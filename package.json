@@ -1,0 +1,55 @@
+{
+  "name": "barb-crawler",
+  "version": "1.0.0",
+  "description": "Production-grade crawler for Barb.ua using Firecrawl API and Playwright",
+  "main": "dist/index.js",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "build:cli": "tsc",
+    "preview": "vite preview",
+    "start": "ts-node src/index.ts",
+    "crawl": "ts-node src/index.ts",
+    "test": "ts-node test/parser.test.ts"
+  },
+  "keywords": [
+    "firecrawl",
+    "playwright",
+    "barb-ua",
+    "crawler",
+    "scraper"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@mendable/firecrawl-js": "^1.19.1",
+    "axios": "^1.7.9",
+    "canvas-confetti": "^1.9.4",
+    "chalk": "^4.1.2",
+    "cheerio": "^1.0.0",
+    "cli-progress": "^3.12.0",
+    "commander": "^12.1.0",
+    "dotenv": "^16.4.7",
+    "leaflet": "^1.9.4",
+    "lucide-react": "^1.32.0",
+    "mapbox-gl": "^3.28.1",
+    "maplibre-gl": "^6.4.1",
+    "playwright": "^1.50.1",
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8",
+    "zod": "^3.24.2"
+  },
+  "devDependencies": {
+    "@types/canvas-confetti": "^1.9.0",
+    "@types/cli-progress": "^3.11.6",
+    "@types/leaflet": "^1.9.22",
+    "@types/mapbox-gl": "^3.4.1",
+    "@types/node": "^20.17.19",
+    "@types/react": "^19.2.18",
+    "@types/react-dom": "^19.2.4",
+    "@vitejs/plugin-react": "^6.0.5",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.7.3",
+    "vite": "^8.2.1"
+  }
+}

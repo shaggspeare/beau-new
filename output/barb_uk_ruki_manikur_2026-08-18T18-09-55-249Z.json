@@ -1,0 +1,62 @@
+{
+  "exportedAt": "2026-08-18T18:09:55.249Z",
+  "totalRecords": 3,
+  "mastersCount": 1,
+  "salonsCount": 2,
+  "records": [
+    {
+      "id": "fargo",
+      "slug": "fargo",
+      "type": "salon",
+      "name": "fargo",
+      "url": "https://barb.ua/uk/salon/fargo",
+      "image": "",
+      "city": "Київ",
+      "address": "",
+      "rating": null,
+      "reviewsCount": null,
+      "phones": [],
+      "socials": {
+        "other": []
+      },
+      "services": [],
+      "crawledAt": "2026-08-18T18:09:50.225Z"
+    },
+    {
+      "id": "afelcher",
+      "slug": "afelcher",
+      "type": "master",
+      "name": "afelcher",
+      "url": "https://barb.ua/uk/master/afelcher",
+      "image": "",
+      "city": "Київ",
+      "address": "",
+      "rating": null,
+      "reviewsCount": null,
+      "phones": [],
+      "socials": {
+        "other": []
+      },
+      "services": [],
+      "crawledAt": "2026-08-18T18:09:52.692Z"
+    },
+    {
+      "id": "pastelbc",
+      "slug": "pastelbc",
+      "type": "salon",
+      "name": "pastelbc",
+      "url": "https://barb.ua/uk/salon/pastelbc",
+      "image": "",
+      "city": "Київ",
+      "address": "",
+      "rating": null,
+      "reviewsCount": null,
+      "phones": [],
+      "socials": {
+        "other": []
+      },
+      "services": [],
+      "crawledAt": "2026-08-18T18:09:55.248Z"
+    }
+  ]
+}
