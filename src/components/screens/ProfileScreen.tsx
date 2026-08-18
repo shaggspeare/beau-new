@@ -15,7 +15,7 @@ export const ProfileScreen: React.FC<ProfileScreenProps> = ({
   onViewMap,
 }) => {
   return (
-    <div style={{ height: '100%', background: '#f7f6fa', display: 'flex', flexDirection: 'column' }}>
+    <div style={{ height: '100%', background: '#f4f7fa', display: 'flex', flexDirection: 'column' }}>
       {/* Top Bar */}
       <div
         style={{
@@ -24,7 +24,7 @@ export const ProfileScreen: React.FC<ProfileScreenProps> = ({
           alignItems: 'center',
           gap: '12px',
           background: '#ffffff',
-          borderBottom: '1px solid #ece9f3',
+          borderBottom: '1px solid #e3ebf3',
         }}
       >
         <button
@@ -34,17 +34,17 @@ export const ProfileScreen: React.FC<ProfileScreenProps> = ({
             height: '38px',
             border: 'none',
             borderRadius: '50%',
-            background: '#f2f0f6',
+            background: '#eaf0f6',
             cursor: 'pointer',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
           }}
         >
-          <ChevronLeft size={20} color="#1a1938" />
+          <ChevronLeft size={20} color="#24405c" />
         </button>
 
-        <h1 style={{ fontFamily: 'var(--font-serif)', fontSize: '24px', fontWeight: 700, color: '#1a1938' }}>
+        <h1 style={{ fontFamily: 'var(--font-serif)', fontSize: '24px', fontWeight: 700, color: '#24405c' }}>
           Profile
         </h1>
       </div>
@@ -63,13 +63,13 @@ export const ProfileScreen: React.FC<ProfileScreenProps> = ({
         {/* User Card */}
         <div
           style={{
-            background: '#1a1938',
+            background: '#24405c',
             borderRadius: '24px',
             padding: '20px',
             display: 'flex',
             alignItems: 'center',
             gap: '16px',
-            boxShadow: '0 8px 24px rgba(26,25,56,0.18)',
+            boxShadow: '0 8px 24px rgba(36,64,92,0.18)',
           }}
         >
           <div
@@ -77,8 +77,8 @@ export const ProfileScreen: React.FC<ProfileScreenProps> = ({
               width: '60px',
               height: '60px',
               borderRadius: '20px',
-              background: '#d9f24e',
-              color: '#1a1938',
+              background: '#ffd4de',
+              color: '#f5265f',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
@@ -93,7 +93,7 @@ export const ProfileScreen: React.FC<ProfileScreenProps> = ({
 
           <div>
             <div style={{ fontSize: '18px', fontWeight: 700, color: '#ffffff' }}>Kate Petrenko</div>
-            <div style={{ fontSize: '13px', color: 'rgba(255,255,255,0.65)', marginTop: '3px' }}>
+            <div style={{ fontSize: '13px', color: 'rgba(255,255,255,0.7)', marginTop: '3px' }}>
               Kyiv · 4 visits · {savedCount} saved masters
             </div>
           </div>
@@ -105,85 +105,85 @@ export const ProfileScreen: React.FC<ProfileScreenProps> = ({
             background: '#ffffff',
             borderRadius: '20px',
             overflow: 'hidden',
-            boxShadow: '0 2px 10px rgba(26,25,56,0.05)',
-            border: '1px solid #f0edf6',
+            boxShadow: '0 2px 10px rgba(36,64,92,0.05)',
+            border: '1px solid #e3ebf3',
           }}
         >
           <div
             style={{
               padding: '16px 18px',
-              borderBottom: '1px solid #f2f0f6',
+              borderBottom: '1px solid #eaf0f6',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'space-between',
               fontSize: '14.5px',
               fontWeight: 600,
-              color: '#1a1938',
+              color: '#24405c',
               cursor: 'pointer',
             }}
           >
             <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-              <Calendar size={16} color="#6f6d86" /> My Bookings
+              <Calendar size={16} color="#6d8299" /> My Bookings
             </div>
-            <span style={{ fontSize: '12px', color: '#8d8aa6' }}>1 active</span>
+            <span style={{ fontSize: '12px', color: '#6d8299' }}>1 active</span>
           </div>
 
           <div
             style={{
               padding: '16px 18px',
-              borderBottom: '1px solid #f2f0f6',
+              borderBottom: '1px solid #eaf0f6',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'space-between',
               fontSize: '14.5px',
               fontWeight: 600,
-              color: '#1a1938',
+              color: '#24405c',
               cursor: 'pointer',
             }}
           >
             <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-              <Bell size={16} color="#6f6d86" /> Notifications
+              <Bell size={16} color="#6d8299" /> Notifications
             </div>
-            <span style={{ fontSize: '12px', color: '#6c5ce7', fontWeight: 700 }}>Enabled</span>
+            <span style={{ fontSize: '12px', color: '#f5265f', fontWeight: 700 }}>Enabled</span>
           </div>
 
           <div
             style={{
               padding: '16px 18px',
-              borderBottom: '1px solid #f2f0f6',
+              borderBottom: '1px solid #eaf0f6',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'space-between',
               fontSize: '14.5px',
               fontWeight: 600,
-              color: '#1a1938',
+              color: '#24405c',
               cursor: 'pointer',
             }}
           >
             <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-              <CreditCard size={16} color="#6f6d86" /> Payment Methods
+              <CreditCard size={16} color="#6d8299" /> Payment Methods
             </div>
-            <span style={{ fontSize: '12px', color: '#8d8aa6' }}>Apple Pay</span>
+            <span style={{ fontSize: '12px', color: '#6d8299' }}>Apple Pay</span>
           </div>
 
           <div
             onClick={onViewMap}
             style={{
               padding: '16px 18px',
-              borderBottom: '1px solid #f2f0f6',
+              borderBottom: '1px solid #eaf0f6',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'space-between',
               fontSize: '14.5px',
               fontWeight: 600,
-              color: '#1a1938',
+              color: '#24405c',
               cursor: 'pointer',
             }}
           >
             <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-              <Database size={16} color="#6f6d86" /> Barb.ua Crawled Dataset
+              <Database size={16} color="#6d8299" /> Barb.ua Crawled Dataset
             </div>
-            <span style={{ fontSize: '12px', color: '#d9f24e', background: '#1a1938', padding: '2px 8px', borderRadius: '8px', fontWeight: 700 }}>
+            <span style={{ fontSize: '12px', color: '#ffffff', background: '#f5265f', padding: '2px 8px', borderRadius: '8px', fontWeight: 700 }}>
               30 masters
             </span>
           </div>
@@ -194,49 +194,50 @@ export const ProfileScreen: React.FC<ProfileScreenProps> = ({
               padding: '16px 18px',
               fontSize: '14.5px',
               fontWeight: 600,
-              color: '#e74c3c',
+              color: '#f5265f',
               cursor: 'pointer',
               display: 'flex',
               alignItems: 'center',
               gap: '10px',
             }}
           >
-            <LogOut size={16} color="#e74c3c" /> Sign out
+            <LogOut size={16} color="#f5265f" /> Sign out
           </div>
         </div>
 
         {/* Master Promotion Card */}
         <div
           style={{
-            background: '#d9f24e',
+            background: '#ffd4de',
             borderRadius: '22px',
             padding: '20px',
-            boxShadow: '0 4px 16px rgba(217, 242, 78, 0.25)',
+            boxShadow: '0 4px 16px rgba(245, 38, 95, 0.15)',
+            border: '1px solid rgba(245, 38, 95, 0.2)',
           }}
         >
-          <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '11px', fontWeight: 800, color: '#1a1938', letterSpacing: '0.06em' }}>
-            <Sparkles size={13} /> PARTNER WITH BEAU
+          <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '11px', fontWeight: 800, color: '#f5265f', letterSpacing: '0.06em' }}>
+            <Sparkles size={13} /> PARTNER WITH BARB
           </div>
           <h3
             style={{
               fontFamily: 'var(--font-serif)',
               fontSize: '20px',
               fontWeight: 700,
-              color: '#1a1938',
+              color: '#24405c',
               marginTop: '4px',
             }}
           >
             Work as a beauty master
           </h3>
-          <p style={{ fontSize: '13px', lineHeight: 1.5, color: 'rgba(26,25,56,0.78)', marginTop: '6px', textWrap: 'pretty' }}>
-            Publish your service catalog, sync your schedule, take clients in Kyiv, and get pinned on the Beau interactive map.
+          <p style={{ fontSize: '13px', lineHeight: 1.5, color: '#24405c', marginTop: '6px', opacity: 0.85 }}>
+            Publish your service catalog, sync your schedule, take clients in Kyiv, and get pinned on the Barb interactive map.
           </p>
           <button
             style={{
               marginTop: '14px',
               padding: '10px 18px',
               borderRadius: '20px',
-              background: '#1a1938',
+              background: '#f5265f',
               color: '#ffffff',
               fontSize: '13px',
               fontWeight: 700,
@@ -245,6 +246,7 @@ export const ProfileScreen: React.FC<ProfileScreenProps> = ({
               display: 'inline-flex',
               alignItems: 'center',
               gap: '6px',
+              boxShadow: '0 4px 12px rgba(245, 38, 95, 0.3)',
             }}
           >
             Master registration <ArrowRight size={14} />

@@ -35,7 +35,7 @@ export const ChatsListScreen: React.FC<ChatsListScreenProps> = ({
   ];
 
   return (
-    <div style={{ height: '100%', background: '#f7f6fa', display: 'flex', flexDirection: 'column' }}>
+    <div style={{ height: '100%', background: '#f4f7fa', display: 'flex', flexDirection: 'column' }}>
       {/* Top Bar */}
       <div
         style={{
@@ -44,7 +44,7 @@ export const ChatsListScreen: React.FC<ChatsListScreenProps> = ({
           alignItems: 'center',
           gap: '12px',
           background: '#ffffff',
-          borderBottom: '1px solid #ece9f3',
+          borderBottom: '1px solid #e3ebf3',
         }}
       >
         <button
@@ -54,17 +54,17 @@ export const ChatsListScreen: React.FC<ChatsListScreenProps> = ({
             height: '38px',
             border: 'none',
             borderRadius: '50%',
-            background: '#f2f0f6',
+            background: '#eaf0f6',
             cursor: 'pointer',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
           }}
         >
-          <ChevronLeft size={20} color="#1a1938" />
+          <ChevronLeft size={20} color="#24405c" />
         </button>
 
-        <h1 style={{ fontFamily: 'var(--font-serif)', fontSize: '24px', fontWeight: 700, color: '#1a1938' }}>
+        <h1 style={{ fontFamily: 'var(--font-serif)', fontSize: '24px', fontWeight: 700, color: '#24405c' }}>
           Chats
         </h1>
       </div>
@@ -90,9 +90,9 @@ export const ChatsListScreen: React.FC<ChatsListScreenProps> = ({
               padding: '14px',
               background: '#ffffff',
               borderRadius: '20px',
-              boxShadow: '0 2px 10px rgba(26,25,56,0.05)',
+              boxShadow: '0 2px 10px rgba(36,64,92,0.05)',
               cursor: 'pointer',
-              border: chat.unread ? '1.5px solid #1a1938' : '1px solid #f0edf6',
+              border: chat.unread ? '1.5px solid #f5265f' : '1px solid #e3ebf3',
             }}
           >
             <div
@@ -101,7 +101,7 @@ export const ChatsListScreen: React.FC<ChatsListScreenProps> = ({
                 height: '48px',
                 borderRadius: '16px',
                 background: chat.master.tint,
-                color: '#1a1938',
+                color: '#24405c',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
@@ -121,7 +121,7 @@ export const ChatsListScreen: React.FC<ChatsListScreenProps> = ({
                     width: '10px',
                     height: '10px',
                     borderRadius: '50%',
-                    background: '#1a1938',
+                    background: '#f5265f',
                     border: '2px solid #ffffff',
                   }}
                 />
@@ -130,17 +130,17 @@ export const ChatsListScreen: React.FC<ChatsListScreenProps> = ({
 
             <div style={{ flex: 1, minWidth: 0 }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '8px' }}>
-                <span style={{ fontSize: '15px', fontWeight: 700, color: '#1a1938' }}>
+                <span style={{ fontSize: '15px', fontWeight: 700, color: '#24405c' }}>
                   {chat.master.name}
                 </span>
-                <span style={{ fontSize: '11px', color: '#a5a2b8', flexShrink: 0 }}>
+                <span style={{ fontSize: '11px', color: '#93a7b8', flexShrink: 0 }}>
                   {chat.time}
                 </span>
               </div>
               <div
                 style={{
                   fontSize: '13px',
-                  color: chat.unread ? '#1a1938' : '#8d8aa6',
+                  color: chat.unread ? '#24405c' : '#6d8299',
                   fontWeight: chat.unread ? 600 : 400,
                   marginTop: '3px',
                   whiteSpace: 'nowrap',

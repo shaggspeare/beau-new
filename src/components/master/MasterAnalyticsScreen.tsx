@@ -8,13 +8,13 @@ interface MasterAnalyticsScreenProps {
 
 export const MasterAnalyticsScreen: React.FC<MasterAnalyticsScreenProps> = ({ master }) => {
   return (
-    <div style={{ height: '100%', background: '#121127', color: '#ffffff', display: 'flex', flexDirection: 'column', overflowY: 'auto' }}>
+    <div style={{ height: '100%', background: '#16283b', color: '#ffffff', display: 'flex', flexDirection: 'column', overflowY: 'auto' }}>
       {/* Header */}
-      <div style={{ padding: '52px 20px 16px', background: '#1a1938', borderBottom: '1px solid #232145' }}>
+      <div style={{ padding: '52px 20px 16px', background: '#24405c', borderBottom: '1px solid #1c3248' }}>
         <h1 style={{ fontFamily: 'var(--font-serif)', fontSize: '24px', fontWeight: 700, color: '#ffffff' }}>
           Performance & Analytics
         </h1>
-        <div style={{ fontSize: '12px', color: 'rgba(255,255,255,0.6)' }}>
+        <div style={{ fontSize: '12px', color: 'rgba(255,255,255,0.65)' }}>
           Insights for {master.name} (Kyiv, {master.district})
         </div>
       </div>
@@ -24,18 +24,18 @@ export const MasterAnalyticsScreen: React.FC<MasterAnalyticsScreenProps> = ({ ma
         {/* Main Revenue Card */}
         <div
           style={{
-            background: 'linear-gradient(135deg, #1a1938 0%, #2b2954 100%)',
+            background: 'linear-gradient(135deg, #24405c 0%, #1c3248 100%)',
             borderRadius: '24px',
             padding: '20px',
-            border: '1.5px solid #d9f24e',
+            border: '1.5px solid #f5265f',
             boxShadow: '0 8px 24px rgba(0,0,0,0.25)',
           }}
         >
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-            <span style={{ fontSize: '11px', letterSpacing: '0.08em', fontWeight: 800, color: '#d9f24e' }}>
+            <span style={{ fontSize: '11px', letterSpacing: '0.08em', fontWeight: 800, color: '#ffd4de' }}>
               MONTHLY EARNINGS
             </span>
-            <span style={{ fontSize: '11px', color: '#bfe8d8', fontWeight: 700, display: 'flex', alignItems: 'center', gap: '2px' }}>
+            <span style={{ fontSize: '11px', color: '#a9c8e6', fontWeight: 700, display: 'flex', alignItems: 'center', gap: '2px' }}>
               <ArrowUpRight size={13} /> +18.4% this month
             </span>
           </div>
@@ -50,52 +50,52 @@ export const MasterAnalyticsScreen: React.FC<MasterAnalyticsScreenProps> = ({ ma
 
         {/* 4 Metrics Grid */}
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px' }}>
-          <div style={{ background: '#1a1938', borderRadius: '18px', padding: '14px', border: '1px solid #2b2954' }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '6px', color: 'rgba(255,255,255,0.6)', fontSize: '11px' }}>
+          <div style={{ background: '#24405c', borderRadius: '18px', padding: '14px', border: '1px solid #1c3248' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '6px', color: 'rgba(255,255,255,0.65)', fontSize: '11px' }}>
               <Calendar size={13} /> Total Bookings
             </div>
             <div style={{ fontSize: '22px', fontWeight: 800, color: '#ffffff', marginTop: '4px' }}>
               142
             </div>
-            <div style={{ fontSize: '10.5px', color: '#bfe8d8', marginTop: '2px' }}>96% completed</div>
+            <div style={{ fontSize: '10.5px', color: '#a9c8e6', marginTop: '2px' }}>96% completed</div>
           </div>
 
-          <div style={{ background: '#1a1938', borderRadius: '18px', padding: '14px', border: '1px solid #2b2954' }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '6px', color: 'rgba(255,255,255,0.6)', fontSize: '11px' }}>
-              <Star size={13} color="#d9f24e" /> Rating Score
+          <div style={{ background: '#24405c', borderRadius: '18px', padding: '14px', border: '1px solid #1c3248' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '6px', color: 'rgba(255,255,255,0.65)', fontSize: '11px' }}>
+              <Star size={13} color="#f5265f" fill="#f5265f" /> Rating Score
             </div>
-            <div style={{ fontSize: '22px', fontWeight: 800, color: '#d9f24e', marginTop: '4px' }}>
+            <div style={{ fontSize: '22px', fontWeight: 800, color: '#ffd4de', marginTop: '4px' }}>
               {master.rating} ★
             </div>
-            <div style={{ fontSize: '10.5px', color: 'rgba(255,255,255,0.6)', marginTop: '2px' }}>
+            <div style={{ fontSize: '10.5px', color: 'rgba(255,255,255,0.65)', marginTop: '2px' }}>
               {master.reviewsCount} reviews
             </div>
           </div>
 
-          <div style={{ background: '#1a1938', borderRadius: '18px', padding: '14px', border: '1px solid #2b2954' }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '6px', color: 'rgba(255,255,255,0.6)', fontSize: '11px' }}>
+          <div style={{ background: '#24405c', borderRadius: '18px', padding: '14px', border: '1px solid #1c3248' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '6px', color: 'rgba(255,255,255,0.65)', fontSize: '11px' }}>
               <Users size={13} /> Repeat Clients
             </div>
-            <div style={{ fontSize: '22px', fontWeight: 800, color: '#c9bcff', marginTop: '4px' }}>
+            <div style={{ fontSize: '22px', fontWeight: 800, color: '#c6dcf1', marginTop: '4px' }}>
               74%
             </div>
-            <div style={{ fontSize: '10.5px', color: 'rgba(255,255,255,0.6)', marginTop: '2px' }}>High loyalty</div>
+            <div style={{ fontSize: '10.5px', color: 'rgba(255,255,255,0.65)', marginTop: '2px' }}>High loyalty</div>
           </div>
 
-          <div style={{ background: '#1a1938', borderRadius: '18px', padding: '14px', border: '1px solid #2b2954' }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '6px', color: 'rgba(255,255,255,0.6)', fontSize: '11px' }}>
+          <div style={{ background: '#24405c', borderRadius: '18px', padding: '14px', border: '1px solid #1c3248' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '6px', color: 'rgba(255,255,255,0.65)', fontSize: '11px' }}>
               <Award size={13} /> Map Visibility
             </div>
-            <div style={{ fontSize: '22px', fontWeight: 800, color: '#ffc3c0', marginTop: '4px' }}>
+            <div style={{ fontSize: '22px', fontWeight: 800, color: '#ffd4de', marginTop: '4px' }}>
               Top 5%
             </div>
-            <div style={{ fontSize: '10.5px', color: 'rgba(255,255,255,0.6)', marginTop: '2px' }}>Kyiv {master.district}</div>
+            <div style={{ fontSize: '10.5px', color: 'rgba(255,255,255,0.65)', marginTop: '2px' }}>Kyiv {master.district}</div>
           </div>
         </div>
 
         {/* Top Services Breakdown */}
-        <div style={{ background: '#1a1938', borderRadius: '20px', padding: '16px', border: '1px solid #2b2954' }}>
-          <div style={{ fontSize: '11px', letterSpacing: '0.08em', fontWeight: 800, color: 'rgba(255,255,255,0.6)', marginBottom: '12px' }}>
+        <div style={{ background: '#24405c', borderRadius: '20px', padding: '16px', border: '1px solid #1c3248' }}>
+          <div style={{ fontSize: '11px', letterSpacing: '0.08em', fontWeight: 800, color: 'rgba(255,255,255,0.65)', marginBottom: '12px' }}>
             TOP REQUESTED SERVICES
           </div>
 
@@ -108,10 +108,10 @@ export const MasterAnalyticsScreen: React.FC<MasterAnalyticsScreenProps> = ({ ma
               <div key={i}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '12.5px', marginBottom: '4px' }}>
                   <span style={{ fontWeight: 600, color: '#ffffff' }}>{s.name}</span>
-                  <span style={{ fontWeight: 700, color: '#d9f24e' }}>{s.rev}</span>
+                  <span style={{ fontWeight: 700, color: '#ffd4de' }}>{s.rev}</span>
                 </div>
                 <div style={{ height: '6px', borderRadius: '3px', background: 'rgba(255,255,255,0.08)', overflow: 'hidden' }}>
-                  <div style={{ height: '100%', borderRadius: '3px', background: '#d9f24e', width: s.pct }} />
+                  <div style={{ height: '100%', borderRadius: '3px', background: '#f5265f', width: s.pct }} />
                 </div>
               </div>
             ))}

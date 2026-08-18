@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import { Master } from '../../data/crawledMasters';
-import { ChevronLeft, Send, CheckCircle2, Calendar, Clock } from 'lucide-react';
+import { ChevronLeft, Send, Calendar, Clock, CheckCircle2 } from 'lucide-react';
 import confetti from 'canvas-confetti';
 
 interface ChatScreenProps {
   master: Master;
   onBack: () => void;
   onViewProfile: () => void;
-  onBookingConfirmed: (timeSlot: string) => void;
+  onBookingConfirmed?: (slot: string) => void;
 }
 
 export const ChatScreen: React.FC<ChatScreenProps> = ({
@@ -16,52 +16,72 @@ export const ChatScreen: React.FC<ChatScreenProps> = ({
   onViewProfile,
   onBookingConfirmed,
 }) => {
-  const [messages, setMessages] = useState([
-    { id: '1', text: `Hi! Saw your ${master.categoryLabel.toLowerCase()} work on Barb.ua — do you have any free slots this week?`, mine: true, time: '10:14' },
-    { id: '2', text: `Hello! Yes, I have open slots on Thursday and Friday. What service are you planning to do?`, mine: false, time: '10:18' },
-    { id: '3', text: `Looking for ${master.services[0]?.name || master.craft}.`, mine: true, time: '10:20' },
-    { id: '4', text: `Perfect! That usually takes about 1.5 - 2 hours. Please pick one of my available time slots below:`, mine: false, time: '10:22' },
+  const [messages, setMessages] = useState<Array<{ id: string; text: string; mine: boolean; time: string }>>([
+    {
+      id: '1',
+      text: `Hi! I have free slots available for this week in my studio (${master.cleanStreet}).`,
+      mine: false,
+      time: '10:15',
+    },
+    {
+      id: '2',
+      text: 'Which time works best for you?',
+      mine: false,
+      time: '10:16',
+    },
   ]);
 
+  const [inputVal, setInputVal] = useState('');
   const [bookedSlot, setBookedSlot] = useState<string | null>(null);
-  const [inputText, setInputText] = useState('');
 
-  const availableSlots = master.slots.length > 0 ? master.slots : ['11:30', '14:00', '16:30', '18:15'];
+  const availableSlots = master.slots && master.slots.length > 0 ? master.slots : ['10:00', '11:30', '14:00', '16:30', '18:00'];
 
   const handlePickSlot = (slot: string) => {
     if (bookedSlot) return;
     setBookedSlot(slot);
 
-    // Confetti celebration
-    try {
-      confetti({
-        particleCount: 60,
-        spread: 60,
-        origin: { y: 0.7 },
-        colors: ['#d9f24e', '#c9bcff', '#ffc3c0', '#1a1938'],
-      });
-    } catch {
-      // Fallback
-    }
+    // Trigger celebratory confetti
+    confetti({
+      particleCount: 55,
+      spread: 60,
+      origin: { y: 0.75 },
+      colors: ['#f5265f', '#ffd4de', '#24405c', '#a9c8e6'],
+    });
 
     setMessages((prev) => [
       ...prev,
-      { id: Date.now().toString(), text: `I would like to book the ${slot} slot, please!`, mine: true, time: 'Just now' },
-      { id: (Date.now() + 1).toString(), text: `🎉 Confirmed! You are booked for Thursday at ${slot}. Looking forward to seeing you at ${master.district}!`, mine: false, time: 'Just now' },
+      {
+        id: Date.now().toString(),
+        text: `I would like to book the ${slot} slot, please!`,
+        mine: true,
+        time: 'Just now',
+      },
+      {
+        id: (Date.now() + 1).toString(),
+        text: `Perfect! You're booked for Thu 20 Aug at ${slot}. Looking forward to seeing you at ${master.cleanStreet}!`,
+        mine: false,
+        time: 'Just now',
+      },
     ]);
 
-    onBookingConfirmed(slot);
+    if (onBookingConfirmed) {
+      onBookingConfirmed(slot);
+    }
   };
 
   const handleSend = () => {
-    if (!inputText.trim()) return;
-    const userMsg = inputText.trim();
-    setInputText('');
+    if (!inputVal.trim()) return;
+    const userMsg = inputVal.trim();
+    setInputVal('');
 
-    const newMsgId = Date.now().toString();
     setMessages((prev) => [
       ...prev,
-      { id: newMsgId, text: userMsg, mine: true, time: 'Just now' },
+      {
+        id: Date.now().toString(),
+        text: userMsg,
+        mine: true,
+        time: 'Just now',
+      },
     ]);
 
     setTimeout(() => {
@@ -78,7 +98,7 @@ export const ChatScreen: React.FC<ChatScreenProps> = ({
   };
 
   return (
-    <div style={{ height: '100%', background: '#f7f6fa', display: 'flex', flexDirection: 'column' }}>
+    <div style={{ height: '100%', background: '#f4f7fa', display: 'flex', flexDirection: 'column' }}>
       {/* Chat Top Header */}
       <div
         style={{
@@ -87,7 +107,7 @@ export const ChatScreen: React.FC<ChatScreenProps> = ({
           alignItems: 'center',
           gap: '10px',
           background: '#ffffff',
-          borderBottom: '1px solid #ece9f3',
+          borderBottom: '1px solid #e3ebf3',
           zIndex: 10,
         }}
       >
@@ -97,7 +117,7 @@ export const ChatScreen: React.FC<ChatScreenProps> = ({
             width: '38px',
             height: '38px',
             borderRadius: '50%',
-            background: '#f2f0f6',
+            background: '#eaf0f6',
             border: 'none',
             display: 'flex',
             alignItems: 'center',
@@ -105,7 +125,7 @@ export const ChatScreen: React.FC<ChatScreenProps> = ({
             cursor: 'pointer',
           }}
         >
-          <ChevronLeft size={20} color="#1a1938" />
+          <ChevronLeft size={20} color="#24405c" />
         </button>
 
         <div
@@ -114,7 +134,7 @@ export const ChatScreen: React.FC<ChatScreenProps> = ({
             height: '40px',
             borderRadius: '14px',
             background: master.tint,
-            color: '#1a1938',
+            color: '#24405c',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
@@ -127,10 +147,10 @@ export const ChatScreen: React.FC<ChatScreenProps> = ({
         </div>
 
         <div style={{ flex: 1, minWidth: 0 }}>
-          <div style={{ fontSize: '15px', fontWeight: 700, color: '#1a1938', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+          <div style={{ fontSize: '15px', fontWeight: 700, color: '#24405c', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
             {master.name}
           </div>
-          <div style={{ fontSize: '11px', color: '#8d8aa6' }}>
+          <div style={{ fontSize: '11px', color: '#6d8299' }}>
             {master.categoryLabel} · Online
           </div>
         </div>
@@ -142,10 +162,10 @@ export const ChatScreen: React.FC<ChatScreenProps> = ({
             padding: '0 14px',
             border: 'none',
             borderRadius: '17px',
-            background: '#f2f0f6',
+            background: '#eaf0f6',
             fontSize: '12.5px',
             fontWeight: 600,
-            color: '#1a1938',
+            color: '#24405c',
             cursor: 'pointer',
           }}
         >
@@ -164,8 +184,8 @@ export const ChatScreen: React.FC<ChatScreenProps> = ({
           gap: '10px',
         }}
       >
-        <div style={{ alignSelf: 'center', fontSize: '11px', color: '#a5a2b8', padding: '2px 0 6px' }}>
-          Today · Barb.ua Direct Booking
+        <div style={{ alignSelf: 'center', fontSize: '11px', color: '#93a7b8', padding: '2px 0 6px' }}>
+          Today · Barb Direct Booking
         </div>
 
         {messages.map((msg) => (
@@ -175,13 +195,14 @@ export const ChatScreen: React.FC<ChatScreenProps> = ({
             style={{
               maxWidth: '82%',
               alignSelf: msg.mine ? 'flex-end' : 'flex-start',
-              background: msg.mine ? '#1a1938' : '#ffffff',
-              color: msg.mine ? '#ffffff' : '#1a1938',
+              background: msg.mine ? '#24405c' : '#ffffff',
+              color: msg.mine ? '#ffffff' : '#24405c',
               borderRadius: msg.mine ? '18px 18px 6px 18px' : '18px 18px 18px 6px',
               padding: '13px 16px',
               fontSize: '14.5px',
               lineHeight: 1.45,
-              boxShadow: '0 2px 8px rgba(26,25,56,0.05)',
+              boxShadow: '0 2px 8px rgba(36,64,92,0.05)',
+              border: msg.mine ? 'none' : '1px solid #e3ebf3',
             }}
           >
             {msg.text}
@@ -197,12 +218,12 @@ export const ChatScreen: React.FC<ChatScreenProps> = ({
               borderRadius: '20px',
               padding: '14px 16px',
               marginTop: '6px',
-              boxShadow: '0 4px 14px rgba(26,25,56,0.06)',
-              border: '1px solid #f0edf6',
+              boxShadow: '0 4px 14px rgba(36,64,92,0.06)',
+              border: '1px solid #e3ebf3',
             }}
           >
-            <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '11px', letterSpacing: '0.08em', fontWeight: 700, color: '#8d8aa6', marginBottom: '10px' }}>
-              <Clock size={12} /> FREE SLOTS · THU 20 AUG
+            <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '11px', letterSpacing: '0.08em', fontWeight: 700, color: '#93a7b8', marginBottom: '10px' }}>
+              <Clock size={12} color="#f5265f" /> FREE SLOTS · THU 20 AUG
             </div>
             <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
               {availableSlots.map((slot, i) => (
@@ -214,10 +235,10 @@ export const ChatScreen: React.FC<ChatScreenProps> = ({
                     padding: '0 16px',
                     border: 'none',
                     borderRadius: '21px',
-                    background: '#f2f0f6',
+                    background: '#eaf0f6',
                     fontSize: '14px',
                     fontWeight: 700,
-                    color: '#1a1938',
+                    color: '#24405c',
                     cursor: 'pointer',
                     display: 'flex',
                     alignItems: 'center',
@@ -225,7 +246,7 @@ export const ChatScreen: React.FC<ChatScreenProps> = ({
                     transition: 'all 0.15s ease',
                   }}
                 >
-                  <Calendar size={13} color="#6f6d86" /> {slot}
+                  <Calendar size={13} color="#6d8299" /> {slot}
                 </button>
               ))}
             </div>
@@ -236,20 +257,21 @@ export const ChatScreen: React.FC<ChatScreenProps> = ({
           <div
             className="animate-pop"
             style={{
-              background: '#d9f24e',
+              background: '#ffd4de',
               borderRadius: '18px',
               padding: '14px 16px',
-              color: '#1a1938',
+              color: '#24405c',
               display: 'flex',
               alignItems: 'center',
               gap: '10px',
-              boxShadow: '0 4px 14px rgba(217, 242, 78, 0.3)',
+              boxShadow: '0 4px 14px rgba(245, 38, 95, 0.25)',
+              border: '1px solid #f5265f',
             }}
           >
-            <CheckCircle2 size={24} color="#1a1938" />
+            <CheckCircle2 size={24} color="#f5265f" />
             <div>
-              <div style={{ fontSize: '14px', fontWeight: 800 }}>Visit Confirmed at {bookedSlot}</div>
-              <div style={{ fontSize: '12px', opacity: 0.85 }}>Added to your active appointments</div>
+              <div style={{ fontSize: '14px', fontWeight: 800, color: '#24405c' }}>Visit Confirmed at {bookedSlot}</div>
+              <div style={{ fontSize: '12px', color: '#6d8299' }}>Added to your active appointments</div>
             </div>
           </div>
         )}
@@ -258,56 +280,46 @@ export const ChatScreen: React.FC<ChatScreenProps> = ({
       {/* Message Input Bottom Bar */}
       <div
         style={{
+          padding: '12px 16px 28px',
           background: '#ffffff',
-          borderTop: '1px solid #ece9f3',
-          padding: '12px 16px 34px',
+          borderTop: '1px solid #e3ebf3',
           display: 'flex',
+          gap: '8px',
           alignItems: 'center',
-          gap: '10px',
         }}
       >
-        <div
+        <input
+          type="text"
+          placeholder="Type message to master..."
+          value={inputVal}
+          onChange={(e) => setInputVal(e.target.value)}
+          onKeyDown={(e) => e.key === 'Enter' && handleSend()}
           style={{
             flex: 1,
             height: '46px',
             borderRadius: '23px',
-            background: '#f2f0f6',
-            display: 'flex',
-            alignItems: 'center',
-            padding: '0 16px',
+            background: '#eaf0f6',
+            border: 'none',
+            outline: 'none',
+            padding: '0 18px',
+            fontSize: '14px',
+            color: '#24405c',
           }}
-        >
-          <input
-            type="text"
-            placeholder="Type your message…"
-            value={inputText}
-            onChange={(e) => setInputText(e.target.value)}
-            onKeyDown={(e) => e.key === 'Enter' && handleSend()}
-            style={{
-              width: '100%',
-              background: 'transparent',
-              border: 'none',
-              outline: 'none',
-              fontSize: '14px',
-              fontFamily: 'inherit',
-              color: '#1a1938',
-            }}
-          />
-        </div>
-
+        />
         <button
           onClick={handleSend}
           style={{
             width: '46px',
             height: '46px',
-            border: 'none',
             borderRadius: '50%',
-            background: '#1a1938',
+            background: '#f5265f',
             color: '#ffffff',
-            cursor: 'pointer',
+            border: 'none',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
+            cursor: 'pointer',
+            boxShadow: '0 4px 14px rgba(245, 38, 95, 0.35)',
           }}
         >
           <Send size={16} />

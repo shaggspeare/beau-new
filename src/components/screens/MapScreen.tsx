@@ -191,22 +191,22 @@ export const MapScreen: React.FC<MapScreenProps> = ({
     filteredMasters.forEach((m) => {
       const isSelected = m.id === activeMasterId;
       const el = document.createElement('div');
-      el.className = `beau-marker-container ${isSelected ? 'active' : ''}`;
+      el.className = `barb-marker-container ${isSelected ? 'active' : ''}`;
 
-      const bgColor = m.category === 'hair' ? '#d9f24e' : m.category === 'nails' ? '#9a86f5' : '#f4938e';
-      const textColor = m.category === 'hair' ? '#1a1938' : '#ffffff';
+      const bgColor = m.category === 'hair' ? '#f5265f' : m.category === 'nails' ? '#24405c' : '#a9c8e6';
+      const textColor = m.category === 'laser' ? '#24405c' : '#ffffff';
 
       // Sleek round circular pin markup
       el.innerHTML = isSelected
         ? `
-          <div class="beau-marker-mini-badge">★ ${m.rating}</div>
-          <div class="beau-marker-pin" style="background: ${bgColor}; color: ${textColor}; border-color: #ffffff; box-shadow: 0 6px 18px rgba(26,25,56,0.35);">
+          <div class="barb-marker-mini-badge">★ ${m.rating}</div>
+          <div class="barb-marker-pin" style="background: ${bgColor}; color: ${textColor}; border-color: #ffffff; box-shadow: 0 6px 18px rgba(36,64,92,0.35);">
             <span>${m.initials}</span>
           </div>
-          <div class="beau-marker-pulse-ring"></div>
+          <div class="barb-marker-pulse-ring"></div>
         `
         : `
-          <div class="beau-marker-pin" style="background: ${bgColor}; color: ${textColor}">
+          <div class="barb-marker-pin" style="background: ${bgColor}; color: ${textColor}">
             <span>${m.initials}</span>
           </div>
         `;
@@ -379,10 +379,10 @@ export const MapScreen: React.FC<MapScreenProps> = ({
               width: '48px',
               height: '48px',
               borderRadius: '50%',
-              background: is3D ? '#d9f24e' : '#ffffff',
+              background: is3D ? '#f5265f' : '#ffffff',
               border: 'none',
-              boxShadow: '0 4px 16px rgba(26,25,56,0.12)',
-              color: '#1a1938',
+              boxShadow: '0 4px 16px rgba(36,64,92,0.12)',
+              color: is3D ? '#ffffff' : '#24405c',
               cursor: 'pointer',
               display: 'flex',
               alignItems: 'center',
@@ -404,8 +404,8 @@ export const MapScreen: React.FC<MapScreenProps> = ({
               borderRadius: '50%',
               background: '#ffffff',
               border: 'none',
-              boxShadow: '0 4px 16px rgba(26,25,56,0.12)',
-              color: '#1a1938',
+              boxShadow: '0 4px 16px rgba(36,64,92,0.12)',
+              color: '#24405c',
               cursor: 'pointer',
               display: 'flex',
               alignItems: 'center',
@@ -423,7 +423,7 @@ export const MapScreen: React.FC<MapScreenProps> = ({
               background: '#ffffff',
               borderRadius: '18px',
               padding: '10px',
-              boxShadow: '0 8px 24px rgba(26,25,56,0.15)',
+              boxShadow: '0 8px 24px rgba(36,64,92,0.15)',
               display: 'flex',
               gap: '8px',
               alignSelf: 'flex-end',
@@ -432,7 +432,7 @@ export const MapScreen: React.FC<MapScreenProps> = ({
             {[
               { id: 'voyager' as const, label: 'Pastel Voyager' },
               { id: 'positron' as const, label: 'Minimal Positron' },
-              { id: 'dark' as const, label: 'Dark Navy' },
+              { id: 'dark' as const, label: 'Dark Steel' },
             ].map((st) => (
               <button
                 key={st.id}
@@ -443,8 +443,8 @@ export const MapScreen: React.FC<MapScreenProps> = ({
                 style={{
                   padding: '6px 12px',
                   borderRadius: '12px',
-                  background: mapStyle === st.id ? '#1a1938' : '#f2f0f6',
-                  color: mapStyle === st.id ? '#ffffff' : '#1a1938',
+                  background: mapStyle === st.id ? '#24405c' : '#eaf0f6',
+                  color: mapStyle === st.id ? '#ffffff' : '#24405c',
                   border: 'none',
                   fontSize: '11.5px',
                   fontWeight: 600,
@@ -485,14 +485,14 @@ export const MapScreen: React.FC<MapScreenProps> = ({
                   padding: '0 14px',
                   border: 'none',
                   borderRadius: '17px',
-                  background: active ? '#1a1938' : '#ffffff',
-                  color: active ? '#ffffff' : '#1a1938',
+                  background: active ? '#24405c' : '#ffffff',
+                  color: active ? '#ffffff' : '#24405c',
                   fontSize: '13px',
                   fontWeight: 600,
                   whiteSpace: 'nowrap',
                   cursor: 'pointer',
                   flexShrink: 0,
-                  boxShadow: '0 2px 8px rgba(26,25,56,0.08)',
+                  boxShadow: '0 2px 8px rgba(36,64,92,0.08)',
                   transition: 'all 0.15s ease',
                 }}
               >
@@ -508,14 +508,14 @@ export const MapScreen: React.FC<MapScreenProps> = ({
               padding: '0 14px',
               border: 'none',
               borderRadius: '17px',
-              background: subFilter === 'top' ? '#d9f24e' : '#ffffff',
-              color: '#1a1938',
+              background: subFilter === 'top' ? '#ffd4de' : '#ffffff',
+              color: '#24405c',
               fontSize: '13px',
               fontWeight: 600,
               whiteSpace: 'nowrap',
               cursor: 'pointer',
               flexShrink: 0,
-              boxShadow: '0 2px 8px rgba(26,25,56,0.08)',
+              boxShadow: '0 2px 8px rgba(36,64,92,0.08)',
             }}
           >
             ★ Top Rated
@@ -528,14 +528,14 @@ export const MapScreen: React.FC<MapScreenProps> = ({
               padding: '0 14px',
               border: 'none',
               borderRadius: '17px',
-              background: subFilter === 'salons' ? '#c9bcff' : '#ffffff',
-              color: '#1a1938',
+              background: subFilter === 'salons' ? '#c6dcf1' : '#ffffff',
+              color: '#24405c',
               fontSize: '13px',
               fontWeight: 600,
               whiteSpace: 'nowrap',
               cursor: 'pointer',
               flexShrink: 0,
-              boxShadow: '0 2px 8px rgba(26,25,56,0.08)',
+              boxShadow: '0 2px 8px rgba(36,64,92,0.08)',
             }}
           >
             🏢 Salons
@@ -543,10 +543,10 @@ export const MapScreen: React.FC<MapScreenProps> = ({
         </div>
       </div>
 
-      {/* Floating Beau Assistant Action Button (FAB) */}
+      {/* Floating Barb Assistant Action Button (FAB) */}
       <button
         onClick={onOpenBot}
-        title="Ask Beau booking assistant"
+        title="Ask Barb booking assistant"
         style={{
           position: 'absolute',
           right: '18px',
@@ -555,12 +555,12 @@ export const MapScreen: React.FC<MapScreenProps> = ({
           height: '54px',
           border: 'none',
           borderRadius: '50%',
-          background: '#d9f24e',
-          color: '#1a1938',
+          background: '#f5265f',
+          color: '#ffffff',
           fontFamily: 'var(--font-serif)',
           fontSize: '24px',
           fontWeight: 700,
-          boxShadow: '0 6px 20px rgba(26,25,56,0.25)',
+          boxShadow: '0 6px 20px rgba(245,38,95,0.35)',
           cursor: 'pointer',
           zIndex: 25,
           display: 'flex',
@@ -661,9 +661,9 @@ export const MapScreen: React.FC<MapScreenProps> = ({
                     gap: '12px',
                     padding: '12px 14px',
                     borderRadius: '18px',
-                    background: isSelected ? '#f7f6fa' : '#ffffff',
-                    border: isSelected ? '2px solid #1a1938' : '1px solid #f2f0f6',
-                    boxShadow: isSelected ? '0 6px 18px rgba(26,25,56,0.12)' : '0 1px 4px rgba(26,25,56,0.03)',
+                    background: isSelected ? '#ffffff' : '#ffffff',
+                    border: isSelected ? '2px solid #f5265f' : '1px solid #e3ebf3',
+                    boxShadow: isSelected ? '0 6px 18px rgba(245,38,95,0.15)' : '0 2px 8px rgba(36,64,92,0.04)',
                     cursor: 'pointer',
                     transition: 'all 0.2s ease',
                   }}
@@ -675,7 +675,7 @@ export const MapScreen: React.FC<MapScreenProps> = ({
                       height: '46px',
                       borderRadius: '15px',
                       background: m.tint,
-                      color: '#1a1938',
+                      color: '#24405c',
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'center',
@@ -690,7 +690,7 @@ export const MapScreen: React.FC<MapScreenProps> = ({
                   {/* Info */}
                   <div style={{ flex: 1, minWidth: 0 }}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-                      <span style={{ fontSize: '15px', fontWeight: 700, color: '#1a1938', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                      <span style={{ fontSize: '15px', fontWeight: 700, color: '#24405c', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
                         {m.name}
                       </span>
                       <span
@@ -698,8 +698,8 @@ export const MapScreen: React.FC<MapScreenProps> = ({
                           fontSize: '10px',
                           padding: '1px 6px',
                           borderRadius: '6px',
-                          background: m.type === 'salon' ? '#c9bcff' : '#f2f0f6',
-                          color: '#1a1938',
+                          background: m.type === 'salon' ? '#c6dcf1' : '#eaf0f6',
+                          color: '#24405c',
                           fontWeight: 600,
                           flexShrink: 0,
                         }}
@@ -707,11 +707,11 @@ export const MapScreen: React.FC<MapScreenProps> = ({
                         {m.type === 'salon' ? 'Salon' : 'Master'}
                       </span>
                     </div>
-                    <div style={{ fontSize: '12.5px', color: '#1a1938', fontWeight: 500, marginTop: '2px', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                    <div style={{ fontSize: '12.5px', color: '#24405c', fontWeight: 500, marginTop: '2px', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
                       {m.cleanStreet}
                     </div>
-                    <div style={{ fontSize: '11px', color: '#8d8aa6', marginTop: '2px', display: 'flex', alignItems: 'center', gap: '4px' }}>
-                      <span style={{ padding: '1px 5px', borderRadius: '4px', background: '#f2f0f6', color: '#6f6d86', fontWeight: 600 }}>{m.district}</span>
+                    <div style={{ fontSize: '11px', color: '#6d8299', marginTop: '2px', display: 'flex', alignItems: 'center', gap: '4px' }}>
+                      <span style={{ padding: '1px 5px', borderRadius: '4px', background: '#eaf0f6', color: '#24405c', fontWeight: 600 }}>{m.district}</span>
                       <span>· {m.metro}</span>
                       <span>· {m.dist}</span>
                     </div>
@@ -719,10 +719,10 @@ export const MapScreen: React.FC<MapScreenProps> = ({
 
                   {/* Rating & Action */}
                   <div style={{ textAlign: 'right', flexShrink: 0 }}>
-                    <div style={{ fontSize: '13px', fontWeight: 700, color: '#1a1938', display: 'flex', alignItems: 'center', justifyContent: 'flex-end', gap: '3px' }}>
-                      <Star size={12} fill="#d9f24e" color="#1a1938" /> {m.rating}
+                    <div style={{ fontSize: '13px', fontWeight: 700, color: '#f5265f', display: 'flex', alignItems: 'center', justifyContent: 'flex-end', gap: '3px' }}>
+                      <Star size={12} fill="#f5265f" color="#f5265f" /> {m.rating}
                     </div>
-                    <div style={{ fontSize: '12px', color: '#8d8aa6', marginTop: '2px' }}>
+                    <div style={{ fontSize: '12px', color: '#6d8299', marginTop: '2px' }}>
                       from {m.minPrice}
                     </div>
                     <button
@@ -732,9 +732,9 @@ export const MapScreen: React.FC<MapScreenProps> = ({
                       }}
                       style={{
                         marginTop: '4px',
-                        padding: '3px 9px',
+                        padding: '4px 10px',
                         borderRadius: '10px',
-                        background: '#1a1938',
+                        background: '#24405c',
                         color: '#ffffff',
                         border: 'none',
                         fontSize: '10.5px',

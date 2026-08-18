@@ -49,13 +49,13 @@ export const MasterMapPreviewScreen: React.FC<MasterMapPreviewScreenProps> = ({
 
       // Custom Round Pin for Master
       const el = document.createElement('div');
-      el.className = 'beau-marker-container active';
+      el.className = 'barb-marker-container active';
       el.innerHTML = `
-        <div class="beau-marker-mini-badge">★ ${master.rating}</div>
-        <div class="beau-marker-pin" style="background: #1a1938; color: #d9f24e; border-color: #ffffff; box-shadow: 0 6px 18px rgba(26,25,56,0.35);">
+        <div class="barb-marker-mini-badge">★ ${master.rating}</div>
+        <div class="barb-marker-pin" style="background: #f5265f; color: #ffffff; border-color: #ffffff; box-shadow: 0 6px 18px rgba(36,64,92,0.35);">
           <span>${master.initials}</span>
         </div>
-        <div class="beau-marker-pulse-ring"></div>
+        <div class="barb-marker-pulse-ring"></div>
       `;
 
       new maplibregl.Marker({ element: el, anchor: 'bottom' })
@@ -69,14 +69,14 @@ export const MasterMapPreviewScreen: React.FC<MasterMapPreviewScreenProps> = ({
   }, [master]);
 
   return (
-    <div style={{ height: '100%', background: '#121127', color: '#ffffff', display: 'flex', flexDirection: 'column', overflowY: 'auto' }}>
+    <div style={{ height: '100%', background: '#16283b', color: '#ffffff', display: 'flex', flexDirection: 'column', overflowY: 'auto' }}>
       {/* Header */}
-      <div style={{ padding: '52px 20px 16px', background: '#1a1938', borderBottom: '1px solid #232145' }}>
+      <div style={{ padding: '52px 20px 16px', background: '#24405c', borderBottom: '1px solid #1c3248' }}>
         <h1 style={{ fontFamily: 'var(--font-serif)', fontSize: '24px', fontWeight: 700, color: '#ffffff' }}>
           Map Pin & Studio Profile
         </h1>
-        <div style={{ fontSize: '12px', color: 'rgba(255,255,255,0.6)' }}>
-          How clients discover {master.name} on the map
+        <div style={{ fontSize: '12px', color: 'rgba(255,255,255,0.65)' }}>
+          How clients discover {master.name} on the Barb map
         </div>
       </div>
 
@@ -89,7 +89,7 @@ export const MasterMapPreviewScreen: React.FC<MasterMapPreviewScreenProps> = ({
             borderRadius: '20px',
             overflow: 'hidden',
             position: 'relative',
-            border: '2px solid #2b2954',
+            border: '2px solid #24405c',
             boxShadow: '0 6px 20px rgba(0,0,0,0.3)',
           }}
         >
@@ -102,11 +102,11 @@ export const MasterMapPreviewScreen: React.FC<MasterMapPreviewScreenProps> = ({
               left: '10px',
               padding: '4px 10px',
               borderRadius: '10px',
-              background: 'rgba(26,25,56,0.85)',
+              background: 'rgba(36,64,92,0.88)',
               backdropFilter: 'blur(8px)',
               fontSize: '11px',
               fontWeight: 700,
-              color: '#d9f24e',
+              color: '#ffd4de',
             }}
           >
             Kyiv · {master.district}
@@ -114,43 +114,43 @@ export const MasterMapPreviewScreen: React.FC<MasterMapPreviewScreenProps> = ({
         </div>
 
         {/* Studio Info Card */}
-        <div style={{ background: '#1a1938', borderRadius: '20px', padding: '18px', border: '1px solid #2b2954' }}>
+        <div style={{ background: '#24405c', borderRadius: '20px', padding: '18px', border: '1px solid #1c3248' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
             <div style={{ fontSize: '13px', fontWeight: 700, color: '#ffffff' }}>Studio Address & Location</div>
-            <span style={{ fontSize: '11px', color: '#d9f24e', fontWeight: 700 }}>LIVE ON MAP</span>
+            <span style={{ fontSize: '11px', color: '#ffd4de', fontWeight: 700 }}>LIVE ON MAP</span>
           </div>
 
-          <div style={{ display: 'flex', alignItems: 'flex-start', gap: '10px', fontSize: '13px', color: 'rgba(255,255,255,0.8)' }}>
-            <MapPin size={16} color="#d9f24e" style={{ flexShrink: 0, marginTop: '2px' }} />
+          <div style={{ display: 'flex', alignItems: 'flex-start', gap: '10px', fontSize: '13px', color: 'rgba(255,255,255,0.85)' }}>
+            <MapPin size={16} color="#f5265f" style={{ flexShrink: 0, marginTop: '2px' }} />
             <div>
               <div style={{ fontWeight: 600, color: '#ffffff' }}>{master.district}, Kyiv</div>
-              <div style={{ fontSize: '12px', color: 'rgba(255,255,255,0.6)', marginTop: '2px' }}>{master.address}</div>
+              <div style={{ fontSize: '12px', color: 'rgba(255,255,255,0.65)', marginTop: '2px' }}>{master.cleanStreet}</div>
             </div>
           </div>
         </div>
 
         {/* Contact Details */}
-        <div style={{ background: '#1a1938', borderRadius: '20px', padding: '18px', border: '1px solid #2b2954' }}>
+        <div style={{ background: '#24405c', borderRadius: '20px', padding: '18px', border: '1px solid #1c3248' }}>
           <div style={{ fontSize: '13px', fontWeight: 700, color: '#ffffff', marginBottom: '12px' }}>
             Public Contact Links
           </div>
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '10px', fontSize: '13px' }}>
-              <Phone size={15} color="#d9f24e" />
+              <Phone size={15} color="#f5265f" />
               <span style={{ color: '#ffffff', fontWeight: 600 }}>{master.phones[0] || '+38 (050) 758-12-34'}</span>
             </div>
 
             {master.socials.instagram && (
               <div style={{ display: 'flex', alignItems: 'center', gap: '10px', fontSize: '13px' }}>
-                <Share2 size={15} color="#c9bcff" />
+                <Share2 size={15} color="#c6dcf1" />
                 <span style={{ color: 'rgba(255,255,255,0.8)' }}>{master.socials.instagram}</span>
               </div>
             )}
 
             <div style={{ display: 'flex', alignItems: 'center', gap: '10px', fontSize: '13px' }}>
-              <Globe size={15} color="#ffc3c0" />
-              <a href={master.url} target="_blank" rel="noreferrer" style={{ color: '#d9f24e', fontSize: '12px' }}>
+              <Globe size={15} color="#ffd4de" />
+              <a href={master.url} target="_blank" rel="noreferrer" style={{ color: '#ffd4de', fontSize: '12px', textDecoration: 'underline' }}>
                 Barb.ua Live Verified Page ↗
               </a>
             </div>
@@ -163,8 +163,8 @@ export const MasterMapPreviewScreen: React.FC<MasterMapPreviewScreenProps> = ({
           style={{
             height: '48px',
             borderRadius: '24px',
-            background: '#d9f24e',
-            color: '#1a1938',
+            background: '#f5265f',
+            color: '#ffffff',
             border: 'none',
             fontSize: '14px',
             fontWeight: 700,
@@ -173,7 +173,7 @@ export const MasterMapPreviewScreen: React.FC<MasterMapPreviewScreenProps> = ({
             alignItems: 'center',
             justifyContent: 'center',
             gap: '8px',
-            boxShadow: '0 4px 16px rgba(217, 242, 78, 0.25)',
+            boxShadow: '0 4px 16px rgba(245, 38, 95, 0.35)',
           }}
         >
           <Eye size={16} /> View Profile (as Client)

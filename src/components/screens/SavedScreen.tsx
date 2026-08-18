@@ -18,7 +18,7 @@ export const SavedScreen: React.FC<SavedScreenProps> = ({
   onExploreMap,
 }) => {
   return (
-    <div style={{ height: '100%', background: '#f7f6fa', display: 'flex', flexDirection: 'column' }}>
+    <div style={{ height: '100%', background: '#f4f7fa', display: 'flex', flexDirection: 'column' }}>
       {/* Top Bar */}
       <div
         style={{
@@ -27,7 +27,7 @@ export const SavedScreen: React.FC<SavedScreenProps> = ({
           alignItems: 'center',
           gap: '12px',
           background: '#ffffff',
-          borderBottom: '1px solid #ece9f3',
+          borderBottom: '1px solid #e3ebf3',
         }}
       >
         <button
@@ -37,17 +37,17 @@ export const SavedScreen: React.FC<SavedScreenProps> = ({
             height: '38px',
             border: 'none',
             borderRadius: '50%',
-            background: '#f2f0f6',
+            background: '#eaf0f6',
             cursor: 'pointer',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
           }}
         >
-          <ChevronLeft size={20} color="#1a1938" />
+          <ChevronLeft size={20} color="#24405c" />
         </button>
 
-        <h1 style={{ fontFamily: 'var(--font-serif)', fontSize: '24px', fontWeight: 700, color: '#1a1938' }}>
+        <h1 style={{ fontFamily: 'var(--font-serif)', fontSize: '24px', fontWeight: 700, color: '#24405c' }}>
           Saved ({favoriteMasters.length})
         </h1>
       </div>
@@ -64,22 +64,22 @@ export const SavedScreen: React.FC<SavedScreenProps> = ({
         }}
       >
         {favoriteMasters.length === 0 ? (
-          <div style={{ textAlign: 'center', padding: '60px 20px', color: '#8d8aa6' }}>
+          <div style={{ textAlign: 'center', padding: '60px 20px', color: '#6d8299' }}>
             <div
               style={{
                 width: '64px',
                 height: '64px',
                 borderRadius: '50%',
-                background: '#f2f0f6',
+                background: '#eaf0f6',
                 margin: '0 auto 16px',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
               }}
             >
-              <Heart size={28} color="#c3c0d2" />
+              <Heart size={28} color="#adc0d0" />
             </div>
-            <div style={{ fontSize: '17px', fontWeight: 700, color: '#1a1938', marginBottom: '6px' }}>
+            <div style={{ fontSize: '17px', fontWeight: 700, color: '#24405c', marginBottom: '6px' }}>
               No saved specialists yet
             </div>
             <p style={{ fontSize: '13px', lineHeight: 1.5, marginBottom: '20px' }}>
@@ -90,12 +90,13 @@ export const SavedScreen: React.FC<SavedScreenProps> = ({
               style={{
                 padding: '12px 24px',
                 borderRadius: '24px',
-                background: '#d9f24e',
-                color: '#1a1938',
+                background: '#f5265f',
+                color: '#ffffff',
                 fontSize: '14px',
                 fontWeight: 700,
                 border: 'none',
                 cursor: 'pointer',
+                boxShadow: '0 4px 14px rgba(245, 38, 95, 0.35)',
               }}
             >
               Explore Map
@@ -113,9 +114,9 @@ export const SavedScreen: React.FC<SavedScreenProps> = ({
                 padding: '14px',
                 background: '#ffffff',
                 borderRadius: '20px',
-                boxShadow: '0 2px 10px rgba(26,25,56,0.05)',
+                boxShadow: '0 2px 10px rgba(36,64,92,0.05)',
                 cursor: 'pointer',
-                border: '1px solid #f0edf6',
+                border: '1px solid #e3ebf3',
               }}
             >
               <div
@@ -124,7 +125,7 @@ export const SavedScreen: React.FC<SavedScreenProps> = ({
                   height: '48px',
                   borderRadius: '16px',
                   background: m.tint,
-                  color: '#1a1938',
+                  color: '#24405c',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
@@ -137,13 +138,13 @@ export const SavedScreen: React.FC<SavedScreenProps> = ({
               </div>
 
               <div style={{ flex: 1, minWidth: 0 }}>
-                <div style={{ fontSize: '15px', fontWeight: 700, color: '#1a1938', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                <div style={{ fontSize: '15px', fontWeight: 700, color: '#24405c', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
                   {m.name}
                 </div>
-                <div style={{ fontSize: '12.5px', color: '#8d8aa6', marginTop: '2px', display: 'flex', alignItems: 'center', gap: '4px' }}>
-                  <span>{m.craft.split(',')[0]}</span> · <Star size={11} fill="#d9f24e" color="#1a1938" /> {m.rating}
+                <div style={{ fontSize: '12.5px', color: '#6d8299', marginTop: '2px', display: 'flex', alignItems: 'center', gap: '4px' }}>
+                  <span>{m.craft.split(',')[0]}</span> · <Star size={11} fill="#f5265f" color="#f5265f" /> {m.rating}
                 </div>
-                <div style={{ fontSize: '11px', color: '#6f6d86', marginTop: '2px' }}>
+                <div style={{ fontSize: '11px', color: '#93a7b8', marginTop: '2px' }}>
                   from {m.minPrice} · {m.district}
                 </div>
               </div>
@@ -163,7 +164,7 @@ export const SavedScreen: React.FC<SavedScreenProps> = ({
                   justifyContent: 'center',
                 }}
               >
-                <Heart size={20} fill="#f4938e" color="#f4938e" />
+                <Heart size={20} fill="#f5265f" color="#f5265f" />
               </button>
             </div>
           ))

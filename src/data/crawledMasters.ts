@@ -57,8 +57,8 @@ export const CRAWLED_MASTERS: Master[] = [
     "category": "hair",
     "categoryLabel": "Hair & Styling",
     "craft": "Стрижка, фарбування, балаяж та укладка",
-    "tint": "#d9f24e",
-    "badgeColor": "#1a1938",
+    "tint": "#ffd4de",
+    "badgeColor": "#24405c",
     "rating": "4.8",
     "rawRating": 9.6,
     "reviewsCount": 37,
@@ -525,7 +525,7 @@ export const CRAWLED_MASTERS: Master[] = [
         "stars": 5,
         "when": "2 тижні тому",
         "tag": "ОД",
-        "tint": "#d9f24e"
+        "tint": "#ffd4de"
       },
       {
         "who": "Ірина С.",
@@ -533,7 +533,7 @@ export const CRAWLED_MASTERS: Master[] = [
         "stars": 5,
         "when": "3 тижні тому",
         "tag": "НК",
-        "tint": "#c9bcff"
+        "tint": "#c6dcf1"
       },
       {
         "who": "Єлизавета П.",
@@ -541,7 +541,7 @@ export const CRAWLED_MASTERS: Master[] = [
         "stars": 5,
         "when": "1 місяць тому",
         "tag": "ВМ",
-        "tint": "#ffc3c0"
+        "tint": "#dbe8f5"
       }
     ],
     "slots": [
@@ -561,8 +561,8 @@ export const CRAWLED_MASTERS: Master[] = [
     "category": "hair",
     "categoryLabel": "Hair & Styling",
     "craft": "Стрижка, фарбування, балаяж та укладка",
-    "tint": "#d9f24e",
-    "badgeColor": "#1a1938",
+    "tint": "#ffd4de",
+    "badgeColor": "#24405c",
     "rating": "4.9",
     "rawRating": 9.8,
     "reviewsCount": 55,
@@ -1261,7 +1261,7 @@ export const CRAWLED_MASTERS: Master[] = [
         "stars": 5,
         "when": "1 місяць тому",
         "tag": "ОД",
-        "tint": "#d9f24e"
+        "tint": "#ffd4de"
       },
       {
         "who": "Дарина Б.",
@@ -1269,7 +1269,7 @@ export const CRAWLED_MASTERS: Master[] = [
         "stars": 5,
         "when": "1 місяць тому",
         "tag": "НК",
-        "tint": "#c9bcff"
+        "tint": "#c6dcf1"
       },
       {
         "who": "Ольга Д.",
@@ -1277,7 +1277,7 @@ export const CRAWLED_MASTERS: Master[] = [
         "stars": 5,
         "when": "2 дні тому",
         "tag": "ВМ",
-        "tint": "#ffc3c0"
+        "tint": "#dbe8f5"
       }
     ],
     "slots": [
@@ -1297,8 +1297,8 @@ export const CRAWLED_MASTERS: Master[] = [
     "category": "hair",
     "categoryLabel": "Hair & Styling",
     "craft": "Стрижка, фарбування, балаяж та укладка",
-    "tint": "#d9f24e",
-    "badgeColor": "#1a1938",
+    "tint": "#ffd4de",
+    "badgeColor": "#24405c",
     "rating": "4.8",
     "rawRating": 9.7,
     "reviewsCount": 31,
@@ -1902,7 +1902,7 @@ export const CRAWLED_MASTERS: Master[] = [
         "stars": 5,
         "when": "2 дні тому",
         "tag": "ОД",
-        "tint": "#d9f24e"
+        "tint": "#ffd4de"
       },
       {
         "who": "Надія К.",
@@ -1910,7 +1910,7 @@ export const CRAWLED_MASTERS: Master[] = [
         "stars": 5,
         "when": "1 тиждень тому",
         "tag": "НК",
-        "tint": "#c9bcff"
+        "tint": "#c6dcf1"
       },
       {
         "who": "Віра М.",
@@ -1918,7 +1918,7 @@ export const CRAWLED_MASTERS: Master[] = [
         "stars": 5,
         "when": "2 тижні тому",
         "tag": "ВМ",
-        "tint": "#ffc3c0"
+        "tint": "#dbe8f5"
       }
     ],
     "slots": [
@@ -1938,8 +1938,8 @@ export const CRAWLED_MASTERS: Master[] = [
     "category": "hair",
     "categoryLabel": "Hair & Styling",
     "craft": "Стрижка, фарбування, балаяж та укладка",
-    "tint": "#d9f24e",
-    "badgeColor": "#1a1938",
+    "tint": "#ffd4de",
+    "badgeColor": "#24405c",
     "rating": "5.0",
     "rawRating": 10,
     "reviewsCount": 11,
@@ -2382,7 +2382,7 @@ export const CRAWLED_MASTERS: Master[] = [
         "stars": 5,
         "when": "2 тижні тому",
         "tag": "ОД",
-        "tint": "#d9f24e"
+        "tint": "#ffd4de"
       },
       {
         "who": "Ірина С.",
@@ -2390,7 +2390,7 @@ export const CRAWLED_MASTERS: Master[] = [
         "stars": 5,
         "when": "3 тижні тому",
         "tag": "НК",
-        "tint": "#c9bcff"
+        "tint": "#c6dcf1"
       },
       {
         "who": "Єлизавета П.",
@@ -2398,7 +2398,7 @@ export const CRAWLED_MASTERS: Master[] = [
         "stars": 5,
         "when": "1 місяць тому",
         "tag": "ВМ",
-        "tint": "#ffc3c0"
+        "tint": "#dbe8f5"
       }
     ],
     "slots": [
@@ -2418,8 +2418,8 @@ export const CRAWLED_MASTERS: Master[] = [
     "category": "hair",
     "categoryLabel": "Hair & Styling",
     "craft": "Стрижка, фарбування, балаяж та укладка",
-    "tint": "#d9f24e",
-    "badgeColor": "#1a1938",
+    "tint": "#ffd4de",
+    "badgeColor": "#24405c",
     "rating": "4.8",
     "rawRating": 9.5,
     "reviewsCount": 114,
@@ -2880,7 +2880,7 @@ export const CRAWLED_MASTERS: Master[] = [
         "stars": 5,
         "when": "1 місяць тому",
         "tag": "ОД",
-        "tint": "#d9f24e"
+        "tint": "#ffd4de"
       },
       {
         "who": "Дарина Б.",
@@ -2888,7 +2888,7 @@ export const CRAWLED_MASTERS: Master[] = [
         "stars": 5,
         "when": "1 місяць тому",
         "tag": "НК",
-        "tint": "#c9bcff"
+        "tint": "#c6dcf1"
       },
       {
         "who": "Ольга Д.",
@@ -2896,7 +2896,7 @@ export const CRAWLED_MASTERS: Master[] = [
         "stars": 5,
         "when": "2 дні тому",
         "tag": "ВМ",
-        "tint": "#ffc3c0"
+        "tint": "#dbe8f5"
       }
     ],
     "slots": [
@@ -2916,8 +2916,8 @@ export const CRAWLED_MASTERS: Master[] = [
     "category": "hair",
     "categoryLabel": "Hair & Styling",
     "craft": "Стрижка, фарбування, балаяж та укладка",
-    "tint": "#d9f24e",
-    "badgeColor": "#1a1938",
+    "tint": "#ffd4de",
+    "badgeColor": "#24405c",
     "rating": "4.8",
     "rawRating": 9.6,
     "reviewsCount": 122,
@@ -3713,7 +3713,7 @@ export const CRAWLED_MASTERS: Master[] = [
         "stars": 5,
         "when": "2 дні тому",
         "tag": "ОД",
-        "tint": "#d9f24e"
+        "tint": "#ffd4de"
       },
       {
         "who": "Надія К.",
@@ -3721,7 +3721,7 @@ export const CRAWLED_MASTERS: Master[] = [
         "stars": 5,
         "when": "1 тиждень тому",
         "tag": "НК",
-        "tint": "#c9bcff"
+        "tint": "#c6dcf1"
       },
       {
         "who": "Віра М.",
@@ -3729,7 +3729,7 @@ export const CRAWLED_MASTERS: Master[] = [
         "stars": 5,
         "when": "2 тижні тому",
         "tag": "ВМ",
-        "tint": "#ffc3c0"
+        "tint": "#dbe8f5"
       }
     ],
     "slots": [
@@ -3749,8 +3749,8 @@ export const CRAWLED_MASTERS: Master[] = [
     "category": "hair",
     "categoryLabel": "Hair & Styling",
     "craft": "Стрижка, фарбування, балаяж та укладка",
-    "tint": "#d9f24e",
-    "badgeColor": "#1a1938",
+    "tint": "#ffd4de",
+    "badgeColor": "#24405c",
     "rating": "5.0",
     "rawRating": 9.9,
     "reviewsCount": 163,
@@ -3937,7 +3937,7 @@ export const CRAWLED_MASTERS: Master[] = [
         "stars": 5,
         "when": "2 тижні тому",
         "tag": "ОД",
-        "tint": "#d9f24e"
+        "tint": "#ffd4de"
       },
       {
         "who": "Ірина С.",
@@ -3945,7 +3945,7 @@ export const CRAWLED_MASTERS: Master[] = [
         "stars": 5,
         "when": "3 тижні тому",
         "tag": "НК",
-        "tint": "#c9bcff"
+        "tint": "#c6dcf1"
       },
       {
         "who": "Єлизавета П.",
@@ -3953,7 +3953,7 @@ export const CRAWLED_MASTERS: Master[] = [
         "stars": 5,
         "when": "1 місяць тому",
         "tag": "ВМ",
-        "tint": "#ffc3c0"
+        "tint": "#dbe8f5"
       }
     ],
     "slots": [
@@ -3973,8 +3973,8 @@ export const CRAWLED_MASTERS: Master[] = [
     "category": "hair",
     "categoryLabel": "Hair & Styling",
     "craft": "Стрижка, фарбування, балаяж та укладка",
-    "tint": "#d9f24e",
-    "badgeColor": "#1a1938",
+    "tint": "#ffd4de",
+    "badgeColor": "#24405c",
     "rating": "5.0",
     "rawRating": 10,
     "reviewsCount": 12,
@@ -4981,7 +4981,7 @@ export const CRAWLED_MASTERS: Master[] = [
         "stars": 5,
         "when": "1 місяць тому",
         "tag": "ОД",
-        "tint": "#d9f24e"
+        "tint": "#ffd4de"
       },
       {
         "who": "Дарина Б.",
@@ -4989,7 +4989,7 @@ export const CRAWLED_MASTERS: Master[] = [
         "stars": 5,
         "when": "1 місяць тому",
         "tag": "НК",
-        "tint": "#c9bcff"
+        "tint": "#c6dcf1"
       },
       {
         "who": "Ольга Д.",
@@ -4997,7 +4997,7 @@ export const CRAWLED_MASTERS: Master[] = [
         "stars": 5,
         "when": "2 дні тому",
         "tag": "ВМ",
-        "tint": "#ffc3c0"
+        "tint": "#dbe8f5"
       }
     ],
     "slots": [
@@ -5017,8 +5017,8 @@ export const CRAWLED_MASTERS: Master[] = [
     "category": "hair",
     "categoryLabel": "Hair & Styling",
     "craft": "Стрижка, фарбування, балаяж та укладка",
-    "tint": "#d9f24e",
-    "badgeColor": "#1a1938",
+    "tint": "#ffd4de",
+    "badgeColor": "#24405c",
     "rating": "5.0",
     "rawRating": 9.9,
     "reviewsCount": 190,
@@ -5285,7 +5285,7 @@ export const CRAWLED_MASTERS: Master[] = [
         "stars": 5,
         "when": "2 дні тому",
         "tag": "ОД",
-        "tint": "#d9f24e"
+        "tint": "#ffd4de"
       },
       {
         "who": "Надія К.",
@@ -5293,7 +5293,7 @@ export const CRAWLED_MASTERS: Master[] = [
         "stars": 5,
         "when": "1 тиждень тому",
         "tag": "НК",
-        "tint": "#c9bcff"
+        "tint": "#c6dcf1"
       },
       {
         "who": "Віра М.",
@@ -5301,7 +5301,7 @@ export const CRAWLED_MASTERS: Master[] = [
         "stars": 5,
         "when": "2 тижні тому",
         "tag": "ВМ",
-        "tint": "#ffc3c0"
+        "tint": "#dbe8f5"
       }
     ],
     "slots": [
@@ -5321,8 +5321,8 @@ export const CRAWLED_MASTERS: Master[] = [
     "category": "hair",
     "categoryLabel": "Hair & Styling",
     "craft": "Стрижка, фарбування, балаяж та укладка",
-    "tint": "#d9f24e",
-    "badgeColor": "#1a1938",
+    "tint": "#ffd4de",
+    "badgeColor": "#24405c",
     "rating": "5.0",
     "rawRating": 10,
     "reviewsCount": 27,
@@ -5354,7 +5354,7 @@ export const CRAWLED_MASTERS: Master[] = [
         "stars": 5,
         "when": "2 тижні тому",
         "tag": "ОД",
-        "tint": "#d9f24e"
+        "tint": "#ffd4de"
       },
       {
         "who": "Ірина С.",
@@ -5362,7 +5362,7 @@ export const CRAWLED_MASTERS: Master[] = [
         "stars": 5,
         "when": "3 тижні тому",
         "tag": "НК",
-        "tint": "#c9bcff"
+        "tint": "#c6dcf1"
       },
       {
         "who": "Єлизавета П.",
@@ -5370,7 +5370,7 @@ export const CRAWLED_MASTERS: Master[] = [
         "stars": 5,
         "when": "1 місяць тому",
         "tag": "ВМ",
-        "tint": "#ffc3c0"
+        "tint": "#dbe8f5"
       }
     ],
     "slots": [
@@ -5390,8 +5390,8 @@ export const CRAWLED_MASTERS: Master[] = [
     "category": "nails",
     "categoryLabel": "Nails & Manicure",
     "craft": "Манікюр, педикюр та гель-дизайн",
-    "tint": "#c9bcff",
-    "badgeColor": "#1a1938",
+    "tint": "#c6dcf1",
+    "badgeColor": "#24405c",
     "rating": "4.9",
     "rawRating": 9.8,
     "reviewsCount": 55,
@@ -6090,7 +6090,7 @@ export const CRAWLED_MASTERS: Master[] = [
         "stars": 5,
         "when": "1 місяць тому",
         "tag": "ОД",
-        "tint": "#d9f24e"
+        "tint": "#ffd4de"
       },
       {
         "who": "Дарина Б.",
@@ -6098,7 +6098,7 @@ export const CRAWLED_MASTERS: Master[] = [
         "stars": 5,
         "when": "1 місяць тому",
         "tag": "НК",
-        "tint": "#c9bcff"
+        "tint": "#c6dcf1"
       },
       {
         "who": "Ольга Д.",
@@ -6106,7 +6106,7 @@ export const CRAWLED_MASTERS: Master[] = [
         "stars": 5,
         "when": "2 дні тому",
         "tag": "ВМ",
-        "tint": "#ffc3c0"
+        "tint": "#dbe8f5"
       }
     ],
     "slots": [
@@ -6126,8 +6126,8 @@ export const CRAWLED_MASTERS: Master[] = [
     "category": "nails",
     "categoryLabel": "Nails & Manicure",
     "craft": "Манікюр, педикюр та гель-дизайн",
-    "tint": "#c9bcff",
-    "badgeColor": "#1a1938",
+    "tint": "#c6dcf1",
+    "badgeColor": "#24405c",
     "rating": "5.0",
     "rawRating": 10,
     "reviewsCount": 22,
@@ -6249,7 +6249,7 @@ export const CRAWLED_MASTERS: Master[] = [
         "stars": 5,
         "when": "2 дні тому",
         "tag": "ОД",
-        "tint": "#d9f24e"
+        "tint": "#ffd4de"
       },
       {
         "who": "Надія К.",
@@ -6257,7 +6257,7 @@ export const CRAWLED_MASTERS: Master[] = [
         "stars": 5,
         "when": "1 тиждень тому",
         "tag": "НК",
-        "tint": "#c9bcff"
+        "tint": "#c6dcf1"
       },
       {
         "who": "Віра М.",
@@ -6265,7 +6265,7 @@ export const CRAWLED_MASTERS: Master[] = [
         "stars": 5,
         "when": "2 тижні тому",
         "tag": "ВМ",
-        "tint": "#ffc3c0"
+        "tint": "#dbe8f5"
       }
     ],
     "slots": [
@@ -6285,8 +6285,8 @@ export const CRAWLED_MASTERS: Master[] = [
     "category": "nails",
     "categoryLabel": "Nails & Manicure",
     "craft": "Манікюр, педикюр та гель-дизайн",
-    "tint": "#c9bcff",
-    "badgeColor": "#1a1938",
+    "tint": "#c6dcf1",
+    "badgeColor": "#24405c",
     "rating": "4.8",
     "rawRating": 9.7,
     "reviewsCount": 31,
@@ -6890,7 +6890,7 @@ export const CRAWLED_MASTERS: Master[] = [
         "stars": 5,
         "when": "2 тижні тому",
         "tag": "ОД",
-        "tint": "#d9f24e"
+        "tint": "#ffd4de"
       },
       {
         "who": "Ірина С.",
@@ -6898,7 +6898,7 @@ export const CRAWLED_MASTERS: Master[] = [
         "stars": 5,
         "when": "3 тижні тому",
         "tag": "НК",
-        "tint": "#c9bcff"
+        "tint": "#c6dcf1"
       },
       {
         "who": "Єлизавета П.",
@@ -6906,7 +6906,7 @@ export const CRAWLED_MASTERS: Master[] = [
         "stars": 5,
         "when": "1 місяць тому",
         "tag": "ВМ",
-        "tint": "#ffc3c0"
+        "tint": "#dbe8f5"
       }
     ],
     "slots": [
@@ -6926,8 +6926,8 @@ export const CRAWLED_MASTERS: Master[] = [
     "category": "nails",
     "categoryLabel": "Nails & Manicure",
     "craft": "Манікюр, педикюр та гель-дизайн",
-    "tint": "#c9bcff",
-    "badgeColor": "#1a1938",
+    "tint": "#c6dcf1",
+    "badgeColor": "#24405c",
     "rating": "5.0",
     "rawRating": 10,
     "reviewsCount": 11,
@@ -7370,7 +7370,7 @@ export const CRAWLED_MASTERS: Master[] = [
         "stars": 5,
         "when": "1 місяць тому",
         "tag": "ОД",
-        "tint": "#d9f24e"
+        "tint": "#ffd4de"
       },
       {
         "who": "Дарина Б.",
@@ -7378,7 +7378,7 @@ export const CRAWLED_MASTERS: Master[] = [
         "stars": 5,
         "when": "1 місяць тому",
         "tag": "НК",
-        "tint": "#c9bcff"
+        "tint": "#c6dcf1"
       },
       {
         "who": "Ольга Д.",
@@ -7386,7 +7386,7 @@ export const CRAWLED_MASTERS: Master[] = [
         "stars": 5,
         "when": "2 дні тому",
         "tag": "ВМ",
-        "tint": "#ffc3c0"
+        "tint": "#dbe8f5"
       }
     ],
     "slots": [
@@ -7406,8 +7406,8 @@ export const CRAWLED_MASTERS: Master[] = [
     "category": "nails",
     "categoryLabel": "Nails & Manicure",
     "craft": "Манікюр, педикюр та гель-дизайн",
-    "tint": "#c9bcff",
-    "badgeColor": "#1a1938",
+    "tint": "#c6dcf1",
+    "badgeColor": "#24405c",
     "rating": "4.8",
     "rawRating": 9.6,
     "reviewsCount": 95,
@@ -7549,7 +7549,7 @@ export const CRAWLED_MASTERS: Master[] = [
         "stars": 5,
         "when": "2 дні тому",
         "tag": "ОД",
-        "tint": "#d9f24e"
+        "tint": "#ffd4de"
       },
       {
         "who": "Надія К.",
@@ -7557,7 +7557,7 @@ export const CRAWLED_MASTERS: Master[] = [
         "stars": 5,
         "when": "1 тиждень тому",
         "tag": "НК",
-        "tint": "#c9bcff"
+        "tint": "#c6dcf1"
       },
       {
         "who": "Віра М.",
@@ -7565,7 +7565,7 @@ export const CRAWLED_MASTERS: Master[] = [
         "stars": 5,
         "when": "2 тижні тому",
         "tag": "ВМ",
-        "tint": "#ffc3c0"
+        "tint": "#dbe8f5"
       }
     ],
     "slots": [
@@ -7585,8 +7585,8 @@ export const CRAWLED_MASTERS: Master[] = [
     "category": "nails",
     "categoryLabel": "Nails & Manicure",
     "craft": "Манікюр, педикюр та гель-дизайн",
-    "tint": "#c9bcff",
-    "badgeColor": "#1a1938",
+    "tint": "#c6dcf1",
+    "badgeColor": "#24405c",
     "rating": "4.8",
     "rawRating": 9.5,
     "reviewsCount": 114,
@@ -8047,7 +8047,7 @@ export const CRAWLED_MASTERS: Master[] = [
         "stars": 5,
         "when": "2 тижні тому",
         "tag": "ОД",
-        "tint": "#d9f24e"
+        "tint": "#ffd4de"
       },
       {
         "who": "Ірина С.",
@@ -8055,7 +8055,7 @@ export const CRAWLED_MASTERS: Master[] = [
         "stars": 5,
         "when": "3 тижні тому",
         "tag": "НК",
-        "tint": "#c9bcff"
+        "tint": "#c6dcf1"
       },
       {
         "who": "Єлизавета П.",
@@ -8063,7 +8063,7 @@ export const CRAWLED_MASTERS: Master[] = [
         "stars": 5,
         "when": "1 місяць тому",
         "tag": "ВМ",
-        "tint": "#ffc3c0"
+        "tint": "#dbe8f5"
       }
     ],
     "slots": [
@@ -8083,8 +8083,8 @@ export const CRAWLED_MASTERS: Master[] = [
     "category": "nails",
     "categoryLabel": "Nails & Manicure",
     "craft": "Манікюр, педикюр та гель-дизайн",
-    "tint": "#c9bcff",
-    "badgeColor": "#1a1938",
+    "tint": "#c6dcf1",
+    "badgeColor": "#24405c",
     "rating": "4.8",
     "rawRating": 9.6,
     "reviewsCount": 129,
@@ -8880,7 +8880,7 @@ export const CRAWLED_MASTERS: Master[] = [
         "stars": 5,
         "when": "1 місяць тому",
         "tag": "ОД",
-        "tint": "#d9f24e"
+        "tint": "#ffd4de"
       },
       {
         "who": "Дарина Б.",
@@ -8888,7 +8888,7 @@ export const CRAWLED_MASTERS: Master[] = [
         "stars": 5,
         "when": "1 місяць тому",
         "tag": "НК",
-        "tint": "#c9bcff"
+        "tint": "#c6dcf1"
       },
       {
         "who": "Ольга Д.",
@@ -8896,7 +8896,7 @@ export const CRAWLED_MASTERS: Master[] = [
         "stars": 5,
         "when": "2 дні тому",
         "tag": "ВМ",
-        "tint": "#ffc3c0"
+        "tint": "#dbe8f5"
       }
     ],
     "slots": [
@@ -8916,8 +8916,8 @@ export const CRAWLED_MASTERS: Master[] = [
     "category": "nails",
     "categoryLabel": "Nails & Manicure",
     "craft": "Манікюр, педикюр та гель-дизайн",
-    "tint": "#c9bcff",
-    "badgeColor": "#1a1938",
+    "tint": "#c6dcf1",
+    "badgeColor": "#24405c",
     "rating": "5.0",
     "rawRating": 10,
     "reviewsCount": 1,
@@ -8948,7 +8948,7 @@ export const CRAWLED_MASTERS: Master[] = [
         "stars": 5,
         "when": "2 дні тому",
         "tag": "ОД",
-        "tint": "#d9f24e"
+        "tint": "#ffd4de"
       },
       {
         "who": "Надія К.",
@@ -8956,7 +8956,7 @@ export const CRAWLED_MASTERS: Master[] = [
         "stars": 5,
         "when": "1 тиждень тому",
         "tag": "НК",
-        "tint": "#c9bcff"
+        "tint": "#c6dcf1"
       },
       {
         "who": "Віра М.",
@@ -8964,7 +8964,7 @@ export const CRAWLED_MASTERS: Master[] = [
         "stars": 5,
         "when": "2 тижні тому",
         "tag": "ВМ",
-        "tint": "#ffc3c0"
+        "tint": "#dbe8f5"
       }
     ],
     "slots": [
@@ -8984,8 +8984,8 @@ export const CRAWLED_MASTERS: Master[] = [
     "category": "nails",
     "categoryLabel": "Nails & Manicure",
     "craft": "Манікюр, педикюр та гель-дизайн",
-    "tint": "#c9bcff",
-    "badgeColor": "#1a1938",
+    "tint": "#c6dcf1",
+    "badgeColor": "#24405c",
     "rating": "5.0",
     "rawRating": 10,
     "reviewsCount": 12,
@@ -9016,7 +9016,7 @@ export const CRAWLED_MASTERS: Master[] = [
         "stars": 5,
         "when": "2 тижні тому",
         "tag": "ОД",
-        "tint": "#d9f24e"
+        "tint": "#ffd4de"
       },
       {
         "who": "Ірина С.",
@@ -9024,7 +9024,7 @@ export const CRAWLED_MASTERS: Master[] = [
         "stars": 5,
         "when": "3 тижні тому",
         "tag": "НК",
-        "tint": "#c9bcff"
+        "tint": "#c6dcf1"
       },
       {
         "who": "Єлизавета П.",
@@ -9032,7 +9032,7 @@ export const CRAWLED_MASTERS: Master[] = [
         "stars": 5,
         "when": "1 місяць тому",
         "tag": "ВМ",
-        "tint": "#ffc3c0"
+        "tint": "#dbe8f5"
       }
     ],
     "slots": [
@@ -9052,8 +9052,8 @@ export const CRAWLED_MASTERS: Master[] = [
     "category": "nails",
     "categoryLabel": "Nails & Manicure",
     "craft": "Манікюр, педикюр та гель-дизайн",
-    "tint": "#c9bcff",
-    "badgeColor": "#1a1938",
+    "tint": "#c6dcf1",
+    "badgeColor": "#24405c",
     "rating": "5.0",
     "rawRating": 10,
     "reviewsCount": 11,
@@ -9084,7 +9084,7 @@ export const CRAWLED_MASTERS: Master[] = [
         "stars": 5,
         "when": "1 місяць тому",
         "tag": "ОД",
-        "tint": "#d9f24e"
+        "tint": "#ffd4de"
       },
       {
         "who": "Дарина Б.",
@@ -9092,7 +9092,7 @@ export const CRAWLED_MASTERS: Master[] = [
         "stars": 5,
         "when": "1 місяць тому",
         "tag": "НК",
-        "tint": "#c9bcff"
+        "tint": "#c6dcf1"
       },
       {
         "who": "Ольга Д.",
@@ -9100,7 +9100,7 @@ export const CRAWLED_MASTERS: Master[] = [
         "stars": 5,
         "when": "2 дні тому",
         "tag": "ВМ",
-        "tint": "#ffc3c0"
+        "tint": "#dbe8f5"
       }
     ],
     "slots": [
@@ -9120,8 +9120,8 @@ export const CRAWLED_MASTERS: Master[] = [
     "category": "laser",
     "categoryLabel": "Laser Epilation",
     "craft": "Лазерна та електроепіляція, догляд",
-    "tint": "#ffc3c0",
-    "badgeColor": "#1a1938",
+    "tint": "#dbe8f5",
+    "badgeColor": "#24405c",
     "rating": "5.0",
     "rawRating": 9.9,
     "reviewsCount": 384,
@@ -9603,7 +9603,7 @@ export const CRAWLED_MASTERS: Master[] = [
         "stars": 5,
         "when": "2 дні тому",
         "tag": "ОД",
-        "tint": "#d9f24e"
+        "tint": "#ffd4de"
       },
       {
         "who": "Надія К.",
@@ -9611,7 +9611,7 @@ export const CRAWLED_MASTERS: Master[] = [
         "stars": 5,
         "when": "1 тиждень тому",
         "tag": "НК",
-        "tint": "#c9bcff"
+        "tint": "#c6dcf1"
       },
       {
         "who": "Віра М.",
@@ -9619,7 +9619,7 @@ export const CRAWLED_MASTERS: Master[] = [
         "stars": 5,
         "when": "2 тижні тому",
         "tag": "ВМ",
-        "tint": "#ffc3c0"
+        "tint": "#dbe8f5"
       }
     ],
     "slots": [
@@ -9639,8 +9639,8 @@ export const CRAWLED_MASTERS: Master[] = [
     "category": "laser",
     "categoryLabel": "Laser Epilation",
     "craft": "Лазерна та електроепіляція, догляд",
-    "tint": "#ffc3c0",
-    "badgeColor": "#1a1938",
+    "tint": "#dbe8f5",
+    "badgeColor": "#24405c",
     "rating": "4.8",
     "rawRating": 9.7,
     "reviewsCount": 31,
@@ -10244,7 +10244,7 @@ export const CRAWLED_MASTERS: Master[] = [
         "stars": 5,
         "when": "2 тижні тому",
         "tag": "ОД",
-        "tint": "#d9f24e"
+        "tint": "#ffd4de"
       },
       {
         "who": "Ірина С.",
@@ -10252,7 +10252,7 @@ export const CRAWLED_MASTERS: Master[] = [
         "stars": 5,
         "when": "3 тижні тому",
         "tag": "НК",
-        "tint": "#c9bcff"
+        "tint": "#c6dcf1"
       },
       {
         "who": "Єлизавета П.",
@@ -10260,7 +10260,7 @@ export const CRAWLED_MASTERS: Master[] = [
         "stars": 5,
         "when": "1 місяць тому",
         "tag": "ВМ",
-        "tint": "#ffc3c0"
+        "tint": "#dbe8f5"
       }
     ],
     "slots": [
@@ -10280,8 +10280,8 @@ export const CRAWLED_MASTERS: Master[] = [
     "category": "laser",
     "categoryLabel": "Laser Epilation",
     "craft": "Лазерна та електроепіляція, догляд",
-    "tint": "#ffc3c0",
-    "badgeColor": "#1a1938",
+    "tint": "#dbe8f5",
+    "badgeColor": "#24405c",
     "rating": "4.8",
     "rawRating": 9.6,
     "reviewsCount": 51,
@@ -11077,7 +11077,7 @@ export const CRAWLED_MASTERS: Master[] = [
         "stars": 5,
         "when": "1 місяць тому",
         "tag": "ОД",
-        "tint": "#d9f24e"
+        "tint": "#ffd4de"
       },
       {
         "who": "Дарина Б.",
@@ -11085,7 +11085,7 @@ export const CRAWLED_MASTERS: Master[] = [
         "stars": 5,
         "when": "1 місяць тому",
         "tag": "НК",
-        "tint": "#c9bcff"
+        "tint": "#c6dcf1"
       },
       {
         "who": "Ольга Д.",
@@ -11093,7 +11093,7 @@ export const CRAWLED_MASTERS: Master[] = [
         "stars": 5,
         "when": "2 дні тому",
         "tag": "ВМ",
-        "tint": "#ffc3c0"
+        "tint": "#dbe8f5"
       }
     ],
     "slots": [
@@ -11113,8 +11113,8 @@ export const CRAWLED_MASTERS: Master[] = [
     "category": "laser",
     "categoryLabel": "Laser Epilation",
     "craft": "Лазерна та електроепіляція, догляд",
-    "tint": "#ffc3c0",
-    "badgeColor": "#1a1938",
+    "tint": "#dbe8f5",
+    "badgeColor": "#24405c",
     "rating": "5.0",
     "rawRating": 9.9,
     "reviewsCount": 36,
@@ -11831,7 +11831,7 @@ export const CRAWLED_MASTERS: Master[] = [
         "stars": 5,
         "when": "2 дні тому",
         "tag": "ОД",
-        "tint": "#d9f24e"
+        "tint": "#ffd4de"
       },
       {
         "who": "Надія К.",
@@ -11839,7 +11839,7 @@ export const CRAWLED_MASTERS: Master[] = [
         "stars": 5,
         "when": "1 тиждень тому",
         "tag": "НК",
-        "tint": "#c9bcff"
+        "tint": "#c6dcf1"
       },
       {
         "who": "Віра М.",
@@ -11847,7 +11847,7 @@ export const CRAWLED_MASTERS: Master[] = [
         "stars": 5,
         "when": "2 тижні тому",
         "tag": "ВМ",
-        "tint": "#ffc3c0"
+        "tint": "#dbe8f5"
       }
     ],
     "slots": [
@@ -11867,8 +11867,8 @@ export const CRAWLED_MASTERS: Master[] = [
     "category": "laser",
     "categoryLabel": "Laser Epilation",
     "craft": "Лазерна та електроепіляція, догляд",
-    "tint": "#ffc3c0",
-    "badgeColor": "#1a1938",
+    "tint": "#dbe8f5",
+    "badgeColor": "#24405c",
     "rating": "5.0",
     "rawRating": 10,
     "reviewsCount": 17,
@@ -12085,7 +12085,7 @@ export const CRAWLED_MASTERS: Master[] = [
         "stars": 5,
         "when": "2 тижні тому",
         "tag": "ОД",
-        "tint": "#d9f24e"
+        "tint": "#ffd4de"
       },
       {
         "who": "Ірина С.",
@@ -12093,7 +12093,7 @@ export const CRAWLED_MASTERS: Master[] = [
         "stars": 5,
         "when": "3 тижні тому",
         "tag": "НК",
-        "tint": "#c9bcff"
+        "tint": "#c6dcf1"
       },
       {
         "who": "Єлизавета П.",
@@ -12101,7 +12101,7 @@ export const CRAWLED_MASTERS: Master[] = [
         "stars": 5,
         "when": "1 місяць тому",
         "tag": "ВМ",
-        "tint": "#ffc3c0"
+        "tint": "#dbe8f5"
       }
     ],
     "slots": [
@@ -12121,8 +12121,8 @@ export const CRAWLED_MASTERS: Master[] = [
     "category": "laser",
     "categoryLabel": "Laser Epilation",
     "craft": "Лазерна та електроепіляція, догляд",
-    "tint": "#ffc3c0",
-    "badgeColor": "#1a1938",
+    "tint": "#dbe8f5",
+    "badgeColor": "#24405c",
     "rating": "4.9",
     "rawRating": 9.8,
     "reviewsCount": 115,
@@ -13115,7 +13115,7 @@ export const CRAWLED_MASTERS: Master[] = [
         "stars": 5,
         "when": "1 місяць тому",
         "tag": "ОД",
-        "tint": "#d9f24e"
+        "tint": "#ffd4de"
       },
       {
         "who": "Дарина Б.",
@@ -13123,7 +13123,7 @@ export const CRAWLED_MASTERS: Master[] = [
         "stars": 5,
         "when": "1 місяць тому",
         "tag": "НК",
-        "tint": "#c9bcff"
+        "tint": "#c6dcf1"
       },
       {
         "who": "Ольга Д.",
@@ -13131,7 +13131,7 @@ export const CRAWLED_MASTERS: Master[] = [
         "stars": 5,
         "when": "2 дні тому",
         "tag": "ВМ",
-        "tint": "#ffc3c0"
+        "tint": "#dbe8f5"
       }
     ],
     "slots": [
@@ -13151,8 +13151,8 @@ export const CRAWLED_MASTERS: Master[] = [
     "category": "laser",
     "categoryLabel": "Laser Epilation",
     "craft": "Лазерна та електроепіляція, догляд",
-    "tint": "#ffc3c0",
-    "badgeColor": "#1a1938",
+    "tint": "#dbe8f5",
+    "badgeColor": "#24405c",
     "rating": "4.8",
     "rawRating": 9.7,
     "reviewsCount": 78,
@@ -13599,7 +13599,7 @@ export const CRAWLED_MASTERS: Master[] = [
         "stars": 5,
         "when": "2 дні тому",
         "tag": "ОД",
-        "tint": "#d9f24e"
+        "tint": "#ffd4de"
       },
       {
         "who": "Надія К.",
@@ -13607,7 +13607,7 @@ export const CRAWLED_MASTERS: Master[] = [
         "stars": 5,
         "when": "1 тиждень тому",
         "tag": "НК",
-        "tint": "#c9bcff"
+        "tint": "#c6dcf1"
       },
       {
         "who": "Віра М.",
@@ -13615,7 +13615,7 @@ export const CRAWLED_MASTERS: Master[] = [
         "stars": 5,
         "when": "2 тижні тому",
         "tag": "ВМ",
-        "tint": "#ffc3c0"
+        "tint": "#dbe8f5"
       }
     ],
     "slots": [
@@ -13635,8 +13635,8 @@ export const CRAWLED_MASTERS: Master[] = [
     "category": "laser",
     "categoryLabel": "Laser Epilation",
     "craft": "Лазерна та електроепіляція, догляд",
-    "tint": "#ffc3c0",
-    "badgeColor": "#1a1938",
+    "tint": "#dbe8f5",
+    "badgeColor": "#24405c",
     "rating": "4.7",
     "rawRating": 9.4,
     "reviewsCount": 18,
@@ -14558,7 +14558,7 @@ export const CRAWLED_MASTERS: Master[] = [
         "stars": 5,
         "when": "2 тижні тому",
         "tag": "ОД",
-        "tint": "#d9f24e"
+        "tint": "#ffd4de"
       },
       {
         "who": "Ірина С.",
@@ -14566,7 +14566,7 @@ export const CRAWLED_MASTERS: Master[] = [
         "stars": 5,
         "when": "3 тижні тому",
         "tag": "НК",
-        "tint": "#c9bcff"
+        "tint": "#c6dcf1"
       },
       {
         "who": "Єлизавета П.",
@@ -14574,7 +14574,7 @@ export const CRAWLED_MASTERS: Master[] = [
         "stars": 5,
         "when": "1 місяць тому",
         "tag": "ВМ",
-        "tint": "#ffc3c0"
+        "tint": "#dbe8f5"
       }
     ],
     "slots": [
@@ -14594,8 +14594,8 @@ export const CRAWLED_MASTERS: Master[] = [
     "category": "laser",
     "categoryLabel": "Laser Epilation",
     "craft": "Лазерна та електроепіляція, догляд",
-    "tint": "#ffc3c0",
-    "badgeColor": "#1a1938",
+    "tint": "#dbe8f5",
+    "badgeColor": "#24405c",
     "rating": "5.0",
     "rawRating": 10,
     "reviewsCount": 12,
@@ -14892,7 +14892,7 @@ export const CRAWLED_MASTERS: Master[] = [
         "stars": 5,
         "when": "1 місяць тому",
         "tag": "ОД",
-        "tint": "#d9f24e"
+        "tint": "#ffd4de"
       },
       {
         "who": "Дарина Б.",
@@ -14900,7 +14900,7 @@ export const CRAWLED_MASTERS: Master[] = [
         "stars": 5,
         "when": "1 місяць тому",
         "tag": "НК",
-        "tint": "#c9bcff"
+        "tint": "#c6dcf1"
       },
       {
         "who": "Ольга Д.",
@@ -14908,7 +14908,7 @@ export const CRAWLED_MASTERS: Master[] = [
         "stars": 5,
         "when": "2 дні тому",
         "tag": "ВМ",
-        "tint": "#ffc3c0"
+        "tint": "#dbe8f5"
       }
     ],
     "slots": [
@@ -14928,8 +14928,8 @@ export const CRAWLED_MASTERS: Master[] = [
     "category": "laser",
     "categoryLabel": "Laser Epilation",
     "craft": "Лазерна та електроепіляція, догляд",
-    "tint": "#ffc3c0",
-    "badgeColor": "#1a1938",
+    "tint": "#dbe8f5",
+    "badgeColor": "#24405c",
     "rating": "5.0",
     "rawRating": 10,
     "reviewsCount": 19,
@@ -15326,7 +15326,7 @@ export const CRAWLED_MASTERS: Master[] = [
         "stars": 5,
         "when": "2 дні тому",
         "tag": "ОД",
-        "tint": "#d9f24e"
+        "tint": "#ffd4de"
       },
       {
         "who": "Надія К.",
@@ -15334,7 +15334,7 @@ export const CRAWLED_MASTERS: Master[] = [
         "stars": 5,
         "when": "1 тиждень тому",
         "tag": "НК",
-        "tint": "#c9bcff"
+        "tint": "#c6dcf1"
       },
       {
         "who": "Віра М.",
@@ -15342,7 +15342,7 @@ export const CRAWLED_MASTERS: Master[] = [
         "stars": 5,
         "when": "2 тижні тому",
         "tag": "ВМ",
-        "tint": "#ffc3c0"
+        "tint": "#dbe8f5"
       }
     ],
     "slots": [

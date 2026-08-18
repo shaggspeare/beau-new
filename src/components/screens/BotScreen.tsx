@@ -21,12 +21,12 @@ export const BotScreen: React.FC<BotScreenProps> = ({
   ]);
 
   const serviceOptions = [
-    { label: 'Hair & Styling', cat: 'hair' as CategoryFilter, bg: '#d9f24e', count: '10 masters' },
-    { label: 'Nails & Manicure', cat: 'nails' as CategoryFilter, bg: '#c9bcff', count: '10 masters' },
-    { label: 'Laser Epilation', cat: 'laser' as CategoryFilter, bg: '#ffc3c0', count: '10 salons' },
-    { label: 'All 30 Masters', cat: 'All' as CategoryFilter, bg: '#bfe8d8', count: '30 masters' },
-    { label: 'Top Rated ★9.5+', cat: 'All' as CategoryFilter, bg: '#ffe4a8', count: '18 masters' },
-    { label: 'Near Pechersk / Center', cat: 'All' as CategoryFilter, bg: '#e4e1ea', count: '12 masters' },
+    { label: 'Hair & Styling', cat: 'hair' as CategoryFilter, bg: '#ffd4de', count: '10 masters' },
+    { label: 'Nails & Manicure', cat: 'nails' as CategoryFilter, bg: '#c6dcf1', count: '10 masters' },
+    { label: 'Laser Epilation', cat: 'laser' as CategoryFilter, bg: '#dbe8f5', count: '10 salons' },
+    { label: 'All 30 Masters', cat: 'All' as CategoryFilter, bg: '#ffe6ec', count: '30 masters' },
+    { label: 'Top Rated ★4.9+', cat: 'All' as CategoryFilter, bg: '#ffd4de', count: '18 masters' },
+    { label: 'Near Pechersk / Center', cat: 'All' as CategoryFilter, bg: '#dce6ef', count: '12 masters' },
   ];
 
   const handlePick = (opt: typeof serviceOptions[0]) => {
@@ -71,18 +71,8 @@ export const BotScreen: React.FC<BotScreenProps> = ({
     }, 1000);
   };
 
-  const handleReset = () => {
-    setPicked(null);
-    setMessages([
-      {
-        sender: 'bot',
-        text: 'Hi! Two taps and your map is ready. What are you after today?',
-      },
-    ]);
-  };
-
   return (
-    <div style={{ height: '100%', background: '#f7f6fa', display: 'flex', flexDirection: 'column' }}>
+    <div style={{ height: '100%', background: '#f4f7fa', display: 'flex', flexDirection: 'column' }}>
       {/* Header */}
       <div
         style={{
@@ -91,7 +81,7 @@ export const BotScreen: React.FC<BotScreenProps> = ({
           alignItems: 'center',
           gap: '12px',
           background: '#ffffff',
-          borderBottom: '1px solid #ece9f3',
+          borderBottom: '1px solid #e3ebf3',
         }}
       >
         <div
@@ -99,8 +89,8 @@ export const BotScreen: React.FC<BotScreenProps> = ({
             width: '38px',
             height: '38px',
             borderRadius: '50%',
-            background: '#d9f24e',
-            color: '#1a1938',
+            background: '#f5265f',
+            color: '#ffffff',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
@@ -112,8 +102,8 @@ export const BotScreen: React.FC<BotScreenProps> = ({
           b
         </div>
         <div style={{ flex: 1 }}>
-          <div style={{ fontSize: '15px', fontWeight: 700, color: '#1a1938' }}>Beau</div>
-          <div style={{ fontSize: '11px', color: '#8d8aa6' }}>your booking assistant</div>
+          <div style={{ fontSize: '15px', fontWeight: 700, color: '#24405c' }}>Barb</div>
+          <div style={{ fontSize: '11px', color: '#6d8299' }}>your booking assistant</div>
         </div>
         <button
           onClick={onSkipToMap}
@@ -122,10 +112,10 @@ export const BotScreen: React.FC<BotScreenProps> = ({
             padding: '0 14px',
             border: 'none',
             borderRadius: '17px',
-            background: '#f2f0f6',
+            background: '#eaf0f6',
             fontSize: '13px',
             fontWeight: 600,
-            color: '#6f6d86',
+            color: '#24405c',
             cursor: 'pointer',
           }}
         >
@@ -138,160 +128,153 @@ export const BotScreen: React.FC<BotScreenProps> = ({
         style={{
           flex: 1,
           overflowY: 'auto',
-          padding: '20px',
+          padding: '20px 18px',
           display: 'flex',
           flexDirection: 'column',
           gap: '14px',
         }}
       >
-        {messages.map((m, idx) => (
-          <div
-            key={idx}
-            className="animate-pop"
-            style={{
-              maxWidth: '84%',
-              alignSelf: m.sender === 'user' ? 'flex-end' : 'flex-start',
-              background: m.sender === 'user' ? '#1a1938' : '#ffffff',
-              color: m.sender === 'user' ? '#ffffff' : '#1a1938',
-              borderRadius: m.sender === 'user' ? '18px 18px 6px 18px' : '18px 18px 18px 6px',
-              padding: '14px 16px',
-              fontSize: '15px',
-              lineHeight: 1.5,
-              boxShadow: m.sender === 'bot' ? '0 2px 8px rgba(26,25,56,0.05)' : 'none',
-            }}
-          >
-            {m.text}
-          </div>
-        ))}
-
-        {/* Suggestion Chips */}
-        {!picked && (
-          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '9px', marginTop: '6px' }}>
-            {serviceOptions.map((opt, i) => (
-              <button
-                key={i}
-                onClick={() => handlePick(opt)}
+        {messages.map((m, idx) => {
+          const isBot = m.sender === 'bot';
+          return (
+            <div
+              key={idx}
+              style={{
+                display: 'flex',
+                gap: '10px',
+                alignItems: 'flex-start',
+                alignSelf: isBot ? 'flex-start' : 'flex-end',
+                maxWidth: '84%',
+              }}
+            >
+              {isBot && (
+                <div
+                  style={{
+                    width: '30px',
+                    height: '30px',
+                    borderRadius: '50%',
+                    background: '#ffd4de',
+                    color: '#f5265f',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    fontFamily: 'var(--font-serif)',
+                    fontSize: '14px',
+                    fontWeight: 700,
+                    flexShrink: 0,
+                  }}
+                >
+                  b
+                </div>
+              )}
+              <div
                 style={{
-                  height: '42px',
-                  padding: '0 16px',
-                  border: 'none',
-                  borderRadius: '21px',
-                  background: opt.bg,
-                  fontSize: '13.5px',
-                  fontWeight: 600,
-                  color: '#1a1938',
-                  cursor: 'pointer',
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '6px',
-                  boxShadow: '0 2px 6px rgba(26,25,56,0.06)',
-                  transition: 'transform 0.15s ease',
+                  padding: '12px 16px',
+                  borderRadius: isBot ? '18px 18px 18px 6px' : '18px 18px 6px 18px',
+                  background: isBot ? '#ffffff' : '#24405c',
+                  color: isBot ? '#24405c' : '#ffffff',
+                  fontSize: '14.5px',
+                  lineHeight: 1.45,
+                  boxShadow: isBot ? '0 2px 8px rgba(36,64,92,0.05)' : 'none',
+                  border: isBot ? '1px solid #e3ebf3' : 'none',
                 }}
               >
-                {opt.label}
-              </button>
-            ))}
+                {m.text}
+              </div>
+            </div>
+          );
+        })}
+
+        {/* Quick Pick Service Chips */}
+        {!picked && (
+          <div style={{ marginTop: '10px', display: 'flex', flexDirection: 'column', gap: '8px' }}>
+            <div style={{ fontSize: '11px', fontWeight: 700, letterSpacing: '0.08em', color: '#93a7b8', marginLeft: '40px' }}>
+              POPULAR FILTERS
+            </div>
+            <div
+              style={{
+                marginLeft: '40px',
+                display: 'flex',
+                flexWrap: 'wrap',
+                gap: '8px',
+              }}
+            >
+              {serviceOptions.map((opt) => (
+                <button
+                  key={opt.label}
+                  onClick={() => handlePick(opt)}
+                  style={{
+                    height: '38px',
+                    padding: '0 16px',
+                    borderRadius: '19px',
+                    border: '1px solid rgba(36,64,92,0.08)',
+                    background: opt.bg,
+                    color: '#24405c',
+                    fontSize: '13px',
+                    fontWeight: 600,
+                    cursor: 'pointer',
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '6px',
+                    boxShadow: '0 2px 6px rgba(36,64,92,0.04)',
+                    transition: 'transform 0.15s ease',
+                  }}
+                >
+                  <span>{opt.label}</span>
+                  <span style={{ fontSize: '11px', opacity: 0.7 }}>· {opt.count}</span>
+                </button>
+              ))}
+            </div>
           </div>
         )}
       </div>
 
-      {/* Bottom Bar */}
+      {/* Input Field */}
       <div
         style={{
-          padding: '12px 16px 34px',
-          display: 'flex',
-          alignItems: 'center',
-          gap: '10px',
+          padding: '12px 18px 24px',
           background: '#ffffff',
-          borderTop: '1px solid #ece9f3',
+          borderTop: '1px solid #e3ebf3',
+          display: 'flex',
+          gap: '10px',
+          alignItems: 'center',
         }}
       >
-        <div
+        <input
+          type="text"
+          placeholder="Ask for hair, nails, laser, or Pechersk..."
+          value={inputText}
+          onChange={(e) => setInputText(e.target.value)}
+          onKeyDown={(e) => e.key === 'Enter' && handleCustomSend()}
           style={{
             flex: 1,
             height: '46px',
             borderRadius: '23px',
-            background: '#f2f0f6',
-            display: 'flex',
-            alignItems: 'center',
-            padding: '0 14px',
-            gap: '8px',
+            background: '#eaf0f6',
+            border: 'none',
+            outline: 'none',
+            padding: '0 18px',
+            fontSize: '14px',
+            color: '#24405c',
           }}
-        >
-          <input
-            type="text"
-            placeholder="Ask Beau anything (e.g. Balayage, Gel nails)..."
-            value={inputText}
-            onChange={(e) => setInputText(e.target.value)}
-            onKeyDown={(e) => e.key === 'Enter' && handleCustomSend()}
-            style={{
-              flex: 1,
-              background: 'transparent',
-              border: 'none',
-              outline: 'none',
-              fontSize: '14px',
-              fontFamily: 'inherit',
-              color: '#1a1938',
-            }}
-          />
-          {inputText && (
-            <button
-              onClick={handleCustomSend}
-              style={{
-                width: '30px',
-                height: '30px',
-                borderRadius: '50%',
-                background: '#1a1938',
-                color: '#ffffff',
-                border: 'none',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                cursor: 'pointer',
-              }}
-            >
-              <Send size={13} />
-            </button>
-          )}
-        </div>
-
+        />
         <button
-          onClick={handleReset}
-          title="Reset Conversation"
+          onClick={handleCustomSend}
           style={{
             width: '46px',
             height: '46px',
-            border: 'none',
             borderRadius: '50%',
-            background: '#f2f0f6',
-            color: '#6f6d86',
-            cursor: 'pointer',
+            background: '#f5265f',
+            color: '#ffffff',
+            border: 'none',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-          }}
-        >
-          <RotateCcw size={16} />
-        </button>
-
-        <button
-          onClick={onSkipToMap}
-          title="Open Map"
-          style={{
-            width: '46px',
-            height: '46px',
-            border: 'none',
-            borderRadius: '50%',
-            background: '#d9f24e',
-            color: '#1a1938',
-            fontWeight: 700,
             cursor: 'pointer',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
+            boxShadow: '0 4px 14px rgba(245, 38, 95, 0.3)',
           }}
         >
-          <MapPin size={18} />
+          <Send size={16} />
         </button>
       </div>
     </div>

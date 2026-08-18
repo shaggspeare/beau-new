@@ -17,7 +17,6 @@ import {
   TrendingUp,
   X,
   Sliders,
-  Layers,
 } from 'lucide-react';
 
 interface IOSDeviceFrameProps {
@@ -76,13 +75,13 @@ export const IOSDeviceFrame: React.FC<IOSDeviceFrameProps> = ({
   }, []);
 
   const isDarkContent = userRole === 'master' || currentScreen === 'login';
-  const statusColor = isDarkContent || dark ? '#ffffff' : '#1a1938';
+  const statusColor = isDarkContent || dark ? '#ffffff' : '#24405c';
 
   const clientScreens = [
     { id: 'map', label: 'Interactive Map (30 Masters)', icon: MapPin },
     { id: 'dash', label: 'Dashboard / Home', icon: Compass },
     { id: 'master', label: 'Master Profile & Catalog', icon: User },
-    { id: 'bot', label: 'Beau Assistant Bot', icon: Sparkles },
+    { id: 'bot', label: 'Barb AI Assistant', icon: Sparkles },
     { id: 'chat', label: 'Chat & Booking Flow', icon: MessageCircle },
     { id: 'favs', label: 'Saved Favorites', icon: Heart },
     { id: 'login', label: 'Splash / Welcome Screen', icon: Smartphone },
@@ -111,7 +110,7 @@ export const IOSDeviceFrame: React.FC<IOSDeviceFrameProps> = ({
           flexDirection: 'column',
           position: 'relative',
           overflow: 'hidden',
-          background: isDarkContent ? '#121127' : '#f7f6fa',
+          background: isDarkContent ? '#16283b' : '#f4f7fa',
         }}
       >
         {/* Fullscreen Mobile Viewport */}
@@ -129,7 +128,7 @@ export const IOSDeviceFrame: React.FC<IOSDeviceFrameProps> = ({
           {children}
         </main>
 
-        {/* Floating Red Router Action Button (Mobile FAB) */}
+        {/* Floating Pink Router Action Button (Mobile FAB) */}
         <button
           onClick={() => setShowMobileRouter(true)}
           title="Open Screen & Role Router"
@@ -142,14 +141,14 @@ export const IOSDeviceFrame: React.FC<IOSDeviceFrameProps> = ({
             height: '42px',
             padding: '0 14px 0 10px',
             borderRadius: '21px',
-            background: 'linear-gradient(135deg, #ff4757 0%, #ee2f43 100%)',
+            background: 'linear-gradient(135deg, #f5265f 0%, #dd1a4e 100%)',
             color: '#ffffff',
-            border: '2px solid rgba(255, 255, 255, 0.5)',
+            border: '2px solid rgba(255, 255, 255, 0.6)',
             display: 'flex',
             alignItems: 'center',
             gap: '6px',
             cursor: 'pointer',
-            boxShadow: '0 6px 20px rgba(255, 71, 87, 0.45)',
+            boxShadow: '0 6px 20px rgba(245, 38, 95, 0.45)',
           }}
         >
           <div
@@ -184,7 +183,7 @@ export const IOSDeviceFrame: React.FC<IOSDeviceFrameProps> = ({
               position: 'fixed',
               inset: 0,
               zIndex: 10000,
-              background: 'rgba(26, 25, 56, 0.65)',
+              background: 'rgba(36, 64, 92, 0.65)',
               backdropFilter: 'blur(8px)',
               WebkitBackdropFilter: 'blur(8px)',
               display: 'flex',
@@ -222,8 +221,8 @@ export const IOSDeviceFrame: React.FC<IOSDeviceFrameProps> = ({
                       width: '34px',
                       height: '34px',
                       borderRadius: '50%',
-                      background: '#d9f24e',
-                      color: '#1a1938',
+                      background: '#f5265f',
+                      color: '#ffffff',
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'center',
@@ -240,13 +239,13 @@ export const IOSDeviceFrame: React.FC<IOSDeviceFrameProps> = ({
                         fontFamily: 'var(--font-serif)',
                         fontSize: '18px',
                         fontWeight: 700,
-                        color: '#1a1938',
+                        color: '#24405c',
                         lineHeight: 1,
                       }}
                     >
-                      Beau Router
+                      Barb Router
                     </h3>
-                    <span style={{ fontSize: '11px', color: '#8d8aa6' }}>
+                    <span style={{ fontSize: '11px', color: '#6d8299' }}>
                       Screen & Dual Role Switcher
                     </span>
                   </div>
@@ -258,9 +257,9 @@ export const IOSDeviceFrame: React.FC<IOSDeviceFrameProps> = ({
                     width: '36px',
                     height: '36px',
                     borderRadius: '50%',
-                    background: '#f2f0f6',
+                    background: '#eaf0f6',
                     border: 'none',
-                    color: '#1a1938',
+                    color: '#24405c',
                     cursor: 'pointer',
                     display: 'flex',
                     alignItems: 'center',
@@ -278,7 +277,7 @@ export const IOSDeviceFrame: React.FC<IOSDeviceFrameProps> = ({
                     fontSize: '11px',
                     letterSpacing: '0.08em',
                     fontWeight: 800,
-                    color: '#8d8aa6',
+                    color: '#6d8299',
                     marginBottom: '8px',
                   }}
                 >
@@ -304,7 +303,7 @@ export const IOSDeviceFrame: React.FC<IOSDeviceFrameProps> = ({
                     fontSize: '11px',
                     letterSpacing: '0.08em',
                     fontWeight: 800,
-                    color: '#8d8aa6',
+                    color: '#6d8299',
                     marginBottom: '8px',
                   }}
                 >
@@ -331,9 +330,9 @@ export const IOSDeviceFrame: React.FC<IOSDeviceFrameProps> = ({
                         style={{
                           padding: '10px 12px',
                           borderRadius: '14px',
-                          background: active ? '#1a1938' : '#f7f6fa',
-                          color: active ? '#ffffff' : '#1a1938',
-                          border: active ? '1.5px solid #1a1938' : '1px solid #f0edf6',
+                          background: active ? '#24405c' : '#f4f7fa',
+                          color: active ? '#ffffff' : '#24405c',
+                          border: active ? '1.5px solid #24405c' : '1px solid #e3ebf3',
                           fontSize: '12px',
                           fontWeight: active ? 700 : 600,
                           cursor: 'pointer',
@@ -343,7 +342,7 @@ export const IOSDeviceFrame: React.FC<IOSDeviceFrameProps> = ({
                           textAlign: 'left',
                         }}
                       >
-                        <Icon size={15} color={active ? '#d9f24e' : '#8d8aa6'} />
+                        <Icon size={15} color={active ? '#ffd4de' : '#6d8299'} />
                         <span
                           style={{
                             overflow: 'hidden',
@@ -370,8 +369,8 @@ export const IOSDeviceFrame: React.FC<IOSDeviceFrameProps> = ({
                     flex: 1,
                     height: '42px',
                     borderRadius: '21px',
-                    background: '#f2f0f6',
-                    color: '#1a1938',
+                    background: '#eaf0f6',
+                    color: '#24405c',
                     border: 'none',
                     fontWeight: 700,
                     fontSize: '13px',
@@ -390,7 +389,7 @@ export const IOSDeviceFrame: React.FC<IOSDeviceFrameProps> = ({
                     flex: 1,
                     height: '42px',
                     borderRadius: '21px',
-                    background: '#1a1938',
+                    background: '#f5265f',
                     color: '#ffffff',
                     border: 'none',
                     fontWeight: 700,
@@ -423,7 +422,7 @@ export const IOSDeviceFrame: React.FC<IOSDeviceFrameProps> = ({
         padding: '32px 24px',
         gap: '44px',
         flexWrap: 'wrap',
-        background: 'linear-gradient(135deg, #f2f0f6 0%, #e9e6ef 100%)',
+        background: 'linear-gradient(135deg, #eef2f6 0%, #e3ebf3 100%)',
       }}
     >
       {/* iOS Device Bezel Mockup Frame */}
@@ -432,10 +431,10 @@ export const IOSDeviceFrame: React.FC<IOSDeviceFrameProps> = ({
           width: '402px',
           height: '874px',
           borderRadius: '54px',
-          background: '#090814',
+          background: '#0d1824',
           padding: '12px',
           boxShadow:
-            '0 30px 80px rgba(26, 25, 56, 0.28), 0 0 0 1px rgba(255, 255, 255, 0.1) inset, 0 0 0 3px #232238',
+            '0 30px 80px rgba(36, 64, 92, 0.28), 0 0 0 1px rgba(255, 255, 255, 0.1) inset, 0 0 0 3px #1c3248',
           position: 'relative',
           display: 'flex',
           flexDirection: 'column',
@@ -450,7 +449,7 @@ export const IOSDeviceFrame: React.FC<IOSDeviceFrameProps> = ({
             borderRadius: '44px',
             overflow: 'hidden',
             position: 'relative',
-            background: isDarkContent ? '#121127' : '#f7f6fa',
+            background: isDarkContent ? '#16283b' : '#f4f7fa',
             display: 'flex',
             flexDirection: 'column',
           }}
@@ -507,8 +506,8 @@ export const IOSDeviceFrame: React.FC<IOSDeviceFrameProps> = ({
                   width: '11px',
                   height: '11px',
                   borderRadius: '50%',
-                  background: '#090814',
-                  border: '1px solid #1a1938',
+                  background: '#0d1824',
+                  border: '1px solid #24405c',
                 }}
               />
               <div
@@ -516,7 +515,7 @@ export const IOSDeviceFrame: React.FC<IOSDeviceFrameProps> = ({
                   width: '10px',
                   height: '10px',
                   borderRadius: '50%',
-                  background: '#1c1b30',
+                  background: '#1c3248',
                 }}
               />
             </div>
@@ -588,7 +587,7 @@ export const IOSDeviceFrame: React.FC<IOSDeviceFrameProps> = ({
               width: '136px',
               height: '5px',
               borderRadius: '3px',
-              background: isDarkContent ? '#ffffff' : '#1a1938',
+              background: isDarkContent ? '#ffffff' : '#24405c',
               opacity: 0.8,
               zIndex: 60,
               pointerEvents: 'none',
@@ -604,7 +603,7 @@ export const IOSDeviceFrame: React.FC<IOSDeviceFrameProps> = ({
           display: 'flex',
           flexDirection: 'column',
           gap: '16px',
-          color: '#6f6d86',
+          color: '#6d8299',
           fontSize: '13px',
           lineHeight: 1.6,
         }}
@@ -615,7 +614,7 @@ export const IOSDeviceFrame: React.FC<IOSDeviceFrameProps> = ({
             background: '#ffffff',
             padding: '22px',
             borderRadius: '24px',
-            boxShadow: '0 4px 20px rgba(26, 25, 56, 0.06)',
+            boxShadow: '0 4px 20px rgba(36, 64, 92, 0.06)',
           }}
         >
           <div
@@ -631,8 +630,8 @@ export const IOSDeviceFrame: React.FC<IOSDeviceFrameProps> = ({
                 width: '42px',
                 height: '42px',
                 borderRadius: '50%',
-                background: '#d9f24e',
-                color: '#1a1938',
+                background: '#f5265f',
+                color: '#ffffff',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
@@ -649,13 +648,13 @@ export const IOSDeviceFrame: React.FC<IOSDeviceFrameProps> = ({
                   fontFamily: 'var(--font-serif)',
                   fontSize: '22px',
                   fontWeight: 700,
-                  color: '#1a1938',
+                  color: '#24405c',
                   lineHeight: 1,
                 }}
               >
-                Beau · Kyiv
+                Barb · Kyiv
               </h1>
-              <span style={{ fontSize: '11px', color: '#8d8aa6', fontWeight: 600 }}>
+              <span style={{ fontSize: '11px', color: '#6d8299', fontWeight: 600 }}>
                 Dual Mode: Client & Master
               </span>
             </div>
@@ -668,7 +667,7 @@ export const IOSDeviceFrame: React.FC<IOSDeviceFrameProps> = ({
                 fontSize: '11px',
                 letterSpacing: '0.08em',
                 fontWeight: 800,
-                color: '#8d8aa6',
+                color: '#6d8299',
                 marginBottom: '6px',
               }}
             >
@@ -690,7 +689,7 @@ export const IOSDeviceFrame: React.FC<IOSDeviceFrameProps> = ({
                 flex: 1,
                 height: '38px',
                 borderRadius: '19px',
-                background: '#1a1938',
+                background: '#24405c',
                 color: '#ffffff',
                 border: 'none',
                 fontWeight: 600,
@@ -711,8 +710,8 @@ export const IOSDeviceFrame: React.FC<IOSDeviceFrameProps> = ({
                 width: '38px',
                 height: '38px',
                 borderRadius: '19px',
-                background: '#f2f0f6',
-                color: '#1a1938',
+                background: '#eaf0f6',
+                color: '#24405c',
                 border: 'none',
                 cursor: 'pointer',
                 display: 'flex',
@@ -731,7 +730,7 @@ export const IOSDeviceFrame: React.FC<IOSDeviceFrameProps> = ({
             background: '#ffffff',
             padding: '18px 20px',
             borderRadius: '20px',
-            boxShadow: '0 4px 16px rgba(26, 25, 56, 0.05)',
+            boxShadow: '0 4px 16px rgba(36, 64, 92, 0.05)',
           }}
         >
           <div
@@ -739,12 +738,12 @@ export const IOSDeviceFrame: React.FC<IOSDeviceFrameProps> = ({
               fontSize: '11px',
               letterSpacing: '0.08em',
               fontWeight: 700,
-              color: '#8d8aa6',
+              color: '#6d8299',
               marginBottom: '10px',
             }}
           >
             ACTIVE SCREEN ({userRole.toUpperCase()}):{' '}
-            <span style={{ color: '#1a1938' }}>
+            <span style={{ color: '#24405c' }}>
               {currentScreen}
             </span>
           </div>
@@ -760,8 +759,8 @@ export const IOSDeviceFrame: React.FC<IOSDeviceFrameProps> = ({
                   style={{
                     padding: '8px 12px',
                     borderRadius: '12px',
-                    background: active ? '#1a1938' : '#f7f6fa',
-                    color: active ? '#ffffff' : '#1a1938',
+                    background: active ? '#24405c' : '#f4f7fa',
+                    color: active ? '#ffffff' : '#24405c',
                     border: 'none',
                     textAlign: 'left',
                     fontSize: '12px',
@@ -772,7 +771,7 @@ export const IOSDeviceFrame: React.FC<IOSDeviceFrameProps> = ({
                     gap: '8px',
                   }}
                 >
-                  <Icon size={14} color={active ? '#d9f24e' : '#8d8aa6'} />
+                  <Icon size={14} color={active ? '#ffd4de' : '#6d8299'} />
                   {item.label}
                 </button>
               );

@@ -44,14 +44,14 @@ export const BottomNavigation: React.FC<BottomNavigationProps> = ({
     <div
       style={{
         background: '#ffffff',
-        borderTop: '1px solid #ece9f3',
+        borderTop: '1px solid #e3ebf3',
         padding: '10px 16px 28px',
         display: 'flex',
         justifyContent: 'space-around',
         alignItems: 'center',
         position: 'relative',
         zIndex: 30,
-        boxShadow: '0 -4px 16px rgba(26, 25, 56, 0.04)',
+        boxShadow: '0 -4px 16px rgba(36, 64, 92, 0.04)',
       }}
     >
       {tabs.map((tab) => {
@@ -74,28 +74,28 @@ export const BottomNavigation: React.FC<BottomNavigationProps> = ({
               minHeight: '44px',
               justifyContent: 'center',
               position: 'relative',
-              color: isActive ? '#1a1938' : '#8d8aa6',
+              color: isActive ? '#f5265f' : '#6d8299',
               transition: 'all 0.15s ease',
             }}
           >
             <div
               style={{
-                width: '26px',
-                height: '26px',
-                borderRadius: '8px',
-                background: isActive ? '#d9f24e' : 'transparent',
+                width: '30px',
+                height: '30px',
+                borderRadius: '10px',
+                background: isActive ? '#ffd4de' : 'transparent',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
                 position: 'relative',
                 transition: 'all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1)',
-                transform: isActive ? 'scale(1.08)' : 'scale(1)',
+                transform: isActive ? 'scale(1.06)' : 'scale(1)',
               }}
             >
               <Icon
-                size={16}
+                size={17}
                 strokeWidth={isActive ? 2.5 : 2}
-                color={isActive ? '#1a1938' : '#8d8aa6'}
+                color={isActive ? '#f5265f' : '#6d8299'}
               />
               {tab.badge !== undefined && (
                 <span
@@ -106,7 +106,7 @@ export const BottomNavigation: React.FC<BottomNavigationProps> = ({
                     width: '14px',
                     height: '14px',
                     borderRadius: '50%',
-                    background: '#f4938e',
+                    background: '#f5265f',
                     color: '#ffffff',
                     fontSize: '9px',
                     fontWeight: 700,

@@ -27,11 +27,11 @@ export const RoleSwitcherPill: React.FC<RoleSwitcherPillProps> = ({
         style={{
           display: 'flex',
           alignItems: 'center',
-          background: currentRole === 'client' ? '#ffffff' : '#121127',
+          background: currentRole === 'client' ? '#ffffff' : '#16283b',
           borderRadius: '24px',
           padding: '3px',
-          boxShadow: '0 4px 16px rgba(26,25,56,0.12)',
-          border: currentRole === 'client' ? '1px solid #ece9f3' : '1px solid #2b2954',
+          boxShadow: '0 4px 16px rgba(36,64,92,0.12)',
+          border: currentRole === 'client' ? '1px solid #e3ebf3' : '1px solid #24405c',
         }}
       >
         {/* Client Tab */}
@@ -40,8 +40,8 @@ export const RoleSwitcherPill: React.FC<RoleSwitcherPillProps> = ({
           style={{
             padding: '6px 14px',
             borderRadius: '20px',
-            background: currentRole === 'client' ? '#1a1938' : 'transparent',
-            color: currentRole === 'client' ? '#ffffff' : 'rgba(255,255,255,0.6)',
+            background: currentRole === 'client' ? '#24405c' : 'transparent',
+            color: currentRole === 'client' ? '#ffffff' : 'rgba(255,255,255,0.7)',
             border: 'none',
             fontSize: '12px',
             fontWeight: 700,
@@ -52,7 +52,7 @@ export const RoleSwitcherPill: React.FC<RoleSwitcherPillProps> = ({
             transition: 'all 0.2s ease',
           }}
         >
-          <User size={13} color={currentRole === 'client' ? '#d9f24e' : 'currentColor'} />
+          <User size={13} color={currentRole === 'client' ? '#ffd4de' : 'currentColor'} />
           <span>Client (Kate)</span>
         </button>
 
@@ -62,8 +62,8 @@ export const RoleSwitcherPill: React.FC<RoleSwitcherPillProps> = ({
           style={{
             padding: '6px 14px',
             borderRadius: '20px',
-            background: currentRole === 'master' ? '#d9f24e' : 'transparent',
-            color: currentRole === 'master' ? '#1a1938' : '#6f6d86',
+            background: currentRole === 'master' ? '#f5265f' : 'transparent',
+            color: currentRole === 'master' ? '#ffffff' : '#6d8299',
             border: 'none',
             fontSize: '12px',
             fontWeight: 700,
@@ -74,7 +74,7 @@ export const RoleSwitcherPill: React.FC<RoleSwitcherPillProps> = ({
             transition: 'all 0.2s ease',
           }}
         >
-          <Sparkles size={13} />
+          <Sparkles size={13} color="#ffffff" />
           <span>Master Portal</span>
         </button>
 
@@ -86,7 +86,7 @@ export const RoleSwitcherPill: React.FC<RoleSwitcherPillProps> = ({
             style={{
               padding: '4px 8px',
               borderRadius: '14px',
-              background: 'rgba(255,255,255,0.1)',
+              background: 'rgba(255,255,255,0.12)',
               color: '#ffffff',
               border: 'none',
               fontSize: '11px',
@@ -116,17 +116,17 @@ export const RoleSwitcherPill: React.FC<RoleSwitcherPillProps> = ({
             width: '260px',
             maxHeight: '340px',
             overflowY: 'auto',
-            background: '#1a1938',
+            background: '#16283b',
             borderRadius: '18px',
             boxShadow: '0 10px 30px rgba(0,0,0,0.4)',
-            border: '1px solid #2b2954',
+            border: '1px solid #24405c',
             padding: '8px',
             display: 'flex',
             flexDirection: 'column',
             gap: '4px',
           }}
         >
-          <div style={{ padding: '6px 8px', fontSize: '10.5px', fontWeight: 800, color: '#d9f24e', letterSpacing: '0.06em' }}>
+          <div style={{ padding: '6px 8px', fontSize: '10.5px', fontWeight: 800, color: '#ffd4de', letterSpacing: '0.06em' }}>
             SELECT CRAWLED MASTER ({allMasters.length})
           </div>
 
@@ -142,9 +142,9 @@ export const RoleSwitcherPill: React.FC<RoleSwitcherPillProps> = ({
                 style={{
                   padding: '8px 10px',
                   borderRadius: '12px',
-                  background: isSelected ? 'rgba(217, 242, 78, 0.15)' : 'transparent',
-                  color: isSelected ? '#d9f24e' : '#ffffff',
-                  border: 'none',
+                  background: isSelected ? 'rgba(245, 38, 95, 0.25)' : 'transparent',
+                  color: isSelected ? '#ffffff' : '#ffffff',
+                  border: isSelected ? '1px solid #f5265f' : 'none',
                   textAlign: 'left',
                   fontSize: '12px',
                   cursor: 'pointer',
@@ -155,11 +155,11 @@ export const RoleSwitcherPill: React.FC<RoleSwitcherPillProps> = ({
               >
                 <div>
                   <div style={{ fontWeight: 700 }}>{m.name}</div>
-                  <div style={{ fontSize: '10.5px', color: 'rgba(255,255,255,0.6)' }}>
+                  <div style={{ fontSize: '10.5px', color: 'rgba(255,255,255,0.65)' }}>
                     {m.categoryLabel} · {m.district}
                   </div>
                 </div>
-                {isSelected && <Check size={14} color="#d9f24e" />}
+                {isSelected && <Check size={14} color="#f5265f" />}
               </button>
             );
           })}

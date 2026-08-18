@@ -48,8 +48,8 @@ export const MasterBottomNavigation: React.FC<MasterBottomNavigationProps> = ({
   return (
     <div
       style={{
-        background: '#1a1938',
-        borderTop: '1px solid #2b2954',
+        background: '#16283b',
+        borderTop: '1px solid #24405c',
         padding: '10px 12px 28px',
         display: 'flex',
         justifyContent: 'space-around',
@@ -79,28 +79,28 @@ export const MasterBottomNavigation: React.FC<MasterBottomNavigationProps> = ({
               minHeight: '44px',
               justifyContent: 'center',
               position: 'relative',
-              color: isActive ? '#d9f24e' : 'rgba(255, 255, 255, 0.55)',
+              color: isActive ? '#f5265f' : 'rgba(255, 255, 255, 0.65)',
               transition: 'all 0.15s ease',
             }}
           >
             <div
               style={{
-                width: '26px',
-                height: '26px',
-                borderRadius: '8px',
-                background: isActive ? 'rgba(217, 242, 78, 0.2)' : 'transparent',
+                width: '28px',
+                height: '28px',
+                borderRadius: '9px',
+                background: isActive ? 'rgba(245, 38, 95, 0.2)' : 'transparent',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
                 position: 'relative',
                 transition: 'all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1)',
-                transform: isActive ? 'scale(1.1)' : 'scale(1)',
+                transform: isActive ? 'scale(1.08)' : 'scale(1)',
               }}
             >
               <Icon
                 size={16}
                 strokeWidth={isActive ? 2.5 : 2}
-                color={isActive ? '#d9f24e' : 'rgba(255, 255, 255, 0.6)'}
+                color={isActive ? '#f5265f' : 'rgba(255, 255, 255, 0.7)'}
               />
               {tab.badge !== undefined && (
                 <span
@@ -111,14 +111,14 @@ export const MasterBottomNavigation: React.FC<MasterBottomNavigationProps> = ({
                     width: '14px',
                     height: '14px',
                     borderRadius: '50%',
-                    background: '#d9f24e',
-                    color: '#1a1938',
+                    background: '#f5265f',
+                    color: '#ffffff',
                     fontSize: '9px',
                     fontWeight: 800,
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
-                    border: '1.5px solid #1a1938',
+                    border: '1.5px solid #16283b',
                   }}
                 >
                   {tab.badge}

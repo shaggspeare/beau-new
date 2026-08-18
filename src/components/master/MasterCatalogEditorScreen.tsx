@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Master, ServiceItem } from '../../data/crawledMasters';
-import { Plus, Search, Edit2, Trash2, Check, X, Tag } from 'lucide-react';
+import { Plus, Search, Edit2, Trash2, Check, X } from 'lucide-react';
 
 interface MasterCatalogEditorScreenProps {
   master: Master;
@@ -54,15 +54,15 @@ export const MasterCatalogEditorScreen: React.FC<MasterCatalogEditorScreenProps>
   };
 
   return (
-    <div style={{ height: '100%', background: '#121127', color: '#ffffff', display: 'flex', flexDirection: 'column' }}>
+    <div style={{ height: '100%', background: '#16283b', color: '#ffffff', display: 'flex', flexDirection: 'column' }}>
       {/* Header */}
-      <div style={{ padding: '52px 20px 16px', background: '#1a1938', borderBottom: '1px solid #232145' }}>
+      <div style={{ padding: '52px 20px 16px', background: '#24405c', borderBottom: '1px solid #1c3248' }}>
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '14px' }}>
           <div>
             <h1 style={{ fontFamily: 'var(--font-serif)', fontSize: '24px', fontWeight: 700, color: '#ffffff' }}>
               Service Catalog
             </h1>
-            <div style={{ fontSize: '12px', color: 'rgba(255,255,255,0.6)' }}>
+            <div style={{ fontSize: '12px', color: 'rgba(255,255,255,0.65)' }}>
               {services.length} services configured for {master.name}
             </div>
           </div>
@@ -72,8 +72,8 @@ export const MasterCatalogEditorScreen: React.FC<MasterCatalogEditorScreenProps>
             style={{
               padding: '8px 14px',
               borderRadius: '16px',
-              background: '#d9f24e',
-              color: '#1a1938',
+              background: '#f5265f',
+              color: '#ffffff',
               border: 'none',
               fontSize: '12.5px',
               fontWeight: 700,
@@ -81,6 +81,7 @@ export const MasterCatalogEditorScreen: React.FC<MasterCatalogEditorScreenProps>
               display: 'flex',
               alignItems: 'center',
               gap: '6px',
+              boxShadow: '0 4px 12px rgba(245, 38, 95, 0.3)',
             }}
           >
             <Plus size={15} /> Add Service
@@ -122,14 +123,14 @@ export const MasterCatalogEditorScreen: React.FC<MasterCatalogEditorScreenProps>
         <div
           style={{
             padding: '16px 20px',
-            background: '#1a1938',
-            borderBottom: '2px solid #d9f24e',
+            background: '#24405c',
+            borderBottom: '2px solid #f5265f',
             display: 'flex',
             flexDirection: 'column',
             gap: '10px',
           }}
         >
-          <div style={{ fontSize: '13px', fontWeight: 700, color: '#d9f24e' }}>ADD NEW SERVICE</div>
+          <div style={{ fontSize: '13px', fontWeight: 700, color: '#ffd4de' }}>ADD NEW SERVICE</div>
           <input
             type="text"
             placeholder="Service name (e.g. Balayage premium)"
@@ -139,7 +140,7 @@ export const MasterCatalogEditorScreen: React.FC<MasterCatalogEditorScreenProps>
               height: '38px',
               borderRadius: '10px',
               background: 'rgba(255,255,255,0.08)',
-              border: '1px solid #2b2954',
+              border: '1px solid #1c3248',
               padding: '0 12px',
               color: '#ffffff',
               fontSize: '13px',
@@ -157,7 +158,7 @@ export const MasterCatalogEditorScreen: React.FC<MasterCatalogEditorScreenProps>
                 height: '38px',
                 borderRadius: '10px',
                 background: 'rgba(255,255,255,0.08)',
-                border: '1px solid #2b2954',
+                border: '1px solid #1c3248',
                 padding: '0 12px',
                 color: '#ffffff',
                 fontSize: '13px',
@@ -169,8 +170,8 @@ export const MasterCatalogEditorScreen: React.FC<MasterCatalogEditorScreenProps>
               style={{
                 padding: '0 16px',
                 borderRadius: '10px',
-                background: '#d9f24e',
-                color: '#1a1938',
+                background: '#f5265f',
+                color: '#ffffff',
                 border: 'none',
                 fontWeight: 700,
                 fontSize: '12px',
@@ -214,19 +215,19 @@ export const MasterCatalogEditorScreen: React.FC<MasterCatalogEditorScreenProps>
             <div
               key={idx}
               style={{
-                background: '#1a1938',
+                background: '#24405c',
                 borderRadius: '16px',
                 padding: '14px 16px',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'space-between',
                 gap: '12px',
-                border: '1px solid #2b2954',
+                border: '1px solid #1c3248',
               }}
             >
               <div style={{ flex: 1, minWidth: 0 }}>
                 <div style={{ fontSize: '14px', fontWeight: 700, color: '#ffffff' }}>{srv.name}</div>
-                <div style={{ fontSize: '11.5px', color: 'rgba(255,255,255,0.55)', marginTop: '2px' }}>
+                <div style={{ fontSize: '11.5px', color: 'rgba(255,255,255,0.65)', marginTop: '2px' }}>
                   {srv.category.replace(/\(\d+\)/, '').trim()}
                 </div>
               </div>
@@ -242,7 +243,7 @@ export const MasterCatalogEditorScreen: React.FC<MasterCatalogEditorScreenProps>
                       height: '32px',
                       borderRadius: '8px',
                       background: 'rgba(255,255,255,0.15)',
-                      border: '1px solid #d9f24e',
+                      border: '1px solid #f5265f',
                       color: '#ffffff',
                       padding: '0 8px',
                       fontSize: '13px',
@@ -256,8 +257,8 @@ export const MasterCatalogEditorScreen: React.FC<MasterCatalogEditorScreenProps>
                       width: '32px',
                       height: '32px',
                       borderRadius: '8px',
-                      background: '#d9f24e',
-                      color: '#1a1938',
+                      background: '#f5265f',
+                      color: '#ffffff',
                       border: 'none',
                       cursor: 'pointer',
                       display: 'flex',
@@ -287,7 +288,7 @@ export const MasterCatalogEditorScreen: React.FC<MasterCatalogEditorScreenProps>
                 </div>
               ) : (
                 <div style={{ display: 'flex', alignItems: 'center', gap: '10px', flexShrink: 0 }}>
-                  <span style={{ fontSize: '14px', fontWeight: 800, color: '#d9f24e' }}>{srv.price}</span>
+                  <span style={{ fontSize: '14px', fontWeight: 800, color: '#ffd4de' }}>{srv.price}</span>
                   <button
                     onClick={() => {
                       setEditingIndex(idx);

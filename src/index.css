@@ -1,25 +1,81 @@
 :root {
-  --beau-navy: #1a1938;
-  --beau-navy-dark: #121127;
-  --beau-navy-light: #2b2954;
-  --beau-lime: #d9f24e;
-  --beau-lime-hover: #c8e33a;
-  --beau-lavender: #c9bcff;
-  --beau-purple: #9a86f5;
-  --beau-coral: #ffc3c0;
-  --beau-coral-deep: #f4938e;
-  --beau-mint: #bfe8d8;
-  --beau-mint-deep: #d8ecdc;
-  --beau-butter: #ffe4a8;
-  --beau-bg: #f2f0f6;
-  --beau-bg-light: #f7f6fa;
-  --beau-subtle: #ece9f3;
-  --beau-card-bg: #ffffff;
-  --beau-text: #1a1938;
-  --beau-muted: #8d8aa6;
-  --beau-muted-light: #a5a2b8;
-  --font-serif: 'Fraunces', Georgia, 'Times New Roman', serif;
-  --font-sans: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  /* =========================================================
+     Barb Pink & Steel Design Tokens (barb Pink Tokens.html)
+     ========================================================= */
+  
+  /* Core Colors */
+  --accent: #f5265f;           /* Primary Barb Pink — Buttons, FAB, active pin, rating figures */
+  --accent-pressed: #dd1a4e;   /* Hover / pressed state of accent */
+  --accent-soft: #ffd4de;      /* Accent blush tint — selected slot, blush tiles, avatar background */
+  --ink: #24405c;              /* Deep steel navy / ink — Headings, body text, ink buttons, message bubbles */
+  --ink-pressed: #1a3247;      /* Hover of ink buttons */
+  --ink-dark: #16283b;         /* Master portal dark backdrop */
+  --link: #2f6194;             /* Links, inline actions, "see all" */
+  --sky: #a9c8e6;              /* Secondary pins, decorative shapes */
+  --sky-soft: #c6dcf1;         /* Avatar tiles, quiet fills */
+
+  /* Surface & Neutrals */
+  --bg-page: #f4f7fa;          /* App background behind cards */
+  --bg-desk: #eef2f6;          /* Map canvas, inset panels, desktop backdrop */
+  --bg-card: #ffffff;          /* Cards, sheets, bars */
+  --bg-subtle: #eaf0f6;        /* Input fields, unselected chips, tab track */
+  --bg-hover: #fafcff;         /* Row hover */
+  --border: #e3ebf3;           /* Hairlines, header and footer edges */
+  --border-strong: #d5e0ea;    /* Secondary button outline */
+  --text-muted: #6d8299;       /* Secondary copy, metadata */
+  --text-faint: #93a7b8;       /* Timestamps, section labels, placeholders */
+  --icon-quiet: #adc0d0;       /* Chevrons, inactive tab glyphs */
+
+  /* Category Tints */
+  --tint-blush: #ffd4de;
+  --tint-sky: #c6dcf1;
+  --tint-pale: #dbe8f5;
+  --tint-rose: #ffe6ec;
+  --tint-steel: #dce6ef;
+  --tint-mist: #eaf0f6;
+
+  /* Typography */
+  --font-display: 'Fraunces', Georgia, serif;
+  --font-ui: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-serif: var(--font-display);
+  --font-sans: var(--font-ui);
+
+  /* Radii */
+  --radius-sm: 8px;
+  --radius-md: 16px;
+  --radius-lg: 20px;
+  --radius-xl: 26px;
+  --radius-pill: 999px;
+  --radius-circle: 50%;
+
+  /* Shadows */
+  --shadow-card: 0 2px 10px rgba(36, 64, 92, 0.05);
+  --shadow-raised: 0 4px 14px rgba(36, 64, 92, 0.10);
+  --shadow-fab: 0 6px 18px rgba(36, 64, 92, 0.25);
+  --shadow-sheet: 0 -6px 24px rgba(36, 64, 92, 0.12);
+
+  /* Backwards compatibility aliases */
+  --barb-pink: var(--accent);
+  --barb-ink: var(--ink);
+  --beau-navy: var(--ink);
+  --beau-navy-dark: var(--ink-dark);
+  --beau-navy-light: #2f5377;
+  --beau-lime: var(--accent);
+  --beau-lime-hover: var(--accent-pressed);
+  --beau-lavender: var(--sky-soft);
+  --beau-purple: var(--sky);
+  --beau-coral: var(--tint-blush);
+  --beau-coral-deep: var(--accent);
+  --beau-mint: var(--tint-pale);
+  --beau-mint-deep: var(--sky-soft);
+  --beau-butter: var(--tint-rose);
+  --beau-bg: var(--bg-page);
+  --beau-bg-light: var(--bg-page);
+  --beau-subtle: var(--bg-subtle);
+  --beau-card-bg: var(--bg-card);
+  --beau-text: var(--ink);
+  --beau-muted: var(--text-muted);
+  --beau-muted-light: var(--text-faint);
 }
 
 * {
@@ -31,8 +87,8 @@
 html, body, #root {
   min-height: 100vh;
   width: 100%;
-  background: var(--beau-bg);
-  color: var(--beau-text);
+  background: var(--bg-desk);
+  color: var(--ink);
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -53,45 +109,24 @@ html, body, #root {
 }
 
 a {
-  color: #6c5ce7;
+  color: var(--link);
   text-decoration: none;
   transition: color 0.2s ease;
 }
 a:hover {
-  color: #4f3ed1;
+  color: var(--ink);
 }
 
-button {
-  font-family: inherit;
-  outline: none;
-  user-select: none;
-}
-
-/* Animations */
-@keyframes beau-pop {
-  from {
-    opacity: 0;
-    transform: translateY(8px) scale(0.98);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
+/* Keyframe Animations */
+@keyframes barb-pop {
+  0% { transform: scale(0.92); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
 }
 
 @keyframes pulse-ring {
-  0% {
-    transform: scale(0.95);
-    box-shadow: 0 0 0 0 rgba(217, 242, 78, 0.7);
-  }
-  70% {
-    transform: scale(1);
-    box-shadow: 0 0 0 10px rgba(217, 242, 78, 0);
-  }
-  100% {
-    transform: scale(0.95);
-    box-shadow: 0 0 0 0 rgba(217, 242, 78, 0);
-  }
+  0% { transform: scale(0.95); opacity: 0.8; }
+  50% { transform: scale(1.35); opacity: 0.15; }
+  100% { transform: scale(1.6); opacity: 0; }
 }
 
 @keyframes float-orb-1 {
@@ -110,8 +145,8 @@ button {
 }
 
 @keyframes red-btn-pulse {
-  0%, 100% { box-shadow: 0 6px 20px rgba(255, 71, 87, 0.45); }
-  50% { box-shadow: 0 8px 26px rgba(255, 71, 87, 0.7); }
+  0%, 100% { box-shadow: 0 6px 20px rgba(245, 38, 95, 0.45); }
+  50% { box-shadow: 0 8px 26px rgba(245, 38, 95, 0.7); }
 }
 
 .floating-red-btn {
@@ -128,7 +163,7 @@ button {
 }
 
 .animate-pop {
-  animation: beau-pop 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: barb-pop 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 .animate-orb-1 {
@@ -145,7 +180,7 @@ button {
 .mapboxgl-map {
   width: 100%;
   height: 100%;
-  background: #eceaf2 !important;
+  background: var(--bg-desk) !important;
   font-family: var(--font-sans) !important;
   z-index: 1;
 }
@@ -159,7 +194,7 @@ button {
 .maplibregl-ctrl-group,
 .mapboxgl-ctrl-group {
   border: none !important;
-  box-shadow: 0 4px 14px rgba(26, 25, 56, 0.12) !important;
+  box-shadow: 0 4px 14px rgba(36, 64, 92, 0.12) !important;
   border-radius: 16px !important;
   overflow: hidden !important;
   background: #ffffff !important;
@@ -179,7 +214,7 @@ button {
 
 .leaflet-control-zoom {
   border: none !important;
-  box-shadow: 0 4px 14px rgba(26, 25, 56, 0.12) !important;
+  box-shadow: 0 4px 14px rgba(36, 64, 92, 0.12) !important;
   border-radius: 16px !important;
   overflow: hidden !important;
   margin-top: 70px !important;
@@ -188,7 +223,7 @@ button {
 
 .leaflet-control-zoom a {
   background: #ffffff !important;
-  color: #1a1938 !important;
+  color: var(--ink) !important;
   border: none !important;
   width: 36px !important;
   height: 36px !important;
@@ -198,7 +233,8 @@ button {
 }
 
 .leaflet-control-zoom a:hover {
-  background: var(--beau-lime) !important;
+  background: var(--accent) !important;
+  color: #ffffff !important;
 }
 
 .leaflet-control-attribution {
@@ -210,7 +246,8 @@ button {
 }
 
 /* Custom Round Marker Pins */
-.beau-marker-container {
+.beau-marker-container,
+.barb-marker-container {
   position: relative;
   cursor: pointer;
   transform: translate(-50%, -100%);
@@ -220,36 +257,40 @@ button {
   align-items: center;
 }
 
-.beau-marker-container:hover {
+.beau-marker-container:hover,
+.barb-marker-container:hover {
   transform: translate(-50%, -108%) scale(1.1);
   z-index: 1000 !important;
 }
 
-.beau-marker-container.active {
+.beau-marker-container.active,
+.barb-marker-container.active {
   transform: translate(-50%, -110%) scale(1.15);
   z-index: 1001 !important;
 }
 
-.beau-marker-mini-badge {
-  padding: 2px 7px;
-  border-radius: 10px;
-  background: #1a1938;
-  color: #d9f24e;
-  font-size: 10.5px;
+.beau-marker-mini-badge,
+.barb-marker-mini-badge {
+  padding: 3px 8px;
+  border-radius: 12px;
+  background: var(--ink);
+  color: #ffffff;
+  font-size: 11px;
   font-weight: 800;
-  box-shadow: 0 2px 8px rgba(26, 25, 56, 0.3);
-  margin-bottom: 2px;
+  box-shadow: 0 3px 10px rgba(36, 64, 92, 0.35);
+  margin-bottom: 3px;
   white-space: nowrap;
-  border: 1px solid rgba(255, 255, 255, 0.4);
-  animation: beau-pop 0.2s ease;
+  border: 1.5px solid rgba(255, 255, 255, 0.8);
+  animation: barb-pop 0.2s ease;
 }
 
-.beau-marker-pin {
-  width: 42px;
-  height: 42px;
+.beau-marker-pin,
+.barb-marker-pin {
+  width: 44px;
+  height: 44px;
   border-radius: 50%;
   border: 3px solid #ffffff;
-  box-shadow: 0 4px 14px rgba(26, 25, 56, 0.28);
+  box-shadow: 0 4px 14px rgba(36, 64, 92, 0.28);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -259,7 +300,8 @@ button {
   transition: all 0.2s ease;
 }
 
-.beau-marker-pin::after {
+.beau-marker-pin::after,
+.barb-marker-pin::after {
   content: '';
   position: absolute;
   bottom: -6px;
@@ -272,46 +314,47 @@ button {
   border-top: 6px solid #ffffff;
 }
 
-.beau-marker-pulse-ring {
+.beau-marker-pulse-ring,
+.barb-marker-pulse-ring {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 52px;
-  height: 52px;
+  width: 56px;
+  height: 56px;
   border-radius: 50%;
-  background: rgba(217, 242, 78, 0.5);
+  background: rgba(245, 38, 95, 0.45);
   animation: pulse-ring 2s infinite;
   z-index: -1;
 }
 
 /* Master list card highlight animation */
 @keyframes card-highlight-glow {
-  0% { transform: scale(0.98); box-shadow: 0 0 0 0 rgba(26, 25, 56, 0.2); }
-  50% { transform: scale(1.02); box-shadow: 0 6px 20px rgba(26, 25, 56, 0.15); }
-  100% { transform: scale(1); box-shadow: 0 4px 16px rgba(26, 25, 56, 0.1); }
+  0% { transform: scale(0.98); box-shadow: 0 0 0 0 rgba(245, 38, 95, 0.2); }
+  50% { transform: scale(1.02); box-shadow: 0 6px 20px rgba(245, 38, 95, 0.25); }
+  100% { transform: scale(1); box-shadow: 0 4px 16px rgba(36, 64, 92, 0.1); }
 }
 
 .master-card-active {
   animation: card-highlight-glow 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-  border: 2px solid #1a1938 !important;
-  background: #f7f6fa !important;
+  border: 2px solid var(--accent) !important;
+  background: #ffffff !important;
 }
 
 /* Glass Pill styling */
 .glass-pill {
   backdrop-filter: blur(14px) saturate(180%);
   -webkit-backdrop-filter: blur(14px) saturate(180%);
-  background: rgba(255, 255, 255, 0.7);
-  box-shadow: 0 4px 16px rgba(26, 25, 56, 0.08), inset 1px 1px 1px rgba(255, 255, 255, 0.8);
+  background: rgba(255, 255, 255, 0.85);
+  box-shadow: 0 4px 16px rgba(36, 64, 92, 0.08), inset 1px 1px 1px rgba(255, 255, 255, 0.8);
   border: 1px solid rgba(255, 255, 255, 0.6);
 }
 
 .glass-pill-dark {
   backdrop-filter: blur(14px) saturate(180%);
   -webkit-backdrop-filter: blur(14px) saturate(180%);
-  background: rgba(26, 25, 56, 0.65);
+  background: rgba(36, 64, 92, 0.75);
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3), inset 1px 1px 1px rgba(255, 255, 255, 0.15);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.12);
   color: #ffffff;
 }

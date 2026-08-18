@@ -125,14 +125,14 @@ export const MasterProfileScreen: React.FC<MasterProfileScreenProps> = ({
                 fontSize: '11px',
                 padding: '2px 8px',
                 borderRadius: '8px',
-                background: master.type === 'salon' ? '#c9bcff' : '#d9f24e',
-                color: '#1a1938',
+                background: master.type === 'salon' ? '#c6dcf1' : '#ffd4de',
+                color: '#24405c',
                 fontWeight: 700,
               }}
             >
               {master.type === 'salon' ? 'Beauty Salon' : 'Master Specialist'}
             </span>
-            <span style={{ fontSize: '11px', color: '#6c5ce7', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '3px' }}>
+            <span style={{ fontSize: '11px', color: '#2f6194', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '3px' }}>
               <CheckCircle2 size={12} /> Barb.ua Verified
             </span>
           </div>
@@ -142,13 +142,13 @@ export const MasterProfileScreen: React.FC<MasterProfileScreenProps> = ({
               fontFamily: 'var(--font-serif)',
               fontSize: '25px',
               fontWeight: 700,
-              color: '#1a1938',
+              color: '#24405c',
             }}
           >
             {master.name}
           </h1>
 
-          <p style={{ fontSize: '13px', color: '#8d8aa6', marginTop: '4px' }}>
+          <p style={{ fontSize: '13px', color: '#6d8299', marginTop: '4px' }}>
             {master.craft} · {master.district}
           </p>
 
@@ -161,12 +161,12 @@ export const MasterProfileScreen: React.FC<MasterProfileScreenProps> = ({
               marginTop: '6px',
             }}
           >
-            <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '13px', fontWeight: 600, color: '#1a1938' }}>
-              <MapPin size={14} color="#d9f24e" fill="#1a1938" />
+            <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '13px', fontWeight: 600, color: '#24405c' }}>
+              <MapPin size={14} color="#f5265f" fill="#ffd4de" />
               <span>{master.cleanStreet}, Київ</span>
             </div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '11.5px', color: '#8d8aa6' }}>
-              <span style={{ padding: '1px 6px', borderRadius: '6px', background: '#f2f0f6', color: '#6f6d86', fontWeight: 600 }}>{master.district} р-н</span>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '11.5px', color: '#6d8299' }}>
+              <span style={{ padding: '1px 6px', borderRadius: '6px', background: '#eaf0f6', color: '#24405c', fontWeight: 600 }}>{master.district} р-н</span>
               <span>· {master.metro}</span>
               <span>· {master.dist}</span>
             </div>
@@ -457,12 +457,12 @@ export const MasterProfileScreen: React.FC<MasterProfileScreenProps> = ({
             height: '52px',
             border: 'none',
             borderRadius: '26px',
-            background: '#d9f24e',
-            color: '#1a1938',
+            background: '#f5265f',
+            color: '#ffffff',
             fontSize: '16px',
             fontWeight: 700,
             cursor: 'pointer',
-            boxShadow: '0 4px 16px rgba(217, 242, 78, 0.3)',
+            boxShadow: '0 4px 16px rgba(245, 38, 95, 0.35)',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',

@@ -1,5 +1,5 @@
 import React from 'react';
-import { ArrowRight, Sparkles } from 'lucide-react';
+import { ArrowRight, Sparkles, UserCheck } from 'lucide-react';
 
 interface LoginScreenProps {
   onSignIn: () => void;
@@ -17,7 +17,7 @@ export const LoginScreen: React.FC<LoginScreenProps> = ({
       style={{
         height: '100%',
         width: '100%',
-        background: '#1a1938',
+        background: '#24405c',
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'flex-end',
@@ -27,7 +27,7 @@ export const LoginScreen: React.FC<LoginScreenProps> = ({
         boxSizing: 'border-box',
       }}
     >
-      {/* Decorative Orbs */}
+      {/* Decorative Barb Pink & Steel Orbs */}
       <div
         className="animate-orb-1"
         style={{
@@ -37,8 +37,8 @@ export const LoginScreen: React.FC<LoginScreenProps> = ({
           width: '280px',
           height: '280px',
           borderRadius: '50%',
-          background: '#d9f24e',
-          filter: 'drop-shadow(0 10px 30px rgba(217, 242, 78, 0.3))',
+          background: '#f5265f',
+          filter: 'drop-shadow(0 10px 30px rgba(245, 38, 95, 0.35))',
         }}
       />
       <div
@@ -50,9 +50,9 @@ export const LoginScreen: React.FC<LoginScreenProps> = ({
           width: '220px',
           height: '220px',
           borderRadius: '50%',
-          background: '#9a86f5',
+          background: '#ffd4de',
           opacity: 0.9,
-          filter: 'drop-shadow(0 10px 30px rgba(154, 134, 245, 0.3))',
+          filter: 'drop-shadow(0 10px 30px rgba(255, 212, 222, 0.25))',
         }}
       />
       <div
@@ -63,8 +63,8 @@ export const LoginScreen: React.FC<LoginScreenProps> = ({
           width: '120px',
           height: '120px',
           borderRadius: '50%',
-          background: '#f4938e',
-          opacity: 0.95,
+          background: '#a9c8e6',
+          opacity: 0.9,
         }}
       />
 
@@ -78,15 +78,15 @@ export const LoginScreen: React.FC<LoginScreenProps> = ({
             gap: '6px',
             padding: '6px 14px',
             borderRadius: '20px',
-            background: 'rgba(255, 255, 255, 0.12)',
+            background: 'rgba(255, 255, 255, 0.14)',
             backdropFilter: 'blur(10px)',
-            color: '#d9f24e',
+            color: '#ffd4de',
             fontSize: '12px',
             fontWeight: 700,
             marginBottom: '16px',
           }}
         >
-          <Sparkles size={13} /> 30 Crawled Masters in Kyiv
+          <Sparkles size={13} color="#f5265f" /> 30 Crawled Masters in Kyiv
         </div>
 
         {/* Big Title */}
@@ -100,7 +100,7 @@ export const LoginScreen: React.FC<LoginScreenProps> = ({
             letterSpacing: '-0.02em',
           }}
         >
-          Beau
+          Barb
         </h1>
 
         <p
@@ -108,8 +108,8 @@ export const LoginScreen: React.FC<LoginScreenProps> = ({
             marginTop: '14px',
             fontSize: '17px',
             lineHeight: 1.45,
-            color: 'rgba(255, 255, 255, 0.76)',
-            maxWidth: '280px',
+            color: 'rgba(255, 255, 255, 0.82)',
+            maxWidth: '290px',
           }}
         >
           Beauty specialists near you — on the map, booked in a tap.
@@ -123,8 +123,8 @@ export const LoginScreen: React.FC<LoginScreenProps> = ({
               height: '54px',
               border: 'none',
               borderRadius: '27px',
-              background: '#d9f24e',
-              color: '#1a1938',
+              background: '#f5265f',
+              color: '#ffffff',
               fontSize: '16px',
               fontWeight: 700,
               cursor: 'pointer',
@@ -132,7 +132,7 @@ export const LoginScreen: React.FC<LoginScreenProps> = ({
               alignItems: 'center',
               justifyContent: 'center',
               gap: '8px',
-              boxShadow: '0 6px 20px rgba(217, 242, 78, 0.3)',
+              boxShadow: '0 6px 20px rgba(245, 38, 95, 0.38)',
               transition: 'all 0.15s ease',
             }}
           >
@@ -143,39 +143,43 @@ export const LoginScreen: React.FC<LoginScreenProps> = ({
             onClick={onExploreMap}
             style={{
               height: '54px',
-              border: '1px solid rgba(255, 255, 255, 0.28)',
               borderRadius: '27px',
-              background: 'rgba(255, 255, 255, 0.08)',
-              backdropFilter: 'blur(10px)',
-              color: '#ffffff',
+              background: 'rgba(255, 255, 255, 0.95)',
+              color: '#24405c',
+              border: 'none',
               fontSize: '15px',
+              fontWeight: 700,
+              cursor: 'pointer',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              gap: '8px',
+            }}
+          >
+            <span>Explore Kyiv Map</span>
+            <ArrowRight size={16} />
+          </button>
+
+          <button
+            onClick={onSignInMaster}
+            style={{
+              height: '46px',
+              borderRadius: '23px',
+              background: 'rgba(255, 255, 255, 0.1)',
+              color: '#ffffff',
+              border: '1px solid rgba(255, 255, 255, 0.25)',
+              fontSize: '13px',
               fontWeight: 600,
               cursor: 'pointer',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
               gap: '6px',
-              transition: 'all 0.15s ease',
-            }}
-          >
-            Explore Map (30 Masters) <ArrowRight size={16} />
-          </button>
-
-          <button
-            onClick={onSignInMaster}
-            style={{
-              height: '40px',
-              border: 'none',
-              background: 'none',
-              color: 'rgba(255, 255, 255, 0.65)',
-              fontSize: '14px',
-              fontWeight: 500,
-              cursor: 'pointer',
               marginTop: '4px',
-              transition: 'color 0.15s ease',
             }}
           >
-            I'm a beauty master →
+            <UserCheck size={14} color="#ffd4de" />
+            <span>Master Sign In (Portal)</span>
           </button>
         </div>
       </div>

@@ -38,7 +38,7 @@ export const MasterChatScreen: React.FC<MasterChatScreenProps> = ({ master, onBa
   };
 
   return (
-    <div style={{ height: '100%', background: '#121127', color: '#ffffff', display: 'flex', flexDirection: 'column' }}>
+    <div style={{ height: '100%', background: '#16283b', color: '#ffffff', display: 'flex', flexDirection: 'column' }}>
       {/* Top Header */}
       <div
         style={{
@@ -46,8 +46,8 @@ export const MasterChatScreen: React.FC<MasterChatScreenProps> = ({ master, onBa
           display: 'flex',
           alignItems: 'center',
           gap: '10px',
-          background: '#1a1938',
-          borderBottom: '1px solid #232145',
+          background: '#24405c',
+          borderBottom: '1px solid #1c3248',
         }}
       >
         <button
@@ -73,8 +73,8 @@ export const MasterChatScreen: React.FC<MasterChatScreenProps> = ({ master, onBa
             width: '40px',
             height: '40px',
             borderRadius: '14px',
-            background: '#d9f24e',
-            color: '#1a1938',
+            background: '#ffd4de',
+            color: '#f5265f',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
@@ -87,7 +87,7 @@ export const MasterChatScreen: React.FC<MasterChatScreenProps> = ({ master, onBa
 
         <div style={{ flex: 1, minWidth: 0 }}>
           <div style={{ fontSize: '15px', fontWeight: 700, color: '#ffffff' }}>Kate Petrenko</div>
-          <div style={{ fontSize: '11px', color: '#bfe8d8' }}>Client · Booked Thursday 11:30</div>
+          <div style={{ fontSize: '11px', color: '#a9c8e6' }}>Client · Booked Thursday 11:30</div>
         </div>
       </div>
 
@@ -102,7 +102,7 @@ export const MasterChatScreen: React.FC<MasterChatScreenProps> = ({ master, onBa
           gap: '10px',
         }}
       >
-        <div style={{ alignSelf: 'center', fontSize: '11px', color: 'rgba(255,255,255,0.4)', padding: '2px 0 6px' }}>
+        <div style={{ alignSelf: 'center', fontSize: '11px', color: 'rgba(255,255,255,0.5)', padding: '2px 0 6px' }}>
           Conversation with client
         </div>
 
@@ -113,14 +113,15 @@ export const MasterChatScreen: React.FC<MasterChatScreenProps> = ({ master, onBa
             style={{
               maxWidth: '82%',
               alignSelf: m.mine ? 'flex-end' : 'flex-start',
-              background: m.mine ? '#d9f24e' : '#1a1938',
-              color: m.mine ? '#1a1938' : '#ffffff',
+              background: m.mine ? '#f5265f' : '#24405c',
+              color: '#ffffff',
               borderRadius: m.mine ? '18px 18px 6px 18px' : '18px 18px 18px 6px',
               padding: '12px 16px',
               fontSize: '14px',
               lineHeight: 1.45,
               fontWeight: m.mine ? 600 : 400,
               boxShadow: '0 2px 8px rgba(0,0,0,0.15)',
+              border: m.mine ? 'none' : '1px solid #1c3248',
             }}
           >
             {m.text}
@@ -129,7 +130,7 @@ export const MasterChatScreen: React.FC<MasterChatScreenProps> = ({ master, onBa
       </div>
 
       {/* Quick Suggestion Chips */}
-      <div style={{ padding: '8px 16px', background: '#1a1938', borderTop: '1px solid #232145', display: 'flex', gap: '8px', overflowX: 'auto' }}>
+      <div style={{ padding: '8px 16px', background: '#24405c', borderTop: '1px solid #1c3248', display: 'flex', gap: '8px', overflowX: 'auto' }}>
         <button
           onClick={() => handleQuickOffer('14:00')}
           style={{
@@ -167,8 +168,8 @@ export const MasterChatScreen: React.FC<MasterChatScreenProps> = ({ master, onBa
       {/* Input */}
       <div
         style={{
-          background: '#1a1938',
-          borderTop: '1px solid #232145',
+          background: '#24405c',
+          borderTop: '1px solid #1c3248',
           padding: '12px 16px 34px',
           display: 'flex',
           alignItems: 'center',
@@ -210,12 +211,13 @@ export const MasterChatScreen: React.FC<MasterChatScreenProps> = ({ master, onBa
             height: '46px',
             border: 'none',
             borderRadius: '50%',
-            background: '#d9f24e',
-            color: '#1a1938',
+            background: '#f5265f',
+            color: '#ffffff',
             cursor: 'pointer',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
+            boxShadow: '0 4px 12px rgba(245, 38, 95, 0.35)',
           }}
         >
           <Send size={16} />
