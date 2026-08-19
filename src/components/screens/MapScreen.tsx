@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState, useMemo } from 'react';
 import * as maplibregl from 'maplibre-gl';
 import { Master } from '../../data/crawledMasters';
 import { CategoryFilter } from '../../types/app';
-import { Search, Navigation, X, ChevronUp, ChevronDown, Star, Layers, Compass, Box, Maximize2 } from 'lucide-react';
+import { Search, X, ChevronUp, ChevronDown, Star } from 'lucide-react';
 
 interface MapScreenProps {
   masters: Master[];
@@ -302,185 +302,53 @@ export const MapScreen: React.FC<MapScreenProps> = ({
           gap: '8px',
         }}
       >
-        <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
-          {/* Search Box */}
-          <div
+        {/* Search Box */}
+        <div
+          style={{
+            height: '48px',
+            background: '#ffffff',
+            borderRadius: '24px',
+            boxShadow: '0 4px 16px rgba(26,25,56,0.12)',
+            display: 'flex',
+            alignItems: 'center',
+            padding: '0 16px',
+            gap: '10px',
+          }}
+        >
+          <Search size={16} color="#8d8aa6" />
+          <input
+            type="text"
+            placeholder={`Пошук серед 30 майстрів Києва...`}
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
             style={{
               flex: 1,
-              height: '48px',
-              background: '#ffffff',
-              borderRadius: '24px',
-              boxShadow: '0 4px 16px rgba(26,25,56,0.12)',
-              display: 'flex',
-              alignItems: 'center',
-              padding: '0 16px',
-              gap: '10px',
-            }}
-          >
-            <Search size={16} color="#8d8aa6" />
-            <input
-              type="text"
-              placeholder={`Пошук серед 30 майстрів Києва...`}
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              style={{
-                flex: 1,
-                border: 'none',
-                outline: 'none',
-                fontSize: '14px',
-                fontFamily: 'inherit',
-                color: '#1a1938',
-              }}
-            />
-            {searchQuery && (
-              <button
-                onClick={() => setSearchQuery('')}
-                style={{
-                  border: 'none',
-                  background: '#f2f0f6',
-                  borderRadius: '50%',
-                  width: '22px',
-                  height: '22px',
-                  cursor: 'pointer',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                }}
-              >
-                <X size={12} color="#6f6d86" />
-              </button>
-            )}
-          </div>
-
-          {/* Map Layer / Style Switcher Button */}
-          <button
-            onClick={() => setShowStyleMenu(!showStyleMenu)}
-            title="Змінити стиль карти"
-            style={{
-              width: '48px',
-              height: '48px',
-              borderRadius: '50%',
-              background: '#ffffff',
               border: 'none',
-              boxShadow: '0 4px 16px rgba(26,25,56,0.12)',
+              outline: 'none',
+              fontSize: '14px',
+              fontFamily: 'inherit',
               color: '#1a1938',
-              cursor: 'pointer',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
             }}
-          >
-            <Layers size={18} />
-          </button>
-
-          {/* 3D Perspective Toggle Button */}
-          <button
-            onClick={() => setIs3D(!is3D)}
-            title="Перемкнути 3D перспективу"
-            style={{
-              width: '48px',
-              height: '48px',
-              borderRadius: '50%',
-              background: is3D ? '#f5265f' : '#ffffff',
-              border: 'none',
-              boxShadow: '0 4px 16px rgba(36,64,92,0.12)',
-              color: is3D ? '#ffffff' : '#24405c',
-              cursor: 'pointer',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              fontWeight: 800,
-              fontSize: '12px',
-            }}
-          >
-            <Box size={18} />
-          </button>
-
-          {/* Center Location Button */}
-          <button
-            onClick={handleCenterKyiv}
-            title="Центрувати Київ"
-            style={{
-              width: '48px',
-              height: '48px',
-              borderRadius: '50%',
-              background: '#ffffff',
-              border: 'none',
-              boxShadow: '0 4px 16px rgba(36,64,92,0.12)',
-              color: '#24405c',
-              cursor: 'pointer',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-            }}
-          >
-            <Navigation size={18} />
-          </button>
-
-          {/* Fullscreen Map Experience Button */}
-          {onToggleFullscreen && (
+          />
+          {searchQuery && (
             <button
-              onClick={onToggleFullscreen}
-              title="Повноекранний режим карти"
+              onClick={() => setSearchQuery('')}
               style={{
-                width: '48px',
-                height: '48px',
-                borderRadius: '50%',
-                background: '#24405c',
                 border: 'none',
-                boxShadow: '0 4px 16px rgba(36,64,92,0.2)',
-                color: '#ffffff',
+                background: '#f2f0f6',
+                borderRadius: '50%',
+                width: '22px',
+                height: '22px',
                 cursor: 'pointer',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
               }}
             >
-              <Maximize2 size={18} />
+              <X size={12} color="#6f6d86" />
             </button>
           )}
         </div>
-
-        {/* Style Switcher Dropdown */}
-        {showStyleMenu && (
-          <div
-            style={{
-              background: '#ffffff',
-              borderRadius: '16px',
-              padding: '10px',
-              boxShadow: '0 8px 24px rgba(36,64,92,0.15)',
-              display: 'flex',
-              gap: '8px',
-              alignSelf: 'flex-end',
-            }}
-          >
-            {[
-              { id: 'voyager' as const, label: 'Пастельна карта' },
-              { id: 'positron' as const, label: 'Світла мінімалістична' },
-              { id: 'dark' as const, label: 'Темний стиль' },
-            ].map((st) => (
-              <button
-                key={st.id}
-                onClick={() => {
-                  setMapStyle(st.id);
-                  setShowStyleMenu(false);
-                }}
-                style={{
-                  padding: '6px 12px',
-                  borderRadius: '12px',
-                  background: mapStyle === st.id ? '#24405c' : '#eaf0f6',
-                  color: mapStyle === st.id ? '#ffffff' : '#24405c',
-                  border: 'none',
-                  fontSize: '11.5px',
-                  fontWeight: 600,
-                  cursor: 'pointer',
-                }}
-              >
-                {st.label}
-              </button>
-            ))}
-          </div>
-        )}
 
         {/* Filter Pills Carousel */}
         <div
