@@ -16,17 +16,17 @@ export const BotScreen: React.FC<BotScreenProps> = ({
   const [messages, setMessages] = useState<Array<{ sender: 'bot' | 'user'; text: string }>>([
     {
       sender: 'bot',
-      text: 'Hi! Two taps and your map is ready. What are you after today?',
+      text: 'Привіт! Декілька кліків — і ваша персональна карта готова. Яка послуга вас цікавить сьогодні?',
     },
   ]);
 
   const serviceOptions = [
-    { label: 'Hair & Styling', cat: 'hair' as CategoryFilter, bg: '#ffd4de', count: '10 masters' },
-    { label: 'Nails & Manicure', cat: 'nails' as CategoryFilter, bg: '#c6dcf1', count: '10 masters' },
-    { label: 'Laser Epilation', cat: 'laser' as CategoryFilter, bg: '#dbe8f5', count: '10 salons' },
-    { label: 'All 30 Masters', cat: 'All' as CategoryFilter, bg: '#ffe6ec', count: '30 masters' },
-    { label: 'Top Rated ★4.9+', cat: 'All' as CategoryFilter, bg: '#ffd4de', count: '18 masters' },
-    { label: 'Near Pechersk / Center', cat: 'All' as CategoryFilter, bg: '#dce6ef', count: '12 masters' },
+    { label: 'Волосся та стрижки', cat: 'hair' as CategoryFilter, bg: '#ffd4de', count: '10 майстрів' },
+    { label: 'Манікюр та нігті', cat: 'nails' as CategoryFilter, bg: '#c6dcf1', count: '10 майстрів' },
+    { label: 'Лазерна епіляція', cat: 'laser' as CategoryFilter, bg: '#dbe8f5', count: '10 салонів' },
+    { label: 'Усі 30 майстрів', cat: 'All' as CategoryFilter, bg: '#ffe6ec', count: '30 майстрів' },
+    { label: 'Топ рейтинг ★4.9+', cat: 'All' as CategoryFilter, bg: '#ffd4de', count: '18 майстрів' },
+    { label: 'Печерськ / Центр', cat: 'All' as CategoryFilter, bg: '#dce6ef', count: '12 майстрів' },
   ];
 
   const handlePick = (opt: typeof serviceOptions[0]) => {
@@ -36,7 +36,7 @@ export const BotScreen: React.FC<BotScreenProps> = ({
     setMessages((prev) => [
       ...prev,
       { sender: 'user', text: opt.label },
-      { sender: 'bot', text: `Nice! Found ${opt.count} for ${opt.label} in Kyiv — opening your live map.` },
+      { sender: 'bot', text: `Чудово! Знайдено ${opt.count} у категорії "${opt.label}" у Києві — відкриваємо інтерактивну карту.` },
     ]);
 
     setTimeout(() => {
@@ -52,18 +52,18 @@ export const BotScreen: React.FC<BotScreenProps> = ({
 
     let matchedCat: CategoryFilter = 'All';
     const lower = text.toLowerCase();
-    if (lower.includes('hair') || lower.includes('волос') || lower.includes('стрижк') || lower.includes('color')) {
+    if (lower.includes('hair') || lower.includes('волос') || lower.includes('стрижк') || lower.includes('color') || lower.includes('фарбуван')) {
       matchedCat = 'hair';
-    } else if (lower.includes('nail') || lower.includes('нігт') || lower.includes('манікюр') || lower.includes('gel')) {
+    } else if (lower.includes('nail') || lower.includes('нігт') || lower.includes('манікюр') || lower.includes('гель') || lower.includes('педикюр')) {
       matchedCat = 'nails';
-    } else if (lower.includes('laser') || lower.includes('лазер') || lower.includes('епіляц') || lower.includes('epil')) {
+    } else if (lower.includes('laser') || lower.includes('лазер') || lower.includes('епіляц') || lower.includes('депіляц')) {
       matchedCat = 'laser';
     }
 
     setMessages((prev) => [
       ...prev,
       { sender: 'user', text },
-      { sender: 'bot', text: `Great choice! Filtered 30 crawled Kyiv masters for "${text}" — zooming to results.` },
+      { sender: 'bot', text: `Чудовий вибір! Відфільтровано 30 перевірених майстрів Києва за запитом "${text}" — показуємо на карті.` },
     ]);
 
     setTimeout(() => {
@@ -103,7 +103,7 @@ export const BotScreen: React.FC<BotScreenProps> = ({
         </div>
         <div style={{ flex: 1 }}>
           <div style={{ fontSize: '15px', fontWeight: 700, color: '#24405c' }}>Barb</div>
-          <div style={{ fontSize: '11px', color: '#6d8299' }}>your booking assistant</div>
+          <div style={{ fontSize: '11px', color: '#6d8299' }}>ваш помічник із запису</div>
         </div>
         <button
           onClick={onSkipToMap}
@@ -119,7 +119,7 @@ export const BotScreen: React.FC<BotScreenProps> = ({
             cursor: 'pointer',
           }}
         >
-          Skip to Map
+          До карти
         </button>
       </div>
 
@@ -189,7 +189,7 @@ export const BotScreen: React.FC<BotScreenProps> = ({
         {!picked && (
           <div style={{ marginTop: '10px', display: 'flex', flexDirection: 'column', gap: '8px' }}>
             <div style={{ fontSize: '11px', fontWeight: 700, letterSpacing: '0.08em', color: '#93a7b8', marginLeft: '40px' }}>
-              POPULAR FILTERS
+              ПОПУЛЯРНІ КАТЕГОРІЇ
             </div>
             <div
               style={{
@@ -242,7 +242,7 @@ export const BotScreen: React.FC<BotScreenProps> = ({
       >
         <input
           type="text"
-          placeholder="Ask for hair, nails, laser, or Pechersk..."
+          placeholder="Запитайте про волосся, нігті, лазер або Печерськ..."
           value={inputText}
           onChange={(e) => setInputText(e.target.value)}
           onKeyDown={(e) => e.key === 'Enter' && handleCustomSend()}

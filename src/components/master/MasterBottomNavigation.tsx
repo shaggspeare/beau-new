@@ -18,29 +18,29 @@ export const MasterBottomNavigation: React.FC<MasterBottomNavigationProps> = ({
   const tabs = [
     {
       id: 'schedule' as MasterScreenType,
-      label: 'Schedule',
+      label: 'Розклад',
       icon: Calendar,
       badge: pendingCount > 0 ? pendingCount : undefined,
     },
     {
       id: 'catalog' as MasterScreenType,
-      label: 'Catalog',
+      label: 'Каталог',
       icon: Tag,
     },
     {
       id: 'chats' as MasterScreenType,
-      label: 'Messages',
+      label: 'Повідомлення',
       icon: MessageSquare,
       badge: unreadCount > 0 ? unreadCount : undefined,
     },
     {
       id: 'analytics' as MasterScreenType,
-      label: 'Stats',
+      label: 'Аналітика',
       icon: TrendingUp,
     },
     {
       id: 'preview' as MasterScreenType,
-      label: 'Map Pin',
+      label: 'Локація',
       icon: MapPin,
     },
   ];

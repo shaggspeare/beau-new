@@ -19,13 +19,13 @@ export const ChatScreen: React.FC<ChatScreenProps> = ({
   const [messages, setMessages] = useState<Array<{ id: string; text: string; mine: boolean; time: string }>>([
     {
       id: '1',
-      text: `Hi! I have free slots available for this week in my studio (${master.cleanStreet}).`,
+      text: `Привіт! У мене є вільні віконця для запису на цей тиждень у студії (${master.cleanStreet}).`,
       mine: false,
       time: '10:15',
     },
     {
       id: '2',
-      text: 'Which time works best for you?',
+      text: 'Який час вам підійде найкраще?',
       mine: false,
       time: '10:16',
     },
@@ -52,15 +52,15 @@ export const ChatScreen: React.FC<ChatScreenProps> = ({
       ...prev,
       {
         id: Date.now().toString(),
-        text: `I would like to book the ${slot} slot, please!`,
+        text: `Я хочу записатися на ${slot}, будь ласка!`,
         mine: true,
-        time: 'Just now',
+        time: 'Щойно',
       },
       {
         id: (Date.now() + 1).toString(),
-        text: `Perfect! You're booked for Thu 20 Aug at ${slot}. Looking forward to seeing you at ${master.cleanStreet}!`,
+        text: `Чудово! Вас записано на Чт 20 Сер о ${slot}. Чекаю на вас за адресою: ${master.cleanStreet}!`,
         mine: false,
-        time: 'Just now',
+        time: 'Щойно',
       },
     ]);
 
@@ -80,7 +80,7 @@ export const ChatScreen: React.FC<ChatScreenProps> = ({
         id: Date.now().toString(),
         text: userMsg,
         mine: true,
-        time: 'Just now',
+        time: 'Щойно',
       },
     ]);
 
@@ -89,9 +89,9 @@ export const ChatScreen: React.FC<ChatScreenProps> = ({
         ...prev,
         {
           id: (Date.now() + 1).toString(),
-          text: `Thank you! I got your message regarding "${userMsg.slice(0, 30)}". Let me know if you need any other details!`,
+          text: `Дякую! Отримала ваше повідомлення щодо "${userMsg.slice(0, 30)}". Якщо виникнуть запитання — пишіть!`,
           mine: false,
-          time: 'Just now',
+          time: 'Щойно',
         },
       ]);
     }, 1200);
@@ -151,7 +151,7 @@ export const ChatScreen: React.FC<ChatScreenProps> = ({
             {master.name}
           </div>
           <div style={{ fontSize: '11px', color: '#6d8299' }}>
-            {master.categoryLabel} · Online
+            {master.categoryLabel} · Онлайн
           </div>
         </div>
 
@@ -169,7 +169,7 @@ export const ChatScreen: React.FC<ChatScreenProps> = ({
             cursor: 'pointer',
           }}
         >
-          Profile
+          Профіль
         </button>
       </div>
 
@@ -185,7 +185,7 @@ export const ChatScreen: React.FC<ChatScreenProps> = ({
         }}
       >
         <div style={{ alignSelf: 'center', fontSize: '11px', color: '#93a7b8', padding: '2px 0 6px' }}>
-          Today · Barb Direct Booking
+          Сьогодні · Онлайн-запис Barb
         </div>
 
         {messages.map((msg) => (
@@ -223,7 +223,7 @@ export const ChatScreen: React.FC<ChatScreenProps> = ({
             }}
           >
             <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '11px', letterSpacing: '0.08em', fontWeight: 700, color: '#93a7b8', marginBottom: '10px' }}>
-              <Clock size={12} color="#f5265f" /> FREE SLOTS · THU 20 AUG
+              <Clock size={12} color="#f5265f" /> ВІЛЬНІ ВІКОНЦЯ · ЧТ 20 СЕР
             </div>
             <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
               {availableSlots.map((slot, i) => (
@@ -270,8 +270,8 @@ export const ChatScreen: React.FC<ChatScreenProps> = ({
           >
             <CheckCircle2 size={24} color="#f5265f" />
             <div>
-              <div style={{ fontSize: '14px', fontWeight: 800, color: '#24405c' }}>Visit Confirmed at {bookedSlot}</div>
-              <div style={{ fontSize: '12px', color: '#6d8299' }}>Added to your active appointments</div>
+              <div style={{ fontSize: '14px', fontWeight: 800, color: '#24405c' }}>Візит підтверджено о {bookedSlot}</div>
+              <div style={{ fontSize: '12px', color: '#6d8299' }}>Додано до ваших активних записів</div>
             </div>
           </div>
         )}
@@ -290,7 +290,7 @@ export const ChatScreen: React.FC<ChatScreenProps> = ({
       >
         <input
           type="text"
-          placeholder="Type message to master..."
+          placeholder="Напишіть повідомлення майстру..."
           value={inputVal}
           onChange={(e) => setInputVal(e.target.value)}
           onKeyDown={(e) => e.key === 'Enter' && handleSend()}

@@ -18,23 +18,23 @@ export const BottomNavigation: React.FC<BottomNavigationProps> = ({
   const tabs = [
     {
       id: 'dash' as ScreenType,
-      label: 'Home',
+      label: 'Головна',
       icon: Home,
     },
     {
       id: 'map' as ScreenType,
-      label: 'Map',
+      label: 'Карта',
       icon: MapPin,
     },
     {
       id: 'chats' as ScreenType,
-      label: 'Chats',
+      label: 'Чати',
       icon: MessageCircle,
       badge: unreadChatCount > 0 ? unreadChatCount : undefined,
     },
     {
       id: 'favs' as ScreenType,
-      label: 'Saved',
+      label: 'Збережені',
       icon: Heart,
       badge: savedCount > 0 ? savedCount : undefined,
     },

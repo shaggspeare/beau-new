@@ -16,20 +16,20 @@ export const ChatsListScreen: React.FC<ChatsListScreenProps> = ({
   const sampleChats = [
     {
       master: masters[0] || masters[0],
-      lastMsg: '🎉 Confirmed! You are booked for Thursday at 11:30.',
+      lastMsg: '🎉 Підтверджено! Вас записано на четвер об 11:30.',
       time: '10:24',
       unread: true,
     },
     {
       master: masters[10] || masters[1],
-      lastMsg: 'Sure, gel manicure with French design takes about 1 hour.',
-      time: 'Yesterday',
+      lastMsg: 'Так, гель-манікюр з френчем займає близько 1 години.',
+      time: 'Вчора',
       unread: false,
     },
     {
       master: masters[20] || masters[2],
-      lastMsg: 'Laser diode package consultation is complimentary!',
-      time: 'Mon',
+      lastMsg: 'Консультація щодо курсу діодної лазерної епіляції безкоштовна!',
+      time: 'Пн',
       unread: false,
     },
   ];
@@ -65,7 +65,7 @@ export const ChatsListScreen: React.FC<ChatsListScreenProps> = ({
         </button>
 
         <h1 style={{ fontFamily: 'var(--font-serif)', fontSize: '24px', fontWeight: 700, color: '#24405c' }}>
-          Chats
+          Чати
         </h1>
       </div>
 

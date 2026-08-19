@@ -320,7 +320,7 @@ export const MapScreen: React.FC<MapScreenProps> = ({
             <Search size={16} color="#8d8aa6" />
             <input
               type="text"
-              placeholder={`Search 30 masters in Kyiv...`}
+              placeholder={`Пошук серед 30 майстрів Києва...`}
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               style={{
@@ -355,7 +355,7 @@ export const MapScreen: React.FC<MapScreenProps> = ({
           {/* Map Layer / Style Switcher Button */}
           <button
             onClick={() => setShowStyleMenu(!showStyleMenu)}
-            title="Switch Map Style"
+            title="Змінити стиль карти"
             style={{
               width: '48px',
               height: '48px',
@@ -376,7 +376,7 @@ export const MapScreen: React.FC<MapScreenProps> = ({
           {/* 3D Perspective Toggle Button */}
           <button
             onClick={() => setIs3D(!is3D)}
-            title="Toggle 3D Perspective View"
+            title="Перемкнути 3D перспективу"
             style={{
               width: '48px',
               height: '48px',
@@ -399,7 +399,7 @@ export const MapScreen: React.FC<MapScreenProps> = ({
           {/* Center Location Button */}
           <button
             onClick={handleCenterKyiv}
-            title="Center Kyiv"
+            title="Центрувати Київ"
             style={{
               width: '48px',
               height: '48px',
@@ -421,7 +421,7 @@ export const MapScreen: React.FC<MapScreenProps> = ({
           {onToggleFullscreen && (
             <button
               onClick={onToggleFullscreen}
-              title="Open Fullscreen Map View"
+              title="Повноекранний режим карти"
               style={{
                 width: '48px',
                 height: '48px',
@@ -446,7 +446,7 @@ export const MapScreen: React.FC<MapScreenProps> = ({
           <div
             style={{
               background: '#ffffff',
-              borderRadius: '18px',
+              borderRadius: '16px',
               padding: '10px',
               boxShadow: '0 8px 24px rgba(36,64,92,0.15)',
               display: 'flex',
@@ -455,9 +455,9 @@ export const MapScreen: React.FC<MapScreenProps> = ({
             }}
           >
             {[
-              { id: 'voyager' as const, label: 'Pastel Voyager' },
-              { id: 'positron' as const, label: 'Minimal Positron' },
-              { id: 'dark' as const, label: 'Dark Steel' },
+              { id: 'voyager' as const, label: 'Пастельна карта' },
+              { id: 'positron' as const, label: 'Світла мінімалістична' },
+              { id: 'dark' as const, label: 'Темний стиль' },
             ].map((st) => (
               <button
                 key={st.id}
@@ -494,10 +494,10 @@ export const MapScreen: React.FC<MapScreenProps> = ({
         >
           {(
             [
-              { id: 'All' as CategoryFilter, label: `All (${masters.length})` },
-              { id: 'hair' as CategoryFilter, label: '✂️ Hair (10)' },
-              { id: 'nails' as CategoryFilter, label: '💅 Nails (10)' },
-              { id: 'laser' as CategoryFilter, label: '⚡ Laser (10)' },
+              { id: 'All' as CategoryFilter, label: `Усі (${masters.length})` },
+              { id: 'hair' as CategoryFilter, label: '✂️ Волосся (10)' },
+              { id: 'nails' as CategoryFilter, label: '💅 Нігті (10)' },
+              { id: 'laser' as CategoryFilter, label: '⚡ Лазер (10)' },
             ] as const
           ).map((f) => {
             const active = categoryFilter === f.id;
@@ -543,7 +543,7 @@ export const MapScreen: React.FC<MapScreenProps> = ({
               boxShadow: '0 2px 8px rgba(36,64,92,0.08)',
             }}
           >
-            ★ Top Rated
+            ★ Топ рейтинг
           </button>
 
           <button
@@ -563,7 +563,7 @@ export const MapScreen: React.FC<MapScreenProps> = ({
               boxShadow: '0 2px 8px rgba(36,64,92,0.08)',
             }}
           >
-            🏢 Salons
+            🏢 Салони
           </button>
         </div>
       </div>
@@ -571,7 +571,7 @@ export const MapScreen: React.FC<MapScreenProps> = ({
       {/* Floating Barb Assistant Action Button (FAB) */}
       <button
         onClick={onOpenBot}
-        title="Ask Barb booking assistant"
+        title="Запитати помічника Barb"
         style={{
           position: 'absolute',
           right: '18px',
@@ -630,7 +630,7 @@ export const MapScreen: React.FC<MapScreenProps> = ({
           <div style={{ width: '100%', padding: '0 20px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
               <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: '19px', fontWeight: 700, color: '#1a1938' }}>
-                Masters nearby
+                Майстри поруч
               </h2>
               <span
                 style={{
@@ -642,11 +642,11 @@ export const MapScreen: React.FC<MapScreenProps> = ({
                   color: '#6f6d86',
                 }}
               >
-                {filteredMasters.length} found
+                {filteredMasters.length} знайдено
               </span>
             </div>
             <div style={{ display: 'flex', alignItems: 'center', gap: '4px', fontSize: '12px', color: '#8d8aa6' }}>
-              <span>{sheetExpanded ? 'Collapse' : 'Expand'}</span>
+              <span>{sheetExpanded ? 'Згорнути' : 'Розгорнути'}</span>
               {sheetExpanded ? <ChevronDown size={15} /> : <ChevronUp size={15} />}
             </div>
           </div>
@@ -666,9 +666,9 @@ export const MapScreen: React.FC<MapScreenProps> = ({
           {filteredMasters.length === 0 ? (
             <div style={{ textAlign: 'center', padding: '30px 16px', color: '#8d8aa6' }}>
               <div style={{ fontSize: '15px', fontWeight: 600, color: '#1a1938', marginBottom: '6px' }}>
-                No masters match your filters
+                Не знайдено майстрів за вашими фільтрами
               </div>
-              <p style={{ fontSize: '13px' }}>Try selecting "All" or clearing your search term.</p>
+              <p style={{ fontSize: '13px' }}>Спробуйте обрати «Усі» або очистити пошуковий запит.</p>
             </div>
           ) : (
             filteredMasters.map((m) => {
@@ -729,7 +729,7 @@ export const MapScreen: React.FC<MapScreenProps> = ({
                           flexShrink: 0,
                         }}
                       >
-                        {m.type === 'salon' ? 'Salon' : 'Master'}
+                        {m.type === 'salon' ? 'Салон' : 'Майстер'}
                       </span>
                     </div>
                     <div style={{ fontSize: '12.5px', color: '#24405c', fontWeight: 500, marginTop: '2px', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
@@ -748,7 +748,7 @@ export const MapScreen: React.FC<MapScreenProps> = ({
                       <Star size={12} fill="#f5265f" color="#f5265f" /> {m.rating}
                     </div>
                     <div style={{ fontSize: '12px', color: '#6d8299', marginTop: '2px' }}>
-                      from {m.minPrice}
+                      від {m.minPrice}
                     </div>
                     <button
                       onClick={(e) => {
@@ -767,7 +767,7 @@ export const MapScreen: React.FC<MapScreenProps> = ({
                         cursor: 'pointer',
                       }}
                     >
-                      Profile ›
+                      Профіль ›
                     </button>
                   </div>
                 </div>

@@ -48,7 +48,7 @@ export const SavedScreen: React.FC<SavedScreenProps> = ({
         </button>
 
         <h1 style={{ fontFamily: 'var(--font-serif)', fontSize: '24px', fontWeight: 700, color: '#24405c' }}>
-          Saved ({favoriteMasters.length})
+          Збережені ({favoriteMasters.length})
         </h1>
       </div>
 
@@ -80,10 +80,10 @@ export const SavedScreen: React.FC<SavedScreenProps> = ({
               <Heart size={28} color="#adc0d0" />
             </div>
             <div style={{ fontSize: '17px', fontWeight: 700, color: '#24405c', marginBottom: '6px' }}>
-              No saved specialists yet
+              У вас поки немає збережених майстрів
             </div>
             <p style={{ fontSize: '13px', lineHeight: 1.5, marginBottom: '20px' }}>
-              Browse the interactive Kyiv map and tap the heart icon to save your favorite masters.
+              Переглядайте інтерактивну карту Києва та натискайте на серце, щоб зберегти улюблених спеціалістів.
             </p>
             <button
               onClick={onExploreMap}
@@ -99,7 +99,7 @@ export const SavedScreen: React.FC<SavedScreenProps> = ({
                 boxShadow: '0 4px 14px rgba(245, 38, 95, 0.35)',
               }}
             >
-              Explore Map
+              Відкрити карту
             </button>
           </div>
         ) : (
@@ -145,7 +145,7 @@ export const SavedScreen: React.FC<SavedScreenProps> = ({
                   <span>{m.craft.split(',')[0]}</span> · <Star size={11} fill="#f5265f" color="#f5265f" /> {m.rating}
                 </div>
                 <div style={{ fontSize: '11px', color: '#93a7b8', marginTop: '2px' }}>
-                  from {m.minPrice} · {m.district}
+                  від {m.minPrice} · {m.district}
                 </div>
               </div>
 

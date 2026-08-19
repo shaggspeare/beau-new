@@ -9,12 +9,12 @@ interface MasterChatScreenProps {
 
 export const MasterChatScreen: React.FC<MasterChatScreenProps> = ({ master, onBack }) => {
   const [messages, setMessages] = useState([
-    { id: '1', text: `Hi! Saw your ${master.categoryLabel.toLowerCase()} work on Barb.ua — do you have any free slots this week?`, mine: false, time: '10:14' },
-    { id: '2', text: `Hello! Yes, I have open slots on Thursday and Friday. What service are you planning to do?`, mine: true, time: '10:18' },
-    { id: '3', text: `Looking for ${master.services[0]?.name || master.craft}.`, mine: false, time: '10:20' },
-    { id: '4', text: `Perfect! That usually takes about 1.5 - 2 hours. Pick a slot below.`, mine: true, time: '10:22' },
-    { id: '5', text: `I would like to book the 11:30 slot, please!`, mine: false, time: '10:24' },
-    { id: '6', text: `🎉 Confirmed! You are booked for Thursday at 11:30. Looking forward to seeing you at ${master.district}!`, mine: true, time: '10:25' },
+    { id: '1', text: `Привіт! Побачила ваші роботи на Barb.ua — чи є вільні віконця цього тижня?`, mine: false, time: '10:14' },
+    { id: '2', text: `Вітаю! Так, є вільний час у четвер та п'ятницю. Яку саме послугу плануєте?`, mine: true, time: '10:18' },
+    { id: '3', text: `Цікавить ${master.services[0]?.name || master.craft}.`, mine: false, time: '10:20' },
+    { id: '4', text: `Чудово! Це зазвичай займає близько 1.5 - 2 годин. Оберіть зручний час нижче.`, mine: true, time: '10:22' },
+    { id: '5', text: `Я хочу записатися на 11:30, будь ласка!`, mine: false, time: '10:24' },
+    { id: '6', text: `🎉 Підтверджено! Вас записано на четвер об 11:30. Чекаю на вас у районі ${master.district}!`, mine: true, time: '10:25' },
   ]);
 
   const [input, setInput] = useState('');
@@ -26,14 +26,14 @@ export const MasterChatScreen: React.FC<MasterChatScreenProps> = ({ master, onBa
 
     setMessages((prev) => [
       ...prev,
-      { id: Date.now().toString(), text, mine: true, time: 'Just now' },
+      { id: Date.now().toString(), text, mine: true, time: 'Щойно' },
     ]);
   };
 
   const handleQuickOffer = (slot: string) => {
     setMessages((prev) => [
       ...prev,
-      { id: Date.now().toString(), text: `I have an open spot at ${slot} on Thursday for you!`, mine: true, time: 'Just now' },
+      { id: Date.now().toString(), text: `У мене є для вас вільне віконце о ${slot} у четвер!`, mine: true, time: 'Щойно' },
     ]);
   };
 
@@ -82,12 +82,12 @@ export const MasterChatScreen: React.FC<MasterChatScreenProps> = ({ master, onBa
             fontWeight: 800,
           }}
         >
-          KP
+          КП
         </div>
 
         <div style={{ flex: 1, minWidth: 0 }}>
-          <div style={{ fontSize: '15px', fontWeight: 700, color: '#ffffff' }}>Kate Petrenko</div>
-          <div style={{ fontSize: '11px', color: '#a9c8e6' }}>Client · Booked Thursday 11:30</div>
+          <div style={{ fontSize: '15px', fontWeight: 700, color: '#ffffff' }}>Катерина Петренко</div>
+          <div style={{ fontSize: '11px', color: '#a9c8e6' }}>Клієнт · Запис на Четвер 11:30</div>
         </div>
       </div>
 
@@ -103,7 +103,7 @@ export const MasterChatScreen: React.FC<MasterChatScreenProps> = ({ master, onBa
         }}
       >
         <div style={{ alignSelf: 'center', fontSize: '11px', color: 'rgba(255,255,255,0.5)', padding: '2px 0 6px' }}>
-          Conversation with client
+          Листування з клієнтом
         </div>
 
         {messages.map((m) => (
@@ -145,7 +145,7 @@ export const MasterChatScreen: React.FC<MasterChatScreenProps> = ({ master, onBa
             cursor: 'pointer',
           }}
         >
-          + Suggest 14:00 slot
+          + Запропонувати час 14:00
         </button>
         <button
           onClick={() => handleQuickOffer('16:30')}
@@ -161,7 +161,7 @@ export const MasterChatScreen: React.FC<MasterChatScreenProps> = ({ master, onBa
             cursor: 'pointer',
           }}
         >
-          + Suggest 16:30 slot
+          + Запропонувати час 16:30
         </button>
       </div>
 
@@ -189,7 +189,7 @@ export const MasterChatScreen: React.FC<MasterChatScreenProps> = ({ master, onBa
         >
           <input
             type="text"
-            placeholder="Reply to Kate Petrenko…"
+            placeholder="Відповісти Катерині Петренко…"
             value={input}
             onChange={(e) => setInput(e.target.value)}
             onKeyDown={(e) => e.key === 'Enter' && handleSend()}

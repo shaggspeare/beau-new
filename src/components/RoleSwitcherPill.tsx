@@ -53,7 +53,7 @@ export const RoleSwitcherPill: React.FC<RoleSwitcherPillProps> = ({
           }}
         >
           <User size={13} color={currentRole === 'client' ? '#ffd4de' : 'currentColor'} />
-          <span>Client (Kate)</span>
+          <span>Клієнт (Катя)</span>
         </button>
 
         {/* Master Tab */}
@@ -75,14 +75,14 @@ export const RoleSwitcherPill: React.FC<RoleSwitcherPillProps> = ({
           }}
         >
           <Sparkles size={13} color="#ffffff" />
-          <span>Master Portal</span>
+          <span>Кабінет майстра</span>
         </button>
 
         {/* Master Selector dropdown trigger when in master mode */}
         {currentRole === 'master' && (
           <button
             onClick={() => setDropdownOpen(!dropdownOpen)}
-            title="Switch Managed Master"
+            title="Змінити профіль майстра"
             style={{
               padding: '4px 8px',
               borderRadius: '14px',
@@ -127,7 +127,7 @@ export const RoleSwitcherPill: React.FC<RoleSwitcherPillProps> = ({
           }}
         >
           <div style={{ padding: '6px 8px', fontSize: '10.5px', fontWeight: 800, color: '#ffd4de', letterSpacing: '0.06em' }}>
-            SELECT CRAWLED MASTER ({allMasters.length})
+            ОБЕРІТЬ МАЙСТРА ({allMasters.length})
           </div>
 
           {allMasters.map((m) => {

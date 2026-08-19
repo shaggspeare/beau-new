@@ -21,10 +21,10 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({
   const topMasters = masters.slice(0, 8);
 
   const categories = [
-    { label: 'Hairdressers', cat: 'hair' as CategoryFilter, from: '₴450', count: '10 masters', bg: '#ffd4de' },
-    { label: 'Nails & Art', cat: 'nails' as CategoryFilter, from: '₴300', count: '10 masters', bg: '#c6dcf1' },
-    { label: 'Laser Epilation', cat: 'laser' as CategoryFilter, from: '₴130', count: '10 salons', bg: '#dbe8f5' },
-    { label: 'All Specialists', cat: 'All' as CategoryFilter, from: '₴200', count: '30 crawled', bg: '#ffe6ec' },
+    { label: 'Перукарі', cat: 'hair' as CategoryFilter, from: '₴450', count: '10 майстрів', bg: '#ffd4de' },
+    { label: 'Манікюр та нігті', cat: 'nails' as CategoryFilter, from: '₴300', count: '10 майстрів', bg: '#c6dcf1' },
+    { label: 'Лазерна епіляція', cat: 'laser' as CategoryFilter, from: '₴130', count: '10 салонів', bg: '#dbe8f5' },
+    { label: 'Усі спеціалісти', cat: 'All' as CategoryFilter, from: '₴200', count: '30 у базі', bg: '#ffe6ec' },
   ];
 
   return (
@@ -34,7 +34,7 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({
         <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: '14px' }}>
           <div>
             <span style={{ fontSize: '13px', fontWeight: 600, color: '#6d8299', letterSpacing: '0.02em' }}>
-              KYIV, UKRAINE
+              КИЇВ, УКРАЇНА
             </span>
             <h1
               style={{
@@ -46,13 +46,13 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({
                 marginTop: '2px',
               }}
             >
-              Hi, Kate!
+              Привіт, Катю!
             </h1>
           </div>
 
           <button
             onClick={onOpenProfile}
-            title="Profile"
+            title="Профіль"
             style={{
               width: '52px',
               height: '52px',
@@ -70,7 +70,7 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({
               boxShadow: '0 4px 14px rgba(36,64,92,0.15)',
             }}
           >
-            KP
+            КП
           </button>
         </div>
 
@@ -104,11 +104,11 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({
               flexShrink: 0,
             }}
           >
-            <div style={{ fontSize: '9px', letterSpacing: '0.08em', fontWeight: 800 }}>AUG</div>
+            <div style={{ fontSize: '9px', letterSpacing: '0.08em', fontWeight: 800 }}>СЕР</div>
             <div style={{ fontFamily: 'var(--font-serif)', fontSize: '22px', fontWeight: 700, lineHeight: 1 }}>20</div>
           </div>
           <div style={{ flex: 1, minWidth: 0 }}>
-            <div style={{ fontSize: '15px', fontWeight: 700, color: '#24405c' }}>Balayage, mid length</div>
+            <div style={{ fontSize: '15px', fontWeight: 700, color: '#24405c' }}>Балаяж, середня довжина</div>
             <div style={{ fontSize: '13px', color: '#6d8299', marginTop: '3px' }}>Валентина Шевчук · 11:30</div>
           </div>
           <ChevronRight size={20} color="#adc0d0" />
@@ -132,7 +132,7 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({
           }}
         >
           <Search size={16} color="#6d8299" />
-          <span style={{ fontSize: '14px', color: '#6d8299' }}>Search 30 masters in Kyiv on map…</span>
+          <span style={{ fontSize: '14px', color: '#6d8299' }}>Пошук серед 30 майстрів Києва на карті…</span>
         </div>
 
         {/* Categories 2x2 Grid */}
@@ -176,7 +176,7 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({
                   {c.label}
                 </div>
                 <div style={{ fontSize: '12px', color: 'rgba(36,64,92,0.7)', marginTop: '2px', fontWeight: 500 }}>
-                  from {c.from} · {c.count}
+                  від {c.from} · {c.count}
                 </div>
               </div>
             </button>
@@ -193,7 +193,7 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({
           }}
         >
           <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: '22px', fontWeight: 700, color: '#24405c' }}>
-            Featured specialists
+            Рекомендовані майстри
           </h2>
           <button
             onClick={() => onOpenMapWithCategory('All')}
@@ -206,7 +206,7 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({
               cursor: 'pointer',
             }}
           >
-            See all (30) ›
+            Усі (30) ›
           </button>
         </div>
 
@@ -311,8 +311,8 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({
                   {m.district} р-н · {m.dist}
                 </div>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '8px' }}>
-                  <span style={{ fontSize: '12px', fontWeight: 700, color: '#24405c' }}>from {m.minPrice}</span>
-                  <span style={{ fontSize: '11px', color: '#f5265f', fontWeight: 700 }}>Book ›</span>
+                  <span style={{ fontSize: '12px', fontWeight: 700, color: '#24405c' }}>від {m.minPrice}</span>
+                  <span style={{ fontSize: '11px', color: '#f5265f', fontWeight: 700 }}>Запис ›</span>
                 </div>
               </div>
             </div>
@@ -335,13 +335,13 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({
         >
           <div>
             <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '11px', fontWeight: 700, color: '#ffd4de' }}>
-              <Sparkles size={12} color="#f5265f" /> LIVE CRAWL DATABASE
+              <Sparkles size={12} color="#f5265f" /> БАЗА ДАНИХ BARB.UA
             </div>
             <div style={{ fontSize: '15px', fontWeight: 700, marginTop: '2px' }}>
-              30 Kyiv Masters Crawled
+              30 майстрів Києва
             </div>
             <div style={{ fontSize: '12px', color: 'rgba(255,255,255,0.7)', marginTop: '2px' }}>
-              Hair, Nails & Laser Epilation parsed from Barb.ua
+              Перукарі, манікюр та лазерна епіляція з реальними цінами
             </div>
           </div>
           <button
@@ -359,7 +359,7 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({
               boxShadow: '0 4px 14px rgba(245, 38, 95, 0.35)',
             }}
           >
-            Open Map
+            На карту
           </button>
         </div>
       </div>

@@ -114,7 +114,7 @@ export const DesktopFullscreenView: React.FC<DesktopFullscreenViewProps> = ({
   const [chatMessages, setChatMessages] = useState<Array<{ id: string; text: string; mine: boolean; time: string }>>([
     {
       id: '1',
-      text: `Hi! Free slots are open for this week in my studio. Which time works for you?`,
+      text: `Привіт! У моїй студії є вільні віконця для запису на цей тиждень. Який час вам підійде найкраще?`,
       mine: false,
       time: '10:15',
     },
@@ -124,18 +124,9 @@ export const DesktopFullscreenView: React.FC<DesktopFullscreenViewProps> = ({
 
   // Bot conversation state
   const [botMessages, setBotMessages] = useState<Array<{ sender: 'bot' | 'user'; text: string }>>([
-    { sender: 'bot', text: 'Hello! I am your Barb Kyiv beauty assistant. Tell me what service or district you are looking for!' },
+    { sender: 'bot', text: 'Привіт! Я ваш б\'юті-асистент Barb у Києві. Підкажіть, яку послугу або район ви шукаєте!' },
   ]);
   const [botInput, setBotInput] = useState('');
-
-  // Service editing state for Master Mode
-  const [editingServiceIdx, setEditingServiceIdx] = useState<number | null>(null);
-  const [editPriceVal, setEditPriceVal] = useState('');
-  const [newServiceName, setNewServiceName] = useState('');
-  const [newServicePrice, setNewServicePrice] = useState('₴600');
-  const [showAddServiceModal, setShowAddServiceModal] = useState(false);
-  const [newSlotInput, setNewSlotInput] = useState('');
-  const [showSlotInput, setShowSlotInput] = useState(false);
 
   // Sync sidebar view on role change
   useEffect(() => {
@@ -383,16 +374,16 @@ export const DesktopFullscreenView: React.FC<DesktopFullscreenViewProps> = ({
     if (!chatInput.trim()) return;
     const msg = chatInput.trim();
     setChatInput('');
-    setChatMessages((prev) => [...prev, { id: Date.now().toString(), text: msg, mine: true, time: 'Just now' }]);
+    setChatMessages((prev) => [...prev, { id: Date.now().toString(), text: msg, mine: true, time: 'Щойно' }]);
 
     setTimeout(() => {
       setChatMessages((prev) => [
         ...prev,
         {
           id: (Date.now() + 1).toString(),
-          text: `Thank you for your message! Looking forward to seeing you at ${activeClientMaster.cleanStreet}.`,
+          text: `Дякую за повідомлення! Чекаю на вас у студії за адресою: ${activeClientMaster.cleanStreet}.`,
           mine: false,
-          time: 'Just now',
+          time: 'Щойно',
         },
       ]);
     }, 1000);
@@ -411,12 +402,12 @@ export const DesktopFullscreenView: React.FC<DesktopFullscreenViewProps> = ({
     onClientBookedSlot(slot);
     setChatMessages((prev) => [
       ...prev,
-      { id: Date.now().toString(), text: `I would like to book the ${slot} slot, please!`, mine: true, time: 'Just now' },
+      { id: Date.now().toString(), text: `Я хочу записатися на ${slot}, будь ласка!`, mine: true, time: 'Щойно' },
       {
         id: (Date.now() + 1).toString(),
-        text: `Confirmed! Your visit is scheduled for Thu 20 Aug at ${slot}. See you soon!`,
+        text: `Підтверджено! Ваш візит заплановано на Чт 20 Сер о ${slot}. До зустрічі!`,
         mine: false,
-        time: 'Just now',
+        time: 'Щойно',
       },
     ]);
   };
@@ -430,9 +421,9 @@ export const DesktopFullscreenView: React.FC<DesktopFullscreenViewProps> = ({
 
     let matchedCat: CategoryFilter = 'All';
     const lower = text.toLowerCase();
-    if (lower.includes('hair') || lower.includes('волос') || lower.includes('стрижк') || lower.includes('color')) {
+    if (lower.includes('hair') || lower.includes('волос') || lower.includes('стрижк') || lower.includes('color') || lower.includes('фарбуван')) {
       matchedCat = 'hair';
-    } else if (lower.includes('nail') || lower.includes('нігт') || lower.includes('манікюр') || lower.includes('gel')) {
+    } else if (lower.includes('nail') || lower.includes('нігт') || lower.includes('манікюр') || lower.includes('gel') || lower.includes('педикюр')) {
       matchedCat = 'nails';
     } else if (lower.includes('laser') || lower.includes('лазер') || lower.includes('епіляц')) {
       matchedCat = 'laser';
@@ -444,7 +435,7 @@ export const DesktopFullscreenView: React.FC<DesktopFullscreenViewProps> = ({
         ...prev,
         {
           sender: 'bot',
-          text: `I've updated the Kyiv map for "${text}"! We found great specialists matching your criteria.`,
+          text: `Я оновив карту Києва за запитом "${text}"! Знайдено чудових спеціалістів за вашими критеріями.`,
         },
       ]);
     }, 800);
@@ -524,7 +515,7 @@ export const DesktopFullscreenView: React.FC<DesktopFullscreenViewProps> = ({
               >
                 Barb
               </div>
-              <div style={{ fontSize: '11px', color: '#6d8299', fontWeight: 600 }}>Kyiv Beauty Map</div>
+              <div style={{ fontSize: '11px', color: '#6d8299', fontWeight: 600 }}>Карта б'юті-майстрів Києва</div>
             </div>
           </div>
 
@@ -541,10 +532,10 @@ export const DesktopFullscreenView: React.FC<DesktopFullscreenViewProps> = ({
           >
             {(
               [
-                { id: 'All' as CategoryFilter, label: 'All (30)' },
-                { id: 'hair' as CategoryFilter, label: '✂️ Hair (10)' },
-                { id: 'nails' as CategoryFilter, label: '💅 Nails (10)' },
-                { id: 'laser' as CategoryFilter, label: '⚡ Laser (10)' },
+                { id: 'All' as CategoryFilter, label: 'Усі (30)' },
+                { id: 'hair' as CategoryFilter, label: '✂️ Волосся (10)' },
+                { id: 'nails' as CategoryFilter, label: '💅 Нігті (10)' },
+                { id: 'laser' as CategoryFilter, label: '⚡ Лазер (10)' },
               ] as const
             ).map((c) => {
               const active = categoryFilter === c.id;
@@ -589,7 +580,7 @@ export const DesktopFullscreenView: React.FC<DesktopFullscreenViewProps> = ({
           <Search size={16} color="#6d8299" />
           <input
             type="text"
-            placeholder="Search 30 masters, services, or districts (Pechersk, Podil)..."
+            placeholder="Пошук серед 30 майстрів, послуг або районів (Печерськ, Поділ)..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             style={{
@@ -644,7 +635,7 @@ export const DesktopFullscreenView: React.FC<DesktopFullscreenViewProps> = ({
           {/* Saved Favorites Trigger */}
           <button
             onClick={() => setSidebarView(sidebarView === 'favs' ? 'list' : 'favs')}
-            title="Saved Favorites"
+            title="Збережені майстри"
             style={{
               height: '38px',
               padding: '0 12px',
@@ -661,7 +652,7 @@ export const DesktopFullscreenView: React.FC<DesktopFullscreenViewProps> = ({
             }}
           >
             <Heart size={14} fill={favoriteIds.size > 0 ? '#f5265f' : 'none'} color={favoriteIds.size > 0 ? '#f5265f' : '#24405c'} />
-            <span>Saved ({favoriteIds.size})</span>
+            <span>Збережені ({favoriteIds.size})</span>
           </button>
 
           {/* Dual Role Selector Pill */}
@@ -687,7 +678,7 @@ export const DesktopFullscreenView: React.FC<DesktopFullscreenViewProps> = ({
                 cursor: 'pointer',
               }}
             >
-              Client (Kate)
+              Клієнт (Катя)
             </button>
 
             <button
@@ -703,7 +694,7 @@ export const DesktopFullscreenView: React.FC<DesktopFullscreenViewProps> = ({
                 cursor: 'pointer',
               }}
             >
-              Master Portal
+              Кабінет майстра
             </button>
           </div>
 
@@ -727,7 +718,7 @@ export const DesktopFullscreenView: React.FC<DesktopFullscreenViewProps> = ({
                   gap: '6px',
                 }}
               >
-                <span>Studio: {currentManagedMaster.name.split(' ')[0]}</span>
+                <span>Студія: {currentManagedMaster.name.split(' ')[0]}</span>
                 <Sliders size={12} />
               </button>
 
@@ -751,7 +742,7 @@ export const DesktopFullscreenView: React.FC<DesktopFullscreenViewProps> = ({
                   }}
                 >
                   <div style={{ padding: '6px 8px', fontSize: '10px', fontWeight: 800, color: '#ffd4de' }}>
-                    SELECT STUDIO ({masters.length})
+                    ОБЕРІТЬ СТУДІЮ ({masters.length})
                   </div>
                   {masters.map((m) => (
                     <button
@@ -789,7 +780,7 @@ export const DesktopFullscreenView: React.FC<DesktopFullscreenViewProps> = ({
           {/* Exit Fullscreen Toggle Button */}
           <button
             onClick={onToggleFullscreen}
-            title="Exit Fullscreen (Switch to Phone Mockup Frame)"
+            title="Вийти з повноекранного режиму (перейти до макету телефону)"
             style={{
               height: '38px',
               padding: '0 14px',
@@ -805,7 +796,7 @@ export const DesktopFullscreenView: React.FC<DesktopFullscreenViewProps> = ({
               gap: '6px',
             }}
           >
-            <Minimize2 size={15} /> Exit Fullscreen
+            <Minimize2 size={15} /> Вийти з повного екрану
           </button>
         </div>
       </header>
@@ -835,10 +826,10 @@ export const DesktopFullscreenView: React.FC<DesktopFullscreenViewProps> = ({
               <div style={{ padding: '16px 20px 12px', borderBottom: '1px solid #e3ebf3', background: '#ffffff' }}>
                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '10px' }}>
                   <div style={{ fontSize: '13px', fontWeight: 700, color: '#24405c' }}>
-                    {filteredMasters.length} specialists found in Kyiv
+                    {filteredMasters.length} спеціалістів знайдено в Києві
                   </div>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-                    <span style={{ fontSize: '11px', color: '#6d8299' }}>Sort:</span>
+                    <span style={{ fontSize: '11px', color: '#6d8299' }}>Сортувати:</span>
                     <select
                       value={sortBy}
                       onChange={(e) => setSortBy(e.target.value as any)}
@@ -854,9 +845,9 @@ export const DesktopFullscreenView: React.FC<DesktopFullscreenViewProps> = ({
                         cursor: 'pointer',
                       }}
                     >
-                      <option value="recommended">Recommended</option>
-                      <option value="rating">Top Rated ★</option>
-                      <option value="price">Lowest Price ₴</option>
+                      <option value="recommended">Рекомендовані</option>
+                      <option value="rating">Топ рейтинг ★</option>
+                      <option value="price">Найнижча ціна ₴</option>
                     </select>
                   </div>
                 </div>
@@ -889,7 +880,7 @@ export const DesktopFullscreenView: React.FC<DesktopFullscreenViewProps> = ({
                           whiteSpace: 'nowrap',
                         }}
                       >
-                        {d === 'All' ? 'All Districts' : d}
+                        {d === 'All' ? 'Усі райони' : d}
                       </button>
                     );
                   })}
@@ -910,9 +901,9 @@ export const DesktopFullscreenView: React.FC<DesktopFullscreenViewProps> = ({
                 {filteredMasters.length === 0 ? (
                   <div style={{ textAlign: 'center', padding: '60px 20px', color: '#6d8299' }}>
                     <div style={{ fontSize: '16px', fontWeight: 700, color: '#24405c', marginBottom: '6px' }}>
-                      No specialists match your filter
+                      Не знайдено спеціалістів за вашим фільтром
                     </div>
-                    <p style={{ fontSize: '13px' }}>Try clearing your search query or selecting "All Districts".</p>
+                    <p style={{ fontSize: '13px' }}>Спробуйте очистити пошуковий запит або обрати «Усі райони».</p>
                     <button
                       onClick={() => {
                         setSearchQuery('');
@@ -931,7 +922,7 @@ export const DesktopFullscreenView: React.FC<DesktopFullscreenViewProps> = ({
                         cursor: 'pointer',
                       }}
                     >
-                      Reset Filters
+                      Скинути фільтри
                     </button>
                   </div>
                 ) : (
@@ -1046,7 +1037,7 @@ export const DesktopFullscreenView: React.FC<DesktopFullscreenViewProps> = ({
                             </div>
                             <span style={{ fontSize: '11.5px', color: '#6d8299' }}>({m.reviewsCount})</span>
                             <span style={{ fontSize: '13px', fontWeight: 800, color: '#24405c', marginLeft: '6px' }}>
-                              from {m.minPrice}
+                              від {m.minPrice}
                             </span>
                           </div>
 
@@ -1069,7 +1060,7 @@ export const DesktopFullscreenView: React.FC<DesktopFullscreenViewProps> = ({
                                 boxShadow: '0 2px 8px rgba(245, 38, 95, 0.3)',
                               }}
                             >
-                              Book Now
+                              Записатись
                             </button>
                             <button
                               onClick={(e) => {
@@ -1088,7 +1079,7 @@ export const DesktopFullscreenView: React.FC<DesktopFullscreenViewProps> = ({
                                 cursor: 'pointer',
                               }}
                             >
-                              Profile ›
+                              Профіль ›
                             </button>
                           </div>
                         </div>
@@ -1131,7 +1122,7 @@ export const DesktopFullscreenView: React.FC<DesktopFullscreenViewProps> = ({
                     cursor: 'pointer',
                   }}
                 >
-                  <ChevronLeft size={18} /> Back to Kyiv Map List
+                  <ChevronLeft size={18} /> Назад до списку на карті
                 </button>
 
                 <button
@@ -1189,9 +1180,9 @@ export const DesktopFullscreenView: React.FC<DesktopFullscreenViewProps> = ({
                   <div style={{ display: 'flex', alignItems: 'center', gap: '3px', fontSize: '13px', fontWeight: 700, color: '#f5265f' }}>
                     <Star size={14} fill="#f5265f" color="#f5265f" /> {activeClientMaster.rating}
                   </div>
-                  <span style={{ fontSize: '12px', color: '#6d8299' }}>· {activeClientMaster.reviewsCount} reviews</span>
+                  <span style={{ fontSize: '12px', color: '#6d8299' }}>· {activeClientMaster.reviewsCount} відгуків</span>
                   <span style={{ fontSize: '11px', padding: '1px 6px', borderRadius: '6px', background: '#c6dcf1', color: '#24405c', fontWeight: 600 }}>
-                    Barb.ua Verified
+                    Перевірено на Barb.ua
                   </span>
                 </div>
 
@@ -1222,7 +1213,7 @@ export const DesktopFullscreenView: React.FC<DesktopFullscreenViewProps> = ({
                     boxShadow: '0 4px 14px rgba(245, 38, 95, 0.35)',
                   }}
                 >
-                  <Calendar size={15} /> Book Appointment
+                  <Calendar size={15} /> Записатися на візит
                 </button>
 
                 <a
@@ -1243,14 +1234,14 @@ export const DesktopFullscreenView: React.FC<DesktopFullscreenViewProps> = ({
                     gap: '6px',
                   }}
                 >
-                  Barb.ua <ExternalLink size={13} />
+                  Профіль Barb.ua <ExternalLink size={13} />
                 </a>
               </div>
 
               {/* Service Catalog List */}
               <div style={{ padding: '20px' }}>
                 <div style={{ fontSize: '12px', fontWeight: 800, letterSpacing: '0.08em', color: '#6d8299', marginBottom: '12px' }}>
-                  SERVICES & PRICES ({activeClientMaster.services.length})
+                  ПОСЛУГИ ТА ЦІНИ ({activeClientMaster.services.length})
                 </div>
 
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
@@ -1328,7 +1319,7 @@ export const DesktopFullscreenView: React.FC<DesktopFullscreenViewProps> = ({
                 </div>
                 <div style={{ flex: 1, minWidth: 0 }}>
                   <div style={{ fontSize: '14px', fontWeight: 700, color: '#24405c' }}>{activeClientMaster.name}</div>
-                  <div style={{ fontSize: '11px', color: '#6d8299' }}>{activeClientMaster.craft} · Instant Booking</div>
+                  <div style={{ fontSize: '11px', color: '#6d8299' }}>{activeClientMaster.craft} · Онлайн-запис</div>
                 </div>
               </div>
 
@@ -1375,7 +1366,7 @@ export const DesktopFullscreenView: React.FC<DesktopFullscreenViewProps> = ({
                     }}
                   >
                     <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '11px', fontWeight: 800, color: '#f5265f', marginBottom: '8px' }}>
-                      <Clock size={12} /> SELECT FREE SLOT · THU 20 AUG
+                      <Clock size={12} /> ОБЕРІТЬ ВІЛЬНЕ ВІКОНЦЕ · ЧТ 20 СЕР
                     </div>
                     <div style={{ display: 'flex', gap: '6px', flexWrap: 'wrap' }}>
                       {['10:00', '11:30', '14:00', '16:30', '18:00'].map((slot) => (
@@ -1415,8 +1406,8 @@ export const DesktopFullscreenView: React.FC<DesktopFullscreenViewProps> = ({
                   >
                     <CheckCircle2 size={20} color="#f5265f" />
                     <div>
-                      <div style={{ fontSize: '13px', fontWeight: 800 }}>Visit confirmed at {bookedSlot}</div>
-                      <div style={{ fontSize: '11px', color: '#6d8299' }}>Added to your active appointments</div>
+                      <div style={{ fontSize: '13px', fontWeight: 800 }}>Візит підтверджено о {bookedSlot}</div>
+                      <div style={{ fontSize: '11px', color: '#6d8299' }}>Додано до ваших активних записів</div>
                     </div>
                   </div>
                 )}
@@ -1426,7 +1417,7 @@ export const DesktopFullscreenView: React.FC<DesktopFullscreenViewProps> = ({
               <div style={{ padding: '12px 16px', background: '#ffffff', borderTop: '1px solid #e3ebf3', display: 'flex', gap: '8px' }}>
                 <input
                   type="text"
-                  placeholder="Type message to master..."
+                  placeholder="Напишіть повідомлення майстру..."
                   value={chatInput}
                   onChange={(e) => setChatInput(e.target.value)}
                   onKeyDown={(e) => e.key === 'Enter' && handleSendChat()}
@@ -1495,8 +1486,8 @@ export const DesktopFullscreenView: React.FC<DesktopFullscreenViewProps> = ({
                     b
                   </div>
                   <div>
-                    <div style={{ fontSize: '14px', fontWeight: 700, color: '#24405c' }}>Barb AI Assistant</div>
-                    <div style={{ fontSize: '11px', color: '#6d8299' }}>Kyiv booking & specialist finder</div>
+                    <div style={{ fontSize: '14px', fontWeight: 700, color: '#24405c' }}>ШІ-асистент Barb</div>
+                    <div style={{ fontSize: '11px', color: '#6d8299' }}>Пошук майстрів та онлайн-запис у Києві</div>
                   </div>
                 </div>
                 <button
@@ -1541,7 +1532,7 @@ export const DesktopFullscreenView: React.FC<DesktopFullscreenViewProps> = ({
               <div style={{ padding: '12px 16px', background: '#ffffff', borderTop: '1px solid #e3ebf3', display: 'flex', gap: '8px' }}>
                 <input
                   type="text"
-                  placeholder="Ask for hair, nails, laser in Pechersk..."
+                  placeholder="Запитайте про волосся, нігті, лазер на Печерську..."
                   value={botInput}
                   onChange={(e) => setBotInput(e.target.value)}
                   onKeyDown={(e) => e.key === 'Enter' && handleSendBot()}
@@ -1592,7 +1583,7 @@ export const DesktopFullscreenView: React.FC<DesktopFullscreenViewProps> = ({
                 }}
               >
                 <div style={{ fontSize: '15px', fontWeight: 700, color: '#24405c' }}>
-                  Saved Specialists ({favoriteIds.size})
+                  Збережені спеціалісти ({favoriteIds.size})
                 </div>
                 <button
                   onClick={() => setSidebarView('list')}
@@ -1683,9 +1674,9 @@ export const DesktopFullscreenView: React.FC<DesktopFullscreenViewProps> = ({
                 {/* Master Sub-Tabs */}
                 <div style={{ display: 'flex', gap: '6px', marginTop: '12px' }}>
                   {[
-                    { id: 'master-schedule' as SidebarView, label: 'Schedule', icon: Calendar },
-                    { id: 'master-catalog' as SidebarView, label: 'Catalog', icon: Tag },
-                    { id: 'master-analytics' as SidebarView, label: 'Stats', icon: TrendingUp },
+                    { id: 'master-schedule' as SidebarView, label: 'Розклад', icon: Calendar },
+                    { id: 'master-catalog' as SidebarView, label: 'Каталог', icon: Tag },
+                    { id: 'master-analytics' as SidebarView, label: 'Статистика', icon: TrendingUp },
                   ].map((t) => {
                     const active = sidebarView === t.id;
                     const Icon = t.icon;
@@ -1721,7 +1712,7 @@ export const DesktopFullscreenView: React.FC<DesktopFullscreenViewProps> = ({
                 <div style={{ flex: 1, overflowY: 'auto', padding: '16px', display: 'flex', flexDirection: 'column', gap: '14px' }}>
                   {/* Incoming Requests */}
                   <div style={{ fontSize: '11px', fontWeight: 800, color: '#ffd4de', letterSpacing: '0.08em' }}>
-                    INCOMING BOOKINGS ({appointments.filter((a) => a.masterId === managedMasterId && a.status === 'pending').length})
+                    ВХІДНІ ЗАЯВКИ ({appointments.filter((a) => a.masterId === managedMasterId && a.status === 'pending').length})
                   </div>
 
                   {appointments
@@ -1758,7 +1749,7 @@ export const DesktopFullscreenView: React.FC<DesktopFullscreenViewProps> = ({
                               cursor: 'pointer',
                             }}
                           >
-                            Accept
+                            Підтвердити
                           </button>
                           <button
                             onClick={() => onDeclineAppointment(appt.id)}
@@ -1772,7 +1763,7 @@ export const DesktopFullscreenView: React.FC<DesktopFullscreenViewProps> = ({
                               cursor: 'pointer',
                             }}
                           >
-                            Decline
+                            Відхилити
                           </button>
                         </div>
                       </div>
@@ -1780,7 +1771,7 @@ export const DesktopFullscreenView: React.FC<DesktopFullscreenViewProps> = ({
 
                   {/* Confirmed list */}
                   <div style={{ fontSize: '11px', fontWeight: 800, color: 'rgba(255,255,255,0.6)', letterSpacing: '0.08em', marginTop: '6px' }}>
-                    CONFIRMED VISITS
+                    ПІДТВЕРДЖЕНІ ВІЗИТИ
                   </div>
 
                   {appointments
@@ -1802,7 +1793,7 @@ export const DesktopFullscreenView: React.FC<DesktopFullscreenViewProps> = ({
                           <div style={{ fontSize: '13.5px', fontWeight: 700 }}>{appt.clientName}</div>
                           <div style={{ fontSize: '11.5px', color: 'rgba(255,255,255,0.7)' }}>{appt.serviceName} · {appt.time}</div>
                         </div>
-                        <span style={{ fontSize: '11px', color: '#a9c8e6', fontWeight: 700 }}>Confirmed ✓</span>
+                        <span style={{ fontSize: '11px', color: '#a9c8e6', fontWeight: 700 }}>Підтверджено ✓</span>
                       </div>
                     ))}
                 </div>
@@ -1812,7 +1803,7 @@ export const DesktopFullscreenView: React.FC<DesktopFullscreenViewProps> = ({
               {sidebarView === 'master-catalog' && (
                 <div style={{ flex: 1, overflowY: 'auto', padding: '16px', display: 'flex', flexDirection: 'column', gap: '10px' }}>
                   <div style={{ fontSize: '11px', fontWeight: 800, color: '#ffd4de', letterSpacing: '0.08em' }}>
-                    STUDIO SERVICE CATALOG ({currentManagedMaster.services.length})
+                    КАТАЛОГ ПОСЛУГ СТУДІЇ ({currentManagedMaster.services.length})
                   </div>
 
                   {currentManagedMaster.services.map((srv, idx) => (
@@ -1849,18 +1840,18 @@ export const DesktopFullscreenView: React.FC<DesktopFullscreenViewProps> = ({
                       border: '1.5px solid #f5265f',
                     }}
                   >
-                    <div style={{ fontSize: '11px', fontWeight: 800, color: '#ffd4de' }}>MONTHLY REVENUE</div>
+                    <div style={{ fontSize: '11px', fontWeight: 800, color: '#ffd4de' }}>МІСЯЧНИЙ ДОХІД</div>
                     <div style={{ fontFamily: 'var(--font-serif)', fontSize: '32px', fontWeight: 700, marginTop: '4px' }}>₴54,200</div>
-                    <div style={{ fontSize: '11.5px', color: '#a9c8e6', marginTop: '2px' }}>+18.4% compared to last month</div>
+                    <div style={{ fontSize: '11.5px', color: '#a9c8e6', marginTop: '2px' }}>+18.4% порівняно з минулим місяцем</div>
                   </div>
 
                   <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '8px' }}>
                     <div style={{ background: '#24405c', borderRadius: '14px', padding: '12px', border: '1px solid #1c3248' }}>
-                      <div style={{ fontSize: '11px', opacity: 0.7 }}>Rating</div>
+                      <div style={{ fontSize: '11px', opacity: 0.7 }}>Рейтинг</div>
                       <div style={{ fontSize: '18px', fontWeight: 800, color: '#ffd4de', marginTop: '2px' }}>{currentManagedMaster.rating} ★</div>
                     </div>
                     <div style={{ background: '#24405c', borderRadius: '14px', padding: '12px', border: '1px solid #1c3248' }}>
-                      <div style={{ fontSize: '11px', opacity: 0.7 }}>Repeat Clients</div>
+                      <div style={{ fontSize: '11px', opacity: 0.7 }}>Постійні клієнти</div>
                       <div style={{ fontSize: '18px', fontWeight: 800, color: '#c6dcf1', marginTop: '2px' }}>74%</div>
                     </div>
                   </div>
@@ -1897,7 +1888,7 @@ export const DesktopFullscreenView: React.FC<DesktopFullscreenViewProps> = ({
             {/* 3D Tilt Toggle */}
             <button
               onClick={() => setIs3D(!is3D)}
-              title="Toggle 3D Perspective View"
+              title="Перемкнути 3D перспективу"
               style={{
                 width: '44px',
                 height: '44px',
@@ -1920,7 +1911,7 @@ export const DesktopFullscreenView: React.FC<DesktopFullscreenViewProps> = ({
             <div style={{ position: 'relative' }}>
               <button
                 onClick={() => setShowStyleMenu(!showStyleMenu)}
-                title="Change Map Style"
+                title="Змінити стиль карти"
                 style={{
                   width: '44px',
                   height: '44px',
@@ -1954,9 +1945,9 @@ export const DesktopFullscreenView: React.FC<DesktopFullscreenViewProps> = ({
                   }}
                 >
                   {[
-                    { id: 'voyager' as const, label: 'Pastel Voyager' },
-                    { id: 'positron' as const, label: 'Minimal Positron' },
-                    { id: 'dark' as const, label: 'Dark Steel' },
+                    { id: 'voyager' as const, label: 'Пастельна карта' },
+                    { id: 'positron' as const, label: 'Світла мінімалістична' },
+                    { id: 'dark' as const, label: 'Темний стиль' },
                   ].map((st) => (
                     <button
                       key={st.id}
@@ -1985,7 +1976,7 @@ export const DesktopFullscreenView: React.FC<DesktopFullscreenViewProps> = ({
             {/* Center Kyiv */}
             <button
               onClick={handleCenterKyiv}
-              title="Center Map on Kyiv"
+              title="Центрувати карту на Києві"
               style={{
                 width: '44px',
                 height: '44px',
@@ -2057,7 +2048,7 @@ export const DesktopFullscreenView: React.FC<DesktopFullscreenViewProps> = ({
                   {activeClientMaster.cleanStreet}
                 </div>
                 <div style={{ fontSize: '11px', color: '#6d8299', marginTop: '1px' }}>
-                  {activeClientMaster.district} · {activeClientMaster.metro} · from {activeClientMaster.minPrice}
+                  {activeClientMaster.district} · {activeClientMaster.metro} · від {activeClientMaster.minPrice}
                 </div>
               </div>
 
@@ -2077,7 +2068,7 @@ export const DesktopFullscreenView: React.FC<DesktopFullscreenViewProps> = ({
                     whiteSpace: 'nowrap',
                   }}
                 >
-                  Book Visit
+                  Записатись
                 </button>
                 <button
                   onClick={() => setSidebarView('profile')}
@@ -2093,7 +2084,7 @@ export const DesktopFullscreenView: React.FC<DesktopFullscreenViewProps> = ({
                     whiteSpace: 'nowrap',
                   }}
                 >
-                  Profile Details ›
+                  Деталі профілю ›
                 </button>
               </div>
             </div>

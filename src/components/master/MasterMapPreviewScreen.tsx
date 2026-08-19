@@ -73,10 +73,10 @@ export const MasterMapPreviewScreen: React.FC<MasterMapPreviewScreenProps> = ({
       {/* Header */}
       <div style={{ padding: '52px 20px 16px', background: '#24405c', borderBottom: '1px solid #1c3248' }}>
         <h1 style={{ fontFamily: 'var(--font-serif)', fontSize: '24px', fontWeight: 700, color: '#ffffff' }}>
-          Map Pin & Studio Profile
+          Мітка на карті та профіль
         </h1>
         <div style={{ fontSize: '12px', color: 'rgba(255,255,255,0.65)' }}>
-          How clients discover {master.name} on the Barb map
+          Як клієнти бачать студію {master.name} на карті Barb
         </div>
       </div>
 
@@ -109,21 +109,21 @@ export const MasterMapPreviewScreen: React.FC<MasterMapPreviewScreenProps> = ({
               color: '#ffd4de',
             }}
           >
-            Kyiv · {master.district}
+            Київ · {master.district}
           </div>
         </div>
 
         {/* Studio Info Card */}
         <div style={{ background: '#24405c', borderRadius: '20px', padding: '18px', border: '1px solid #1c3248' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
-            <div style={{ fontSize: '13px', fontWeight: 700, color: '#ffffff' }}>Studio Address & Location</div>
-            <span style={{ fontSize: '11px', color: '#ffd4de', fontWeight: 700 }}>LIVE ON MAP</span>
+            <div style={{ fontSize: '13px', fontWeight: 700, color: '#ffffff' }}>Адреса та розташування студії</div>
+            <span style={{ fontSize: '11px', color: '#ffd4de', fontWeight: 700 }}>АКТИВНО НА КАРТІ</span>
           </div>
 
           <div style={{ display: 'flex', alignItems: 'flex-start', gap: '10px', fontSize: '13px', color: 'rgba(255,255,255,0.85)' }}>
             <MapPin size={16} color="#f5265f" style={{ flexShrink: 0, marginTop: '2px' }} />
             <div>
-              <div style={{ fontWeight: 600, color: '#ffffff' }}>{master.district}, Kyiv</div>
+              <div style={{ fontWeight: 600, color: '#ffffff' }}>{master.district}, Київ</div>
               <div style={{ fontSize: '12px', color: 'rgba(255,255,255,0.65)', marginTop: '2px' }}>{master.cleanStreet}</div>
             </div>
           </div>
@@ -132,7 +132,7 @@ export const MasterMapPreviewScreen: React.FC<MasterMapPreviewScreenProps> = ({
         {/* Contact Details */}
         <div style={{ background: '#24405c', borderRadius: '20px', padding: '18px', border: '1px solid #1c3248' }}>
           <div style={{ fontSize: '13px', fontWeight: 700, color: '#ffffff', marginBottom: '12px' }}>
-            Public Contact Links
+            Публічні контактні дані
           </div>
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
@@ -151,7 +151,7 @@ export const MasterMapPreviewScreen: React.FC<MasterMapPreviewScreenProps> = ({
             <div style={{ display: 'flex', alignItems: 'center', gap: '10px', fontSize: '13px' }}>
               <Globe size={15} color="#ffd4de" />
               <a href={master.url} target="_blank" rel="noreferrer" style={{ color: '#ffd4de', fontSize: '12px', textDecoration: 'underline' }}>
-                Barb.ua Live Verified Page ↗
+                Перевірена сторінка на Barb.ua ↗
               </a>
             </div>
           </div>
@@ -176,7 +176,7 @@ export const MasterMapPreviewScreen: React.FC<MasterMapPreviewScreenProps> = ({
             boxShadow: '0 4px 16px rgba(245, 38, 95, 0.35)',
           }}
         >
-          <Eye size={16} /> View Profile (as Client)
+          <Eye size={16} /> Переглянути профіль (як клієнт)
         </button>
       </div>
     </div>

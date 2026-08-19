@@ -86,7 +86,7 @@ export const LoginScreen: React.FC<LoginScreenProps> = ({
             marginBottom: '16px',
           }}
         >
-          <Sparkles size={13} color="#f5265f" /> 30 Crawled Masters in Kyiv
+          <Sparkles size={13} color="#f5265f" /> 30 перевірених майстрів у Києві
         </div>
 
         {/* Big Title */}
@@ -112,7 +112,7 @@ export const LoginScreen: React.FC<LoginScreenProps> = ({
             maxWidth: '290px',
           }}
         >
-          Beauty specialists near you — on the map, booked in a tap.
+          Б'юті-майстри поруч з вами — на карті, запис в один дотик.
         </p>
 
         {/* Action Buttons */}
@@ -136,7 +136,7 @@ export const LoginScreen: React.FC<LoginScreenProps> = ({
               transition: 'all 0.15s ease',
             }}
           >
-            Continue with phone
+            Увійти за номером телефону
           </button>
 
           <button
@@ -156,7 +156,7 @@ export const LoginScreen: React.FC<LoginScreenProps> = ({
               gap: '8px',
             }}
           >
-            <span>Explore Kyiv Map</span>
+            <span>Відкрити карту Києва</span>
             <ArrowRight size={16} />
           </button>
 
@@ -179,7 +179,7 @@ export const LoginScreen: React.FC<LoginScreenProps> = ({
             }}
           >
             <UserCheck size={14} color="#ffd4de" />
-            <span>Master Sign In (Portal)</span>
+            <span>Вхід для майстрів (Кабінет)</span>
           </button>
         </div>
       </div>

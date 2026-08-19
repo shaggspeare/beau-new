@@ -75,7 +75,7 @@ export const MasterScheduleScreen: React.FC<MasterScheduleScreenProps> = ({
                     fontWeight: 800,
                   }}
                 >
-                  MASTER PORTAL
+                  КАБІНЕТ МАЙСТРА
                 </span>
               </div>
               <div style={{ fontSize: '12px', color: 'rgba(255,255,255,0.7)', marginTop: '2px' }}>
@@ -88,9 +88,9 @@ export const MasterScheduleScreen: React.FC<MasterScheduleScreenProps> = ({
         {/* Day Selector Pill Tabs */}
         <div style={{ display: 'flex', gap: '8px', marginTop: '16px' }}>
           {[
-            { id: 'today', label: 'Thu 20 Aug', sub: 'Today' },
-            { id: 'tomorrow', label: 'Fri 21 Aug', sub: 'Tomorrow' },
-            { id: 'saturday', label: 'Sat 22 Aug', sub: 'Weekend' },
+            { id: 'today', label: 'Чт 20 Сер', sub: 'Сьогодні' },
+            { id: 'tomorrow', label: 'Пт 21 Сер', sub: 'Завтра' },
+            { id: 'saturday', label: 'Сб 22 Сер', sub: 'Вихідні' },
           ].map((d) => {
             const active = selectedDay === d.id;
             return (
@@ -123,7 +123,7 @@ export const MasterScheduleScreen: React.FC<MasterScheduleScreenProps> = ({
         {pendingAppointments.length > 0 && (
           <div>
             <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '11px', letterSpacing: '0.08em', fontWeight: 800, color: '#ffd4de', marginBottom: '10px' }}>
-              <AlertCircle size={13} color="#f5265f" /> INCOMING BOOKING REQUESTS ({pendingAppointments.length})
+              <AlertCircle size={13} color="#f5265f" /> ВХІДНІ ЗАЯВКИ НА ЗАПИС ({pendingAppointments.length})
             </div>
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
@@ -154,7 +154,7 @@ export const MasterScheduleScreen: React.FC<MasterScheduleScreenProps> = ({
                           fontSize: '13px',
                         }}
                       >
-                        KP
+                        КП
                       </div>
                       <div>
                         <div style={{ fontSize: '15px', fontWeight: 700, color: '#ffffff' }}>{appt.clientName}</div>
@@ -194,7 +194,7 @@ export const MasterScheduleScreen: React.FC<MasterScheduleScreenProps> = ({
                         boxShadow: '0 4px 12px rgba(245, 38, 95, 0.35)',
                       }}
                     >
-                      <Check size={16} /> Accept Visit
+                      <Check size={16} /> Підтвердити візит
                     </button>
 
                     <button
@@ -242,7 +242,7 @@ export const MasterScheduleScreen: React.FC<MasterScheduleScreenProps> = ({
         {/* Confirmed Schedule Section */}
         <div>
           <div style={{ fontSize: '11px', letterSpacing: '0.08em', fontWeight: 800, color: 'rgba(255,255,255,0.6)', marginBottom: '10px' }}>
-            CONFIRMED CLIENT VISITS ({confirmedAppointments.length})
+            ПІДТВЕРДЖЕНІ ВІЗИТИ ({confirmedAppointments.length})
           </div>
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
@@ -284,7 +284,7 @@ export const MasterScheduleScreen: React.FC<MasterScheduleScreenProps> = ({
 
                 <div style={{ textAlign: 'right' }}>
                   <div style={{ fontSize: '14px', fontWeight: 800, color: '#ffd4de' }}>{appt.price}</div>
-                  <span style={{ fontSize: '10px', color: '#a9c8e6', fontWeight: 700 }}>Confirmed ✓</span>
+                  <span style={{ fontSize: '10px', color: '#a9c8e6', fontWeight: 700 }}>Підтверджено ✓</span>
                 </div>
               </div>
             ))}
@@ -295,8 +295,8 @@ export const MasterScheduleScreen: React.FC<MasterScheduleScreenProps> = ({
         <div style={{ background: '#24405c', borderRadius: '20px', padding: '16px', border: '1px solid #1c3248' }}>
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '12px' }}>
             <div>
-              <div style={{ fontSize: '13px', fontWeight: 700, color: '#ffffff' }}>Available Time Slots</div>
-              <div style={{ fontSize: '11px', color: 'rgba(255,255,255,0.65)' }}>Slots visible to clients on the map</div>
+              <div style={{ fontSize: '13px', fontWeight: 700, color: '#ffffff' }}>Доступні віконця для запису</div>
+              <div style={{ fontSize: '11px', color: 'rgba(255,255,255,0.65)' }}>Віконця, які бачать клієнти на карті</div>
             </div>
 
             <button
@@ -316,7 +316,7 @@ export const MasterScheduleScreen: React.FC<MasterScheduleScreenProps> = ({
                 boxShadow: '0 2px 8px rgba(245, 38, 95, 0.3)',
               }}
             >
-              <Plus size={13} /> Add Slot
+              <Plus size={13} /> Додати час
             </button>
           </div>
 
@@ -324,7 +324,7 @@ export const MasterScheduleScreen: React.FC<MasterScheduleScreenProps> = ({
             <div style={{ display: 'flex', gap: '8px', marginBottom: '12px' }}>
               <input
                 type="text"
-                placeholder="e.g. 15:30"
+                placeholder="напр. 15:30"
                 value={newSlotInput}
                 onChange={(e) => setNewSlotInput(e.target.value)}
                 style={{
@@ -352,7 +352,7 @@ export const MasterScheduleScreen: React.FC<MasterScheduleScreenProps> = ({
                   cursor: 'pointer',
                 }}
               >
-                Save
+                Зберегти
               </button>
             </div>
           )}

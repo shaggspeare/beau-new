@@ -92,7 +92,7 @@ export const MasterProfileScreen: React.FC<MasterProfileScreenProps> = ({
               zIndex: 10,
             }}
           >
-            <Heart size={20} fill={isFavorite ? '#f4938e' : 'none'} color="#f4938e" />
+            <Heart size={20} fill={isFavorite ? '#f5265f' : 'none'} color="#f5265f" />
           </button>
 
           {/* Center Avatar Badge */}
@@ -130,10 +130,10 @@ export const MasterProfileScreen: React.FC<MasterProfileScreenProps> = ({
                 fontWeight: 700,
               }}
             >
-              {master.type === 'salon' ? 'Beauty Salon' : 'Master Specialist'}
+              {master.type === 'salon' ? 'Салон краси' : 'Приватний майстер'}
             </span>
             <span style={{ fontSize: '11px', color: '#2f6194', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '3px' }}>
-              <CheckCircle2 size={12} /> Barb.ua Verified
+              <CheckCircle2 size={12} /> Перевірено на Barb.ua
             </span>
           </div>
 
@@ -190,7 +190,7 @@ export const MasterProfileScreen: React.FC<MasterProfileScreenProps> = ({
                 fontWeight: 600,
               }}
             >
-              Barb.ua Profile <ExternalLink size={12} />
+              Профіль Barb.ua <ExternalLink size={12} />
             </a>
 
             {master.phones.length > 0 && (
@@ -202,10 +202,11 @@ export const MasterProfileScreen: React.FC<MasterProfileScreenProps> = ({
                   gap: '4px',
                   padding: '5px 12px',
                   borderRadius: '14px',
-                  background: '#d9f24e',
-                  color: '#1a1938',
+                  background: '#ffd4de',
+                  color: '#24405c',
                   fontSize: '11.5px',
                   fontWeight: 700,
+                  textDecoration: 'none',
                 }}
               >
                 <Phone size={12} /> {master.phones[0]}
@@ -226,9 +227,9 @@ export const MasterProfileScreen: React.FC<MasterProfileScreenProps> = ({
           >
             {(
               [
-                { id: 'catalog', label: `Catalog (${master.services.length})` },
-                { id: 'reviews', label: `Reviews (${master.reviewsCount})` },
-                { id: 'portfolio', label: 'Portfolio' },
+                { id: 'catalog', label: `Прайс (${master.services.length})` },
+                { id: 'reviews', label: `Відгуки (${master.reviewsCount})` },
+                { id: 'portfolio', label: 'Портфоліо' },
               ] as const
             ).map((t) => {
               const active = activeTab === t.id;
@@ -241,8 +242,8 @@ export const MasterProfileScreen: React.FC<MasterProfileScreenProps> = ({
                     height: '38px',
                     border: 'none',
                     borderRadius: '19px',
-                    background: active ? '#d9f24e' : 'transparent',
-                    color: '#1a1938',
+                    background: active ? '#24405c' : 'transparent',
+                    color: active ? '#ffffff' : '#24405c',
                     fontSize: '13px',
                     fontWeight: active ? 700 : 500,
                     cursor: 'pointer',
@@ -276,7 +277,7 @@ export const MasterProfileScreen: React.FC<MasterProfileScreenProps> = ({
                 <Search size={14} color="#8d8aa6" />
                 <input
                   type="text"
-                  placeholder="Filter master services..."
+                  placeholder="Пошук послуг майстра..."
                   value={serviceSearch}
                   onChange={(e) => setServiceSearch(e.target.value)}
                   style={{
@@ -294,7 +295,7 @@ export const MasterProfileScreen: React.FC<MasterProfileScreenProps> = ({
 
             {filteredServices.length === 0 ? (
               <div style={{ textAlign: 'center', padding: '24px 0', color: '#8d8aa6', fontSize: '13px' }}>
-                No services found matching "{serviceSearch}"
+                Послуг за запитом "{serviceSearch}" не знайдено
               </div>
             ) : (
               <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
@@ -323,7 +324,7 @@ export const MasterProfileScreen: React.FC<MasterProfileScreenProps> = ({
                     </div>
                     <div style={{ textAlign: 'right', flexShrink: 0 }}>
                       <div style={{ fontSize: '14px', fontWeight: 800, color: '#1a1938' }}>{srv.price}</div>
-                      <span style={{ fontSize: '11px', color: '#6c5ce7', fontWeight: 700 }}>Select ›</span>
+                      <span style={{ fontSize: '11px', color: '#f5265f', fontWeight: 700 }}>Обрати ›</span>
                     </div>
                   </div>
                 ))}
@@ -340,13 +341,13 @@ export const MasterProfileScreen: React.FC<MasterProfileScreenProps> = ({
                 {master.rating}
               </div>
               <div>
-                <div style={{ display: 'flex', gap: '2px', color: '#d9f24e' }}>
+                <div style={{ display: 'flex', gap: '2px', color: '#f5265f' }}>
                   {[...Array(5)].map((_, i) => (
-                    <Star key={i} size={16} fill="#1a1938" color="#1a1938" />
+                    <Star key={i} size={16} fill="#f5265f" color="#f5265f" />
                   ))}
                 </div>
                 <div style={{ fontSize: '12px', color: '#8d8aa6', marginTop: '4px' }}>
-                  Based on {master.reviewsCount} verified reviews
+                  На основі {master.reviewsCount} перевірених відгуків
                 </div>
               </div>
             </div>
@@ -357,7 +358,7 @@ export const MasterProfileScreen: React.FC<MasterProfileScreenProps> = ({
                 <div key={i} style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
                   <span style={{ fontSize: '12px', color: '#8d8aa6', width: '8px' }}>{b.star}</span>
                   <div style={{ flex: 1, height: '7px', borderRadius: '4px', background: '#f2f0f6', overflow: 'hidden' }}>
-                    <div style={{ height: '100%', borderRadius: '4px', background: '#d9f24e', width: b.width }} />
+                    <div style={{ height: '100%', borderRadius: '4px', background: '#f5265f', width: b.width }} />
                   </div>
                   <span style={{ fontSize: '12px', color: '#8d8aa6', width: '28px', textAlign: 'right' }}>{b.count}</span>
                 </div>
@@ -366,7 +367,7 @@ export const MasterProfileScreen: React.FC<MasterProfileScreenProps> = ({
 
             {/* User Reviews List */}
             <div style={{ fontSize: '11px', letterSpacing: '0.08em', fontWeight: 700, color: '#8d8aa6', margin: '24px 0 6px' }}>
-              CLIENT FEEDBACK
+              ВІДГУКИ КЛІЄНТІВ
             </div>
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
@@ -393,8 +394,8 @@ export const MasterProfileScreen: React.FC<MasterProfileScreenProps> = ({
                       <div style={{ fontSize: '14px', fontWeight: 700, color: '#1a1938' }}>{r.who}</div>
                       <div style={{ fontSize: '11px', color: '#a5a2b8' }}>{r.when}</div>
                     </div>
-                    <div style={{ fontSize: '12px', fontWeight: 700, color: '#1a1938', display: 'flex', alignItems: 'center', gap: '2px' }}>
-                      <Star size={12} fill="#d9f24e" color="#1a1938" /> {r.stars}
+                    <div style={{ fontSize: '12px', fontWeight: 700, color: '#f5265f', display: 'flex', alignItems: 'center', gap: '2px' }}>
+                      <Star size={12} fill="#f5265f" color="#f5265f" /> {r.stars}
                     </div>
                   </div>
                   <p style={{ fontSize: '13px', lineHeight: 1.55, color: '#6f6d86', marginTop: '9px' }}>
@@ -410,12 +411,12 @@ export const MasterProfileScreen: React.FC<MasterProfileScreenProps> = ({
         {activeTab === 'portfolio' && (
           <div style={{ padding: '18px 20px 24px', columns: 2, columnGap: '12px' }}>
             <div style={{ height: '170px', borderRadius: '18px', background: `linear-gradient(135deg, ${master.tint}44 0%, #ded9e9 100%)`, marginBottom: '12px', display: 'flex', alignItems: 'flex-end', padding: '12px' }}>
-              <span style={{ fontSize: '10px', fontWeight: 700, color: '#1a1938' }}>{master.category.toUpperCase()} WORK</span>
+              <span style={{ fontSize: '10px', fontWeight: 700, color: '#1a1938' }}>РОБОТИ МАЙСТРА</span>
             </div>
             <div style={{ height: '120px', borderRadius: '18px', background: 'repeating-linear-gradient(135deg,#eee9e6 0 9px,#e6dedd 9px 18px)', marginBottom: '12px' }} />
             <div style={{ height: '140px', borderRadius: '18px', background: 'repeating-linear-gradient(135deg,#e6ece9 0 9px,#dde6e2 9px 18px)', marginBottom: '12px' }} />
             <div style={{ height: '160px', borderRadius: '18px', background: `linear-gradient(135deg, ${master.tint}33 0%, #e4dfd9 100%)`, marginBottom: '12px', display: 'flex', alignItems: 'flex-end', padding: '10px' }}>
-              <span style={{ fontSize: '9px', fontFamily: 'monospace', color: '#6f6d86' }}>STUDIO PHOTO</span>
+              <span style={{ fontSize: '9px', fontFamily: 'monospace', color: '#6f6d86' }}>ФОТО СТУДІЇ</span>
             </div>
           </div>
         )}
@@ -433,7 +434,7 @@ export const MasterProfileScreen: React.FC<MasterProfileScreenProps> = ({
       >
         <button
           onClick={onChat}
-          title="Direct Message"
+          title="Написати повідомлення"
           style={{
             width: '52px',
             height: '52px',
@@ -469,7 +470,7 @@ export const MasterProfileScreen: React.FC<MasterProfileScreenProps> = ({
             gap: '8px',
           }}
         >
-          Book a visit (from {master.minPrice})
+          Записатися на візит (від {master.minPrice})
         </button>
       </div>
     </div>

@@ -60,10 +60,10 @@ export const MasterCatalogEditorScreen: React.FC<MasterCatalogEditorScreenProps>
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '14px' }}>
           <div>
             <h1 style={{ fontFamily: 'var(--font-serif)', fontSize: '24px', fontWeight: 700, color: '#ffffff' }}>
-              Service Catalog
+              Каталог послуг
             </h1>
             <div style={{ fontSize: '12px', color: 'rgba(255,255,255,0.65)' }}>
-              {services.length} services configured for {master.name}
+              {services.length} послуг налаштовано для {master.name}
             </div>
           </div>
 
@@ -84,7 +84,7 @@ export const MasterCatalogEditorScreen: React.FC<MasterCatalogEditorScreenProps>
               boxShadow: '0 4px 12px rgba(245, 38, 95, 0.3)',
             }}
           >
-            <Plus size={15} /> Add Service
+            <Plus size={15} /> Додати послугу
           </button>
         </div>
 
@@ -103,7 +103,7 @@ export const MasterCatalogEditorScreen: React.FC<MasterCatalogEditorScreenProps>
           <Search size={14} color="rgba(255,255,255,0.5)" />
           <input
             type="text"
-            placeholder="Filter catalog services..."
+            placeholder="Пошук по каталогу послуг..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             style={{
@@ -130,10 +130,10 @@ export const MasterCatalogEditorScreen: React.FC<MasterCatalogEditorScreenProps>
             gap: '10px',
           }}
         >
-          <div style={{ fontSize: '13px', fontWeight: 700, color: '#ffd4de' }}>ADD NEW SERVICE</div>
+          <div style={{ fontSize: '13px', fontWeight: 700, color: '#ffd4de' }}>ДОДАТИ НОВУ ПОСЛУГУ</div>
           <input
             type="text"
-            placeholder="Service name (e.g. Balayage premium)"
+            placeholder="Назва послуги (напр. Балаяж преміум)"
             value={newName}
             onChange={(e) => setNewName(e.target.value)}
             style={{
@@ -150,7 +150,7 @@ export const MasterCatalogEditorScreen: React.FC<MasterCatalogEditorScreenProps>
           <div style={{ display: 'flex', gap: '8px' }}>
             <input
               type="text"
-              placeholder="Price (e.g. ₴850)"
+              placeholder="Ціна (напр. ₴850)"
               value={newPrice}
               onChange={(e) => setNewPrice(e.target.value)}
               style={{
@@ -178,7 +178,7 @@ export const MasterCatalogEditorScreen: React.FC<MasterCatalogEditorScreenProps>
                 cursor: 'pointer',
               }}
             >
-              Add
+              Додати
             </button>
             <button
               onClick={() => setShowAddModal(false)}
@@ -191,7 +191,7 @@ export const MasterCatalogEditorScreen: React.FC<MasterCatalogEditorScreenProps>
                 cursor: 'pointer',
               }}
             >
-              Cancel
+              Скасувати
             </button>
           </div>
         </div>
@@ -294,7 +294,7 @@ export const MasterCatalogEditorScreen: React.FC<MasterCatalogEditorScreenProps>
                       setEditingIndex(idx);
                       setEditPrice(srv.price);
                     }}
-                    title="Edit Price"
+                    title="Змінити ціну"
                     style={{
                       width: '30px',
                       height: '30px',
@@ -312,7 +312,7 @@ export const MasterCatalogEditorScreen: React.FC<MasterCatalogEditorScreenProps>
                   </button>
                   <button
                     onClick={() => handleDelete(idx)}
-                    title="Delete Service"
+                    title="Видалити послугу"
                     style={{
                       width: '30px',
                       height: '30px',

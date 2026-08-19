@@ -45,7 +45,7 @@ export const ProfileScreen: React.FC<ProfileScreenProps> = ({
         </button>
 
         <h1 style={{ fontFamily: 'var(--font-serif)', fontSize: '24px', fontWeight: 700, color: '#24405c' }}>
-          Profile
+          Профіль
         </h1>
       </div>
 
@@ -88,13 +88,13 @@ export const ProfileScreen: React.FC<ProfileScreenProps> = ({
               flexShrink: 0,
             }}
           >
-            KP
+            КП
           </div>
 
           <div>
-            <div style={{ fontSize: '18px', fontWeight: 700, color: '#ffffff' }}>Kate Petrenko</div>
+            <div style={{ fontSize: '18px', fontWeight: 700, color: '#ffffff' }}>Катерина Петренко</div>
             <div style={{ fontSize: '13px', color: 'rgba(255,255,255,0.7)', marginTop: '3px' }}>
-              Kyiv · 4 visits · {savedCount} saved masters
+              Київ · 4 візити · {savedCount} збережених майстрів
             </div>
           </div>
         </div>
@@ -123,9 +123,9 @@ export const ProfileScreen: React.FC<ProfileScreenProps> = ({
             }}
           >
             <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-              <Calendar size={16} color="#6d8299" /> My Bookings
+              <Calendar size={16} color="#6d8299" /> Мої записи
             </div>
-            <span style={{ fontSize: '12px', color: '#6d8299' }}>1 active</span>
+            <span style={{ fontSize: '12px', color: '#6d8299' }}>1 активний</span>
           </div>
 
           <div
@@ -142,9 +142,9 @@ export const ProfileScreen: React.FC<ProfileScreenProps> = ({
             }}
           >
             <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-              <Bell size={16} color="#6d8299" /> Notifications
+              <Bell size={16} color="#6d8299" /> Сповіщення
             </div>
-            <span style={{ fontSize: '12px', color: '#f5265f', fontWeight: 700 }}>Enabled</span>
+            <span style={{ fontSize: '12px', color: '#f5265f', fontWeight: 700 }}>Увімкнено</span>
           </div>
 
           <div
@@ -161,7 +161,7 @@ export const ProfileScreen: React.FC<ProfileScreenProps> = ({
             }}
           >
             <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-              <CreditCard size={16} color="#6d8299" /> Payment Methods
+              <CreditCard size={16} color="#6d8299" /> Способи оплати
             </div>
             <span style={{ fontSize: '12px', color: '#6d8299' }}>Apple Pay</span>
           </div>
@@ -181,10 +181,10 @@ export const ProfileScreen: React.FC<ProfileScreenProps> = ({
             }}
           >
             <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-              <Database size={16} color="#6d8299" /> Barb.ua Crawled Dataset
+              <Database size={16} color="#6d8299" /> База даних Barb.ua
             </div>
             <span style={{ fontSize: '12px', color: '#ffffff', background: '#f5265f', padding: '2px 8px', borderRadius: '8px', fontWeight: 700 }}>
-              30 masters
+              30 майстрів
             </span>
           </div>
 
@@ -201,7 +201,7 @@ export const ProfileScreen: React.FC<ProfileScreenProps> = ({
               gap: '10px',
             }}
           >
-            <LogOut size={16} color="#f5265f" /> Sign out
+            <LogOut size={16} color="#f5265f" /> Вийти з акаунта
           </div>
         </div>
 
@@ -216,7 +216,7 @@ export const ProfileScreen: React.FC<ProfileScreenProps> = ({
           }}
         >
           <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '11px', fontWeight: 800, color: '#f5265f', letterSpacing: '0.06em' }}>
-            <Sparkles size={13} /> PARTNER WITH BARB
+            <Sparkles size={13} /> СПІВПРАЦЯ З BARB
           </div>
           <h3
             style={{
@@ -227,10 +227,10 @@ export const ProfileScreen: React.FC<ProfileScreenProps> = ({
               marginTop: '4px',
             }}
           >
-            Work as a beauty master
+            Працюйте як б'юті-майстер
           </h3>
           <p style={{ fontSize: '13px', lineHeight: 1.5, color: '#24405c', marginTop: '6px', opacity: 0.85 }}>
-            Publish your service catalog, sync your schedule, take clients in Kyiv, and get pinned on the Barb interactive map.
+            Публікуйте свій прайс-лист, налаштовуйте розклад, приймайте клієнтів у Києві та отримуйте мітку на інтерактивній карті Barb.
           </p>
           <button
             style={{
@@ -249,7 +249,7 @@ export const ProfileScreen: React.FC<ProfileScreenProps> = ({
               boxShadow: '0 4px 12px rgba(245, 38, 95, 0.3)',
             }}
           >
-            Master registration <ArrowRight size={14} />
+            Реєстрація для майстрів <ArrowRight size={14} />
           </button>
         </div>
       </div>

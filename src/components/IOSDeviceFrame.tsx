@@ -78,21 +78,21 @@ export const IOSDeviceFrame: React.FC<IOSDeviceFrameProps> = ({
   const statusColor = isDarkContent || dark ? '#ffffff' : '#24405c';
 
   const clientScreens = [
-    { id: 'map', label: 'Interactive Map (30 Masters)', icon: MapPin },
-    { id: 'dash', label: 'Dashboard / Home', icon: Compass },
-    { id: 'master', label: 'Master Profile & Catalog', icon: User },
-    { id: 'bot', label: 'Barb AI Assistant', icon: Sparkles },
-    { id: 'chat', label: 'Chat & Booking Flow', icon: MessageCircle },
-    { id: 'favs', label: 'Saved Favorites', icon: Heart },
-    { id: 'login', label: 'Splash / Welcome Screen', icon: Smartphone },
+    { id: 'map', label: 'Інтерактивна карта (30 майстрів)', icon: MapPin },
+    { id: 'dash', label: 'Головна / Огляд', icon: Compass },
+    { id: 'master', label: 'Профіль майстра та прайс', icon: User },
+    { id: 'bot', label: 'ШІ-асистент Barb', icon: Sparkles },
+    { id: 'chat', label: 'Чат та онлайн-запис', icon: MessageCircle },
+    { id: 'favs', label: 'Збережені майстри', icon: Heart },
+    { id: 'login', label: 'Екран привітання', icon: Smartphone },
   ] as const;
 
   const masterScreens = [
-    { id: 'schedule', label: 'Schedule & Client Requests', icon: Calendar },
-    { id: 'catalog', label: 'Service Catalog & Prices', icon: Tag },
-    { id: 'chats', label: 'Client Messages', icon: MessageCircle },
-    { id: 'analytics', label: 'Revenue & Performance', icon: TrendingUp },
-    { id: 'preview', label: 'Map Pin & Studio Profile', icon: MapPin },
+    { id: 'schedule', label: 'Розклад та заявки клієнтів', icon: Calendar },
+    { id: 'catalog', label: 'Прайс-лист та послуги', icon: Tag },
+    { id: 'chats', label: 'Повідомлення клієнтів', icon: MessageCircle },
+    { id: 'analytics', label: 'Дохід та статистика', icon: TrendingUp },
+    { id: 'preview', label: 'Мітка на карті та профіль', icon: MapPin },
   ] as const;
 
   // ==========================================
@@ -172,7 +172,7 @@ export const IOSDeviceFrame: React.FC<IOSDeviceFrameProps> = ({
               textTransform: 'uppercase',
             }}
           >
-            Router
+            Роутер
           </span>
         </button>
 
@@ -243,10 +243,10 @@ export const IOSDeviceFrame: React.FC<IOSDeviceFrameProps> = ({
                         lineHeight: 1,
                       }}
                     >
-                      Barb Router
+                      Barb Роутер
                     </h3>
                     <span style={{ fontSize: '11px', color: '#6d8299' }}>
-                      Screen & Dual Role Switcher
+                      Перемикач ролей та екранів
                     </span>
                   </div>
                 </div>
@@ -281,7 +281,7 @@ export const IOSDeviceFrame: React.FC<IOSDeviceFrameProps> = ({
                     marginBottom: '8px',
                   }}
                 >
-                  ACTIVE DUAL ROLE
+                  АКТИВНИЙ РЕЖИМ
                 </div>
                 <RoleSwitcherPill
                   currentRole={userRole}
@@ -307,7 +307,7 @@ export const IOSDeviceFrame: React.FC<IOSDeviceFrameProps> = ({
                     marginBottom: '8px',
                   }}
                 >
-                  JUMP TO SCREEN ({userRole.toUpperCase()})
+                  ПЕРЕЙТИ ДО ЕКРАНУ ({userRole.toUpperCase()})
                 </div>
 
                 <div
@@ -381,7 +381,7 @@ export const IOSDeviceFrame: React.FC<IOSDeviceFrameProps> = ({
                     gap: '6px',
                   }}
                 >
-                  <RotateCcw size={14} /> Restart Flow
+                  <RotateCcw size={14} /> Перезапустити
                 </button>
                 <button
                   onClick={() => setShowMobileRouter(false)}
@@ -397,7 +397,7 @@ export const IOSDeviceFrame: React.FC<IOSDeviceFrameProps> = ({
                     cursor: 'pointer',
                   }}
                 >
-                  Done
+                  Готово
                 </button>
               </div>
             </div>
@@ -652,10 +652,10 @@ export const IOSDeviceFrame: React.FC<IOSDeviceFrameProps> = ({
                   lineHeight: 1,
                 }}
               >
-                Barb · Kyiv
+                Barb · Київ
               </h1>
               <span style={{ fontSize: '11px', color: '#6d8299', fontWeight: 600 }}>
-                Dual Mode: Client & Master
+                Подвійний режим: Клієнт та Майстер
               </span>
             </div>
           </div>
@@ -671,7 +671,7 @@ export const IOSDeviceFrame: React.FC<IOSDeviceFrameProps> = ({
                 marginBottom: '6px',
               }}
             >
-              SWITCH DUAL ROLE
+              ЗМІНИТИ РЕЖИМ
             </div>
             <RoleSwitcherPill
               currentRole={userRole}
@@ -701,11 +701,11 @@ export const IOSDeviceFrame: React.FC<IOSDeviceFrameProps> = ({
                 gap: '6px',
               }}
             >
-              <Maximize2 size={13} /> Fullscreen Mode
+              <Maximize2 size={13} /> Повноекранний режим
             </button>
             <button
               onClick={onReset}
-              title="Restart Prototype Flow"
+              title="Перезапустити потік прототипу"
               style={{
                 width: '38px',
                 height: '38px',
@@ -742,7 +742,7 @@ export const IOSDeviceFrame: React.FC<IOSDeviceFrameProps> = ({
               marginBottom: '10px',
             }}
           >
-            ACTIVE SCREEN ({userRole.toUpperCase()}):{' '}
+            АКТИВНИЙ ЕКРАН ({userRole.toUpperCase()}):{' '}
             <span style={{ color: '#24405c' }}>
               {currentScreen}
             </span>
