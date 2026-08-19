@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState, useMemo } from 'react';
 import * as maplibregl from 'maplibre-gl';
 import { Master } from '../../data/crawledMasters';
 import { CategoryFilter } from '../../types/app';
-import { Search, Navigation, X, ChevronUp, ChevronDown, Star, Layers, Compass, Box } from 'lucide-react';
+import { Search, Navigation, X, ChevronUp, ChevronDown, Star, Layers, Compass, Box, Maximize2 } from 'lucide-react';
 
 interface MapScreenProps {
   masters: Master[];
@@ -12,6 +12,7 @@ interface MapScreenProps {
   onOpenMasterProfile: (masterId: number) => void;
   onOpenBot: () => void;
   onCategoryFilterChange: (cat: CategoryFilter) => void;
+  onToggleFullscreen?: () => void;
 }
 
 export const MapScreen: React.FC<MapScreenProps> = ({
@@ -22,6 +23,7 @@ export const MapScreen: React.FC<MapScreenProps> = ({
   onOpenMasterProfile,
   onOpenBot,
   onCategoryFilterChange,
+  onToggleFullscreen,
 }) => {
   const mapContainerRef = useRef<HTMLDivElement>(null);
   const mapInstanceRef = useRef<maplibregl.Map | null>(null);
@@ -414,6 +416,29 @@ export const MapScreen: React.FC<MapScreenProps> = ({
           >
             <Navigation size={18} />
           </button>
+
+          {/* Fullscreen Map Experience Button */}
+          {onToggleFullscreen && (
+            <button
+              onClick={onToggleFullscreen}
+              title="Open Fullscreen Map View"
+              style={{
+                width: '48px',
+                height: '48px',
+                borderRadius: '50%',
+                background: '#24405c',
+                border: 'none',
+                boxShadow: '0 4px 16px rgba(36,64,92,0.2)',
+                color: '#ffffff',
+                cursor: 'pointer',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}
+            >
+              <Maximize2 size={18} />
+            </button>
+          )}
         </div>
 
         {/* Style Switcher Dropdown */}

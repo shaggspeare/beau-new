@@ -23,6 +23,9 @@ import { MasterAnalyticsScreen } from './components/master/MasterAnalyticsScreen
 import { MasterMapPreviewScreen } from './components/master/MasterMapPreviewScreen';
 import { MasterChatScreen } from './components/master/MasterChatScreen';
 
+// Desktop Fullscreen App
+import { DesktopFullscreenView } from './components/desktop/DesktopFullscreenView';
+
 export const App: React.FC = () => {
   const [userRole, setUserRole] = useState<UserRole>('client');
   const [clientScreen, setClientScreen] = useState<ClientScreenType>('login');
@@ -203,6 +206,35 @@ export const App: React.FC = () => {
     (a) => a.masterId === managedMasterId && a.status === 'pending'
   ).length;
 
+  if (fullscreen) {
+    return (
+      <DesktopFullscreenView
+        masters={mastersList}
+        activeMasterId={activeMasterId}
+        onSelectMaster={(id) => setActiveMasterId(id)}
+        categoryFilter={categoryFilter}
+        onCategoryFilterChange={(cat) => setCategoryFilter(cat)}
+        userRole={userRole}
+        onSwitchRole={handleSwitchRole}
+        managedMasterId={managedMasterId}
+        onSelectManagedMaster={(id) => setManagedMasterId(id)}
+        currentManagedMaster={currentManagedMaster}
+        activeClientMaster={activeClientMaster}
+        favoriteIds={favoriteIds}
+        onToggleFavorite={handleToggleFavorite}
+        appointments={appointments}
+        onAcceptAppointment={handleAcceptAppointment}
+        onDeclineAppointment={handleDeclineAppointment}
+        masterSlots={masterSlots}
+        onAddSlot={handleAddSlot}
+        onRemoveSlot={handleRemoveSlot}
+        onUpdateServices={handleUpdateMasterServices}
+        onClientBookedSlot={handleClientBookedSlot}
+        onToggleFullscreen={() => setFullscreen(false)}
+      />
+    );
+  }
+
   return (
     <IOSDeviceFrame
       currentScreen={userRole === 'client' ? clientScreen : masterScreen}
@@ -263,6 +295,7 @@ export const App: React.FC = () => {
                 }}
                 onOpenBot={() => navigateClient('bot')}
                 onCategoryFilterChange={(cat) => setCategoryFilter(cat)}
+                onToggleFullscreen={() => setFullscreen(true)}
               />
             )}
 

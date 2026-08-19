@@ -99,7 +99,7 @@ export const IOSDeviceFrame: React.FC<IOSDeviceFrameProps> = ({
   // 1. MOBILE NATIVE VIEW (< 820px)
   // Real full UI edge-to-edge + Floating Red Button
   // ==========================================
-  if (isMobile || fullscreen) {
+  if (isMobile) {
     return (
       <div
         style={{
