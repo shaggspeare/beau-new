@@ -2,20 +2,22 @@
 <html lang="uk">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='50' fill='%23f5265f'/><text x='50' y='67' font-size='50' font-family='serif' font-weight='bold' text-anchor='middle' fill='%23ffffff'>b</text></svg>" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Barb — Карта б'юті-майстрів Києва та онлайн-запис</title>
-    <meta name="description" content="Знайдіть 30 перевірених майстрів краси у Києві: перукарі, манікюр та лазерна епіляція. Інтерактивна карта та миттєвий запис на Barb." />
-    
-    <!-- Google Fonts: Fraunces & DM Sans -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='50' fill='%23e0144c'/><text x='50' y='67' font-size='50' font-family='sans-serif' font-weight='bold' text-anchor='middle' fill='%23ffffff'>b</text></svg>" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="theme-color" content="#ffffff" />
+    <title>Barb — концепт застосунку</title>
+    <meta name="description" content="Клікабельний концепт застосунку Barb: пошук і запис до б'юті-майстрів Києва та кабінет майстра Barb Pro. Справжні дані з barb.ua." />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Fraunces:ital,opsz,wght@0,9..144,400..800;1,9..144,400..800&display=swap" rel="stylesheet" />
-    
-    <!-- Leaflet & MapLibre & Mapbox Vector Map CSS -->
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
-    <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css" />
-    <link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/v3.9.4/mapbox-gl.css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700;800&display=swap" />
+    <style>
+      body { margin: 0; background: #e6ecf3; -webkit-tap-highlight-color: transparent; }
+      /* mobile: stretch the 390×844 app root to the screen */
+      .fill { width: 100vw; height: 100dvh; }
+      .fill > div { width: 100% !important; height: 100% !important; }
+      /* iOS Safari zooms into inputs under 16px */
+      @media (max-width: 819px) { input { font-size: 16px !important; } }
+    </style>
   </head>
   <body>
     <div id="root"></div>

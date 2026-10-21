@@ -1,0 +1,33 @@
+{
+  "v": 3,
+  "createdOnFiles": {"v": 1, "at": "2026-10-19T00:20:00Z"},
+  "title": "Barb — мобільний застосунок",
+  "launch": {"view": "canvas"},
+  "pages": [{"id": "screens", "name": "Екрани"}, {"id": "prototype", "name": "Прототип"}],
+  "boards": {
+    "Main.dc.html": {"x": 0, "y": 0, "w": 390, "h": 844, "title": "01 · Вітання", "is_interactive": true, "radius": 44},
+    "Home.dc.html": {"x": 470, "y": 0, "w": 390, "h": 844, "title": "02 · Головна", "is_interactive": true, "radius": 44},
+    "Map.dc.html": {"x": 940, "y": 0, "w": 390, "h": 844, "title": "03 · Карта", "is_interactive": true, "radius": 44},
+    "Category.dc.html": {"x": 1410, "y": 0, "w": 390, "h": 844, "title": "04 · Категорія", "is_interactive": true, "radius": 44},
+    "Profile.dc.html": {"x": 1880, "y": 0, "w": 390, "h": 844, "title": "05 · Профіль майстра", "is_interactive": true, "radius": 44},
+    "Booking.dc.html": {"x": 2350, "y": 0, "w": 390, "h": 844, "title": "06 · Вибір часу", "is_interactive": true, "radius": 44},
+    "Booked.dc.html": {"x": 0, "y": 964, "w": 390, "h": 844, "title": "07 · Запис створено", "is_interactive": true, "radius": 44},
+    "Visits.dc.html": {"x": 470, "y": 964, "w": 390, "h": 844, "title": "08 · Мої записи", "is_interactive": true, "radius": 44},
+    "Deals.dc.html": {"x": 940, "y": 964, "w": 390, "h": 844, "title": "09 · Акції", "is_interactive": true, "radius": 44},
+    "Chat.dc.html": {"x": 1410, "y": 964, "w": 390, "h": 844, "title": "10 · Чат з майстром", "is_interactive": true, "radius": 44},
+    "Assistant.dc.html": {"x": 1880, "y": 964, "w": 390, "h": 844, "title": "11 · Підбір за 3 кроки", "is_interactive": true, "radius": 44},
+    "Account.dc.html": {"x": 2350, "y": 964, "w": 390, "h": 844, "title": "12 · Кабінет клієнта", "is_interactive": true, "radius": 44},
+    "Pro.dc.html": {"x": 0, "y": 2180, "w": 390, "h": 844, "title": "Pro 01 · Розклад і заявки", "is_interactive": true, "radius": 44},
+    "ProPrices.dc.html": {"x": 470, "y": 2180, "w": 390, "h": 844, "title": "Pro 02 · Прайс", "is_interactive": true, "radius": 44},
+    "ProChats.dc.html": {"x": 940, "y": 2180, "w": 390, "h": 844, "title": "Pro 03 · Повідомлення", "is_interactive": true, "radius": 44},
+    "ProProfile.dc.html": {"x": 1410, "y": 2180, "w": 390, "h": 844, "title": "Pro 04 · Профіль і акції", "is_interactive": true, "radius": 44},
+    "Prototype.dc.html": {"x": 0, "y": 0, "w": 1440, "h": 940, "title": "Клікабельний прототип · клієнт + Barb Pro", "page": "prototype", "expand": "fill", "is_interactive": true}
+  },
+  "order": ["Main.dc.html", "Home.dc.html", "Map.dc.html", "Category.dc.html", "Profile.dc.html", "Booking.dc.html", "Booked.dc.html", "Visits.dc.html", "Deals.dc.html", "Chat.dc.html", "Assistant.dc.html", "Account.dc.html", "Pro.dc.html", "ProPrices.dc.html", "ProChats.dc.html", "ProProfile.dc.html", "Prototype.dc.html"],
+  "notes": {
+    "titleClient": {"x": 0, "y": -300, "text": "Barb — застосунок для клієнтів", "kind": "title1", "maxW": 2740},
+    "titlePro": {"x": 0, "y": 1928, "text": "Barb Pro — кабінет майстра і салону", "kind": "title1", "maxW": 1800},
+    "about": {"x": -560, "y": 0, "w": 440, "maxH": 640, "fill": "blue", "size": "m", "text": "Концепт мобільного застосунку для barb.ua.\n\nКожен екран — робочий прототип: натисніть ▶ на будь-якому екрані й пройдіть шлях від пошуку до запису. Повний прототип з перемиканням «клієнт / майстер» — на сторінці «Прототип».\n\nДані справжні: 22 профілі з barb.ua (Київ) — прайси з тривалістю, 10-бальні рейтинги, кількість відгуків, адреси й метро. Акції — з barb.ua/uk/skidka (жовтень 2026). Відгуки й графік роботи — з профілів В. Шевчук та «Майстерні краси Юлії Юдіної».\n\nВільні години для запису, клієнти в Barb Pro та відповіді в чаті — демонстраційні.\n\nКарта — стилізована схема Києва з лініями метро.\n\nАкцентний колір і шрифт для примірки бренду — у Tweaks екрана «01 · Вітання»."}
+  },
+  "designSystems": []
+}

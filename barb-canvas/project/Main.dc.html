@@ -1,0 +1,1825 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<title>Barb — застосунок для клієнтів</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;family=Montserrat:wght@400;500;600;700;800&amp;family=Nunito+Sans:wght@400;500;600;700;800&amp;family=Onest:wght@400;500;600;700;800&amp;display=swap">
+<style>body{margin:0}</style>
+</helmet>
+<div style="position: relative; width: 390px; height: 844px; overflow: hidden; background: #f4f7fa; font-family: {{font}}; color: #24405c">
+
+<sc-if value="{{loading}}" hint-placeholder-val="{{ false }}">
+<div style="position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; background: #ffffff">
+<div style="font-size: 30px; font-weight: 800; letter-spacing: -0.03em; color: #24405c">Barb.ua</div>
+<div style="font-size: 14px; color: #5a6e84">Завантажуємо майстрів Києва…</div>
+</div>
+</sc-if>
+
+<sc-if value="{{s.welcome}}" hint-placeholder-val="{{ true }}">
+<section aria-label="Вітання" style="position: absolute; inset: 0; display: flex; flex-direction: column; background: #ffffff">
+<div style="position: relative; height: 430px; overflow: hidden; background: #edf1f5; flex: none">
+<div style="position: absolute; left: -355px; top: -170px; width: 1000px; height: 800px">
+<img src="{{map}}" alt="" style="position: absolute; left: 0; top: 0; width: 1000px; height: 800px; display: block; max-width: none">
+<div style="position: absolute; left: {{W.you.x}}%; top: {{W.you.y}}%; transform: translate(-50%, -50%); width: 16px; height: 16px; border-radius: 8px; background: #2f6194; border: 3px solid #ffffff; box-shadow: 0 0 0 9px rgba(47, 97, 148, 0.16)"></div>
+<sc-for list="{{W.pins}}" as="p" hint-placeholder-count="8">
+<div style="position: absolute; left: {{p.x}}%; top: {{p.y}}%; transform: translate(-50%, -50%); height: 28px; padding: 0 9px; border-radius: 14px; background: {{p.bg}}; color: #ffffff; border: 2px solid #ffffff; box-shadow: 0 4px 12px rgba(36, 64, 92, 0.25); display: flex; align-items: center; gap: 3px; font-size: 13px; font-weight: 800; white-space: nowrap">
+<svg width="11" height="11" viewBox="0 0 24 24" aria-hidden="true" style="fill: currentColor; stroke: none"><path d="{{ic.star}}"></path></svg>{{p.label}}</div>
+</sc-for>
+</div>
+<div style="position: absolute; left: 0; right: 0; bottom: 0; height: 140px; background: linear-gradient(rgba(255, 255, 255, 0), #ffffff)"></div>
+</div>
+<div style="flex: 1; display: flex; flex-direction: column; gap: 14px; padding: 0 24px 34px; margin-top: -24px; position: relative">
+<div style="font-size: 13px; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: {{accentDeep}}">Barb.ua · Київ</div>
+<h1 style="margin: 0; font-size: 33px; line-height: 1.06; font-weight: 800; letter-spacing: -0.035em; color: #24405c">Знайди свого майстра краси</h1>
+<p style="margin: 0; font-size: 16px; line-height: 1.45; color: #5a6e84">Салони, майстри та акції Києва на одній карті. Запис онлайн — без дзвінків.</p>
+<div style="display: flex; gap: 22px; margin-top: 2px">
+<div style="display: flex; flex-direction: column; gap: 2px">
+<div style="font-size: 21px; font-weight: 800; letter-spacing: -0.02em; color: #24405c">{{W.pros}}</div>
+<div style="font-size: 12px; color: #5a6e84">салонів і майстрів</div>
+</div>
+<div style="display: flex; flex-direction: column; gap: 2px">
+<div style="font-size: 21px; font-weight: 800; letter-spacing: -0.02em; color: #24405c">{{W.procs}}</div>
+<div style="font-size: 12px; color: #5a6e84">процедур у каталозі</div>
+</div>
+</div>
+<div style="flex: 1"></div>
+<button type="button" onClick="{{W.start}}" style="height: 56px; border: none; border-radius: 28px; background: {{accent}}; color: #ffffff; font-family: inherit; font-size: 17px; font-weight: 700; cursor: pointer; box-shadow: 0 8px 20px rgba(224, 20, 76, 0.28)">Знайти майстра</button>
+<sc-if value="{{linked}}" hint-placeholder-val="{{ false }}">
+<button type="button" onClick="{{toPro}}" style="height: 48px; border: none; border-radius: 24px; background: none; display: flex; align-items: center; justify-content: center; gap: 6px; color: #24405c; font-family: inherit; font-size: 15px; font-weight: 600; cursor: pointer">Я майстер або салон — Barb Pro
+<svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" style="fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round"><path d="{{ic.chevR}}"></path></svg></button>
+</sc-if>
+<sc-if value="{{unlinked}}" hint-placeholder-val="{{ true }}">
+<a href="Pro.dc.html" style="height: 48px; border-radius: 24px; display: flex; align-items: center; justify-content: center; gap: 6px; color: #24405c; font-size: 15px; font-weight: 600; text-decoration: none">Я майстер або салон — Barb Pro
+<svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" style="fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round"><path d="{{ic.chevR}}"></path></svg></a>
+</sc-if>
+</div>
+</section>
+</sc-if>
+
+<sc-if value="{{s.home}}" hint-placeholder-val="{{ false }}">
+<section aria-label="Головна" style="position: absolute; inset: 0; display: flex; flex-direction: column; background: #f4f7fa">
+<div style="flex: 1; min-height: 0; overflow-y: auto; scrollbar-width: none; padding: 54px 0 110px">
+<div style="display: flex; align-items: center; justify-content: space-between; padding: 0 20px">
+<button type="button" onClick="{{H.toMap}}" style="height: 40px; padding: 0 14px 0 10px; border-radius: 20px; border: none; background: #ffffff; box-shadow: 0 2px 8px rgba(36, 64, 92, 0.08); display: flex; align-items: center; gap: 6px; color: #24405c; font-family: inherit; font-size: 15px; font-weight: 700; cursor: pointer">
+<svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" style="fill: none; stroke: {{accent}}; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round"><path d="{{ic.pin}}"></path></svg>Київ
+<svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true" style="fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round"><path d="{{ic.chevD}}"></path></svg>
+</button>
+<div style="display: flex; gap: 10px">
+<button type="button" aria-label="Повідомлення" onClick="{{H.openChats}}" style="position: relative; width: 44px; height: 44px; border-radius: 22px; border: none; background: #ffffff; box-shadow: 0 2px 8px rgba(36, 64, 92, 0.08); display: flex; align-items: center; justify-content: center; color: #24405c; cursor: pointer; padding: 0">
+<svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true" style="fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round"><path d="{{ic.msg}}"></path></svg>
+<sc-if value="{{H.chatDot}}" hint-placeholder-val="{{ false }}"><span style="position: absolute; top: 9px; right: 10px; width: 9px; height: 9px; border-radius: 5px; background: {{accent}}; border: 2px solid #ffffff"></span></sc-if>
+</button>
+<button type="button" aria-label="Обране" onClick="{{H.openSaved}}" style="width: 44px; height: 44px; border-radius: 22px; border: none; background: #ffffff; box-shadow: 0 2px 8px rgba(36, 64, 92, 0.08); display: flex; align-items: center; justify-content: center; color: #24405c; cursor: pointer; padding: 0">
+<svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true" style="fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round"><path d="{{ic.heart}}"></path></svg>
+</button>
+</div>
+</div>
+<div style="padding: 20px 20px 0">
+<div style="font-size: 15px; font-weight: 500; color: #5a6e84">{{H.greet}}</div>
+<h1 style="margin: 6px 0 0; font-size: 28px; line-height: 1.1; font-weight: 800; letter-spacing: -0.03em; color: #24405c">Знайди свого майстра краси</h1>
+</div>
+<div style="padding: 16px 20px 0">
+<button type="button" onClick="{{H.openSearch}}" style="width: 100%; height: 52px; border-radius: 16px; border: 1px solid #e3ebf3; background: #ffffff; display: flex; align-items: center; gap: 10px; padding: 0 16px; color: #5a6e84; font-family: inherit; font-size: 15px; cursor: pointer; box-shadow: 0 2px 10px rgba(36, 64, 92, 0.05); text-align: left">
+<svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true" style="fill: none; stroke: currentColor; stroke-width: 1.9; stroke-linecap: round; stroke-linejoin: round; flex: none"><path d="{{ic.search}}"></path></svg>Послуга, майстер або салон</button>
+</div>
+<sc-if value="{{H.hasNext}}" hint-placeholder-val="{{ false }}">
+<div style="padding: 16px 20px 0">
+<button type="button" onClick="{{H.next.open}}" style="width: 100%; border: none; background: #24405c; color: #ffffff; border-radius: 20px; padding: 14px; display: flex; align-items: center; gap: 14px; text-align: left; font-family: inherit; cursor: pointer">
+<span style="width: 52px; height: 58px; border-radius: 14px; background: rgba(255, 255, 255, 0.12); display: flex; flex-direction: column; align-items: center; justify-content: center; flex: none">
+<span style="font-size: 21px; font-weight: 800; line-height: 1">{{H.next.num}}</span>
+<span style="font-size: 12px; margin-top: 3px; opacity: 0.85">{{H.next.mon}}</span>
+</span>
+<span style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 3px">
+<span style="font-size: 12px; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; opacity: 0.75">Найближчий запис</span>
+<span style="font-size: 16px; font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{H.next.title}}</span>
+<span style="font-size: 13px; opacity: 0.85; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{H.next.sub}}</span>
+</span>
+<span style="padding: 5px 9px; border-radius: 11px; font-size: 12px; font-weight: 700; background: {{H.next.stBg}}; color: {{H.next.stFg}}; flex: none">{{H.next.st}}</span>
+</button>
+</div>
+</sc-if>
+<div style="padding: 16px 20px 0">
+<button type="button" onClick="{{H.openAsst}}" style="width: 100%; border: none; border-radius: 20px; background: {{accentSoft}}; padding: 16px; display: flex; align-items: center; gap: 14px; text-align: left; font-family: inherit; cursor: pointer; color: #24405c">
+<span style="width: 46px; height: 46px; border-radius: 15px; background: #ffffff; color: {{accent}}; display: flex; align-items: center; justify-content: center; flex: none">
+<svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" style="fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round"><path d="{{ic.spark}}"></path></svg>
+</span>
+<span style="flex: 1; display: flex; flex-direction: column; gap: 3px">
+<span style="font-size: 16px; font-weight: 700">Підібрати майстра за 3 кроки</span>
+<span style="font-size: 13px; line-height: 1.35; color: #5a6e84">Послуга, район і бюджет — решту зробить Barb</span>
+</span>
+<svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true" style="fill: none; stroke: #5a6e84; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; flex: none"><path d="{{ic.chevR}}"></path></svg>
+</button>
+</div>
+<div style="padding: 26px 20px 0; display: flex; align-items: center; justify-content: space-between">
+<h2 style="margin: 0; font-size: 19px; font-weight: 800; letter-spacing: -0.015em; color: #24405c">Категорії</h2>
+<button type="button" onClick="{{H.openSearch}}" style="height: 36px; padding: 0 4px; border: none; background: none; color: #2f6194; font-family: inherit; font-size: 15px; font-weight: 600; cursor: pointer">Усі послуги</button>
+</div>
+<div style="padding: 12px 14px 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px 6px">
+<sc-for list="{{H.cats}}" as="c" hint-placeholder-count="8">
+<button type="button" onClick="{{c.open}}" style="border: none; background: none; padding: 0; display: flex; flex-direction: column; align-items: center; gap: 8px; cursor: pointer; font-family: inherit; color: #24405c">
+<span style="width: 64px; height: 64px; border-radius: 20px; background: #ffffff; box-shadow: 0 2px 10px rgba(36, 64, 92, 0.06); display: flex; align-items: center; justify-content: center; color: {{accent}}">
+<svg width="27" height="27" viewBox="0 0 24 24" aria-hidden="true" style="fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round"><path d="{{c.icon}}"></path></svg>
+</span>
+<span style="font-size: 12.5px; font-weight: 600; line-height: 1.2; text-align: center">{{c.n}}</span>
+</button>
+</sc-for>
+</div>
+<div style="padding: 28px 20px 0; display: flex; align-items: center; justify-content: space-between">
+<h2 style="margin: 0; font-size: 19px; font-weight: 800; letter-spacing: -0.015em; color: #24405c">Акції та знижки</h2>
+<button type="button" onClick="{{H.toDeals}}" style="height: 36px; padding: 0 4px; border: none; background: none; color: #2f6194; font-family: inherit; font-size: 15px; font-weight: 600; cursor: pointer">Усі · {{H.dealsCount}}</button>
+</div>
+<div style="display: flex; gap: 12px; overflow-x: auto; scrollbar-width: none; padding: 12px 20px 6px">
+<sc-for list="{{H.deals}}" as="d" hint-placeholder-count="4">
+<button type="button" onClick="{{d.open}}" style="flex: none; width: 236px; border: none; background: #ffffff; border-radius: 20px; padding: 14px; text-align: left; font-family: inherit; color: #24405c; cursor: pointer; box-shadow: 0 2px 10px rgba(36, 64, 92, 0.06); display: flex; flex-direction: column; gap: 8px">
+<span style="display: flex; justify-content: space-between; align-items: center; width: 100%">
+<span style="padding: 4px 9px; border-radius: 10px; background: {{accent}}; color: #ffffff; font-size: 13px; font-weight: 800">{{d.badge}}</span>
+<span style="font-size: 12px; color: #5a6e84">{{d.till}}</span>
+</span>
+<span style="font-size: 15px; font-weight: 700; line-height: 1.3; min-height: 40px">{{d.t}}</span>
+<span style="font-size: 12.5px; color: #5a6e84; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; width: 100%">{{d.who}}</span>
+<span style="display: flex; align-items: baseline; gap: 8px">
+<span style="font-size: 16px; font-weight: 800">{{d.price}}</span>
+<span style="font-size: 13px; color: #5a6e84; text-decoration: line-through">{{d.old}}</span>
+</span>
+</button>
+</sc-for>
+</div>
+<div style="padding: 26px 20px 0; display: flex; align-items: center; justify-content: space-between">
+<h2 style="margin: 0; font-size: 19px; font-weight: 800; letter-spacing: -0.015em; color: #24405c">Найкращі за відгуками</h2>
+<button type="button" onClick="{{H.toMap}}" style="height: 36px; padding: 0 4px; border: none; background: none; color: #2f6194; font-family: inherit; font-size: 15px; font-weight: 600; cursor: pointer">На карті</button>
+</div>
+<div style="padding: 12px 20px 0; display: flex; flex-direction: column; gap: 12px">
+<sc-for list="{{H.top}}" as="p" hint-placeholder-count="4">
+<div style="background: #ffffff; border-radius: 20px; box-shadow: 0 2px 10px rgba(36, 64, 92, 0.06); padding: 14px; display: flex; gap: 8px; align-items: flex-start">
+<button type="button" onClick="{{p.open}}" style="border: none; background: none; padding: 0; display: flex; gap: 12px; flex: 1; min-width: 0; text-align: left; font-family: inherit; color: #24405c; cursor: pointer">
+<span style="width: 56px; height: 56px; border-radius: 18px; background: {{p.tint}}; display: flex; align-items: center; justify-content: center; font-size: 17px; font-weight: 800; color: #24405c; flex: none">{{p.ini}}</span>
+<span style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 3px">
+<span style="font-size: 16px; font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{p.name}}</span>
+<span style="font-size: 13px; color: #5a6e84; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{p.sub}}</span>
+<span style="display: flex; align-items: center; gap: 6px; font-size: 13px; color: #5a6e84">
+<span style="display: inline-flex; align-items: center; gap: 3px; color: {{accentDeep}}; font-weight: 800">
+<svg width="13" height="13" viewBox="0 0 24 24" aria-hidden="true" style="fill: currentColor; stroke: none"><path d="{{ic.star}}"></path></svg>{{p.rating}}</span>
+<span>{{p.reviewsLabel}}</span><span>·</span><span>{{p.km}}</span>
+</span>
+</span>
+</button>
+<button type="button" aria-label="{{p.favLabel}}" onClick="{{p.toggleFav}}" style="width: 44px; height: 44px; margin: -8px -8px 0 0; border: none; background: none; display: flex; align-items: center; justify-content: center; color: {{p.favColor}}; cursor: pointer; flex: none; padding: 0">
+<svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true" style="fill: {{p.favFill}}; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round"><path d="{{ic.heart}}"></path></svg>
+</button>
+</div>
+</sc-for>
+</div>
+</div>
+</section>
+</sc-if>
+
+<sc-if value="{{s.search}}" hint-placeholder-val="{{ false }}">
+<section aria-label="Пошук" style="position: absolute; inset: 0; display: flex; flex-direction: column; background: #ffffff">
+<div style="padding: 52px 16px 12px; display: flex; align-items: center; gap: 8px; border-bottom: 1px solid #e3ebf3">
+<button type="button" aria-label="Назад" onClick="{{back}}" style="width: 44px; height: 44px; border-radius: 22px; border: none; background: none; display: flex; align-items: center; justify-content: center; color: #24405c; cursor: pointer; padding: 0; flex: none">
+<svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" style="fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round"><path d="{{ic.chevL}}"></path></svg>
+</button>
+<div style="flex: 1; min-width: 0; height: 46px; border-radius: 15px; background: #eef3f8; display: flex; align-items: center; gap: 8px; padding: 0 8px 0 12px">
+<svg width="19" height="19" viewBox="0 0 24 24" aria-hidden="true" style="fill: none; stroke: #5a6e84; stroke-width: 1.9; stroke-linecap: round; stroke-linejoin: round; flex: none"><path d="{{ic.search}}"></path></svg>
+<input type="text" aria-label="Пошук послуги, майстра або салону" value="{{S.q}}" onChange="{{S.onQ}}" placeholder="Послуга, майстер або салон" style="flex: 1; min-width: 0; border: none; background: none; outline: none; font-family: inherit; font-size: 16px; color: #24405c">
+<sc-if value="{{S.hasQ}}" hint-placeholder-val="{{ false }}">
+<button type="button" aria-label="Очистити пошук" onClick="{{S.clear}}" style="width: 32px; height: 32px; border-radius: 16px; border: none; background: #dfe7ef; display: flex; align-items: center; justify-content: center; color: #24405c; cursor: pointer; padding: 0; flex: none">
+<svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true" style="fill: none; stroke: currentColor; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round"><path d="{{ic.x}}"></path></svg>
+</button>
+</sc-if>
+</div>
+</div>
+<div style="flex: 1; min-height: 0; overflow-y: auto; scrollbar-width: none; padding: 6px 0 34px">
+<sc-if value="{{S.noQ}}" hint-placeholder-val="{{ true }}">
+<div style="padding: 16px 20px 0">
+<h2 style="margin: 0; font-size: 13px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: #5a6e84">Популярне на barb.ua</h2>
+<div style="display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px">
+<sc-for list="{{S.popular}}" as="c" hint-placeholder-count="8">
+<button type="button" onClick="{{c.pick}}" style="height: 40px; padding: 0 14px; border-radius: 20px; border: 1px solid #e3ebf3; background: #ffffff; display: flex; align-items: center; gap: 8px; font-family: inherit; font-size: 14px; font-weight: 600; color: #24405c; cursor: pointer">{{c.label}}<span style="font-size: 12px; font-weight: 600; color: #5a6e84">{{c.count}}</span></button>
+</sc-for>
+</div>
+<h2 style="margin: 28px 0 0; font-size: 13px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: #5a6e84">Усі категорії</h2>
+<div style="display: flex; flex-direction: column; margin-top: 6px">
+<sc-for list="{{S.cats}}" as="c" hint-placeholder-count="8">
+<button type="button" onClick="{{c.open}}" style="height: 62px; border: none; border-bottom: 1px solid #eef2f6; background: none; padding: 0; display: flex; align-items: center; gap: 14px; font-family: inherit; color: #24405c; cursor: pointer; text-align: left">
+<span style="width: 42px; height: 42px; border-radius: 14px; background: {{accentSoft}}; color: {{accent}}; display: flex; align-items: center; justify-content: center; flex: none">
+<svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true" style="fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round"><path d="{{c.icon}}"></path></svg>
+</span>
+<span style="flex: 1; display: flex; flex-direction: column; gap: 2px; min-width: 0">
+<span style="font-size: 16px; font-weight: 700">{{c.full}}</span>
+<span style="font-size: 13px; color: #5a6e84; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{c.subs}}</span>
+</span>
+<svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" style="fill: none; stroke: #7a8ea3; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; flex: none"><path d="{{ic.chevR}}"></path></svg>
+</button>
+</sc-for>
+</div>
+</div>
+</sc-if>
+<sc-if value="{{S.hasPlaces}}" hint-placeholder-val="{{ false }}">
+<div style="padding: 16px 20px 0">
+<h2 style="margin: 0 0 10px; font-size: 13px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: #5a6e84">Майстри та салони</h2>
+<sc-for list="{{S.places}}" as="p" hint-placeholder-count="3">
+<button type="button" onClick="{{p.open}}" style="width: 100%; min-height: 64px; border: none; border-bottom: 1px solid #eef2f6; background: none; padding: 8px 0; display: flex; align-items: center; gap: 12px; font-family: inherit; color: #24405c; cursor: pointer; text-align: left">
+<span style="width: 46px; height: 46px; border-radius: 15px; background: {{p.tint}}; display: flex; align-items: center; justify-content: center; font-size: 15px; font-weight: 800; flex: none">{{p.ini}}</span>
+<span style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px">
+<span style="font-size: 16px; font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{p.name}}</span>
+<span style="font-size: 13px; color: #5a6e84; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{p.sub}}</span>
+</span>
+<span style="display: inline-flex; align-items: center; gap: 3px; color: {{accentDeep}}; font-size: 14px; font-weight: 800; flex: none">
+<svg width="13" height="13" viewBox="0 0 24 24" aria-hidden="true" style="fill: currentColor; stroke: none"><path d="{{ic.star}}"></path></svg>{{p.rating}}</span>
+</button>
+</sc-for>
+</div>
+</sc-if>
+<sc-if value="{{S.hasSvcs}}" hint-placeholder-val="{{ false }}">
+<div style="padding: 22px 20px 0">
+<h2 style="margin: 0 0 6px; font-size: 13px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: #5a6e84">Послуги · {{S.svcCount}}</h2>
+<sc-for list="{{S.svcs}}" as="x" hint-placeholder-count="5">
+<button type="button" onClick="{{x.open}}" style="width: 100%; border: none; border-bottom: 1px solid #eef2f6; background: none; padding: 12px 0; display: flex; align-items: center; gap: 12px; font-family: inherit; color: #24405c; cursor: pointer; text-align: left">
+<span style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 3px">
+<span style="font-size: 15px; font-weight: 600; line-height: 1.3">{{x.n}}</span>
+<span style="font-size: 13px; color: #5a6e84; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{x.place}}</span>
+</span>
+<span style="font-size: 15px; font-weight: 800; white-space: nowrap; flex: none">{{x.price}}</span>
+</button>
+</sc-for>
+</div>
+</sc-if>
+<sc-if value="{{S.none}}" hint-placeholder-val="{{ false }}">
+<div style="padding: 60px 32px 0; display: flex; flex-direction: column; align-items: center; gap: 10px; text-align: center">
+<div style="font-size: 18px; font-weight: 800">Нічого не знайшли</div>
+<p style="margin: 0; font-size: 15px; line-height: 1.45; color: #5a6e84">{{S.noneText}}</p>
+<button type="button" onClick="{{S.clear}}" style="margin-top: 8px; height: 46px; padding: 0 20px; border-radius: 23px; border: 1px solid #d5e0ea; background: #ffffff; color: #24405c; font-family: inherit; font-size: 15px; font-weight: 700; cursor: pointer">Очистити пошук</button>
+</div>
+</sc-if>
+</div>
+</section>
+</sc-if>
+
+<sc-if value="{{s.list}}" hint-placeholder-val="{{ false }}">
+<section aria-label="{{L.title}}" style="position: absolute; inset: 0; display: flex; flex-direction: column; background: #f4f7fa">
+<div style="padding: 52px 12px 10px; background: #ffffff; display: flex; align-items: center; gap: 6px">
+<button type="button" aria-label="Назад" onClick="{{back}}" style="width: 44px; height: 44px; border-radius: 22px; border: none; background: none; display: flex; align-items: center; justify-content: center; color: #24405c; cursor: pointer; padding: 0; flex: none">
+<svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" style="fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round"><path d="{{ic.chevL}}"></path></svg>
+</button>
+<div style="flex: 1; min-width: 0">
+<h1 style="margin: 0; font-size: 20px; font-weight: 800; letter-spacing: -0.02em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{L.title}}</h1>
+<div style="font-size: 13px; color: #5a6e84; margin-top: 2px">{{L.count}}</div>
+</div>
+<button type="button" aria-label="Показати на карті" onClick="{{L.toMap}}" style="width: 44px; height: 44px; border-radius: 22px; border: 1px solid #e3ebf3; background: #ffffff; display: flex; align-items: center; justify-content: center; color: #24405c; cursor: pointer; padding: 0; flex: none">
+<svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true" style="fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round"><path d="{{ic.map}}"></path></svg>
+</button>
+</div>
+<div style="background: #ffffff; border-bottom: 1px solid #e3ebf3; display: flex; gap: 8px; overflow-x: auto; scrollbar-width: none; padding: 4px 16px 14px">
+<sc-for list="{{L.chips}}" as="c" hint-placeholder-count="3">
+<button type="button" aria-pressed="{{c.on}}" onClick="{{c.pick}}" style="flex: none; height: 38px; padding: 0 16px; border-radius: 19px; border: 1px solid {{c.bd}}; background: {{c.bg}}; color: {{c.fg}}; font-family: inherit; font-size: 14px; font-weight: 700; cursor: pointer; white-space: nowrap">{{c.label}}</button>
+</sc-for>
+<button type="button" onClick="{{L.cycleSort}}" style="flex: none; height: 38px; padding: 0 14px; border-radius: 19px; border: 1px solid #d5e0ea; background: #ffffff; color: #24405c; font-family: inherit; font-size: 14px; font-weight: 700; cursor: pointer; white-space: nowrap; display: flex; align-items: center; gap: 6px">
+<svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true" style="fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round"><path d="{{ic.sort}}"></path></svg>{{L.sortLabel}}</button>
+</div>
+<div style="flex: 1; min-height: 0; overflow-y: auto; scrollbar-width: none; padding: 14px 16px 34px; display: flex; flex-direction: column; gap: 12px">
+<sc-for list="{{L.items}}" as="p" hint-placeholder-count="4">
+<div style="background: #ffffff; border-radius: 22px; box-shadow: 0 2px 10px rgba(36, 64, 92, 0.06); padding: 14px; display: flex; flex-direction: column; gap: 12px">
+<div style="display: flex; gap: 8px; align-items: flex-start">
+<button type="button" onClick="{{p.open}}" style="border: none; background: none; padding: 0; display: flex; gap: 12px; flex: 1; min-width: 0; text-align: left; font-family: inherit; color: #24405c; cursor: pointer">
+<span style="width: 60px; height: 60px; border-radius: 19px; background: {{p.tint}}; display: flex; align-items: center; justify-content: center; font-size: 18px; font-weight: 800; color: #24405c; flex: none">{{p.ini}}</span>
+<span style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 3px">
+<span style="font-size: 16px; font-weight: 700; line-height: 1.25">{{p.name}}</span>
+<span style="font-size: 13px; color: #5a6e84">{{p.title}}</span>
+<span style="display: flex; align-items: center; gap: 6px; font-size: 13px; color: #5a6e84; flex-wrap: wrap">
+<span style="display: inline-flex; align-items: center; gap: 3px; color: {{accentDeep}}; font-weight: 800">
+<svg width="13" height="13" viewBox="0 0 24 24" aria-hidden="true" style="fill: currentColor; stroke: none"><path d="{{ic.star}}"></path></svg>{{p.rating}}</span>
+<span>{{p.reviewsLabel}}</span><span>·</span><span>{{p.km}}</span>
+</span>
+</span>
+</button>
+<button type="button" aria-label="{{p.favLabel}}" onClick="{{p.toggleFav}}" style="width: 44px; height: 44px; margin: -8px -8px 0 0; border: none; background: none; display: flex; align-items: center; justify-content: center; color: {{p.favColor}}; cursor: pointer; flex: none; padding: 0">
+<svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true" style="fill: {{p.favFill}}; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round"><path d="{{ic.heart}}"></path></svg>
+</button>
+</div>
+<div style="display: flex; gap: 8px; align-items: flex-start; font-size: 13px; line-height: 1.35; color: #5a6e84">
+<svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true" style="fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; flex: none; margin-top: 1px"><path d="{{ic.pin}}"></path></svg>
+<span>{{p.addr}}</span>
+</div>
+<div style="display: flex; align-items: center; justify-content: space-between; border-top: 1px solid #eef2f6; padding-top: 12px; gap: 12px">
+<div style="display: flex; flex-direction: column; gap: 1px; min-width: 0">
+<span style="font-size: 12px; color: #5a6e84">{{p.priceLabel}}</span>
+<span style="font-size: 17px; font-weight: 800">{{p.price}}</span>
+</div>
+<button type="button" onClick="{{p.book}}" style="height: 44px; padding: 0 20px; border-radius: 22px; border: none; background: {{accent}}; color: #ffffff; font-family: inherit; font-size: 15px; font-weight: 700; cursor: pointer; flex: none">Записатись</button>
+</div>
+</div>
+</sc-for>
+<sc-if value="{{L.none}}" hint-placeholder-val="{{ false }}">
+<div style="padding: 60px 28px; text-align: center; display: flex; flex-direction: column; gap: 8px">
+<div style="font-size: 18px; font-weight: 800">Нікого не знайшли</div>
+<p style="margin: 0; font-size: 15px; line-height: 1.45; color: #5a6e84">Спробуйте прибрати фільтр «Майстри» чи «Салони».</p>
+</div>
+</sc-if>
+</div>
+</section>
+</sc-if>
+
+<sc-if value="{{s.map}}" hint-placeholder-val="{{ false }}">
+<section aria-label="Карта" style="position: absolute; inset: 0; background: #edf1f5">
+<div ref="{{M.setRef}}" style="position: absolute; inset: 0; overflow: auto; scrollbar-width: none">
+<div style="position: relative; width: {{M.w}}px; height: {{M.h}}px">
+<img src="{{map}}" alt="Схема Києва з майстрами та салонами" draggable="false" style="position: absolute; left: 0; top: 0; width: 100%; height: 100%; display: block; max-width: none; user-select: none">
+<sc-for list="{{M.labels}}" as="l" hint-placeholder-count="10">
+<div aria-hidden="true" style="position: absolute; left: {{l.x}}%; top: {{l.y}}%; transform: translate(-50%, -50%); font-size: 11px; font-weight: 700; letter-spacing: 0.14em; color: #8496ab; white-space: nowrap; pointer-events: none">{{l.t}}</div>
+</sc-for>
+<div role="img" aria-label="Ви тут" style="position: absolute; left: {{M.you.x}}%; top: {{M.you.y}}%; transform: translate(-50%, -50%); width: 18px; height: 18px; border-radius: 9px; background: #2f6194; border: 3px solid #ffffff; box-shadow: 0 0 0 10px rgba(47, 97, 148, 0.16); box-sizing: border-box"></div>
+<sc-for list="{{M.pins}}" as="p" hint-placeholder-count="12">
+<button type="button" aria-label="{{p.aria}}" onClick="{{p.pick}}" style="position: absolute; left: {{p.x}}%; top: {{p.y}}%; transform: translate(-50%, -100%); z-index: {{p.z}}; border: none; background: none; padding: 0; cursor: pointer; display: flex; flex-direction: column; align-items: center; font-family: inherit">
+<span style="height: {{p.h}}px; padding: 0 {{p.px}}px; border-radius: 17px; background: {{p.bg}}; color: #ffffff; border: 2px solid #ffffff; box-shadow: 0 4px 12px rgba(36, 64, 92, 0.3); display: flex; align-items: center; gap: 4px; font-size: {{p.fs}}px; font-weight: 800; white-space: nowrap">
+<svg width="11" height="11" viewBox="0 0 24 24" aria-hidden="true" style="fill: currentColor; stroke: none"><path d="{{ic.star}}"></path></svg>{{p.label}}<sc-if value="{{p.sel}}" hint-placeholder-val="{{ false }}"><span style="font-weight: 700; max-width: 150px; overflow: hidden; text-overflow: ellipsis">· {{p.name}}</span></sc-if>
+</span>
+<span style="width: 3px; height: 8px; border-radius: 2px; background: {{p.bg}}"></span>
+</button>
+</sc-for>
+</div>
+</div>
+<div style="position: absolute; left: 0; right: 0; top: 0; padding: 52px 16px 0; display: flex; flex-direction: column; gap: 10px; pointer-events: none">
+<button type="button" onClick="{{M.openSearch}}" style="pointer-events: auto; height: 50px; border-radius: 25px; border: none; background: #ffffff; box-shadow: 0 6px 18px rgba(36, 64, 92, 0.14); display: flex; align-items: center; gap: 10px; padding: 0 18px; color: #5a6e84; font-family: inherit; font-size: 15px; cursor: pointer; text-align: left">
+<svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true" style="fill: none; stroke: currentColor; stroke-width: 1.9; stroke-linecap: round; stroke-linejoin: round; flex: none"><path d="{{ic.search}}"></path></svg>Пошук на карті Києва</button>
+<div style="pointer-events: auto; display: flex; gap: 8px; overflow-x: auto; scrollbar-width: none; margin: 0 -16px; padding: 0 16px 4px">
+<sc-for list="{{M.chips}}" as="c" hint-placeholder-count="6">
+<button type="button" aria-pressed="{{c.on}}" onClick="{{c.pick}}" style="flex: none; height: 38px; padding: 0 15px; border-radius: 19px; border: none; background: {{c.bg}}; color: {{c.fg}}; font-family: inherit; font-size: 14px; font-weight: 700; cursor: pointer; white-space: nowrap; box-shadow: 0 3px 10px rgba(36, 64, 92, 0.12)">{{c.label}}</button>
+</sc-for>
+</div>
+</div>
+<div style="position: absolute; right: 14px; top: 172px; display: flex; flex-direction: column; gap: 10px">
+<button type="button" aria-label="Наблизити" onClick="{{M.zoomIn}}" style="width: 44px; height: 44px; border-radius: 22px; border: none; background: #ffffff; box-shadow: 0 4px 12px rgba(36, 64, 92, 0.14); display: flex; align-items: center; justify-content: center; color: #24405c; cursor: pointer; padding: 0">
+<svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true" style="fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round"><path d="{{ic.plus}}"></path></svg>
+</button>
+<button type="button" aria-label="Віддалити" onClick="{{M.zoomOut}}" style="width: 44px; height: 44px; border-radius: 22px; border: none; background: #ffffff; box-shadow: 0 4px 12px rgba(36, 64, 92, 0.14); display: flex; align-items: center; justify-content: center; color: #24405c; cursor: pointer; padding: 0">
+<svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true" style="fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round"><path d="{{ic.minus}}"></path></svg>
+</button>
+<button type="button" aria-label="Де я" onClick="{{M.locate}}" style="width: 44px; height: 44px; border-radius: 22px; border: none; background: #ffffff; box-shadow: 0 4px 12px rgba(36, 64, 92, 0.14); display: flex; align-items: center; justify-content: center; color: #2f6194; cursor: pointer; padding: 0">
+<svg width="21" height="21" viewBox="0 0 24 24" aria-hidden="true" style="fill: none; stroke: currentColor; stroke-width: 1.9; stroke-linecap: round"><path d="{{ic.locate}}"></path></svg>
+</button>
+</div>
+<sc-if value="{{M.hasSel}}" hint-placeholder-val="{{ false }}">
+<div style="position: absolute; left: 12px; right: 12px; bottom: 96px; background: #ffffff; border-radius: 24px; box-shadow: 0 12px 32px rgba(36, 64, 92, 0.2); padding: 14px; display: flex; flex-direction: column; gap: 12px">
+<div style="display: flex; gap: 12px; align-items: flex-start">
+<span style="width: 56px; height: 56px; border-radius: 18px; background: {{M.sel.tint}}; display: flex; align-items: center; justify-content: center; font-size: 17px; font-weight: 800; flex: none">{{M.sel.ini}}</span>
+<div style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 3px">
+<div style="font-size: 16px; font-weight: 700; line-height: 1.25">{{M.sel.name}}</div>
+<div style="display: flex; align-items: center; gap: 6px; font-size: 13px; color: #5a6e84; flex-wrap: wrap">
+<span style="display: inline-flex; align-items: center; gap: 3px; color: {{accentDeep}}; font-weight: 800">
+<svg width="13" height="13" viewBox="0 0 24 24" aria-hidden="true" style="fill: currentColor; stroke: none"><path d="{{ic.star}}"></path></svg>{{M.sel.rating}}</span>
+<span>{{M.sel.reviewsLabel}}</span><span>·</span><span>{{M.sel.km}}</span>
+</div>
+<div style="font-size: 13px; color: #5a6e84; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{M.sel.addr}}</div>
+</div>
+<button type="button" aria-label="Закрити картку" onClick="{{M.closeSel}}" style="width: 36px; height: 36px; border-radius: 18px; border: none; background: #eef3f8; display: flex; align-items: center; justify-content: center; color: #24405c; cursor: pointer; padding: 0; flex: none">
+<svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true" style="fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round"><path d="{{ic.x}}"></path></svg>
+</button>
+</div>
+<div style="display: flex; gap: 10px; align-items: center">
+<div style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 1px">
+<span style="font-size: 12px; color: #5a6e84">{{M.sel.priceLabel}}</span>
+<span style="font-size: 16px; font-weight: 800">{{M.sel.price}}</span>
+</div>
+<button type="button" onClick="{{M.sel.open}}" style="height: 44px; padding: 0 16px; border-radius: 22px; border: 1px solid #d5e0ea; background: #ffffff; color: #24405c; font-family: inherit; font-size: 15px; font-weight: 700; cursor: pointer">Профіль</button>
+<button type="button" onClick="{{M.sel.book}}" style="height: 44px; padding: 0 18px; border-radius: 22px; border: none; background: {{accent}}; color: #ffffff; font-family: inherit; font-size: 15px; font-weight: 700; cursor: pointer">Записатись</button>
+</div>
+</div>
+</sc-if>
+<sc-if value="{{M.noSel}}" hint-placeholder-val="{{ true }}">
+<div style="position: absolute; left: 0; right: 0; bottom: 100px; display: flex; justify-content: center">
+<button type="button" onClick="{{M.toList}}" style="height: 46px; padding: 0 20px; border-radius: 23px; border: none; background: #24405c; color: #ffffff; font-family: inherit; font-size: 15px; font-weight: 700; cursor: pointer; display: flex; align-items: center; gap: 8px; box-shadow: 0 8px 20px rgba(36, 64, 92, 0.3)">
+<svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" style="fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round"><path d="{{ic.list}}"></path></svg>{{M.count}}</button>
+</div>
+</sc-if>
+</section>
+</sc-if>
+
+<sc-if value="{{s.place}}" hint-placeholder-val="{{ false }}">
+<section aria-label="{{P.name}}" style="position: absolute; inset: 0; display: flex; flex-direction: column; background: #ffffff">
+<div style="flex: 1; min-height: 0; overflow-y: auto; scrollbar-width: none; padding-bottom: 120px">
+<div style="position: relative; height: 230px; background: {{P.tint}}; display: flex; align-items: center; justify-content: center">
+<span style="width: 100px; height: 100px; border-radius: 32px; background: rgba(255, 255, 255, 0.75); display: flex; align-items: center; justify-content: center; font-size: 36px; font-weight: 800; letter-spacing: -0.02em; color: #24405c; margin-top: 16px">{{P.ini}}</span>
+<button type="button" aria-label="Назад" onClick="{{back}}" style="position: absolute; left: 16px; top: 50px; width: 44px; height: 44px; border-radius: 22px; border: none; background: #ffffff; display: flex; align-items: center; justify-content: center; color: #24405c; cursor: pointer; padding: 0; box-shadow: 0 2px 8px rgba(36, 64, 92, 0.1)">
+<svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true" style="fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round"><path d="{{ic.chevL}}"></path></svg>
+</button>
+<div style="position: absolute; right: 16px; top: 50px; display: flex; gap: 10px">
+<button type="button" aria-label="Поділитися" onClick="{{P.share}}" style="width: 44px; height: 44px; border-radius: 22px; border: none; background: #ffffff; display: flex; align-items: center; justify-content: center; color: #24405c; cursor: pointer; padding: 0; box-shadow: 0 2px 8px rgba(36, 64, 92, 0.1)">
+<svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true" style="fill: none; stroke: currentColor; stroke-width: 1.9; stroke-linecap: round; stroke-linejoin: round"><path d="{{ic.share}}"></path></svg>
+</button>
+<button type="button" aria-label="{{P.favLabel}}" onClick="{{P.toggleFav}}" style="width: 44px; height: 44px; border-radius: 22px; border: none; background: #ffffff; display: flex; align-items: center; justify-content: center; color: {{P.favColor}}; cursor: pointer; padding: 0; box-shadow: 0 2px 8px rgba(36, 64, 92, 0.1)">
+<svg width="21" height="21" viewBox="0 0 24 24" aria-hidden="true" style="fill: {{P.favFill}}; stroke: currentColor; stroke-width: 1.9; stroke-linecap: round; stroke-linejoin: round"><path d="{{ic.heart}}"></path></svg>
+</button>
+</div>
+</div>
+<div style="position: relative; margin-top: -26px; background: #ffffff; border-radius: 26px 26px 0 0; padding: 22px 20px 0">
+<div style="font-size: 13px; font-weight: 700; letter-spacing: 0.02em; color: {{accentDeep}}">{{P.title}}</div>
+<h1 style="margin: 6px 0 0; font-size: 26px; line-height: 1.12; font-weight: 800; letter-spacing: -0.025em; color: #24405c">{{P.name}}</h1>
+<sc-if value="{{P.hasWork}}" hint-placeholder-val="{{ false }}"><div style="font-size: 14px; color: #5a6e84; margin-top: 6px">{{P.work}}</div></sc-if>
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px 10px; margin-top: 12px">
+<span style="display: inline-flex; align-items: center; gap: 5px; height: 32px; padding: 0 11px; border-radius: 16px; background: {{accentSoft}}; color: {{accentDeep}}; font-size: 16px; font-weight: 800">
+<svg width="15" height="15" viewBox="0 0 24 24" aria-hidden="true" style="fill: currentColor; stroke: none"><path d="{{ic.star}}"></path></svg>{{P.rating}}<span style="font-size: 12px; font-weight: 700">/10</span></span>
+<span style="font-size: 14px; font-weight: 700; color: #24405c">{{P.reviewsLabel}}</span>
+<sc-if value="{{P.hasExp}}" hint-placeholder-val="{{ false }}"><span style="font-size: 14px; color: #5a6e84">· {{P.exp}}</span></sc-if>
+</div>
+<div style="display: flex; gap: 10px; margin-top: 18px">
+<button type="button" onClick="{{P.book}}" style="flex: 1; height: 52px; border: none; border-radius: 26px; background: {{accent}}; color: #ffffff; font-family: inherit; font-size: 16px; font-weight: 700; cursor: pointer">Записатись</button>
+<button type="button" aria-label="Написати майстру" onClick="{{P.chat}}" style="width: 52px; height: 52px; border-radius: 26px; border: 1px solid #d5e0ea; background: #ffffff; display: flex; align-items: center; justify-content: center; color: #24405c; cursor: pointer; padding: 0; flex: none">
+<svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true" style="fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round"><path d="{{ic.msg}}"></path></svg>
+</button>
+<button type="button" aria-label="Прокласти маршрут" onClick="{{P.route}}" style="width: 52px; height: 52px; border-radius: 26px; border: 1px solid #d5e0ea; background: #ffffff; display: flex; align-items: center; justify-content: center; color: #24405c; cursor: pointer; padding: 0; flex: none">
+<svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true" style="fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round"><path d="{{ic.route}}"></path></svg>
+</button>
+</div>
+<div style="margin-top: 18px; border: 1px solid #e3ebf3; border-radius: 20px; overflow: hidden">
+<div style="position: relative; height: 112px; overflow: hidden; background: #edf1f5">
+<img src="{{map}}" alt="" style="position: absolute; left: {{P.mmx}}px; top: {{P.mmy}}px; width: 1000px; height: 800px; max-width: none; display: block">
+<span style="position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); width: 24px; height: 24px; border-radius: 12px; background: {{accent}}; border: 4px solid #ffffff; box-shadow: 0 0 0 10px rgba(224, 20, 76, 0.16), 0 4px 10px rgba(36, 64, 92, 0.3); box-sizing: border-box"></span>
+</div>
+<div style="padding: 12px 14px; display: flex; gap: 10px; align-items: flex-start">
+<svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true" style="fill: none; stroke: #24405c; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; flex: none; margin-top: 1px"><path d="{{ic.pin}}"></path></svg>
+<div style="display: flex; flex-direction: column; gap: 2px">
+<div style="font-size: 15px; font-weight: 700">{{P.addr}}</div>
+<div style="font-size: 13px; line-height: 1.35; color: #5a6e84">{{P.area}}</div>
+</div>
+</div>
+</div>
+<sc-if value="{{P.hasDeal}}" hint-placeholder-val="{{ false }}">
+<button type="button" onClick="{{P.deal.open}}" style="margin-top: 12px; width: 100%; border: none; border-radius: 18px; background: {{accentSoft}}; padding: 12px 14px; display: flex; align-items: center; gap: 12px; text-align: left; font-family: inherit; color: #24405c; cursor: pointer">
+<span style="padding: 4px 8px; border-radius: 9px; background: {{accent}}; color: #ffffff; font-size: 12px; font-weight: 800; flex: none">Акція</span>
+<span style="flex: 1; font-size: 14px; font-weight: 600; line-height: 1.3">{{P.deal.t}}</span>
+<span style="font-size: 12px; color: #5a6e84; flex: none">{{P.deal.till}}</span>
+</button>
+</sc-if>
+<div role="tablist" aria-label="Розділи профілю" style="display: flex; gap: 4px; margin-top: 22px; padding: 4px; background: #eef3f8; border-radius: 16px">
+<sc-for list="{{P.tabs}}" as="t" hint-placeholder-count="3">
+<button type="button" role="tab" aria-selected="{{t.on}}" onClick="{{t.pick}}" style="flex: 1; height: 40px; border: none; border-radius: 12px; background: {{t.bg}}; color: {{t.fg}}; font-family: inherit; font-size: 14px; font-weight: 700; cursor: pointer; box-shadow: {{t.sh}}; padding: 0 4px; white-space: nowrap">{{t.label}}</button>
+</sc-for>
+</div>
+</div>
+<sc-if value="{{P.tServices}}" hint-placeholder-val="{{ true }}">
+<div style="padding: 16px 20px 0">
+<sc-if value="{{P.hasSvc}}" hint-placeholder-val="{{ true }}">
+<div style="height: 46px; border-radius: 15px; background: #eef3f8; display: flex; align-items: center; gap: 8px; padding: 0 12px">
+<svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" style="fill: none; stroke: #5a6e84; stroke-width: 1.9; stroke-linecap: round; stroke-linejoin: round; flex: none"><path d="{{ic.search}}"></path></svg>
+<input type="text" aria-label="Пошук послуги в прайсі" value="{{P.svcQ}}" onChange="{{P.onSvcQ}}" placeholder="{{P.svcPh}}" style="flex: 1; min-width: 0; border: none; background: none; outline: none; font-family: inherit; font-size: 15px; color: #24405c">
+</div>
+<div style="display: flex; flex-direction: column; margin-top: 6px">
+<sc-for list="{{P.groups}}" as="g" hint-placeholder-count="4">
+<div style="border-bottom: 1px solid #eef2f6">
+<button type="button" aria-expanded="{{g.open}}" onClick="{{g.toggle}}" style="width: 100%; min-height: 56px; border: none; background: none; padding: 0; display: flex; align-items: center; gap: 10px; font-family: inherit; color: #24405c; cursor: pointer; text-align: left">
+<span style="flex: 1; font-size: 16px; font-weight: 700">{{g.name}}</span>
+<span style="font-size: 13px; font-weight: 700; color: #5a6e84">{{g.count}}</span>
+<svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" style="fill: none; stroke: #5a6e84; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; flex: none; transform: {{g.rot}}; transition: transform 0.2s ease"><path d="{{ic.chevD}}"></path></svg>
+</button>
+<sc-if value="{{g.open}}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; flex-direction: column; padding-bottom: 8px">
+<sc-for list="{{g.items}}" as="it" hint-placeholder-count="4">
+<div style="display: flex; align-items: center; gap: 12px; padding: 9px 0">
+<div style="flex: 1; min-width: 0">
+<div style="font-size: 15px; line-height: 1.3; font-weight: 500">{{it.n}}</div>
+<sc-if value="{{it.hasDur}}" hint-placeholder-val="{{ false }}"><div style="font-size: 13px; color: #5a6e84; margin-top: 3px">{{it.dur}}</div></sc-if>
+</div>
+<div style="font-size: 15px; font-weight: 800; white-space: nowrap">{{it.price}}</div>
+<button type="button" aria-label="{{it.aria}}" aria-pressed="{{it.on}}" onClick="{{it.toggle}}" style="width: 38px; height: 38px; border-radius: 19px; border: 1.5px solid {{it.bd}}; background: {{it.bg}}; color: {{it.fg}}; display: flex; align-items: center; justify-content: center; cursor: pointer; flex: none; padding: 0">
+<svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" style="fill: none; stroke: currentColor; stroke-width: 2.3; stroke-linecap: round; stroke-linejoin: round"><path d="{{it.icon}}"></path></svg>
+</button>
+</div>
+</sc-for>
+</div>
+</sc-if>
+</div>
+</sc-for>
+<sc-if value="{{P.svcNone}}" hint-placeholder-val="{{ false }}">
+<p style="margin: 18px 0 0; font-size: 15px; color: #5a6e84; text-align: center">У прайсі немає «{{P.svcQ}}»</p>
+</sc-if>
+</div>
+</sc-if>
+<sc-if value="{{P.noSvc}}" hint-placeholder-val="{{ false }}">
+<div style="padding: 26px 16px; border-radius: 20px; background: #f4f7fa; display: flex; flex-direction: column; align-items: center; gap: 10px; text-align: center">
+<div style="font-size: 16px; font-weight: 800">Прайс ще не заповнено</div>
+<p style="margin: 0; font-size: 14px; line-height: 1.45; color: #5a6e84">Запитайте ціну й вільний час у чаті — відповідь прийде сповіщенням.</p>
+<button type="button" onClick="{{P.chat}}" style="margin-top: 4px; height: 44px; padding: 0 20px; border-radius: 22px; border: 1px solid #d5e0ea; background: #ffffff; color: #24405c; font-family: inherit; font-size: 15px; font-weight: 700; cursor: pointer">Написати в чат</button>
+</div>
+</sc-if>
+</div>
+</sc-if>
+<sc-if value="{{P.tReviews}}" hint-placeholder-val="{{ false }}">
+<div style="padding: 18px 20px 0; display: flex; flex-direction: column; gap: 12px">
+<div style="display: flex; align-items: center; gap: 16px; padding: 16px; border-radius: 20px; background: #f4f7fa">
+<div style="font-size: 46px; font-weight: 800; letter-spacing: -0.04em; color: {{accentDeep}}; line-height: 1">{{P.rating}}</div>
+<div style="display: flex; flex-direction: column; gap: 3px">
+<div style="font-size: 15px; font-weight: 700">з 10 · {{P.reviewsLabel}}</div>
+<div style="font-size: 13px; color: #5a6e84">Середня оцінка клієнтів на barb.ua</div>
+</div>
+</div>
+<sc-for list="{{P.reviews}}" as="r" hint-placeholder-count="3">
+<div style="padding: 14px; border: 1px solid #e3ebf3; border-radius: 18px">
+<div style="display: flex; align-items: center; gap: 10px">
+<span style="width: 38px; height: 38px; border-radius: 19px; background: {{r.tint}}; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 800; flex: none">{{r.ini}}</span>
+<div style="display: flex; flex-direction: column; gap: 1px">
+<div style="font-size: 15px; font-weight: 700">{{r.who}}</div>
+<div style="font-size: 12px; color: #5a6e84">{{r.date}}</div>
+</div>
+</div>
+<p style="margin: 10px 0 0; font-size: 15px; line-height: 1.45">{{r.text}}</p>
+</div>
+</sc-for>
+<sc-if value="{{P.noReviews}}" hint-placeholder-val="{{ false }}">
+<p style="margin: 0; font-size: 14px; line-height: 1.45; color: #5a6e84">Тексти відгуків — у профілі на barb.ua.</p>
+</sc-if>
+<div style="display: flex; gap: 10px">
+<a href="{{P.url}}" target="_blank" rel="noopener" style="flex: 1; height: 46px; border-radius: 23px; border: 1px solid #d5e0ea; display: flex; align-items: center; justify-content: center; gap: 6px; color: #24405c; font-size: 15px; font-weight: 700; text-decoration: none">Усі відгуки
+<svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true" style="fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round"><path d="{{ic.ext}}"></path></svg></a>
+<button type="button" onClick="{{P.addReview}}" style="flex: 1; height: 46px; border-radius: 23px; border: none; background: #24405c; color: #ffffff; font-family: inherit; font-size: 15px; font-weight: 700; cursor: pointer">Оцінити</button>
+</div>
+</div>
+</sc-if>
+<sc-if value="{{P.tAbout}}" hint-placeholder-val="{{ false }}">
+<div style="padding: 18px 20px 0; display: flex; flex-direction: column; gap: 16px">
+<sc-if value="{{P.hasAbout}}" hint-placeholder-val="{{ false }}"><p style="margin: 0; font-size: 15px; line-height: 1.55">{{P.about}}</p></sc-if>
+<sc-if value="{{P.hasHours}}" hint-placeholder-val="{{ false }}">
+<div style="border: 1px solid #e3ebf3; border-radius: 18px; padding: 6px 14px">
+<div style="font-size: 13px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: #5a6e84; padding: 8px 0 4px">Графік роботи</div>
+<sc-for list="{{P.hours}}" as="h" hint-placeholder-count="7">
+<div style="display: flex; justify-content: space-between; padding: 7px 0; font-size: 15px; border-top: 1px solid #f0f4f8">
+<span style="color: #5a6e84">{{h.d}}</span><span style="font-weight: {{h.w}}">{{h.t}}</span>
+</div>
+</sc-for>
+</div>
+</sc-if>
+<div style="display: flex; flex-direction: column; border: 1px solid #e3ebf3; border-radius: 18px; overflow: hidden">
+<sc-if value="{{P.hasIg}}" hint-placeholder-val="{{ false }}">
+<a href="{{P.igUrl}}" target="_blank" rel="noopener" style="min-height: 54px; padding: 0 14px; display: flex; align-items: center; gap: 12px; color: #24405c; text-decoration: none; border-bottom: 1px solid #eef2f6">
+<svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true" style="fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; flex: none"><path d="{{ic.insta}}"></path></svg>
+<span style="flex: 1; font-size: 15px; font-weight: 600">{{P.ig}}</span>
+<svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true" style="fill: none; stroke: #5a6e84; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round"><path d="{{ic.ext}}"></path></svg>
+</a>
+</sc-if>
+<sc-if value="{{P.hasPhotos}}" hint-placeholder-val="{{ false }}">
+<a href="{{P.url}}" target="_blank" rel="noopener" style="min-height: 54px; padding: 0 14px; display: flex; align-items: center; gap: 12px; color: #24405c; text-decoration: none; border-bottom: 1px solid #eef2f6">
+<svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true" style="fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; flex: none"><path d="{{ic.photo}}"></path></svg>
+<span style="flex: 1; font-size: 15px; font-weight: 600">{{P.photos}}</span>
+<svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true" style="fill: none; stroke: #5a6e84; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round"><path d="{{ic.ext}}"></path></svg>
+</a>
+</sc-if>
+<a href="{{P.url}}" target="_blank" rel="noopener" style="min-height: 54px; padding: 0 14px; display: flex; align-items: center; gap: 12px; color: #24405c; text-decoration: none">
+<svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true" style="fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; flex: none"><path d="{{ic.globe}}"></path></svg>
+<span style="flex: 1; font-size: 15px; font-weight: 600">Профіль на barb.ua</span>
+<svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true" style="fill: none; stroke: #5a6e84; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round"><path d="{{ic.ext}}"></path></svg>
+</a>
+</div>
+</div>
+</sc-if>
+</div>
+<div style="position: absolute; left: 0; right: 0; bottom: 0; padding: 12px 20px 30px; background: #ffffff; border-top: 1px solid #e3ebf3; display: flex; align-items: center; gap: 12px">
+<div style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 1px">
+<span style="font-size: 13px; color: #5a6e84; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{P.bar.label}}</span>
+<span style="font-size: 18px; font-weight: 800; white-space: nowrap">{{P.bar.value}}</span>
+</div>
+<button type="button" onClick="{{P.book}}" style="height: 52px; padding: 0 26px; border: none; border-radius: 26px; background: {{accent}}; color: #ffffff; font-family: inherit; font-size: 16px; font-weight: 700; cursor: pointer; flex: none">{{P.bar.cta}}</button>
+</div>
+</section>
+</sc-if>
+
+<sc-if value="{{s.book}}" hint-placeholder-val="{{ false }}">
+<section aria-label="Запис" style="position: absolute; inset: 0; display: flex; flex-direction: column; background: #f4f7fa">
+<div style="padding: 52px 16px 12px; background: #ffffff; border-bottom: 1px solid #e3ebf3; display: flex; align-items: center; gap: 8px">
+<button type="button" aria-label="Назад" onClick="{{back}}" style="width: 44px; height: 44px; border-radius: 22px; border: none; background: none; display: flex; align-items: center; justify-content: center; color: #24405c; cursor: pointer; padding: 0; flex: none">
+<svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" style="fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round"><path d="{{ic.chevL}}"></path></svg>
+</button>
+<div style="flex: 1; min-width: 0">
+<h1 style="margin: 0; font-size: 20px; font-weight: 800; letter-spacing: -0.02em">{{B.heading}}</h1>
+<div style="font-size: 13px; color: #5a6e84; margin-top: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{B.place.name}}</div>
+</div>
+<span style="width: 42px; height: 42px; border-radius: 14px; background: {{B.place.tint}}; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 800; flex: none">{{B.place.ini}}</span>
+</div>
+<div style="flex: 1; min-height: 0; overflow-y: auto; scrollbar-width: none; padding: 16px 16px 150px; display: flex; flex-direction: column; gap: 14px">
+<div style="background: #ffffff; border-radius: 22px; padding: 16px; box-shadow: 0 2px 10px rgba(36, 64, 92, 0.05)">
+<div style="display: flex; align-items: center; justify-content: space-between">
+<h2 style="margin: 0; font-size: 17px; font-weight: 800">Послуги</h2>
+<button type="button" onClick="{{B.editSvcs}}" style="height: 36px; padding: 0 2px; border: none; background: none; color: #2f6194; font-family: inherit; font-size: 15px; font-weight: 600; cursor: pointer">{{B.editLabel}}</button>
+</div>
+<sc-if value="{{B.hasSvcs}}" hint-placeholder-val="{{ true }}">
+<sc-for list="{{B.svcs}}" as="x" hint-placeholder-count="2">
+<div style="display: flex; align-items: center; gap: 10px; padding: 11px 0; border-bottom: 1px solid #eef2f6">
+<div style="flex: 1; min-width: 0">
+<div style="font-size: 15px; font-weight: 600; line-height: 1.3">{{x.n}}</div>
+<sc-if value="{{x.hasDur}}" hint-placeholder-val="{{ false }}"><div style="font-size: 13px; color: #5a6e84; margin-top: 2px">{{x.dur}}</div></sc-if>
+</div>
+<div style="font-size: 15px; font-weight: 800; white-space: nowrap">{{x.price}}</div>
+<button type="button" aria-label="Прибрати послугу" onClick="{{x.remove}}" style="width: 34px; height: 34px; border-radius: 17px; border: none; background: #eef3f8; display: flex; align-items: center; justify-content: center; color: #24405c; cursor: pointer; padding: 0; flex: none">
+<svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true" style="fill: none; stroke: currentColor; stroke-width: 2.4; stroke-linecap: round"><path d="{{ic.x}}"></path></svg>
+</button>
+</div>
+</sc-for>
+<div style="display: flex; justify-content: space-between; align-items: baseline; padding-top: 12px">
+<span style="font-size: 14px; color: #5a6e84">{{B.durLabel}}</span>
+<span style="font-size: 18px; font-weight: 800">{{B.total}}</span>
+</div>
+</sc-if>
+<sc-if value="{{B.noSvcs}}" hint-placeholder-val="{{ false }}">
+<p style="margin: 8px 0 4px; font-size: 14px; line-height: 1.4; color: #5a6e84">Оберіть послугу — популярне в прайсі:</p>
+<sc-for list="{{B.suggest}}" as="x" hint-placeholder-count="5">
+<div style="display: flex; align-items: center; gap: 10px; padding: 9px 0; border-bottom: 1px solid #eef2f6">
+<div style="flex: 1; min-width: 0">
+<div style="font-size: 15px; font-weight: 600; line-height: 1.3">{{x.n}}</div>
+<sc-if value="{{x.hasDur}}" hint-placeholder-val="{{ false }}"><div style="font-size: 13px; color: #5a6e84; margin-top: 2px">{{x.dur}}</div></sc-if>
+</div>
+<div style="font-size: 15px; font-weight: 800; white-space: nowrap">{{x.price}}</div>
+<button type="button" aria-label="{{x.aria}}" aria-pressed="{{x.on}}" onClick="{{x.toggle}}" style="width: 38px; height: 38px; border-radius: 19px; border: 1.5px solid {{x.bd}}; background: {{x.bg}}; color: {{x.fg}}; display: flex; align-items: center; justify-content: center; cursor: pointer; flex: none; padding: 0">
+<svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" style="fill: none; stroke: currentColor; stroke-width: 2.3; stroke-linecap: round; stroke-linejoin: round"><path d="{{x.icon}}"></path></svg>
+</button>
+</div>
+</sc-for>
+</sc-if>
+</div>
+<div style="background: #ffffff; border-radius: 22px; padding: 16px 0; box-shadow: 0 2px 10px rgba(36, 64, 92, 0.05)">
+<h2 style="margin: 0; padding: 0 16px; font-size: 17px; font-weight: 800">Дата</h2>
+<div style="display: flex; gap: 8px; overflow-x: auto; scrollbar-width: none; padding: 12px 16px 2px">
+<sc-for list="{{B.days}}" as="d" hint-placeholder-count="6">
+<button type="button" aria-pressed="{{d.on}}" aria-label="{{d.aria}}" onClick="{{d.pick}}" style="flex: none; width: 60px; height: 74px; border-radius: 18px; border: 1.5px solid {{d.bd}}; background: {{d.bg}}; color: {{d.fg}}; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; font-family: inherit; cursor: pointer; padding: 0">
+<span style="font-size: 12px; font-weight: 700">{{d.wd}}</span>
+<span style="font-size: 21px; font-weight: 800; line-height: 1.1">{{d.num}}</span>
+<span style="font-size: 11px; font-weight: 600">{{d.mon}}</span>
+</button>
+</sc-for>
+</div>
+</div>
+<div style="background: #ffffff; border-radius: 22px; padding: 16px; box-shadow: 0 2px 10px rgba(36, 64, 92, 0.05)">
+<h2 style="margin: 0; font-size: 17px; font-weight: 800">Вільний час</h2>
+<sc-for list="{{B.parts}}" as="pt" hint-placeholder-count="3">
+<div style="margin-top: 14px">
+<div style="font-size: 13px; font-weight: 700; color: #5a6e84">{{pt.label}}</div>
+<div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; margin-top: 8px">
+<sc-for list="{{pt.slots}}" as="sl" hint-placeholder-count="4">
+<button type="button" disabled="{{sl.busy}}" aria-pressed="{{sl.on}}" aria-label="{{sl.aria}}" onClick="{{sl.pick}}" style="height: 44px; border-radius: 14px; border: 1.5px solid {{sl.bd}}; background: {{sl.bg}}; color: {{sl.fg}}; font-family: inherit; font-size: 15px; font-weight: 700; text-decoration: {{sl.deco}}; cursor: {{sl.cur}}; padding: 0">{{sl.t}}</button>
+</sc-for>
+</div>
+</div>
+</sc-for>
+<sc-if value="{{B.noSlots}}" hint-placeholder-val="{{ false }}">
+<p style="margin: 12px 0 0; font-size: 14px; color: #5a6e84">На цей день вільних вікон немає — оберіть іншу дату.</p>
+</sc-if>
+</div>
+<p style="margin: 0 6px; font-size: 13px; line-height: 1.45; color: #5a6e84">Майстер підтвердить запис у Barb Pro — ми надішлемо сповіщення й нагадаємо за 2 години до візиту.</p>
+</div>
+<div style="position: absolute; left: 0; right: 0; bottom: 0; background: #ffffff; border-top: 1px solid #e3ebf3; padding: 12px 20px 30px; display: flex; flex-direction: column; gap: 10px">
+<div style="display: flex; justify-content: space-between; gap: 12px; font-size: 14px">
+<span style="color: #5a6e84">{{B.summary}}</span>
+<span style="font-weight: 800; white-space: nowrap">{{B.total}}</span>
+</div>
+<button type="button" disabled="{{B.cantConfirm}}" onClick="{{B.confirm}}" style="height: 54px; border: none; border-radius: 27px; background: {{B.ctaBg}}; color: {{B.ctaFg}}; font-family: inherit; font-size: 17px; font-weight: 700; cursor: {{B.ctaCur}}">{{B.ctaLabel}}</button>
+</div>
+</section>
+</sc-if>
+
+<sc-if value="{{s.done}}" hint-placeholder-val="{{ false }}">
+<section aria-label="Запис створено" style="position: absolute; inset: 0; display: flex; flex-direction: column; background: #ffffff">
+<div style="flex: 1; min-height: 0; overflow-y: auto; scrollbar-width: none; padding: 84px 22px 20px; display: flex; flex-direction: column; align-items: center; text-align: center">
+<div style="width: 92px; height: 92px; border-radius: 46px; background: {{accentSoft}}; display: flex; align-items: center; justify-content: center">
+<div style="width: 62px; height: 62px; border-radius: 31px; background: {{accent}}; color: #ffffff; display: flex; align-items: center; justify-content: center">
+<svg width="32" height="32" viewBox="0 0 24 24" aria-hidden="true" style="fill: none; stroke: currentColor; stroke-width: 2.6; stroke-linecap: round; stroke-linejoin: round"><path d="{{ic.check}}"></path></svg>
+</div>
+</div>
+<h1 style="margin: 22px 0 0; font-size: 29px; font-weight: 800; letter-spacing: -0.025em">Ви записані!</h1>
+<p style="margin: 10px 0 0; font-size: 15px; line-height: 1.45; color: #5a6e84; max-width: 300px">{{DN.note}}</p>
+<div style="width: 100%; margin-top: 24px; text-align: left; border: 1px solid #e3ebf3; border-radius: 22px; padding: 16px; display: flex; flex-direction: column; gap: 14px; box-sizing: border-box">
+<div style="display: flex; gap: 12px; align-items: center">
+<span style="width: 48px; height: 48px; border-radius: 16px; background: {{DN.b.tint}}; display: flex; align-items: center; justify-content: center; font-size: 15px; font-weight: 800; flex: none">{{DN.b.ini}}</span>
+<div style="flex: 1; min-width: 0">
+<div style="font-size: 16px; font-weight: 800; line-height: 1.25">{{DN.b.place}}</div>
+<div style="font-size: 13px; color: #5a6e84; margin-top: 2px">{{DN.b.title}}</div>
+</div>
+</div>
+<div style="display: flex; gap: 12px; align-items: flex-start; font-size: 15px">
+<svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true" style="fill: none; stroke: {{accent}}; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; flex: none"><path d="{{ic.calendar}}"></path></svg>
+<span style="font-weight: 700">{{DN.b.when}}</span>
+</div>
+<div style="display: flex; gap: 12px; align-items: flex-start; font-size: 15px">
+<svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true" style="fill: none; stroke: {{accent}}; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; flex: none"><path d="{{ic.tag}}"></path></svg>
+<span style="line-height: 1.4">{{DN.b.svcs}}</span>
+</div>
+<div style="display: flex; gap: 12px; align-items: flex-start; font-size: 15px">
+<svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true" style="fill: none; stroke: {{accent}}; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; flex: none"><path d="{{ic.pin}}"></path></svg>
+<span style="line-height: 1.4">{{DN.b.addr}}</span>
+</div>
+<div style="display: flex; justify-content: space-between; align-items: baseline; border-top: 1px solid #eef2f6; padding-top: 12px">
+<span style="font-size: 14px; color: #5a6e84">{{DN.b.durLabel}}</span>
+<span style="font-size: 18px; font-weight: 800">{{DN.b.total}}</span>
+</div>
+</div>
+<button type="button" onClick="{{DN.addCal}}" style="margin-top: 14px; width: 100%; height: 48px; border-radius: 24px; border: 1px solid #d5e0ea; background: #ffffff; color: #24405c; font-family: inherit; font-size: 15px; font-weight: 700; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px">
+<svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" style="fill: none; stroke: currentColor; stroke-width: 1.9; stroke-linecap: round; stroke-linejoin: round"><path d="{{ic.calendar}}"></path></svg>Додати в календар</button>
+</div>
+<div style="padding: 12px 22px 32px; display: flex; flex-direction: column; gap: 10px">
+<button type="button" onClick="{{DN.toVisits}}" style="height: 54px; border: none; border-radius: 27px; background: {{accent}}; color: #ffffff; font-family: inherit; font-size: 17px; font-weight: 700; cursor: pointer">Мої записи</button>
+<button type="button" onClick="{{DN.chat}}" style="height: 50px; border: none; border-radius: 25px; background: #eef3f8; color: #24405c; font-family: inherit; font-size: 16px; font-weight: 700; cursor: pointer">Написати майстру</button>
+</div>
+</section>
+</sc-if>
+
+<sc-if value="{{s.visits}}" hint-placeholder-val="{{ false }}">
+<section aria-label="Мої записи" style="position: absolute; inset: 0; display: flex; flex-direction: column; background: #f4f7fa">
+<div style="padding: 56px 20px 0">
+<h1 style="margin: 0; font-size: 28px; font-weight: 800; letter-spacing: -0.03em">Мої записи</h1>
+<div role="tablist" aria-label="Записи" style="display: flex; gap: 4px; margin-top: 16px; padding: 4px; background: #e6edf4; border-radius: 16px">
+<sc-for list="{{V.segs}}" as="t" hint-placeholder-count="2">
+<button type="button" role="tab" aria-selected="{{t.on}}" onClick="{{t.pick}}" style="flex: 1; height: 40px; border: none; border-radius: 12px; background: {{t.bg}}; color: {{t.fg}}; font-family: inherit; font-size: 14px; font-weight: 700; cursor: pointer; box-shadow: {{t.sh}}">{{t.label}}</button>
+</sc-for>
+</div>
+</div>
+<div style="flex: 1; min-height: 0; overflow-y: auto; scrollbar-width: none; padding: 16px 16px 110px; display: flex; flex-direction: column; gap: 12px">
+<sc-for list="{{V.items}}" as="v" hint-placeholder-count="2">
+<div style="background: #ffffff; border-radius: 22px; padding: 16px; box-shadow: 0 2px 10px rgba(36, 64, 92, 0.05)">
+<div style="display: flex; gap: 14px">
+<span style="width: 56px; height: 64px; border-radius: 16px; background: #f4f7fa; display: flex; flex-direction: column; align-items: center; justify-content: center; flex: none">
+<span style="font-size: 22px; font-weight: 800; line-height: 1">{{v.num}}</span>
+<span style="font-size: 12px; font-weight: 600; color: #5a6e84; margin-top: 3px">{{v.mon}}</span>
+</span>
+<div style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 3px">
+<div style="display: flex; justify-content: space-between; align-items: center; gap: 8px">
+<span style="font-size: 13px; font-weight: 700; color: #5a6e84">{{v.when}}</span>
+<span style="padding: 4px 9px; border-radius: 10px; font-size: 12px; font-weight: 700; background: {{v.stBg}}; color: {{v.stFg}}; white-space: nowrap">{{v.st}}</span>
+</div>
+<button type="button" onClick="{{v.open}}" style="border: none; background: none; padding: 0; text-align: left; font-family: inherit; color: #24405c; font-size: 16px; font-weight: 800; cursor: pointer; line-height: 1.25">{{v.place}}</button>
+<div style="font-size: 13px; line-height: 1.35; color: #5a6e84">{{v.svcs}}</div>
+<div style="font-size: 15px; font-weight: 800; margin-top: 4px">{{v.total}}</div>
+</div>
+</div>
+<sc-if value="{{v.asking}}" hint-placeholder-val="{{ false }}">
+<div style="margin-top: 14px; padding: 12px; border-radius: 16px; background: #fdf0f3; display: flex; flex-direction: column; gap: 10px">
+<div style="font-size: 14px; font-weight: 700">Скасувати запис? Майстер отримає сповіщення.</div>
+<div style="display: flex; gap: 8px">
+<button type="button" onClick="{{v.cancelYes}}" style="flex: 1; height: 42px; border: none; border-radius: 21px; background: {{accent}}; color: #ffffff; font-family: inherit; font-size: 14px; font-weight: 700; cursor: pointer">Так, скасувати</button>
+<button type="button" onClick="{{v.cancelNo}}" style="flex: 1; height: 42px; border: 1px solid #d5e0ea; border-radius: 21px; background: #ffffff; color: #24405c; font-family: inherit; font-size: 14px; font-weight: 700; cursor: pointer">Залишити</button>
+</div>
+</div>
+</sc-if>
+<sc-if value="{{v.idle}}" hint-placeholder-val="{{ true }}">
+<div style="display: flex; gap: 8px; margin-top: 14px">
+<button type="button" onClick="{{v.chat}}" style="flex: 1; height: 42px; border: 1px solid #d5e0ea; border-radius: 21px; background: #ffffff; color: #24405c; font-family: inherit; font-size: 14px; font-weight: 700; cursor: pointer">Написати</button>
+<button type="button" onClick="{{v.move}}" style="flex: 1; height: 42px; border: 1px solid #d5e0ea; border-radius: 21px; background: #ffffff; color: #24405c; font-family: inherit; font-size: 14px; font-weight: 700; cursor: pointer">Перенести</button>
+<button type="button" onClick="{{v.cancel}}" style="height: 42px; padding: 0 12px; border: none; border-radius: 21px; background: none; color: {{accentDeep}}; font-family: inherit; font-size: 14px; font-weight: 700; cursor: pointer">Скасувати</button>
+</div>
+</sc-if>
+</div>
+</sc-for>
+<sc-if value="{{V.empty}}" hint-placeholder-val="{{ false }}">
+<div style="padding: 70px 30px 0; display: flex; flex-direction: column; align-items: center; gap: 12px; text-align: center">
+<span style="width: 72px; height: 72px; border-radius: 24px; background: #ffffff; color: {{accent}}; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 10px rgba(36, 64, 92, 0.06)">
+<svg width="32" height="32" viewBox="0 0 24 24" aria-hidden="true" style="fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round"><path d="{{ic.calendar}}"></path></svg>
+</span>
+<div style="font-size: 19px; font-weight: 800">{{V.emptyTitle}}</div>
+<p style="margin: 0; font-size: 15px; line-height: 1.45; color: #5a6e84">{{V.emptyText}}</p>
+<button type="button" onClick="{{V.find}}" style="margin-top: 6px; height: 50px; padding: 0 24px; border: none; border-radius: 25px; background: {{accent}}; color: #ffffff; font-family: inherit; font-size: 16px; font-weight: 700; cursor: pointer">Знайти майстра</button>
+</div>
+</sc-if>
+</div>
+</section>
+</sc-if>
+
+<sc-if value="{{s.deals}}" hint-placeholder-val="{{ false }}">
+<section aria-label="Акції та знижки" style="position: absolute; inset: 0; display: flex; flex-direction: column; background: #f4f7fa">
+<div style="padding: 56px 20px 0">
+<h1 style="margin: 0; font-size: 28px; font-weight: 800; letter-spacing: -0.03em">Акції та знижки</h1>
+<div style="font-size: 14px; color: #5a6e84; margin-top: 4px">{{DL.sub}}</div>
+</div>
+<div style="display: flex; gap: 8px; overflow-x: auto; scrollbar-width: none; padding: 14px 20px 4px">
+<sc-for list="{{DL.chips}}" as="c" hint-placeholder-count="6">
+<button type="button" aria-pressed="{{c.on}}" onClick="{{c.pick}}" style="flex: none; height: 38px; padding: 0 16px; border-radius: 19px; border: 1px solid {{c.bd}}; background: {{c.bg}}; color: {{c.fg}}; font-family: inherit; font-size: 14px; font-weight: 700; cursor: pointer; white-space: nowrap">{{c.label}}</button>
+</sc-for>
+</div>
+<div style="flex: 1; min-height: 0; overflow-y: auto; scrollbar-width: none; padding: 12px 16px 110px; display: flex; flex-direction: column; gap: 12px">
+<sc-for list="{{DL.items}}" as="d" hint-placeholder-count="5">
+<button type="button" onClick="{{d.open}}" style="width: 100%; border: none; background: #ffffff; border-radius: 22px; padding: 16px; display: flex; gap: 14px; text-align: left; font-family: inherit; color: #24405c; cursor: pointer; box-shadow: 0 2px 10px rgba(36, 64, 92, 0.05)">
+<span style="width: 66px; height: 66px; border-radius: 20px; background: {{accentSoft}}; color: {{accentDeep}}; display: flex; align-items: center; justify-content: center; font-size: {{d.badgeFs}}px; font-weight: 800; letter-spacing: -0.02em; flex: none; text-align: center; line-height: 1.05">{{d.badge}}</span>
+<span style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 4px">
+<span style="font-size: 15px; font-weight: 700; line-height: 1.3">{{d.t}}</span>
+<span style="font-size: 13px; color: #5a6e84; line-height: 1.3">{{d.who}} · {{d.dist}}</span>
+<span style="display: flex; align-items: baseline; gap: 8px; margin-top: 4px">
+<span style="font-size: 16px; font-weight: 800">{{d.price}}</span>
+<span style="font-size: 13px; color: #5a6e84; text-decoration: line-through">{{d.old}}</span>
+<span style="margin-left: auto; font-size: 12px; font-weight: 600; color: #5a6e84; white-space: nowrap">{{d.till}}</span>
+</span>
+</span>
+</button>
+</sc-for>
+<p style="margin: 6px 6px 0; font-size: 13px; line-height: 1.45; color: #5a6e84">Акції з каталогу barb.ua: салони й майстри публікують їх самі у своєму кабінеті.</p>
+</div>
+</section>
+</sc-if>
+
+<sc-if value="{{s.deal}}" hint-placeholder-val="{{ false }}">
+<section aria-label="Акція" style="position: absolute; inset: 0; display: flex; flex-direction: column; background: #ffffff">
+<div style="flex: 1; min-height: 0; overflow-y: auto; scrollbar-width: none; padding-bottom: 150px">
+<div style="position: relative; height: 240px; background: {{accentSoft}}; display: flex; align-items: center; justify-content: center">
+<button type="button" aria-label="Назад" onClick="{{back}}" style="position: absolute; left: 16px; top: 50px; width: 44px; height: 44px; border-radius: 22px; border: none; background: #ffffff; display: flex; align-items: center; justify-content: center; color: #24405c; cursor: pointer; padding: 0">
+<svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true" style="fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round"><path d="{{ic.chevL}}"></path></svg>
+</button>
+<div style="margin-top: 30px; font-size: {{DD.bigFs}}px; font-weight: 800; letter-spacing: -0.04em; color: {{accentDeep}}; line-height: 1">{{DD.big}}</div>
+</div>
+<div style="padding: 22px 20px 0; display: flex; flex-direction: column; gap: 10px">
+<div style="font-size: 13px; font-weight: 700; color: {{accentDeep}}">{{DD.role}}</div>
+<h1 style="margin: 0; font-size: 25px; line-height: 1.15; font-weight: 800; letter-spacing: -0.025em">{{DD.t}}</h1>
+<div style="font-size: 15px; color: #5a6e84">{{DD.who}} · {{DD.dist}}</div>
+<div style="display: flex; align-items: baseline; gap: 10px; margin-top: 8px">
+<span style="font-size: 28px; font-weight: 800; letter-spacing: -0.02em">{{DD.price}}</span>
+<span style="font-size: 16px; color: #5a6e84; text-decoration: line-through">{{DD.old}}</span>
+</div>
+<sc-if value="{{DD.hasSave}}" hint-placeholder-val="{{ false }}">
+<div style="align-self: flex-start; padding: 6px 12px; border-radius: 12px; background: #e3f3ea; color: #1f7a52; font-size: 14px; font-weight: 700">{{DD.save}}</div>
+</sc-if>
+<div style="margin-top: 10px; border: 1px solid #e3ebf3; border-radius: 18px; overflow: hidden">
+<div style="min-height: 52px; padding: 0 14px; display: flex; align-items: center; gap: 12px; border-bottom: 1px solid #eef2f6">
+<svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true" style="fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; flex: none"><path d="{{ic.clock}}"></path></svg>
+<span style="font-size: 15px; font-weight: 600">{{DD.till}}</span>
+</div>
+<a href="{{DD.url}}" target="_blank" rel="noopener" style="min-height: 52px; padding: 0 14px; display: flex; align-items: center; gap: 12px; color: #24405c; text-decoration: none">
+<svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true" style="fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; flex: none"><path d="{{ic.globe}}"></path></svg>
+<span style="flex: 1; font-size: 15px; font-weight: 600">Умови акції на barb.ua</span>
+<svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true" style="fill: none; stroke: #5a6e84; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round"><path d="{{ic.ext}}"></path></svg>
+</a>
+</div>
+</div>
+</div>
+<div style="position: absolute; left: 0; right: 0; bottom: 0; padding: 12px 20px 30px; background: #ffffff; border-top: 1px solid #e3ebf3; display: flex; flex-direction: column; gap: 10px">
+<button type="button" onClick="{{DD.book}}" style="height: 54px; border: none; border-radius: 27px; background: {{accent}}; color: #ffffff; font-family: inherit; font-size: 17px; font-weight: 700; cursor: pointer">Записатись за акцією</button>
+<sc-if value="{{DD.hasPlace}}" hint-placeholder-val="{{ false }}">
+<button type="button" onClick="{{DD.openPlace}}" style="height: 48px; border: none; border-radius: 24px; background: #eef3f8; color: #24405c; font-family: inherit; font-size: 16px; font-weight: 700; cursor: pointer">Профіль і прайс</button>
+</sc-if>
+</div>
+</section>
+</sc-if>
+
+<sc-if value="{{s.chat}}" hint-placeholder-val="{{ false }}">
+<section aria-label="Чат" style="position: absolute; inset: 0; display: flex; flex-direction: column; background: #f4f7fa">
+<div style="padding: 52px 12px 10px; background: #ffffff; border-bottom: 1px solid #e3ebf3; display: flex; align-items: center; gap: 8px">
+<button type="button" aria-label="Назад" onClick="{{back}}" style="width: 44px; height: 44px; border-radius: 22px; border: none; background: none; display: flex; align-items: center; justify-content: center; color: #24405c; cursor: pointer; padding: 0; flex: none">
+<svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" style="fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round"><path d="{{ic.chevL}}"></path></svg>
+</button>
+<button type="button" onClick="{{C.openPlace}}" style="flex: 1; min-width: 0; border: none; background: none; padding: 0; display: flex; align-items: center; gap: 10px; font-family: inherit; color: #24405c; cursor: pointer; text-align: left">
+<span style="width: 42px; height: 42px; border-radius: 14px; background: {{C.tint}}; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 800; flex: none">{{C.ini}}</span>
+<span style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 1px">
+<span style="font-size: 16px; font-weight: 800; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{C.name}}</span>
+<span style="font-size: 13px; color: #5a6e84; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{C.title}}</span>
+</span>
+</button>
+<button type="button" onClick="{{C.book}}" style="height: 40px; padding: 0 14px; border-radius: 20px; border: none; background: {{accentSoft}}; color: {{accentDeep}}; font-family: inherit; font-size: 14px; font-weight: 800; cursor: pointer; flex: none">Записатись</button>
+</div>
+<div ref="{{C.setRef}}" style="flex: 1; min-height: 0; overflow-y: auto; scrollbar-width: none; padding: 16px; display: flex; flex-direction: column; gap: 10px">
+<div style="align-self: center; font-size: 12px; font-weight: 600; color: #5a6e84; background: #e6edf4; padding: 5px 10px; border-radius: 10px">Сьогодні</div>
+<div style="align-self: center; max-width: 290px; text-align: center; font-size: 13px; line-height: 1.45; color: #5a6e84">{{C.intro}}</div>
+<sc-for list="{{C.msgs}}" as="m" hint-placeholder-count="2">
+<div style="align-self: {{m.align}}; max-width: 80%; padding: 10px 14px 8px; border-radius: {{m.radius}}; background: {{m.bg}}; color: {{m.fg}}; font-size: 15px; line-height: 1.4; box-shadow: {{m.sh}}">{{m.text}}<div style="font-size: 11px; margin-top: 4px; text-align: right; color: {{m.timeFg}}">{{m.time}}</div></div>
+</sc-for>
+<sc-if value="{{C.typing}}" hint-placeholder-val="{{ false }}">
+<div style="align-self: flex-start; padding: 10px 14px; border-radius: 18px 18px 18px 6px; background: #ffffff; color: #5a6e84; font-size: 14px">друкує…</div>
+</sc-if>
+<sc-if value="{{C.showBook}}" hint-placeholder-val="{{ false }}">
+<button type="button" onClick="{{C.book}}" style="align-self: flex-start; height: 42px; padding: 0 18px; border-radius: 21px; border: none; background: {{accent}}; color: #ffffff; font-family: inherit; font-size: 14px; font-weight: 700; cursor: pointer; display: flex; align-items: center; gap: 6px">
+<svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true" style="fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round"><path d="{{ic.calendar}}"></path></svg>Обрати час</button>
+</sc-if>
+</div>
+<div style="background: #ffffff; border-top: 1px solid #e3ebf3; padding: 10px 12px 30px">
+<sc-if value="{{C.hasQuick}}" hint-placeholder-val="{{ true }}">
+<div style="display: flex; gap: 8px; overflow-x: auto; scrollbar-width: none; margin: 0 -12px 10px; padding: 0 12px">
+<sc-for list="{{C.quick}}" as="q" hint-placeholder-count="3">
+<button type="button" onClick="{{q.send}}" style="flex: none; height: 38px; padding: 0 14px; border-radius: 19px; border: 1px solid #d5e0ea; background: #ffffff; color: #24405c; font-family: inherit; font-size: 14px; font-weight: 600; cursor: pointer; white-space: nowrap">{{q.t}}</button>
+</sc-for>
+</div>
+</sc-if>
+<div style="display: flex; gap: 8px; align-items: center">
+<input type="text" aria-label="Повідомлення майстру" value="{{C.draft}}" onChange="{{C.onDraft}}" onKeyDown="{{C.onKey}}" placeholder="Напишіть повідомлення…" style="flex: 1; min-width: 0; height: 46px; border-radius: 23px; border: 1px solid #e3ebf3; background: #f4f7fa; padding: 0 16px; font-family: inherit; font-size: 15px; color: #24405c; outline: none; box-sizing: border-box">
+<button type="button" aria-label="Надіслати" onClick="{{C.send}}" style="width: 46px; height: 46px; border-radius: 23px; border: none; background: {{C.sendBg}}; color: #ffffff; display: flex; align-items: center; justify-content: center; cursor: pointer; padding: 0; flex: none">
+<svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true" style="fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round"><path d="{{ic.send}}"></path></svg>
+</button>
+</div>
+</div>
+</section>
+</sc-if>
+
+<sc-if value="{{s.chats}}" hint-placeholder-val="{{ false }}">
+<section aria-label="Повідомлення" style="position: absolute; inset: 0; display: flex; flex-direction: column; background: #ffffff">
+<div style="padding: 52px 12px 12px; display: flex; align-items: center; gap: 6px; border-bottom: 1px solid #e3ebf3">
+<button type="button" aria-label="Назад" onClick="{{back}}" style="width: 44px; height: 44px; border-radius: 22px; border: none; background: none; display: flex; align-items: center; justify-content: center; color: #24405c; cursor: pointer; padding: 0; flex: none">
+<svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" style="fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round"><path d="{{ic.chevL}}"></path></svg>
+</button>
+<h1 style="margin: 0; font-size: 22px; font-weight: 800; letter-spacing: -0.02em">Повідомлення</h1>
+</div>
+<div style="flex: 1; min-height: 0; overflow-y: auto; scrollbar-width: none; padding: 4px 20px 30px">
+<sc-for list="{{CL.items}}" as="c" hint-placeholder-count="2">
+<button type="button" onClick="{{c.open}}" style="width: 100%; min-height: 76px; border: none; border-bottom: 1px solid #eef2f6; background: none; padding: 10px 0; display: flex; align-items: center; gap: 12px; font-family: inherit; color: #24405c; cursor: pointer; text-align: left">
+<span style="width: 50px; height: 50px; border-radius: 17px; background: {{c.tint}}; display: flex; align-items: center; justify-content: center; font-size: 15px; font-weight: 800; flex: none">{{c.ini}}</span>
+<span style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 3px">
+<span style="display: flex; justify-content: space-between; gap: 8px"><span style="font-size: 16px; font-weight: 800; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{c.name}}</span><span style="font-size: 12px; color: #5a6e84; flex: none">{{c.time}}</span></span>
+<span style="font-size: 14px; color: #5a6e84; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{c.last}}</span>
+</span>
+</button>
+</sc-for>
+<sc-if value="{{CL.empty}}" hint-placeholder-val="{{ false }}">
+<div style="padding: 80px 20px 0; display: flex; flex-direction: column; align-items: center; gap: 10px; text-align: center">
+<div style="font-size: 19px; font-weight: 800">Поки що без розмов</div>
+<p style="margin: 0; font-size: 15px; line-height: 1.45; color: #5a6e84">Напишіть майстру з його профілю — запитайте про вільний час чи ціну.</p>
+</div>
+</sc-if>
+</div>
+</section>
+</sc-if>
+
+<sc-if value="{{s.asst}}" hint-placeholder-val="{{ false }}">
+<section aria-label="Підбір майстра" style="position: absolute; inset: 0; display: flex; flex-direction: column; background: #f4f7fa">
+<div style="padding: 52px 12px 12px; background: #ffffff; border-bottom: 1px solid #e3ebf3; display: flex; align-items: center; gap: 8px">
+<button type="button" aria-label="Назад" onClick="{{back}}" style="width: 44px; height: 44px; border-radius: 22px; border: none; background: none; display: flex; align-items: center; justify-content: center; color: #24405c; cursor: pointer; padding: 0; flex: none">
+<svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" style="fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round"><path d="{{ic.chevL}}"></path></svg>
+</button>
+<span style="width: 42px; height: 42px; border-radius: 14px; background: {{accent}}; color: #ffffff; display: flex; align-items: center; justify-content: center; flex: none">
+<svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true" style="fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round"><path d="{{ic.spark}}"></path></svg>
+</span>
+<div style="flex: 1; min-width: 0">
+<div style="font-size: 16px; font-weight: 800">Barb підбір</div>
+<div style="font-size: 13px; color: #5a6e84">3 питання — і готовий список</div>
+</div>
+<button type="button" onClick="{{A.restart}}" style="height: 40px; padding: 0 12px; border-radius: 20px; border: none; background: #eef3f8; color: #24405c; font-family: inherit; font-size: 14px; font-weight: 700; cursor: pointer; flex: none">Заново</button>
+</div>
+<div style="flex: 1; min-height: 0; overflow-y: auto; scrollbar-width: none; padding: 18px 16px 40px; display: flex; flex-direction: column; gap: 10px">
+<sc-for list="{{A.msgs}}" as="m" hint-placeholder-count="2">
+<div style="align-self: {{m.align}}; max-width: 82%; padding: 11px 14px; border-radius: {{m.radius}}; background: {{m.bg}}; color: {{m.fg}}; font-size: 15px; line-height: 1.4; box-shadow: {{m.sh}}">{{m.text}}</div>
+</sc-for>
+<sc-if value="{{A.hasChips}}" hint-placeholder-val="{{ true }}">
+<div style="display: flex; flex-wrap: wrap; gap: 8px; margin-top: 4px">
+<sc-for list="{{A.chips}}" as="c" hint-placeholder-count="4">
+<button type="button" onClick="{{c.pick}}" style="height: 42px; padding: 0 16px; border-radius: 21px; border: 1.5px solid {{accent}}; background: #ffffff; color: {{accentDeep}}; font-family: inherit; font-size: 15px; font-weight: 700; cursor: pointer">{{c.label}}</button>
+</sc-for>
+</div>
+</sc-if>
+<sc-if value="{{A.hasResults}}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; flex-direction: column; gap: 10px; margin-top: 4px">
+<sc-for list="{{A.results}}" as="p" hint-placeholder-count="3">
+<button type="button" onClick="{{p.open}}" style="width: 100%; border: none; background: #ffffff; border-radius: 20px; padding: 14px; display: flex; gap: 12px; align-items: center; text-align: left; font-family: inherit; color: #24405c; cursor: pointer; box-shadow: 0 2px 10px rgba(36, 64, 92, 0.06)">
+<span style="width: 52px; height: 52px; border-radius: 17px; background: {{p.tint}}; display: flex; align-items: center; justify-content: center; font-size: 16px; font-weight: 800; flex: none">{{p.ini}}</span>
+<span style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 3px">
+<span style="font-size: 16px; font-weight: 700; line-height: 1.25">{{p.name}}</span>
+<span style="font-size: 13px; color: #5a6e84">{{p.why}}</span>
+<span style="display: flex; align-items: center; gap: 6px; font-size: 13px; color: #5a6e84">
+<span style="display: inline-flex; align-items: center; gap: 3px; color: {{accentDeep}}; font-weight: 800">
+<svg width="13" height="13" viewBox="0 0 24 24" aria-hidden="true" style="fill: currentColor; stroke: none"><path d="{{ic.star}}"></path></svg>{{p.rating}}</span><span>{{p.reviewsLabel}}</span>
+</span>
+</span>
+<span style="font-size: 14px; font-weight: 800; white-space: nowrap; flex: none">{{p.price}}</span>
+</button>
+</sc-for>
+<button type="button" onClick="{{A.toMap}}" style="height: 48px; border: none; border-radius: 24px; background: #24405c; color: #ffffff; font-family: inherit; font-size: 15px; font-weight: 700; cursor: pointer">Показати на карті</button>
+</div>
+</sc-if>
+</div>
+</section>
+</sc-if>
+
+<sc-if value="{{s.me}}" hint-placeholder-val="{{ false }}">
+<section aria-label="Кабінет клієнта" style="position: absolute; inset: 0; display: flex; flex-direction: column; background: #f4f7fa">
+<div style="flex: 1; min-height: 0; overflow-y: auto; scrollbar-width: none; padding: 56px 16px 110px; display: flex; flex-direction: column; gap: 16px">
+<div style="display: flex; align-items: center; gap: 14px; padding: 0 4px">
+<span style="width: 64px; height: 64px; border-radius: 22px; background: {{accentSoft}}; color: {{accentDeep}}; display: flex; align-items: center; justify-content: center; font-size: 24px; font-weight: 800; flex: none">К</span>
+<div style="display: flex; flex-direction: column; gap: 2px">
+<div style="font-size: 22px; font-weight: 800; letter-spacing: -0.02em">Катерина</div>
+<div style="font-size: 14px; color: #5a6e84">Київ · клієнтка Barb</div>
+</div>
+</div>
+<div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px">
+<sc-for list="{{ME.stats}}" as="x" hint-placeholder-count="3">
+<button type="button" onClick="{{x.open}}" style="border: none; background: #ffffff; border-radius: 18px; padding: 14px 10px; display: flex; flex-direction: column; align-items: center; gap: 3px; font-family: inherit; color: #24405c; cursor: pointer; box-shadow: 0 2px 10px rgba(36, 64, 92, 0.05)">
+<span style="font-size: 22px; font-weight: 800">{{x.v}}</span>
+<span style="font-size: 12.5px; color: #5a6e84; font-weight: 600">{{x.label}}</span>
+</button>
+</sc-for>
+</div>
+<div style="background: #ffffff; border-radius: 22px; overflow: hidden; box-shadow: 0 2px 10px rgba(36, 64, 92, 0.05)">
+<sc-for list="{{ME.rows}}" as="r" hint-placeholder-count="5">
+<button type="button" onClick="{{r.open}}" style="width: 100%; min-height: 58px; border: none; border-bottom: 1px solid #eef2f6; background: none; padding: 0 16px; display: flex; align-items: center; gap: 14px; font-family: inherit; color: #24405c; cursor: pointer; text-align: left">
+<svg width="21" height="21" viewBox="0 0 24 24" aria-hidden="true" style="fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; flex: none"><path d="{{r.icon}}"></path></svg>
+<span style="flex: 1; font-size: 16px; font-weight: 600">{{r.label}}</span>
+<span style="font-size: 14px; color: #5a6e84">{{r.value}}</span>
+<sc-if value="{{r.isToggle}}" hint-placeholder-val="{{ false }}">
+<span style="width: 46px; height: 28px; border-radius: 14px; background: {{r.trackBg}}; position: relative; flex: none">
+<span style="position: absolute; top: 3px; left: {{r.knobX}}px; width: 22px; height: 22px; border-radius: 11px; background: #ffffff; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2); transition: left 0.2s ease"></span>
+</span>
+</sc-if>
+<sc-if value="{{r.isLink}}" hint-placeholder-val="{{ true }}">
+<svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" style="fill: none; stroke: #7a8ea3; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; flex: none"><path d="{{ic.chevR}}"></path></svg>
+</sc-if>
+</button>
+</sc-for>
+</div>
+<div style="background: #24405c; color: #ffffff; border-radius: 22px; padding: 18px; display: flex; flex-direction: column; gap: 8px">
+<div style="font-size: 13px; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; color: #ffc9d6">Barb Pro</div>
+<div style="font-size: 19px; font-weight: 800; line-height: 1.25">Ви майстер або салон?</div>
+<p style="margin: 0; font-size: 14px; line-height: 1.45; color: rgba(255, 255, 255, 0.85)">Заявки, розклад, прайс і чати з клієнтами — в одному застосунку.</p>
+<sc-if value="{{linked}}" hint-placeholder-val="{{ false }}">
+<button type="button" onClick="{{toPro}}" style="margin-top: 6px; align-self: flex-start; height: 44px; padding: 0 18px; border: none; border-radius: 22px; background: #ffffff; color: #24405c; display: flex; align-items: center; gap: 6px; font-family: inherit; font-size: 15px; font-weight: 800; cursor: pointer">Відкрити Barb Pro
+<svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true" style="fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round"><path d="{{ic.chevR}}"></path></svg></button>
+</sc-if>
+<sc-if value="{{unlinked}}" hint-placeholder-val="{{ true }}">
+<a href="Pro.dc.html" style="margin-top: 6px; align-self: flex-start; height: 44px; padding: 0 18px; border-radius: 22px; background: #ffffff; color: #24405c; display: flex; align-items: center; gap: 6px; font-size: 15px; font-weight: 800; text-decoration: none">Відкрити Barb Pro
+<svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true" style="fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round"><path d="{{ic.chevR}}"></path></svg></a>
+</sc-if>
+</div>
+</div>
+</section>
+</sc-if>
+
+<sc-if value="{{s.saved}}" hint-placeholder-val="{{ false }}">
+<section aria-label="Обране" style="position: absolute; inset: 0; display: flex; flex-direction: column; background: #f4f7fa">
+<div style="padding: 52px 12px 12px; background: #ffffff; display: flex; align-items: center; gap: 6px; border-bottom: 1px solid #e3ebf3">
+<button type="button" aria-label="Назад" onClick="{{back}}" style="width: 44px; height: 44px; border-radius: 22px; border: none; background: none; display: flex; align-items: center; justify-content: center; color: #24405c; cursor: pointer; padding: 0; flex: none">
+<svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" style="fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round"><path d="{{ic.chevL}}"></path></svg>
+</button>
+<h1 style="margin: 0; font-size: 22px; font-weight: 800; letter-spacing: -0.02em">Обране</h1>
+</div>
+<div style="flex: 1; min-height: 0; overflow-y: auto; scrollbar-width: none; padding: 16px 16px 40px; display: flex; flex-direction: column; gap: 12px">
+<sc-for list="{{SV.items}}" as="p" hint-placeholder-count="2">
+<div style="background: #ffffff; border-radius: 20px; box-shadow: 0 2px 10px rgba(36, 64, 92, 0.06); padding: 14px; display: flex; gap: 8px; align-items: flex-start">
+<button type="button" onClick="{{p.open}}" style="border: none; background: none; padding: 0; display: flex; gap: 12px; flex: 1; min-width: 0; text-align: left; font-family: inherit; color: #24405c; cursor: pointer">
+<span style="width: 56px; height: 56px; border-radius: 18px; background: {{p.tint}}; display: flex; align-items: center; justify-content: center; font-size: 17px; font-weight: 800; flex: none">{{p.ini}}</span>
+<span style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 3px">
+<span style="font-size: 16px; font-weight: 700; line-height: 1.25">{{p.name}}</span>
+<span style="font-size: 13px; color: #5a6e84">{{p.sub}}</span>
+<span style="display: flex; align-items: center; gap: 6px; font-size: 13px; color: #5a6e84">
+<span style="display: inline-flex; align-items: center; gap: 3px; color: {{accentDeep}}; font-weight: 800">
+<svg width="13" height="13" viewBox="0 0 24 24" aria-hidden="true" style="fill: currentColor; stroke: none"><path d="{{ic.star}}"></path></svg>{{p.rating}}</span><span>{{p.reviewsLabel}}</span><span>·</span><span>{{p.km}}</span>
+</span>
+</span>
+</button>
+<button type="button" aria-label="{{p.favLabel}}" onClick="{{p.toggleFav}}" style="width: 44px; height: 44px; margin: -8px -8px 0 0; border: none; background: none; display: flex; align-items: center; justify-content: center; color: {{p.favColor}}; cursor: pointer; flex: none; padding: 0">
+<svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true" style="fill: {{p.favFill}}; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round"><path d="{{ic.heart}}"></path></svg>
+</button>
+</div>
+</sc-for>
+<sc-if value="{{SV.empty}}" hint-placeholder-val="{{ false }}">
+<div style="padding: 80px 24px 0; display: flex; flex-direction: column; align-items: center; gap: 10px; text-align: center">
+<div style="font-size: 19px; font-weight: 800">Тут поки порожньо</div>
+<p style="margin: 0; font-size: 15px; line-height: 1.45; color: #5a6e84">Натискайте на сердечко в профілі майстра, щоб зберегти його.</p>
+<button type="button" onClick="{{SV.explore}}" style="margin-top: 6px; height: 48px; padding: 0 22px; border: none; border-radius: 24px; background: {{accent}}; color: #ffffff; font-family: inherit; font-size: 15px; font-weight: 700; cursor: pointer">Відкрити карту</button>
+</div>
+</sc-if>
+</div>
+</section>
+</sc-if>
+
+<sc-if value="{{showTabs}}" hint-placeholder-val="{{ false }}">
+<nav aria-label="Основна навігація" style="position: absolute; left: 0; right: 0; bottom: 0; height: 84px; background: rgba(255, 255, 255, 0.97); border-top: 1px solid #e3ebf3; display: flex; justify-content: space-around; align-items: flex-start; padding: 8px 6px 0; box-sizing: border-box; z-index: 40">
+<sc-for list="{{tabs}}" as="t" hint-placeholder-count="5">
+<button type="button" aria-current="{{t.cur}}" onClick="{{t.go}}" style="position: relative; width: 70px; height: 52px; border: none; background: none; padding: 0; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 4px; font-family: inherit; color: {{t.color}}">
+<svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" style="fill: none; stroke: currentColor; stroke-width: 1.9; stroke-linecap: round; stroke-linejoin: round"><path d="{{t.icon}}"></path></svg>
+<span style="font-size: 11.5px; font-weight: {{t.weight}}">{{t.label}}</span>
+<sc-if value="{{t.hasBadge}}" hint-placeholder-val="{{ false }}"><span style="position: absolute; top: -3px; left: 40px; min-width: 19px; height: 19px; border-radius: 10px; background: {{accent}}; color: #ffffff; font-size: 11px; font-weight: 800; display: flex; align-items: center; justify-content: center; padding: 0 5px; box-sizing: border-box; border: 2px solid #ffffff">{{t.badge}}</span></sc-if>
+</button>
+</sc-for>
+</nav>
+</sc-if>
+
+<sc-if value="{{toast.show}}" hint-placeholder-val="{{ false }}">
+<div role="status" style="position: absolute; left: 50%; bottom: 110px; transform: translateX(-50%); background: #24405c; color: #ffffff; font-size: 14px; font-weight: 600; line-height: 1.35; padding: 12px 16px; border-radius: 16px; box-shadow: 0 10px 26px rgba(36, 64, 92, 0.3); z-index: 60; width: max-content; max-width: 320px; text-align: center">{{toast.text}}</div>
+</sc-if>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"start":{"editor":"enum","options":["welcome","home","map","list","search","place","book","done","visits","deals","chat","asst","me"],"default":"welcome"},"accent":{"editor":"color","default":"#e0144c","options":["#e0144c","#f5265f","#c8175d","#24405c"]},"font":{"editor":"enum","options":["Onest","Manrope","Montserrat","Nunito Sans"],"default":"Onest"},"$preview":{"width":390,"height":844}}'>
+var DATA_URL = '/_blob/fa3b6b67b01bcc9461fe3fa8fc588b78';
+var MAP_URL = '/_blob/6fbcaa5014c9b085611d3cbc41428787';
+var ACCENT = '#e0144c';
+var INK = '#24405c';
+var MUTED = '#5a6e84';
+var FONTS = {
+  'Onest': "'Onest', system-ui, -apple-system, 'Segoe UI', sans-serif",
+  'Manrope': "'Manrope', system-ui, -apple-system, 'Segoe UI', sans-serif",
+  'Montserrat': "'Montserrat', system-ui, -apple-system, 'Segoe UI', sans-serif",
+  'Nunito Sans': "'Nunito Sans', system-ui, -apple-system, 'Segoe UI', sans-serif"
+};
+var IC = {
+  home: 'M3.5 10.5L12 3.8l8.5 6.7 M5.5 9v10a1 1 0 0 0 1 1h3.5v-6h4v6h3.5a1 1 0 0 0 1-1V9',
+  map: 'M9 4.5L3.5 6.5v13L9 17.5l6 2l5.5-2v-13L15 6.5z M9 4.5v13 M15 6.5v13',
+  tag: 'M20.6 13.4l-7.2 7.2a1.5 1.5 0 0 1-2.1 0L3.5 12.8V4.5a1 1 0 0 1 1-1h8.3l7.8 7.8a1.5 1.5 0 0 1 0 2.1z M8 8h.01',
+  calendar: 'M5 5.5h14a1 1 0 0 1 1 1V19a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6.5a1 1 0 0 1 1-1z M4 10h16 M8.5 3.5v4 M15.5 3.5v4',
+  user: 'M16 8a4 4 0 1 1-8 0a4 4 0 1 1 8 0z M4.5 20.5a7.5 7.5 0 0 1 15 0',
+  search: 'M18 11a7 7 0 1 1-14 0a7 7 0 1 1 14 0z M20.5 20.5l-4.6-4.6',
+  pin: 'M12 21s-6.5-5.8-6.5-11a6.5 6.5 0 1 1 13 0c0 5.2-6.5 11-6.5 11z M14.5 10a2.5 2.5 0 1 1-5 0a2.5 2.5 0 1 1 5 0z',
+  chevL: 'M15 5l-7 7l7 7',
+  chevR: 'M9 5l7 7l-7 7',
+  chevD: 'M6 9l6 6l6-6',
+  star: 'M12 3.2l2.7 5.5l6 .9l-4.35 4.25l1.03 6l-5.38-2.83l-5.38 2.83l1.03-6L3.3 9.6l6-.9z',
+  heart: 'M12 20.3s-8-4.9-8-10.5a4.6 4.6 0 0 1 8-3.1a4.6 4.6 0 0 1 8 3.1c0 5.6-8 10.5-8 10.5z',
+  msg: 'M20.5 11.5a8 8 0 0 1-11.8 7L3.5 20l1.6-4.8A8 8 0 1 1 20.5 11.5z',
+  x: 'M6 6l12 12 M18 6L6 18',
+  check: 'M5 12.5l4.5 4.5L19 7.5',
+  plus: 'M12 5v14 M5 12h14',
+  minus: 'M5 12h14',
+  clock: 'M21 12a9 9 0 1 1-18 0a9 9 0 1 1 18 0z M12 7.5V12l3 2',
+  locate: 'M12 3v3 M12 18v3 M3 12h3 M18 12h3 M17 12a5 5 0 1 1-10 0a5 5 0 1 1 10 0z',
+  route: 'M12 2.8l9.2 9.2l-9.2 9.2L2.8 12z M9.5 14.5V12a1 1 0 0 1 1-1h4 M13 9l2 2l-2 2',
+  share: 'M12 3.5v11 M8 7.5l4-4l4 4 M5 12v6.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V12',
+  spark: 'M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9z M18.5 15l.8 1.7l1.7.8l-1.7.8l-.8 1.7l-.8-1.7l-1.7-.8l1.7-.8z',
+  list: 'M9 6.5h11 M9 12h11 M9 17.5h11 M4.5 6.5h.01 M4.5 12h.01 M4.5 17.5h.01',
+  sort: 'M4 7h16 M7 12h10 M10 17h4',
+  bell: 'M6 16.5V11a6 6 0 1 1 12 0v5.5l1.5 2h-15z M10 20.5a2 2 0 0 0 4 0',
+  globe: 'M21 12a9 9 0 1 1-18 0a9 9 0 1 1 18 0z M3 12h18 M12 3c2.4 2.6 3.6 5.6 3.6 9s-1.2 6.4-3.6 9c-2.4-2.6-3.6-5.6-3.6-9S9.6 5.6 12 3z',
+  insta: 'M7.5 3.5h9a4 4 0 0 1 4 4v9a4 4 0 0 1-4 4h-9a4 4 0 0 1-4-4v-9a4 4 0 0 1 4-4z M15.5 12a3.5 3.5 0 1 1-7 0a3.5 3.5 0 1 1 7 0z M17 7h.01',
+  ext: 'M14 4h6v6 M20 4l-9 9 M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5',
+  send: 'M4 12L20 4l-6 16l-2.5-6.5z M11.5 13.5L20 4',
+  photo: 'M4.5 5h15a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1h-15a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1z M3.5 16l5-5l4 4l2.5-2.5l5.5 5 M15.5 9.5h.01',
+  scissors: 'M9 6.5a2.5 2.5 0 1 1-5 0a2.5 2.5 0 1 1 5 0z M9 17.5a2.5 2.5 0 1 1-5 0a2.5 2.5 0 1 1 5 0z M8.6 7.9L20 17 M8.6 16.1L20 7',
+  polish: 'M10 3.5h4V7h-4z M8.5 7h7a1 1 0 0 1 1 1v11.5a1.5 1.5 0 0 1-1.5 1.5h-6a1.5 1.5 0 0 1-1.5-1.5V8a1 1 0 0 1 1-1z M7.5 12.5h9',
+  eye: 'M2.5 12s3.5-6.5 9.5-6.5s9.5 6.5 9.5 6.5s-3.5 6.5-9.5 6.5S2.5 12 2.5 12z M14.8 12a2.8 2.8 0 1 1-5.6 0a2.8 2.8 0 1 1 5.6 0z',
+  face: 'M21 12a9 9 0 1 1-18 0a9 9 0 1 1 18 0z M8.5 14.5s1.2 1.8 3.5 1.8s3.5-1.8 3.5-1.8 M9 9.5h.01 M15 9.5h.01',
+  zap: 'M13 2.5L5 13.5h6l-1 8l8-11h-6z',
+  lotus: 'M12 20c-4.4 0-8-3-8-7c3 0 5.6 1 8 3.6c2.4-2.6 5-3.6 8-3.6c0 4-3.6 7-8 7z M12 16.6C9.8 13 9.8 8.8 12 4.5c2.2 4.3 2.2 8.5 0 12.1z',
+  lipstick: 'M8.5 21h7v-8h-7z M9.5 13V8.5L14.5 5v8',
+  pen: 'M15.5 4.5l4 4L9 19l-5 1l1-5z M13.5 6.5l4 4'
+};
+var CAT_IC = { hair: IC.scissors, nails: IC.polish, brows: IC.eye, face: IC.face, removal: IC.zap, body: IC.lotus, makeup: IC.lipstick, pmu: IC.pen, all: IC.list };
+var WD = ['Нд', 'Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб'];
+var MG = ['січня', 'лютого', 'березня', 'квітня', 'травня', 'червня', 'липня', 'серпня', 'вересня', 'жовтня', 'листопада', 'грудня'];
+var MS = ['січ', 'лют', 'бер', 'квіт', 'трав', 'черв', 'лип', 'серп', 'вер', 'жовт', 'лист', 'груд'];
+var SLOTS = ['09:00', '09:30', '10:00', '10:30', '11:00', '11:30', '12:00', '12:30', '13:00', '13:30', '14:00', '14:30', '15:00', '15:30', '16:00', '16:30', '17:00', '17:30', '18:00', '18:30', '19:00', '19:30', '20:00'];
+var SORTS = { rating: 'За рейтингом', near: 'Поруч', price: 'Дешевші', reviews: 'За відгуками' };
+var SORT_ORDER = ['rating', 'near', 'price', 'reviews'];
+var STATUS = { pending: ['Очікує підтвердження', '#fff4dc', '#7a5200'], confirmed: ['Підтверджено', '#e3f3ea', '#1f7a52'], declined: ['Відхилено', '#fdeceb', '#b42318'] };
+var SCREENS = { welcome: ['W', 'welcomeData'], home: ['H', 'homeData'], search: ['S', 'searchData'], list: ['L', 'listData'], map: ['M', 'mapData'], place: ['P', 'placeData'], book: ['B', 'bookData'], done: ['DN', 'doneData'], visits: ['V', 'visitsData'], deals: ['DL', 'dealsData'], deal: ['DD', 'dealData'], chat: ['C', 'chatData'], chats: ['CL', 'chatsData'], asst: ['A', 'asstData'], me: ['ME', 'meData'], saved: ['SV', 'savedData'] };
+var TAB_SCREENS = ['home', 'map', 'deals', 'visits', 'me'];
+var DB = null, DB_P = null, PL = {}, CAT = {};
+
+function rgb(h) { h = String(h || '').replace('#', ''); if (h.length === 3) h = h.split('').map(function (c) { return c + c; }).join(''); var n = parseInt(h, 16); if (isNaN(n)) n = 0xe0144c; return [(n >> 16) & 255, (n >> 8) & 255, n & 255]; }
+function mix(a, b, t) { var A = rgb(a), B = rgb(b); return '#' + A.map(function (v, i) { var c = Math.round(v * (1 - t) + B[i] * t); return ('0' + c.toString(16)).slice(-2); }).join(''); }
+function fmt(n) { return String(n).replace(/\B(?=(\d{3})+(?!\d))/g, ' '); }
+function plural(n, a, b, c) { var m10 = n % 10, m100 = n % 100; if (m10 === 1 && m100 !== 11) return a; if (m10 >= 2 && m10 <= 4 && (m100 < 10 || m100 >= 20)) return b; return c; }
+function revLabel(n) { return n + ' ' + plural(n, 'відгук', 'відгуки', 'відгуків'); }
+function kmLabel(k) { return k < 1 ? Math.round(k * 1000) + ' м' : String(k).replace('.', ',') + ' км'; }
+function rLabel(r) { return r >= 10 ? '10' : String(r); }
+function durText(m) { if (!m) return ''; var h = Math.floor(m / 60), mm = m % 60; return (h ? h + ' год' : '') + (h && mm ? ' ' : '') + (mm ? mm + ' хв' : ''); }
+function initials(name) { var w = String(name).replace(/[«»"]/g, '').split(/\s+/).filter(Boolean); return (((w[0] || '')[0] || '') + ((w[1] || '')[0] || '')).toUpperCase(); }
+function hhmm(d) { return ('0' + d.getHours()).slice(-2) + ':' + ('0' + d.getMinutes()).slice(-2); }
+function dayList() { var out = []; var now = new Date(); for (var i = 0; i < 14; i++) { var d = new Date(now.getFullYear(), now.getMonth(), now.getDate() + i); out.push({ i: i, wd: i === 0 ? 'Сьогодні' : (i === 1 ? 'Завтра' : WD[d.getDay()]), dw: WD[d.getDay()], num: d.getDate(), mon: MS[d.getMonth()], long: WD[d.getDay()] + ', ' + d.getDate() + ' ' + MG[d.getMonth()] }); } return out; }
+function hashStr(s) { var h = 2166136261; for (var i = 0; i < s.length; i++) { h ^= s.charCodeAt(i); h = Math.imul(h, 16777619); } return h >>> 0; }
+function slotsFor(pid, day) { var h = hashStr(pid + '|' + day); var now = new Date(); var cur = now.getHours() * 60 + now.getMinutes(); return SLOTS.map(function (t) { h = (Math.imul(h, 1103515245) + 12345) >>> 0; var p = t.split(':'); var m = (+p[0]) * 60 + (+p[1]); var busy = ((h >>> 9) % 100) < 42; if (day === 0 && m < cur + 60) busy = true; return { t: t, busy: busy, m: m }; }); }
+function firstFree(pid, day, after) { var s = slotsFor(pid, day); for (var i = 0; i < s.length; i++) { if (!s[i].busy && s[i].m >= (after || 0)) return s[i].t; } return null; }
+function catMin(p, cat) { return (cat && cat !== 'all' && p.cmin && p.cmin[cat]) || p.min || 0; }
+function priceFrom(v) { return v ? ('від ' + fmt(v) + ' грн') : 'ціни за запитом'; }
+function findSvc(p, name) { var f = null; p.groups.forEach(function (g, gi) { g[2].forEach(function (r, ri) { if (!f && r[0] === name) f = { k: p.id + '|' + gi + '|' + ri, n: r[0], price: r[1], v: r[2], dur: r[3], dm: r[4], gi: gi }; }); }); return f; }
+function svcItem(p, gi, ri) { var r = p.groups[gi][2][ri]; return { k: p.id + '|' + gi + '|' + ri, n: r[0], price: r[1], v: r[2], dur: r[3], dm: r[4], gi: gi }; }
+
+function prepDB(d) {
+  PL = {}; CAT = { all: { k: 'all', n: 'Усі', full: 'Усі майстри й салони', sub: [] } };
+  d.places.forEach(function (p) { PL[p.id] = p; });
+  d.cats.forEach(function (c) { CAT[c.k] = c; });
+  d.deals.forEach(function (x) {
+    if (x.pid && PL[x.pid]) {
+      x.svcObj = findSvc(PL[x.pid], x.svc);
+    } else {
+      var id = 'deal-' + x.id;
+      var price = x.now ? ((x.frm ? 'від ' : '') + fmt(x.now) + ' грн') : 'за запитом';
+      PL[id] = { id: id, name: x.who, type: 'salon', title: x.role, rating: 0, reviews: 0, addr: x.dist, district: '', metro: '', ini: initials(x.who), tint: '#ffe1e8', x: 55, y: 55, km: 0, min: x.now || 0, cmin: {}, cats: [x.cat], ig: '', url: x.url, nsvc: 1, groups: [['Акція', '', [[x.t, price, x.now || 0, '', 0]]]], pseudo: true };
+      x.pidX = id;
+      x.svcObj = { k: id + '|0|0', n: x.t, price: price, v: x.now || 0, dur: '', dm: 0, gi: 0 };
+    }
+  });
+  DB = d;
+}
+function loadDB() {
+  if (DB) return Promise.resolve(DB);
+  if (!DB_P) {
+    DB_P = fetch(DATA_URL).then(function (r) { if (!r.ok) throw new Error('data ' + r.status); return r.json(); }).then(function (d) { prepDB(d); return d; }).catch(function (e) { DB_P = null; throw e; });
+  }
+  return DB_P;
+}
+
+class Component extends DCLogic {
+  componentDidMount() {
+    var self = this;
+    this._alive = true;
+    this._jump = this.props.jump;
+    loadDB().then(function () { if (self._alive) self.setState(Object.assign({ ready: true }, self.seed())); }).catch(function () { if (self._alive) self.setState({ failed: true }); });
+  }
+  componentWillUnmount() { this._alive = false; (this._t || []).forEach(function (t) { clearTimeout(t); }); }
+  componentDidUpdate() { this.applyJump(); this.applyDecisions(); this.reportScreen(); this.syncMap(); this.syncChat(); }
+
+  applyJump() {
+    var j = this.props.jump;
+    if (!j || j === this._jump || !DB || !(this.state && this.state.ready)) return;
+    this._jump = j;
+    var target = String(j).split(':')[0]; var arg = '';
+    if (target.indexOf('|') >= 0) { arg = target.split('|')[1]; target = target.split('|')[0]; }
+    if (target === 'reset') { this._reported = null; this.setState(Object.assign(this.base(), this.seed(), { ready: true })); return; }
+    if (!SCREENS[target]) return;
+    var st = this.st();
+    var patch = { screen: target, hist: [], asking: null };
+    if (target === 'place' && arg && PL[arg]) Object.assign(patch, { pid: arg, pTab: 'services', svcQ: '', openG: null, sel: st.pid === arg ? st.sel : [] });
+    if (target === 'done' && !st.bookings.length) {
+      var b = this.makeBooking('vshevchyk', [findSvc(PL.vshevchyk, 'Біозавивка волосся')].filter(Boolean), 2, firstFree('vshevchyk', 2, 11 * 60) || '11:30');
+      patch.bookings = [b]; patch.lastId = b.id;
+    }
+    if (target === 'asst') patch.asst = { step: 0 };
+    if (target === 'search') patch.q = '';
+    this.setState(patch);
+  }
+  applyDecisions() {
+    var dec = this.props.decisions;
+    if (!dec || typeof dec !== 'object' || this.props.visible === false || !(this.state && this.state.ready)) return;
+    var st = this.st(); var msg = ''; var changed = false;
+    var list = st.bookings.map(function (b) {
+      var d = dec[b.id];
+      if (d && b.status === 'pending') { changed = true; msg = d === 'confirmed' ? 'Запис підтверджено · ' + PL[b.pid].name : 'Майстер не зможе в цей час — оберіть інший'; return Object.assign({}, b, { status: d }); }
+      return b;
+    });
+    if (changed) { this.setState({ bookings: list }); this.toast(msg); }
+  }
+  reportScreen() {
+    if (typeof this.props.onScreen !== 'function' || !(this.state && this.state.ready)) return;
+    var scr = this.st().screen;
+    if (scr !== this._reported) { this._reported = scr; this.props.onScreen(scr); }
+  }
+  later(fn, ms) { var self = this; var t = setTimeout(function () { if (self._alive) fn(); }, ms); (this._t = this._t || []).push(t); }
+
+  base() {
+    return { screen: this.props.start || 'welcome', hist: [], q: '', cat: 'hair', typeF: 'all', sort: 'rating', pid: 'vshevchyk', pTab: 'services', openG: null, sel: [], svcQ: '', day: 1, time: '', bookings: [], lastId: null, reId: null, favs: ['vshevchyk', 'epilyaciakiev'], chatId: 'vshevchyk', chats: {}, draft: '', typing: false, mapSel: null, mapCat: 'all', zoom: 0, dealId: 'd1', dealF: 'all', visTab: 'up', asking: null, asst: { step: 0 }, remind: true, toast: '' };
+  }
+  st() { return Object.assign(this.base(), this.state || {}); }
+
+  seed() {
+    var start = this.props.start || 'welcome';
+    var s = {};
+    var vs = PL.vshevchyk;
+    if (!vs) return s;
+    if (start === 'map') { s.mapSel = 'beauty-laser'; s.zoom = 1; }
+    if (start === 'place') {
+      var a = findSvc(vs, 'Тонування волосся');
+      s.sel = a ? [a] : []; s.openG = {}; if (a) s.openG[a.gi] = true;
+    }
+    if (start === 'book') {
+      s.sel = [findSvc(vs, 'Жіноча стрижка'), findSvc(vs, 'Тонування волосся')].filter(Boolean);
+      s.day = 2; s.time = firstFree('vshevchyk', 2, 11 * 60) || '';
+    }
+    if (start === 'done' || start === 'visits' || start === 'me') {
+      var b = this.makeBooking('vshevchyk', [findSvc(vs, 'Біозавивка волосся')].filter(Boolean), 2, firstFree('vshevchyk', 2, 11 * 60) || '11:30');
+      b.status = start === 'done' ? 'pending' : 'confirmed';
+      s.bookings = [b]; s.lastId = b.id;
+      var yu = PL.yuliayudina;
+      if (start === 'visits' && yu) {
+        var ys = findSvc(yu, 'Лазерна епіляція обличчя повністю') || svcItem(yu, 0, 0);
+        var b2 = this.makeBooking('yuliayudina', [ys], 5, firstFree('yuliayudina', 5, 17 * 60) || '18:00');
+        b2.id = b2.id + 'y'; b2.status = 'pending';
+        s.bookings = [b, b2];
+      }
+    }
+    if (start === 'chat') {
+      var t1 = firstFree('vshevchyk', 2, 10 * 60) || '11:30', t2 = firstFree('vshevchyk', 3, 15 * 60) || '16:00';
+      var dl = dayList();
+      s.chats = { vshevchyk: [
+        { mine: true, text: 'Добрий день! Чи є вільний час на біозавивку цього тижня?', time: '10:12' },
+        { mine: false, text: 'Добрий день! Так: ' + dl[2].long + ' о ' + t1 + ' або ' + dl[3].long + ' о ' + t2 + '. Записати вас?', time: '10:20', cta: true }
+      ] };
+    }
+    if (start === 'asst') s.asst = { step: 3, cat: 'nails', area: 'left', budget: 1500 };
+    return s;
+  }
+
+  go(screen, patch) { var st = this.st(); var h = st.hist.concat([st.screen]).slice(-24); this.setState(Object.assign({ screen: screen, hist: h, asking: null }, patch || {})); }
+  back() { var st = this.st(); var h = st.hist.slice(); var prev = h.pop() || 'home'; this.setState({ screen: prev, hist: h, asking: null }); }
+  tab(k) { this.setState({ screen: k, hist: [], asking: null }); }
+  toast(text) { var self = this; var id = (this._toastId || 0) + 1; this._toastId = id; this.setState({ toast: text }); this.later(function () { if (self._toastId === id) self.setState({ toast: '' }); }, 2400); }
+  openPlace(pid, patch) { var st = this.st(); if (!PL[pid] || PL[pid].pseudo) return; var p = Object.assign({ pid: pid, pTab: 'services', svcQ: '', openG: null }, patch || {}); if (pid !== st.pid && !(patch && patch.sel)) p.sel = []; this.go('place', p); }
+  startBook(pid, patch) { var st = this.st(); var p = Object.assign({ pid: pid, time: '', reId: null }, patch || {}); if (pid !== st.pid && !(patch && patch.sel)) p.sel = []; if (p.day === undefined) p.day = st.day || 1; this.go('book', p); }
+  openChat(pid) { this.go('chat', { chatId: pid, draft: '', typing: false }); }
+  toggleFav(pid) { var st = this.st(); var f = st.favs.slice(); var i = f.indexOf(pid); if (i >= 0) { f.splice(i, 1); this.setState({ favs: f }); this.toast('Прибрано з обраного'); } else { f.push(pid); this.setState({ favs: f }); this.toast('Додано в обране'); } }
+  toggleSel(item) { var st = this.st(); var sel = st.sel.slice(); var idx = -1; sel.forEach(function (x, j) { if (x.k === item.k) idx = j; }); if (idx >= 0) sel.splice(idx, 1); else sel.push(item); this.setState({ sel: sel }); }
+
+  totals(svcs) {
+    var sum = 0, from = false, ask = false, dm = 0, known = true;
+    svcs.forEach(function (x) { if (x.v) sum += x.v; else ask = true; if (/від/.test(x.price)) from = true; if (x.dm) dm += x.dm; else known = false; });
+    var total = sum ? ((from ? 'від ' : '') + fmt(sum) + ' грн') : 'за запитом';
+    if (sum && ask) total += ' +';
+    var dl = dm ? ((known ? 'Тривалість ' : 'Тривалість від ') + durText(dm)) : 'Тривалість уточнить майстер';
+    return { total: total, durLabel: dl, dm: dm };
+  }
+  makeBooking(pid, svcs, day, time) {
+    var dd = dayList()[day] || dayList()[1];
+    var tot = this.totals(svcs);
+    return { id: 'b' + Date.now() + Math.floor(Math.random() * 1000), pid: pid, svcs: svcs, day: day, num: dd.num, mon: dd.mon, dw: dd.dw, long: dd.long, time: time, total: tot.total, durLabel: tot.durLabel, status: 'pending' };
+  }
+  sortedBookings(st) { return st.bookings.slice().sort(function (a, b) { return (a.day - b.day) || (a.time < b.time ? -1 : (a.time > b.time ? 1 : 0)); }); }
+  confirmBooking() {
+    var st = this.st(); if (!st.sel.length || !st.time) return;
+    var self = this;
+    var b = this.makeBooking(st.pid, st.sel.slice(), st.day, st.time);
+    var list = st.bookings.filter(function (x) { return x.id !== st.reId; }).concat([b]);
+    this.setState({ bookings: list, lastId: b.id, screen: 'done', hist: [], sel: [], time: '', reId: null });
+    if (typeof this.props.onBooked === 'function' && b.pid === 'vshevchyk') {
+      this.props.onBooked({ id: b.id, day: b.day, long: b.long, time: b.time, svc: b.svcs.map(function (x) { return x.n; }).join(', '), total: b.total, dur: b.durLabel.replace(/^Тривалість\s*/, '') });
+      return;
+    }
+    this.later(function () {
+      var s2 = self.st();
+      if (!s2.bookings.some(function (x) { return x.id === b.id; })) return;
+      self.setState({ bookings: s2.bookings.map(function (x) { return x.id === b.id ? Object.assign({}, x, { status: 'confirmed' }) : x; }) });
+      self.toast('Запис підтверджено · ' + PL[b.pid].name);
+    }, 6000);
+  }
+
+  sendMsg(text) {
+    var st = this.st(); text = String(text || '').trim(); if (!text) return;
+    var self = this; var pid = st.chatId;
+    var chats = Object.assign({}, st.chats); var arr = (chats[pid] || []).slice();
+    arr.push({ mine: true, text: text, time: hhmm(new Date()) }); chats[pid] = arr;
+    this.setState({ chats: chats, draft: '', typing: true });
+    this.later(function () {
+      var s2 = self.st(); var c2 = Object.assign({}, s2.chats); var a2 = (c2[pid] || []).slice();
+      var r = self.reply(pid, text);
+      a2.push({ mine: false, text: r, time: hhmm(new Date()), cta: true }); c2[pid] = a2;
+      self.setState({ chats: c2, typing: false });
+    }, 1600);
+  }
+  reply(pid, text) {
+    var p = PL[pid]; var t = text.toLowerCase();
+    if (/скільки|ціна|ціну|варт|коштує/.test(t)) return 'Добрий день! Орієнтуйтеся на прайс у профілі — точну вартість підкажемо на консультації перед процедурою.';
+    if (/адрес|знайти|де ви|метро/.test(t)) return 'Ми за адресою: ' + p.addr + (p.metro ? ', ' + p.metro : '') + '. Чекаємо на вас!';
+    if (/трива|довго/.test(t)) return 'Залежить від процедури — тривалість указана біля кожної послуги в прайсі.';
+    var s1 = firstFree(pid, 1, 10 * 60), s2 = firstFree(pid, 1, 15 * 60);
+    return 'Добрий день! Завтра є вільні вікна' + (s1 ? ' о ' + s1 : '') + (s2 && s2 !== s1 ? ' і ' + s2 : '') + '. Записати вас?';
+  }
+
+  mapDims(z) { var Z = [1, 1.6, 2.4][z] || 1; var h = Math.round(844 * Z); return { w: Math.round(h * 1.25), h: h }; }
+  mapRef() {
+    var self = this;
+    if (!this._mapRefFn) this._mapRefFn = function (el) {
+      if (el) { if (el !== self._mapEl) { self._mapEl = el; self._mapKey = null; setTimeout(function () { self.syncMap(true); }, 0); } }
+      else self._mapEl = null;
+    };
+    return this._mapRefFn;
+  }
+  chatRef() {
+    var self = this;
+    if (!this._chatRefFn) this._chatRefFn = function (el) {
+      if (el) { if (el !== self._chatEl) { self._chatEl = el; self._chatN = -1; setTimeout(function () { self.syncChat(); }, 0); } }
+      else self._chatEl = null;
+    };
+    return this._chatRefFn;
+  }
+  centerMap(smooth) {
+    var el = this._mapEl; if (!el || !DB) return;
+    var st = this.st(); var p = st.mapSel && PL[st.mapSel];
+    var t = p ? { x: p.x, y: p.y } : (this._focus || { x: DB.you[0], y: DB.you[1] });
+    this._focus = null;
+    var left = t.x / 100 * el.scrollWidth - el.clientWidth / 2;
+    var top = t.y / 100 * el.scrollHeight - el.clientHeight * (p ? 0.4 : 0.5);
+    try { el.scrollTo({ left: Math.max(0, left), top: Math.max(0, top), behavior: smooth ? 'smooth' : 'auto' }); } catch (e) { el.scrollLeft = Math.max(0, left); el.scrollTop = Math.max(0, top); }
+  }
+  syncMap(first) {
+    if (!this._mapEl || !DB) return;
+    var st = this.st(); var key = st.zoom + '|' + (st.mapSel || '');
+    if (first || key !== this._mapKey) { var instant = first || this._mapKey === null; this._mapKey = key; this.centerMap(!instant); }
+  }
+  syncChat() {
+    var el = this._chatEl; if (!el) return;
+    var st = this.st(); var n = (st.chats[st.chatId] || []).length + (st.typing ? 1 : 0);
+    if (n !== this._chatN) { this._chatN = n; el.scrollTop = el.scrollHeight; }
+  }
+  zoomBy(d) {
+    var st = this.st(); var z = Math.max(0, Math.min(2, st.zoom + d)); if (z === st.zoom) return;
+    var el = this._mapEl;
+    if (el && !st.mapSel) this._focus = { x: (el.scrollLeft + el.clientWidth / 2) / el.scrollWidth * 100, y: (el.scrollTop + el.clientHeight / 2) / el.scrollHeight * 100 };
+    this.setState({ zoom: z });
+  }
+  locate() { this._focus = { x: DB.you[0], y: DB.you[1] }; var st = this.st(); if (st.mapSel) this.setState({ mapSel: null }); else this.centerMap(true); }
+
+  card(p, cat, st) {
+    var self = this; var a = this._a; var fav = st.favs.indexOf(p.id) >= 0; var v = catMin(p, cat);
+    return {
+      id: p.id, name: p.name, ini: p.ini, tint: p.tint, title: p.title,
+      sub: p.title + ' · ' + p.district + ' р-н',
+      rating: rLabel(p.rating), reviewsLabel: revLabel(p.reviews), km: kmLabel(p.km),
+      addr: p.addr + (p.metro ? ' · ' + p.metro : ''),
+      priceLabel: 'Ціни від', price: v ? (fmt(v) + ' грн') : 'за запитом',
+      favColor: fav ? a : '#7a8ea3', favFill: fav ? a : 'none', favLabel: fav ? 'Прибрати з обраного' : 'Додати в обране',
+      open: function () { self.openPlace(p.id); },
+      book: function () { self.startBook(p.id); },
+      toggleFav: function () { self.toggleFav(p.id); }
+    };
+  }
+  dealCard(d) {
+    var self = this; var badge, fs = 19;
+    if (d.gift) { badge = '1+1'; fs = 20; } else if (d.off) { badge = '−' + d.off + '%'; } else if (d.now) { badge = fmt(d.now) + ' ₴'; fs = 15; } else { badge = '%'; }
+    var price = d.now ? ((d.frm ? 'від ' : '') + fmt(d.now) + ' грн') : (d.svcObj ? d.svcObj.price : '');
+    return { id: d.id, badge: badge, badgeFs: fs, t: d.t, who: d.who, role: d.role, dist: d.dist, price: price, old: d.old ? (fmt(d.old) + ' грн') : '', till: d.till ? ('до ' + d.till) : 'безстроково', open: function () { self.go('deal', { dealId: d.id }); } };
+  }
+
+  renderVals() {
+    var self = this;
+    var accent = this.props.accent || ACCENT;
+    this._a = accent;
+    var out = { font: FONTS[this.props.font] || FONTS.Onest, accent: accent, accentSoft: mix(accent, '#ffffff', 0.88), accentDeep: mix(accent, '#000000', 0.2), map: MAP_URL, ic: IC, back: function () { self.back(); }, s: {}, tabs: [], showTabs: false, toast: { show: false, text: '' }, loading: false };
+    out.linked = typeof this.props.onRole === 'function';
+    out.unlinked = !out.linked;
+    out.toPro = function () { if (typeof self.props.onRole === 'function') self.props.onRole('pro'); };
+    Object.keys(SCREENS).forEach(function (k) { out[SCREENS[k][0]] = {}; });
+    if (!DB || !(this.state && this.state.ready)) { out.loading = true; return out; }
+    var st = this.st();
+    var scr = SCREENS[st.screen] ? st.screen : 'home';
+    Object.keys(SCREENS).forEach(function (k) { out.s[k] = scr === k; });
+    out.showTabs = TAB_SCREENS.indexOf(scr) >= 0;
+    out.tabs = this.tabsData(st, scr);
+    out.toast = { show: !!st.toast, text: st.toast };
+    out[SCREENS[scr][0]] = this[SCREENS[scr][1]](st);
+    return out;
+  }
+
+  tabsData(st, scr) {
+    var self = this; var a = this._a;
+    var pending = st.bookings.filter(function (b) { return b.status === 'pending'; }).length;
+    return [['home', 'Головна', IC.home], ['map', 'Карта', IC.map], ['deals', 'Акції', IC.tag], ['visits', 'Записи', IC.calendar], ['me', 'Профіль', IC.user]].map(function (t) {
+      var on = scr === t[0]; var badge = t[0] === 'visits' ? pending : 0;
+      return { label: t[1], icon: t[2], color: on ? a : MUTED, weight: on ? 800 : 600, cur: on ? 'page' : 'false', hasBadge: badge > 0, badge: String(badge), go: function () { self.tab(t[0]); } };
+    });
+  }
+
+  welcomeData(st) {
+    var self = this; var a = this._a;
+    return {
+      pins: DB.places.map(function (p) { return { x: p.x, y: p.y, label: rLabel(p.rating), bg: p.id === 'vshevchyk' ? a : INK }; }),
+      you: { x: DB.you[0], y: DB.you[1] }, pros: DB.stats.pros, procs: DB.stats.procs,
+      start: function () { self.tab('home'); }
+    };
+  }
+
+  homeData(st) {
+    var self = this;
+    var hr = new Date().getHours();
+    var greet = (hr < 5 ? 'Доброї ночі' : hr < 12 ? 'Доброго ранку' : hr < 18 ? 'Доброго дня' : 'Доброго вечора') + ', Катерино';
+    var up = this.sortedBookings(st).filter(function (b) { return b.status !== 'declined'; })[0];
+    var next = {};
+    if (up) {
+      var p = PL[up.pid]; var conf = up.status === 'confirmed';
+      next = { num: up.num, mon: up.mon, title: up.svcs.length ? (up.svcs[0].n + (up.svcs.length > 1 ? ' +' + (up.svcs.length - 1) : '')) : p.name, sub: p.name + ' · ' + up.dw + ', ' + up.time, st: conf ? 'Підтверджено' : 'Очікує', stBg: conf ? '#e3f3ea' : 'rgba(255, 255, 255, 0.16)', stFg: conf ? '#1f7a52' : '#ffffff', open: function () { self.tab('visits'); } };
+    }
+    var top = DB.places.slice().sort(function (a, b) { return (b.rating + Math.log10(b.reviews + 1)) - (a.rating + Math.log10(a.reviews + 1)); }).slice(0, 4);
+    return {
+      greet: greet, hasNext: !!up, next: next,
+      chatDot: Object.keys(st.chats).some(function (k) { return (st.chats[k] || []).length > 0; }),
+      cats: DB.cats.map(function (c) { return { n: c.n, icon: CAT_IC[c.k], open: function () { self.go('list', { cat: c.k, typeF: 'all', sort: 'rating' }); } }; }),
+      deals: DB.deals.slice(0, 6).map(function (d) { return self.dealCard(d); }),
+      dealsCount: DB.stats.kyivDeals,
+      top: top.map(function (p) { return self.card(p, null, st); }),
+      toMap: function () { self.tab('map'); },
+      openChats: function () { self.go('chats'); },
+      openSaved: function () { self.go('saved'); },
+      openSearch: function () { self.go('search', { q: '' }); },
+      openAsst: function () { self.go('asst', { asst: { step: 0 } }); },
+      toDeals: function () { self.tab('deals'); }
+    };
+  }
+
+  searchData(st) {
+    var self = this; var q = st.q.trim().toLowerCase();
+    var res = {
+      q: st.q, hasQ: !!st.q, noQ: !q,
+      onQ: function (e) { self.setState({ q: e.target.value }); },
+      clear: function () { self.setState({ q: '' }); },
+      popular: DB.popular.map(function (x) { return { label: x[1], count: fmt(x[2]), pick: function () { self.setState({ q: x[0] }); } }; }),
+      cats: DB.cats.map(function (c) { return { full: c.full, subs: c.sub.map(function (s) { return s[0]; }).join(', '), icon: CAT_IC[c.k], open: function () { self.go('list', { cat: c.k, typeF: 'all', sort: 'rating' }); } }; }),
+      places: [], svcs: [], hasPlaces: false, hasSvcs: false, none: false, noneText: '', svcCount: '0'
+    };
+    if (!q) return res;
+    var places = DB.places.filter(function (p) { return (p.name + ' ' + p.title + ' ' + p.district + ' ' + p.metro + ' ' + p.addr).toLowerCase().indexOf(q) >= 0; }).slice(0, 5);
+    res.places = places.map(function (p) { return self.card(p, null, st); });
+    var svcs = [], per = {}, total = 0;
+    DB.places.slice().sort(function (a, b) { return (b.rating - a.rating) || (b.reviews - a.reviews); }).forEach(function (p) {
+      p.groups.forEach(function (g, gi) { g[2].forEach(function (r, ri) {
+        if (r[0].toLowerCase().indexOf(q) < 0) return;
+        total++;
+        if (svcs.length >= 14 || (per[p.id] || 0) >= 2) return;
+        per[p.id] = (per[p.id] || 0) + 1;
+        var item = svcItem(p, gi, ri);
+        svcs.push({ n: r[0], price: r[1], place: p.name + ' · ' + p.district + ' р-н', open: function () { var o = {}; o[gi] = true; self.openPlace(p.id, { sel: [item], openG: o }); } });
+      }); });
+    });
+    res.svcs = svcs; res.svcCount = fmt(total);
+    res.hasPlaces = res.places.length > 0; res.hasSvcs = svcs.length > 0;
+    res.none = !res.hasPlaces && !res.hasSvcs;
+    res.noneText = 'За запитом «' + st.q.trim() + '» нічого немає серед майстрів Києва. Спробуйте іншу назву послуги.';
+    return res;
+  }
+
+  listItems(st, cat) {
+    var arr = DB.places.filter(function (p) { return cat === 'all' || p.cats.indexOf(cat) >= 0; });
+    if (st.typeF !== 'all') arr = arr.filter(function (p) { return p.type === st.typeF; });
+    var sorters = {
+      rating: function (a, b) { return (b.rating - a.rating) || (b.reviews - a.reviews); },
+      near: function (a, b) { return a.km - b.km; },
+      price: function (a, b) { return (catMin(a, cat) || 1e9) - (catMin(b, cat) || 1e9); },
+      reviews: function (a, b) { return b.reviews - a.reviews; }
+    };
+    return arr.slice().sort(sorters[st.sort] || sorters.rating);
+  }
+  listData(st) {
+    var self = this; var c = CAT[st.cat] || CAT.all;
+    var all = DB.places.filter(function (p) { return c.k === 'all' || p.cats.indexOf(c.k) >= 0; });
+    var n = { all: all.length, master: all.filter(function (p) { return p.type === 'master'; }).length, salon: all.filter(function (p) { return p.type === 'salon'; }).length };
+    var items = this.listItems(st, c.k).map(function (p) { return self.card(p, c.k, st); });
+    return {
+      title: c.full, count: items.length + ' ' + plural(items.length, 'результат', 'результати', 'результатів') + ' у Києві',
+      chips: [['all', 'Усі'], ['master', 'Майстри'], ['salon', 'Салони']].map(function (x) { var on = st.typeF === x[0]; return { label: x[1] + ' · ' + n[x[0]], on: on, bg: on ? INK : '#ffffff', fg: on ? '#ffffff' : INK, bd: on ? INK : '#d5e0ea', pick: function () { self.setState({ typeF: x[0] }); } }; }),
+      sortLabel: SORTS[st.sort] || SORTS.rating,
+      cycleSort: function () { var i = SORT_ORDER.indexOf(st.sort); self.setState({ sort: SORT_ORDER[(i + 1) % SORT_ORDER.length] }); },
+      items: items, none: !items.length,
+      toMap: function () { self.go('map', { mapCat: c.k, mapSel: null }); }
+    };
+  }
+
+  mapData(st) {
+    var self = this; var a = this._a; var dims = this.mapDims(st.zoom);
+    var list = DB.places.filter(function (p) { return st.mapCat === 'all' || p.cats.indexOf(st.mapCat) >= 0; });
+    var selP = st.mapSel && PL[st.mapSel]; if (selP && list.indexOf(selP) < 0) selP = null;
+    var ordered = list.filter(function (p) { return p !== selP; }).concat(selP ? [selP] : []);
+    var pins = ordered.map(function (p, i) { var on = p === selP; return { x: p.x, y: p.y, label: rLabel(p.rating), name: p.name, sel: on, bg: on ? a : INK, h: on ? 34 : 28, px: on ? 12 : 9, fs: on ? 14 : 12, z: on ? 50 : 10 + i, aria: p.name + ', рейтинг ' + rLabel(p.rating), pick: function () { self.setState({ mapSel: p.id }); } }; });
+    var chips = [{ k: 'all', n: 'Усі' }].concat(DB.cats).map(function (c) { var on = st.mapCat === c.k; return { label: c.n, on: on, bg: on ? INK : '#ffffff', fg: on ? '#ffffff' : INK, pick: function () { self.setState({ mapCat: c.k, mapSel: null }); } }; });
+    return {
+      w: dims.w, h: dims.h, setRef: this.mapRef(),
+      labels: DB.labels.map(function (l) { return { t: l[0], x: l[1], y: l[2] }; }),
+      you: { x: DB.you[0], y: DB.you[1] }, pins: pins, chips: chips,
+      hasSel: !!selP, noSel: !selP, sel: selP ? this.card(selP, st.mapCat, st) : {},
+      closeSel: function () { self.setState({ mapSel: null }); },
+      zoomIn: function () { self.zoomBy(1); }, zoomOut: function () { self.zoomBy(-1); }, locate: function () { self.locate(); },
+      openSearch: function () { self.go('search', { q: '' }); },
+      toList: function () { self.go('list', { cat: st.mapCat, typeF: 'all' }); },
+      count: 'Списком · ' + list.length
+    };
+  }
+
+  placeData(st) {
+    var self = this; var a = this._a; var soft = mix(a, '#ffffff', 0.88);
+    var p = PL[st.pid] && !PL[st.pid].pseudo ? PL[st.pid] : PL.vshevchyk;
+    var fav = st.favs.indexOf(p.id) >= 0;
+    var q = st.svcQ.trim().toLowerCase();
+    var openG = st.openG || { 0: true };
+    var selKeys = {}; st.sel.forEach(function (x) { selKeys[x.k] = true; });
+    var groups = [];
+    p.groups.forEach(function (g, gi) {
+      var items = [];
+      g[2].forEach(function (r, ri) {
+        if (q && r[0].toLowerCase().indexOf(q) < 0) return;
+        var on = !!selKeys[p.id + '|' + gi + '|' + ri];
+        var item = svcItem(p, gi, ri);
+        items.push({ n: r[0], price: r[1], dur: r[3], hasDur: !!r[3], on: on, aria: (on ? 'Прибрати: ' : 'Додати: ') + r[0], bg: on ? a : '#ffffff', fg: on ? '#ffffff' : a, bd: on ? a : '#d5e0ea', icon: on ? IC.check : IC.plus, toggle: function () { self.toggleSel(item); } });
+      });
+      if (q && !items.length) return;
+      var open = q ? true : !!openG[gi];
+      groups.push({ name: g[0], count: String(g[2].length), open: open, rot: open ? 'rotate(180deg)' : 'rotate(0deg)', items: open ? items : [], toggle: function () { var o = Object.assign({}, self.st().openG || { 0: true }); o[gi] = !o[gi]; self.setState({ openG: o }); } });
+    });
+    var deal = DB.deals.filter(function (d) { return d.pid === p.id; })[0];
+    var tabs = [['services', 'Послуги · ' + p.nsvc], ['reviews', 'Відгуки · ' + p.reviews], ['about', p.type === 'salon' ? 'Про салон' : 'Про майстра']].map(function (t) { var on = st.pTab === t[0]; return { label: t[1], on: on, bg: on ? '#ffffff' : 'transparent', fg: on ? INK : MUTED, sh: on ? '0 2px 6px rgba(36, 64, 92, 0.1)' : 'none', pick: function () { self.setState({ pTab: t[0] }); } }; });
+    var today = WD[new Date().getDay()];
+    var tot = this.totals(st.sel);
+    var revs = (p.revs || []).map(function (r, i) { return { who: r[0], date: r[1], text: r[2], ini: initials(r[0]), tint: i % 2 ? '#dceaf7' : soft }; });
+    var bar = st.sel.length ? { label: st.sel.length + ' ' + plural(st.sel.length, 'послуга', 'послуги', 'послуг') + ' · ' + (tot.dm ? durText(tot.dm) : 'тривалість уточнить майстер'), value: tot.total, cta: 'Обрати час' } : { label: 'Ціни', value: priceFrom(p.min), cta: 'Записатись' };
+    return {
+      name: p.name, ini: p.ini, tint: p.tint, title: p.title, hasWork: !!p.work, work: p.work || '',
+      rating: rLabel(p.rating), reviewsLabel: revLabel(p.reviews), hasExp: !!p.exp, exp: p.exp || '',
+      addr: p.addr, area: [p.district ? p.district + ' р-н' : '', p.metro, kmLabel(p.km) + ' від вас'].filter(Boolean).join(' · '),
+      mmx: Math.round(174 - p.x * 10), mmy: Math.round(56 - p.y * 8),
+      favColor: fav ? a : INK, favFill: fav ? a : 'none', favLabel: fav ? 'Прибрати з обраного' : 'Додати в обране',
+      toggleFav: function () { self.toggleFav(p.id); },
+      share: function () { self.toast('Посилання на профіль скопійовано'); },
+      route: function () { self.toast('Маршрут до ' + p.addr + ' відкриється в картах'); },
+      book: function () { self.startBook(p.id, { sel: st.sel }); },
+      chat: function () { self.openChat(p.id); },
+      hasDeal: !!deal, deal: deal ? { t: deal.t, till: deal.till ? 'до ' + deal.till : 'безстроково', open: function () { self.go('deal', { dealId: deal.id }); } } : {},
+      tabs: tabs, tServices: st.pTab === 'services', tReviews: st.pTab === 'reviews', tAbout: st.pTab === 'about',
+      hasSvc: p.groups.length > 0, noSvc: p.groups.length === 0,
+      svcQ: st.svcQ, svcPh: 'Пошук серед ' + p.nsvc + ' ' + plural(p.nsvc, 'послуги', 'послуг', 'послуг'),
+      onSvcQ: function (e) { self.setState({ svcQ: e.target.value }); },
+      groups: groups, svcNone: !!q && groups.length === 0,
+      reviews: revs, noReviews: revs.length === 0, url: p.url,
+      addReview: function () { self.toast('Оцінити майстра можна після візиту'); },
+      hasAbout: !!p.about, about: p.about || '',
+      hasHours: !!(p.hours && p.hours.length), hours: (p.hours || []).map(function (h) { return { d: h[0], t: h[1], w: h[0] === today ? 800 : 500 }; }),
+      hasIg: !!p.ig, ig: p.ig, igUrl: p.ig ? 'https://www.instagram.com/' + p.ig.replace('@', '') + '/' : '',
+      hasPhotos: !!p.photos, photos: p.photos ? (p.photos + ' фото робіт на barb.ua') : '',
+      bar: bar
+    };
+  }
+
+  bookData(st) {
+    var self = this; var a = this._a;
+    var p = PL[st.pid] || PL.vshevchyk;
+    var tot = this.totals(st.sel);
+    var selKeys = {}; st.sel.forEach(function (x) { selKeys[x.k] = true; });
+    var suggest = [];
+    if (!st.sel.length) {
+      var gs = p.groups.map(function (g, gi) { return { g: g, gi: gi }; });
+      gs.sort(function (x, y) { return (y.g[1] === st.cat ? 1 : 0) - (x.g[1] === st.cat ? 1 : 0); });
+      for (var round = 0; round < 3 && suggest.length < 6; round++) {
+        gs.forEach(function (o) {
+          if (suggest.length >= 6) return;
+          var cnt = 0;
+          for (var ri = 0; ri < o.g[2].length; ri++) {
+            var r = o.g[2][ri];
+            if (r[2] < 100 && !p.pseudo) continue;
+            if (cnt === round) { var it = svcItem(p, o.gi, ri); if (!suggest.some(function (z) { return z.k === it.k; })) suggest.push(it); break; }
+            cnt++;
+          }
+        });
+      }
+    }
+    var days = dayList().map(function (d) { var on = d.i === st.day; return { wd: d.wd, num: d.num, mon: d.mon, aria: d.long, on: on, bg: on ? INK : '#ffffff', fg: on ? '#ffffff' : INK, bd: on ? INK : '#e3ebf3', pick: function () { self.setState({ day: d.i, time: '' }); } }; });
+    var sl = slotsFor(p.id, st.day);
+    var parts = [['Ранок', 0, 720], ['День', 720, 1020], ['Вечір', 1020, 1440]].map(function (pt) {
+      return { label: pt[0], slots: sl.filter(function (x) { return x.m >= pt[1] && x.m < pt[2]; }).map(function (x) { var on = x.t === st.time; return { t: x.t, busy: x.busy, on: on, aria: x.busy ? x.t + ', зайнято' : x.t, bg: on ? a : (x.busy ? '#f4f7fa' : '#ffffff'), fg: on ? '#ffffff' : (x.busy ? '#9aabbd' : INK), bd: on ? a : (x.busy ? '#f4f7fa' : '#d5e0ea'), deco: x.busy ? 'line-through' : 'none', cur: x.busy ? 'default' : 'pointer', pick: function () { if (!x.busy) self.setState({ time: x.t }); } }; }) };
+    });
+    var can = st.sel.length > 0 && !!st.time;
+    var dd = dayList()[st.day] || dayList()[1];
+    return {
+      heading: st.reId ? 'Перенесення запису' : 'Запис',
+      place: { name: p.name, tint: p.tint, ini: p.ini },
+      editLabel: p.pseudo ? '' : (st.sel.length ? 'Змінити' : 'Увесь прайс'),
+      editSvcs: function () { if (!p.pseudo) self.go('place', { pid: p.id, pTab: 'services', svcQ: '' }); },
+      hasSvcs: st.sel.length > 0, noSvcs: st.sel.length === 0,
+      svcs: st.sel.map(function (x) { return { n: x.n, price: x.price, dur: x.dur, hasDur: !!x.dur, remove: function () { self.toggleSel(x); } }; }),
+      suggest: suggest.map(function (x) { var on = !!selKeys[x.k]; return { n: x.n, price: x.price, dur: x.dur, hasDur: !!x.dur, on: on, aria: 'Додати: ' + x.n, bg: on ? a : '#ffffff', fg: on ? '#ffffff' : a, bd: on ? a : '#d5e0ea', icon: on ? IC.check : IC.plus, toggle: function () { self.toggleSel(x); } }; }),
+      total: tot.total, durLabel: tot.durLabel,
+      days: days, parts: parts, noSlots: !sl.some(function (x) { return !x.busy; }),
+      summary: st.time ? (dd.long + ' о ' + st.time) : 'Оберіть дату й час',
+      cantConfirm: !can, ctaBg: can ? a : '#dfe6ee', ctaFg: can ? '#ffffff' : MUTED, ctaCur: can ? 'pointer' : 'default',
+      ctaLabel: !st.sel.length ? 'Оберіть послугу' : (!st.time ? 'Оберіть час' : (st.reId ? 'Перенести запис' : 'Підтвердити запис')),
+      confirm: function () { self.confirmBooking(); }
+    };
+  }
+
+  doneData(st) {
+    var self = this;
+    var b = st.bookings.filter(function (x) { return x.id === st.lastId; })[0] || st.bookings[st.bookings.length - 1];
+    if (!b) return { note: '', b: {}, toVisits: function () { self.tab('visits'); }, chat: function () { self.tab('home'); }, addCal: function () {} };
+    var p = PL[b.pid];
+    return {
+      note: b.status === 'confirmed' ? 'Запис підтверджено. Нагадаємо за 2 години до візиту.' : (b.status === 'declined' ? 'Майстер не зможе прийняти в цей час — оберіть інший у «Мої записи».' : 'Майстер підтвердить запис найближчим часом — надішлемо сповіщення.'),
+      b: { place: p.name, ini: p.ini, tint: p.tint, title: p.title, when: b.long + ' о ' + b.time, svcs: b.svcs.map(function (x) { return x.n; }).join(', '), addr: p.addr + (p.metro ? ' · ' + p.metro : ''), total: b.total, durLabel: b.durLabel },
+      toVisits: function () { self.tab('visits'); },
+      chat: function () { self.openChat(b.pid); },
+      addCal: function () { self.toast('Додано в календар'); }
+    };
+  }
+
+  visitsData(st) {
+    var self = this; var a = this._a;
+    var up = st.visTab === 'up';
+    var list = up ? this.sortedBookings(st) : [];
+    var segs = [['up', 'Майбутні · ' + st.bookings.length], ['past', 'Минулі']].map(function (t) { var on = st.visTab === t[0]; return { label: t[1], on: on, bg: on ? '#ffffff' : 'transparent', fg: on ? INK : MUTED, sh: on ? '0 2px 6px rgba(36, 64, 92, 0.1)' : 'none', pick: function () { self.setState({ visTab: t[0], asking: null }); } }; });
+    var items = list.map(function (b) {
+      var p = PL[b.pid]; var conf = b.status === 'confirmed'; var asking = st.asking === b.id;
+      return {
+        num: b.num, mon: b.mon, when: b.dw + ' · ' + b.time, place: p.name, svcs: b.svcs.map(function (x) { return x.n; }).join(', '), total: b.total,
+        st: (STATUS[b.status] || STATUS.pending)[0], stBg: (STATUS[b.status] || STATUS.pending)[1], stFg: (STATUS[b.status] || STATUS.pending)[2],
+        asking: asking, idle: !asking,
+        open: function () { if (!p.pseudo) self.openPlace(b.pid); },
+        chat: function () { self.openChat(b.pid); },
+        move: function () { self.startBook(b.pid, { sel: b.svcs.slice(), reId: b.id, day: b.day }); },
+        cancel: function () { self.setState({ asking: b.id }); },
+        cancelYes: function () { var s2 = self.st(); self.setState({ bookings: s2.bookings.filter(function (x) { return x.id !== b.id; }), asking: null }); self.toast('Запис скасовано'); },
+        cancelNo: function () { self.setState({ asking: null }); }
+      };
+    });
+    return {
+      segs: segs, items: items, empty: items.length === 0,
+      emptyTitle: up ? 'Поки що немає записів' : 'Тут з’являться минулі візити',
+      emptyText: up ? 'Знайдіть майстра на карті чи в категоріях — запис займає хвилину.' : 'Після візиту зможете оцінити майстра й повторити запис в один дотик.',
+      find: function () { self.tab('map'); }
+    };
+  }
+
+  dealsData(st) {
+    var self = this;
+    var cats = [['all', 'Усі'], ['hair', 'Волосся'], ['nails', 'Нігті'], ['face', 'Обличчя'], ['body', 'Тіло'], ['removal', 'Епіляція']];
+    var list = DB.deals.filter(function (d) { return st.dealF === 'all' || d.cat === st.dealF; });
+    return {
+      sub: 'Добірка: ' + DB.deals.length + ' з ' + DB.stats.kyivDeals + ' акцій Києва',
+      chips: cats.map(function (c) { var on = st.dealF === c[0]; return { label: c[1], on: on, bg: on ? INK : '#ffffff', fg: on ? '#ffffff' : INK, bd: on ? INK : '#d5e0ea', pick: function () { self.setState({ dealF: c[0] }); } }; }),
+      items: list.map(function (d) { return self.dealCard(d); })
+    };
+  }
+
+  dealData(st) {
+    var self = this;
+    var d = DB.deals.filter(function (x) { return x.id === st.dealId; })[0] || DB.deals[0];
+    var c = this.dealCard(d);
+    var big = d.gift ? '1+1' : (d.off ? '−' + d.off + '%' : (d.now ? fmt(d.now) + ' ₴' : '%'));
+    var realPlace = d.pid && PL[d.pid] && !PL[d.pid].pseudo;
+    return {
+      big: big, bigFs: big.length > 5 ? 60 : 80, role: d.role, t: d.t, who: d.who, dist: d.dist,
+      price: c.price, old: c.old, hasSave: !!(d.old && d.now), save: d.old && d.now ? 'Економія ' + fmt(d.old - d.now) + ' грн' : '',
+      till: d.till ? 'Діє до ' + d.till + '.2026' : 'Безстрокова акція', url: d.url,
+      hasPlace: !!realPlace,
+      openPlace: function () { if (realPlace) self.openPlace(d.pid); },
+      book: function () { var pid = realPlace ? d.pid : d.pidX; self.startBook(pid, { sel: d.svcObj ? [d.svcObj] : [] }); }
+    };
+  }
+
+  chatData(st) {
+    var self = this; var a = this._a;
+    var p = PL[st.chatId] || PL.vshevchyk;
+    var msgs = st.chats[p.id] || [];
+    var last = msgs[msgs.length - 1];
+    return {
+      name: p.name, ini: p.ini, tint: p.tint, title: p.title,
+      intro: 'Запитайте про вільний час, ціну чи процедуру — ' + p.name + ' отримає повідомлення в Barb Pro.',
+      msgs: msgs.map(function (m) { return { text: m.text, time: m.time, align: m.mine ? 'flex-end' : 'flex-start', radius: m.mine ? '18px 18px 6px 18px' : '18px 18px 18px 6px', bg: m.mine ? INK : '#ffffff', fg: m.mine ? '#ffffff' : INK, sh: m.mine ? 'none' : '0 2px 8px rgba(36, 64, 92, 0.06)', timeFg: m.mine ? 'rgba(255, 255, 255, 0.75)' : MUTED }; }),
+      typing: !!st.typing, showBook: !!(last && !last.mine && last.cta && !st.typing),
+      hasQuick: msgs.length === 0,
+      quick: ['Чи є вільний час завтра?', 'Скільки коштує процедура?', 'Як вас знайти?'].map(function (t) { return { t: t, send: function () { self.sendMsg(t); } }; }),
+      draft: st.draft,
+      onDraft: function (e) { self.setState({ draft: e.target.value }); },
+      onKey: function (e) { if (e.key === 'Enter') { e.preventDefault(); self.sendMsg(self.st().draft); } },
+      send: function () { self.sendMsg(self.st().draft); },
+      sendBg: st.draft.trim() ? a : '#c3cfdb',
+      setRef: this.chatRef(),
+      book: function () { self.startBook(p.id); },
+      openPlace: function () { self.openPlace(p.id); }
+    };
+  }
+
+  chatsData(st) {
+    var self = this;
+    var ids = Object.keys(st.chats).filter(function (k) { return (st.chats[k] || []).length > 0 && PL[k]; });
+    return {
+      items: ids.map(function (k) { var p = PL[k]; var arr = st.chats[k]; var m = arr[arr.length - 1]; return { name: p.name, ini: p.ini, tint: p.tint, time: m.time, last: (m.mine ? 'Ви: ' : '') + m.text, open: function () { self.openChat(k); } }; }),
+      empty: ids.length === 0
+    };
+  }
+
+  asstData(st) {
+    var self = this; var a = this._a;
+    var as = st.asst || { step: 0 };
+    var AREAS = [['center', 'Ближче до центру'], ['right', 'Правий берег'], ['left', 'Лівий берег'], ['any', 'Будь-де']];
+    var BUDS = [[500, 'До 500 грн'], [1500, 'До 1 500 грн'], [0, 'Не важливо']];
+    var msgs = [];
+    function bot(t) { msgs.push({ text: t, align: 'flex-start', radius: '18px 18px 18px 6px', bg: '#ffffff', fg: INK, sh: '0 2px 8px rgba(36, 64, 92, 0.06)' }); }
+    function me(t) { msgs.push({ text: t, align: 'flex-end', radius: '18px 18px 6px 18px', bg: INK, fg: '#ffffff', sh: 'none' }); }
+    function lab(list, v) { var f = list.filter(function (x) { return x[0] === v; })[0]; return f ? f[1] : ''; }
+    bot('Привіт! Підберу майстра за трьома питаннями. Що плануєте?');
+    var chips = [], results = [];
+    if (as.step === 0) chips = DB.cats.slice(0, 6).map(function (c) { return { label: c.n, pick: function () { self.setState({ asst: { step: 1, cat: c.k } }); } }; });
+    if (as.step >= 1) { me(CAT[as.cat] ? CAT[as.cat].n : ''); bot('Чудово. Де вам зручніше?'); }
+    if (as.step === 1) chips = AREAS.map(function (x) { return { label: x[1], pick: function () { self.setState({ asst: { step: 2, cat: as.cat, area: x[0] } }); } }; });
+    if (as.step >= 2) { me(lab(AREAS, as.area)); bot('І який бюджет на процедуру?'); }
+    if (as.step === 2) chips = BUDS.map(function (x) { return { label: x[1], pick: function () { self.setState({ asst: { step: 3, cat: as.cat, area: as.area, budget: x[0] } }); } }; });
+    if (as.step >= 3) {
+      me(lab(BUDS, as.budget));
+      var inArea = function (p) { if (as.area === 'center') return p.km <= 4.5; if (as.area === 'right') return p.x < 62; if (as.area === 'left') return p.x > 70; return true; };
+      var inBud = function (p) { var v = catMin(p, as.cat); return !as.budget || (v > 0 && v <= as.budget); };
+      var pool = DB.places.filter(function (p) { return p.cats.indexOf(as.cat) >= 0; });
+      var r = pool.filter(function (p) { return inArea(p) && inBud(p); }); var relaxed = false;
+      if (!r.length) { r = pool.filter(inBud); relaxed = true; }
+      if (!r.length) { r = pool.filter(inArea); relaxed = true; }
+      if (!r.length) { r = pool; relaxed = true; }
+      r = r.slice().sort(function (x, y) { return (y.rating - x.rating) || (y.reviews - x.reviews); }).slice(0, 3);
+      bot(relaxed ? 'Точних збігів немає — ось найближчі варіанти:' : 'Ось ' + r.length + ' ' + plural(r.length, 'варіант', 'варіанти', 'варіантів') + ' з найвищим рейтингом:');
+      results = r.map(function (p) { return Object.assign(self.card(p, as.cat, st), { why: p.title + ' · ' + p.district + ' р-н · ' + kmLabel(p.km), price: priceFrom(catMin(p, as.cat)) }); });
+      this._asstTop = r[0] ? r[0].id : null;
+    }
+    var top = this._asstTop;
+    return {
+      msgs: msgs, chips: chips, hasChips: chips.length > 0, results: results, hasResults: results.length > 0,
+      restart: function () { self.setState({ asst: { step: 0 } }); },
+      toMap: function () { self.go('map', { mapCat: as.cat || 'all', mapSel: top, zoom: 1 }); }
+    };
+  }
+
+  meData(st) {
+    var self = this; var a = this._a;
+    var chatsN = Object.keys(st.chats).filter(function (k) { return (st.chats[k] || []).length > 0; }).length;
+    return {
+      stats: [
+        { v: st.bookings.length, label: plural(st.bookings.length, 'запис', 'записи', 'записів'), open: function () { self.tab('visits'); } },
+        { v: st.favs.length, label: 'в обраному', open: function () { self.go('saved'); } },
+        { v: chatsN, label: plural(chatsN, 'чат', 'чати', 'чатів'), open: function () { self.go('chats'); } }
+      ],
+      rows: [
+        { label: 'Мої записи', icon: IC.calendar, value: '', isLink: true, isToggle: false, open: function () { self.tab('visits'); } },
+        { label: 'Обране', icon: IC.heart, value: String(st.favs.length), isLink: true, isToggle: false, open: function () { self.go('saved'); } },
+        { label: 'Повідомлення', icon: IC.msg, value: chatsN ? String(chatsN) : '', isLink: true, isToggle: false, open: function () { self.go('chats'); } },
+        { label: 'Нагадування про візит', icon: IC.bell, value: '', isLink: false, isToggle: true, trackBg: st.remind ? a : '#c3cfdb', knobX: st.remind ? 21 : 3, open: function () { var on = !self.st().remind; self.setState({ remind: on }); self.toast(on ? 'Нагадаємо за 2 години до візиту' : 'Нагадування вимкнено'); } },
+        { label: 'Місто', icon: IC.pin, value: 'Київ', isLink: true, isToggle: false, open: function () { self.toast('Також: Харків, Дніпро, Одеса, Львів, Запоріжжя, Миколаїв'); } }
+      ]
+    };
+  }
+
+  savedData(st) {
+    var self = this;
+    var items = st.favs.map(function (id) { return PL[id]; }).filter(function (p) { return p && !p.pseudo; }).map(function (p) { return self.card(p, null, st); });
+    return { items: items, empty: items.length === 0, explore: function () { self.tab('map'); } };
+  }
+}
+</script>
+</body>
+</html>

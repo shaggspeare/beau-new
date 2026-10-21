@@ -1,0 +1,9 @@
+{
+  "name": "barb-canvas-tools",
+  "private": true,
+  "type": "module",
+  "description": "Lint/integration checks for the Barb .dc.html canvas files",
+  "dependencies": {
+    "node-html-parser": "6.1.13"
+  }
+}

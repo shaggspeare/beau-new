@@ -1,0 +1,583 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<title>Barb Pro — кабінет майстра</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;family=Montserrat:wght@400;500;600;700;800&amp;family=Nunito+Sans:wght@400;500;600;700;800&amp;family=Onest:wght@400;500;600;700;800&amp;display=swap">
+<style>body{margin:0}</style>
+</helmet>
+<div style="position: relative; width: 390px; height: 844px; overflow: hidden; background: #f4f7fa; font-family: {{font}}; color: #24405c">
+
+<sc-if value="{{loading}}" hint-placeholder-val="{{ false }}">
+<div style="position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; background: #24405c; color: #ffffff">
+<div style="font-size: 30px; font-weight: 800; letter-spacing: -0.03em">Barb Pro</div>
+<div style="font-size: 14px; color: rgba(255, 255, 255, 0.8)">Завантажуємо кабінет…</div>
+</div>
+</sc-if>
+
+<sc-if value="{{s.today}}" hint-placeholder-val="{{ true }}">
+<section aria-label="Розклад і заявки" style="position: absolute; inset: 0; display: flex; flex-direction: column; background: #f4f7fa">
+<div style="flex: 1; min-height: 0; overflow-y: auto; scrollbar-width: none; padding-bottom: 110px">
+<div style="background: #24405c; color: #ffffff; padding: 54px 16px 18px; border-radius: 0 0 28px 28px">
+<div style="display: flex; align-items: center; gap: 12px; padding: 0 4px">
+<span style="width: 50px; height: 50px; border-radius: 17px; background: {{me.tint}}; color: #24405c; display: flex; align-items: center; justify-content: center; font-size: 17px; font-weight: 800; flex: none">{{me.ini}}</span>
+<div style="flex: 1; min-width: 0">
+<div style="font-size: 18px; font-weight: 800; letter-spacing: -0.01em">{{me.name}}</div>
+<div style="font-size: 13px; color: rgba(255, 255, 255, 0.82); margin-top: 2px">{{me.title}} · Barb Pro</div>
+</div>
+<button type="button" aria-label="Нові заявки" onClick="{{T.toReqs}}" style="position: relative; width: 44px; height: 44px; border-radius: 22px; border: none; background: rgba(255, 255, 255, 0.12); color: #ffffff; display: flex; align-items: center; justify-content: center; cursor: pointer; padding: 0; flex: none">
+<svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true" style="fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round"><path d="{{ic.bell}}"></path></svg>
+<sc-if value="{{T.hasReq}}" hint-placeholder-val="{{ true }}"><span style="position: absolute; top: -2px; right: -2px; min-width: 20px; height: 20px; border-radius: 10px; background: {{accent}}; color: #ffffff; font-size: 11px; font-weight: 800; display: flex; align-items: center; justify-content: center; padding: 0 5px; box-sizing: border-box; border: 2px solid #24405c">{{T.reqCount}}</span></sc-if>
+</button>
+</div>
+<div style="display: flex; gap: 6px; margin-top: 18px">
+<sc-for list="{{T.days}}" as="d" hint-placeholder-count="7">
+<button type="button" aria-pressed="{{d.on}}" aria-label="{{d.aria}}" onClick="{{d.pick}}" style="flex: 1; height: 68px; border: none; border-radius: 17px; background: {{d.bg}}; color: {{d.fg}}; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; font-family: inherit; cursor: pointer; padding: 0">
+<span style="font-size: 12px; font-weight: 700">{{d.wd}}</span>
+<span style="font-size: 19px; font-weight: 800; line-height: 1.1">{{d.num}}</span>
+<span style="width: 6px; height: 6px; border-radius: 3px; background: {{d.dot}}"></span>
+</button>
+</sc-for>
+</div>
+</div>
+<div style="padding: 16px 16px 0; display: flex; flex-direction: column; gap: 18px">
+<div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px">
+<sc-for list="{{T.stats}}" as="x" hint-placeholder-count="3">
+<div style="background: #ffffff; border-radius: 18px; padding: 12px; box-shadow: 0 2px 10px rgba(36, 64, 92, 0.05); display: flex; flex-direction: column; gap: 2px">
+<span style="font-size: 19px; font-weight: 800; letter-spacing: -0.01em; white-space: nowrap">{{x.v}}</span>
+<span style="font-size: 12px; font-weight: 600; color: #5a6e84">{{x.label}}</span>
+</div>
+</sc-for>
+</div>
+<sc-if value="{{T.hasReq}}" hint-placeholder-val="{{ true }}">
+<div style="display: flex; flex-direction: column; gap: 10px">
+<h2 style="margin: 0; font-size: 18px; font-weight: 800; letter-spacing: -0.01em">Нові заявки · {{T.reqCount}}</h2>
+<sc-for list="{{T.reqs}}" as="r" hint-placeholder-count="2">
+<div style="background: #ffffff; border-radius: 22px; padding: 14px; border: 1.5px solid {{accentLine}}; display: flex; flex-direction: column; gap: 12px">
+<div style="display: flex; align-items: center; gap: 12px">
+<span style="width: 44px; height: 44px; border-radius: 15px; background: {{r.tint}}; display: flex; align-items: center; justify-content: center; font-size: 15px; font-weight: 800; flex: none">{{r.ini}}</span>
+<div style="flex: 1; min-width: 0">
+<sc-if value="{{r.isNew}}" hint-placeholder-val="{{ false }}"><div style="display: inline-flex; align-items: center; height: 22px; padding: 0 8px; border-radius: 11px; background: {{accentSoft}}; color: {{accentDeep}}; font-size: 12px; font-weight: 800; margin-bottom: 4px">Нова · із застосунку Barb</div></sc-if>
+<div style="font-size: 16px; font-weight: 800">{{r.name}}</div>
+<div style="font-size: 13px; color: #5a6e84; margin-top: 2px">{{r.svc}}</div>
+</div>
+<div style="font-size: 15px; font-weight: 800; white-space: nowrap">{{r.price}}</div>
+</div>
+<div style="display: flex; gap: 16px; font-size: 14px; font-weight: 600">
+<span style="display: inline-flex; align-items: center; gap: 6px">
+<svg width="17" height="17" viewBox="0 0 24 24" aria-hidden="true" style="fill: none; stroke: {{accent}}; stroke-width: 1.9; stroke-linecap: round; stroke-linejoin: round"><path d="{{ic.calendar}}"></path></svg>{{r.when}}</span>
+<span style="display: inline-flex; align-items: center; gap: 6px">
+<svg width="17" height="17" viewBox="0 0 24 24" aria-hidden="true" style="fill: none; stroke: {{accent}}; stroke-width: 1.9; stroke-linecap: round; stroke-linejoin: round"><path d="{{ic.clock}}"></path></svg>{{r.dur}}</span>
+</div>
+<div style="display: flex; gap: 8px">
+<button type="button" onClick="{{r.accept}}" style="flex: 1; height: 46px; border: none; border-radius: 23px; background: {{accent}}; color: #ffffff; font-family: inherit; font-size: 15px; font-weight: 700; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 6px">
+<svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" style="fill: none; stroke: currentColor; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round"><path d="{{ic.check}}"></path></svg>Підтвердити</button>
+<button type="button" onClick="{{r.decline}}" style="height: 46px; padding: 0 16px; border: 1px solid #d5e0ea; border-radius: 23px; background: #ffffff; color: #24405c; font-family: inherit; font-size: 15px; font-weight: 700; cursor: pointer">Відхилити</button>
+<button type="button" aria-label="Написати клієнтці" onClick="{{r.chat}}" style="width: 46px; height: 46px; border: 1px solid #d5e0ea; border-radius: 23px; background: #ffffff; color: #24405c; display: flex; align-items: center; justify-content: center; cursor: pointer; padding: 0; flex: none">
+<svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true" style="fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round"><path d="{{ic.msg}}"></path></svg>
+</button>
+</div>
+</div>
+</sc-for>
+</div>
+</sc-if>
+<div style="display: flex; flex-direction: column; gap: 10px">
+<h2 style="margin: 0; font-size: 18px; font-weight: 800; letter-spacing: -0.01em">{{T.dayTitle}}</h2>
+<sc-for list="{{T.visits}}" as="v" hint-placeholder-count="3">
+<div style="display: flex; gap: 12px; align-items: stretch">
+<div style="width: 50px; padding-top: 15px; font-size: 15px; font-weight: 800; text-align: right; flex: none">{{v.time}}</div>
+<div style="flex: 1; min-width: 0; background: #ffffff; border-radius: 18px; padding: 13px 14px; box-shadow: 0 2px 10px rgba(36, 64, 92, 0.05); display: flex; flex-direction: column; gap: 4px">
+<div style="display: flex; justify-content: space-between; align-items: center; gap: 8px">
+<span style="font-size: 16px; font-weight: 700">{{v.name}}</span>
+<span style="padding: 3px 9px; border-radius: 10px; font-size: 12px; font-weight: 700; background: #e3f3ea; color: #1f7a52; white-space: nowrap">Підтверджено</span>
+</div>
+<div style="font-size: 13px; color: #5a6e84">{{v.svc}}</div>
+<div style="font-size: 14px; font-weight: 800">{{v.price}}</div>
+</div>
+</div>
+</sc-for>
+<sc-if value="{{T.noVisits}}" hint-placeholder-val="{{ false }}">
+<div style="background: #ffffff; border-radius: 18px; padding: 18px; font-size: 14px; line-height: 1.45; color: #5a6e84; text-align: center">Записів на цей день поки немає — клієнти бачать ваші відкриті вікна нижче.</div>
+</sc-if>
+</div>
+<div style="background: #ffffff; border-radius: 22px; padding: 16px; box-shadow: 0 2px 10px rgba(36, 64, 92, 0.05)">
+<div style="display: flex; align-items: center; justify-content: space-between">
+<h2 style="margin: 0; font-size: 18px; font-weight: 800; letter-spacing: -0.01em">Вікна для запису</h2>
+<button type="button" onClick="{{T.openAll}}" style="height: 36px; padding: 0 2px; border: none; background: none; color: #2f6194; font-family: inherit; font-size: 15px; font-weight: 600; cursor: pointer">Відкрити всі</button>
+</div>
+<p style="margin: 6px 0 0; font-size: 13px; line-height: 1.45; color: #5a6e84">Відкриті вікна клієнти бачать у застосунку Barb і записуються в один дотик. Натисніть, щоб відкрити чи закрити.</p>
+<div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; margin-top: 12px">
+<sc-for list="{{T.slots}}" as="sl" hint-placeholder-count="8">
+<button type="button" aria-pressed="{{sl.on}}" aria-label="{{sl.aria}}" disabled="{{sl.locked}}" onClick="{{sl.toggle}}" style="height: 44px; border-radius: 14px; border: 1.5px solid {{sl.bd}}; background: {{sl.bg}}; color: {{sl.fg}}; font-family: inherit; font-size: 15px; font-weight: 700; cursor: {{sl.cur}}; padding: 0; text-decoration: {{sl.deco}}">{{sl.t}}</button>
+</sc-for>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 14px; margin-top: 12px; font-size: 12px; font-weight: 600; color: #5a6e84">
+<span style="display: inline-flex; align-items: center; gap: 6px"><span style="width: 12px; height: 12px; border-radius: 4px; border: 1.5px solid {{accent}}; background: #ffffff; box-sizing: border-box"></span>Відкрито</span>
+<span style="display: inline-flex; align-items: center; gap: 6px"><span style="width: 12px; height: 12px; border-radius: 4px; background: #24405c"></span>Запис</span>
+<span style="display: inline-flex; align-items: center; gap: 6px"><span style="width: 12px; height: 12px; border-radius: 4px; background: #fff4dc; border: 1.5px solid #e9c46a; box-sizing: border-box"></span>Заявка</span>
+<span style="display: inline-flex; align-items: center; gap: 6px"><span style="width: 12px; height: 12px; border-radius: 4px; background: #eef2f6"></span>Закрито</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+</sc-if>
+
+<sc-if value="{{s.prices}}" hint-placeholder-val="{{ false }}">
+<section aria-label="Прайс-лист" style="position: absolute; inset: 0; display: flex; flex-direction: column; background: #f4f7fa">
+<div style="background: #24405c; color: #ffffff; padding: 54px 20px 18px; border-radius: 0 0 28px 28px; flex: none">
+<h1 style="margin: 0; font-size: 26px; font-weight: 800; letter-spacing: -0.025em">Прайс-лист</h1>
+<div style="font-size: 14px; color: rgba(255, 255, 255, 0.82); margin-top: 4px">{{PR.sub}}</div>
+<div style="height: 46px; border-radius: 15px; background: rgba(255, 255, 255, 0.12); display: flex; align-items: center; gap: 8px; padding: 0 12px; margin-top: 14px">
+<svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" style="fill: none; stroke: rgba(255, 255, 255, 0.85); stroke-width: 1.9; stroke-linecap: round; stroke-linejoin: round; flex: none"><path d="{{ic.search}}"></path></svg>
+<input type="text" aria-label="Пошук послуги в прайсі" value="{{PR.q}}" onChange="{{PR.onQ}}" placeholder="Знайти послугу" style="flex: 1; min-width: 0; border: none; background: none; outline: none; font-family: inherit; font-size: 15px; color: #ffffff">
+</div>
+</div>
+<div style="flex: 1; min-height: 0; overflow-y: auto; scrollbar-width: none; padding: 4px 16px 110px">
+<p style="margin: 12px 4px 0; font-size: 13px; line-height: 1.45; color: #5a6e84">Натисніть на ціну, щоб змінити її — оновлення одразу бачать клієнти в застосунку й на barb.ua.</p>
+<sc-for list="{{PR.groups}}" as="g" hint-placeholder-count="4">
+<div style="margin-top: 12px; background: #ffffff; border-radius: 20px; box-shadow: 0 2px 10px rgba(36, 64, 92, 0.05); overflow: hidden">
+<button type="button" aria-expanded="{{g.open}}" onClick="{{g.toggle}}" style="width: 100%; min-height: 56px; border: none; background: none; padding: 0 16px; display: flex; align-items: center; gap: 10px; font-family: inherit; color: #24405c; cursor: pointer; text-align: left">
+<span style="flex: 1; font-size: 16px; font-weight: 800">{{g.name}}</span>
+<span style="font-size: 13px; font-weight: 700; color: #5a6e84">{{g.count}}</span>
+<svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" style="fill: none; stroke: #5a6e84; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; flex: none; transform: {{g.rot}}; transition: transform 0.2s ease"><path d="{{ic.chevD}}"></path></svg>
+</button>
+<sc-if value="{{g.open}}" hint-placeholder-val="{{ false }}">
+<sc-for list="{{g.items}}" as="it" hint-placeholder-count="4">
+<div style="display: flex; align-items: center; gap: 10px; padding: 10px 16px; border-top: 1px solid #eef2f6">
+<div style="flex: 1; min-width: 0">
+<div style="font-size: 15px; font-weight: 600; line-height: 1.3">{{it.n}}</div>
+<sc-if value="{{it.hasDur}}" hint-placeholder-val="{{ false }}"><div style="font-size: 13px; color: #5a6e84; margin-top: 2px">{{it.dur}}</div></sc-if>
+</div>
+<sc-if value="{{it.editing}}" hint-placeholder-val="{{ false }}">
+<input type="text" aria-label="{{it.aria}}" value="{{it.draft}}" onChange="{{it.onDraft}}" onKeyDown="{{it.onKey}}" style="width: 104px; height: 38px; border-radius: 12px; border: 1.5px solid {{accent}}; padding: 0 10px; font-family: inherit; font-size: 15px; font-weight: 700; color: #24405c; outline: none; box-sizing: border-box">
+<button type="button" aria-label="Зберегти ціну" onClick="{{it.save}}" style="width: 38px; height: 38px; border-radius: 19px; border: none; background: {{accent}}; color: #ffffff; display: flex; align-items: center; justify-content: center; cursor: pointer; padding: 0; flex: none">
+<svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" style="fill: none; stroke: currentColor; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round"><path d="{{ic.check}}"></path></svg>
+</button>
+</sc-if>
+<sc-if value="{{it.idle}}" hint-placeholder-val="{{ true }}">
+<button type="button" aria-label="{{it.aria}}" onClick="{{it.edit}}" style="height: 38px; padding: 0 12px; border-radius: 12px; border: 1px solid {{it.bd}}; background: {{it.bg}}; color: #24405c; font-family: inherit; font-size: 14px; font-weight: 800; cursor: pointer; white-space: nowrap; flex: none">{{it.price}}</button>
+</sc-if>
+</div>
+</sc-for>
+</sc-if>
+</div>
+</sc-for>
+</div>
+</section>
+</sc-if>
+
+<sc-if value="{{s.inbox}}" hint-placeholder-val="{{ false }}">
+<section aria-label="Повідомлення" style="position: absolute; inset: 0; display: flex; flex-direction: column; background: #f4f7fa">
+<div style="background: #24405c; color: #ffffff; padding: 54px 20px 20px; border-radius: 0 0 28px 28px; flex: none">
+<h1 style="margin: 0; font-size: 26px; font-weight: 800; letter-spacing: -0.025em">Повідомлення</h1>
+<div style="font-size: 14px; color: rgba(255, 255, 255, 0.82); margin-top: 4px">Клієнти пишуть із застосунку Barb і з barb.ua</div>
+</div>
+<div style="flex: 1; min-height: 0; overflow-y: auto; scrollbar-width: none; padding: 12px 16px 110px; display: flex; flex-direction: column; gap: 10px">
+<sc-for list="{{IN.items}}" as="c" hint-placeholder-count="3">
+<button type="button" onClick="{{c.open}}" style="width: 100%; border: none; background: #ffffff; border-radius: 20px; padding: 14px; display: flex; align-items: center; gap: 12px; font-family: inherit; color: #24405c; cursor: pointer; text-align: left; box-shadow: 0 2px 10px rgba(36, 64, 92, 0.05)">
+<span style="width: 48px; height: 48px; border-radius: 16px; background: {{c.tint}}; display: flex; align-items: center; justify-content: center; font-size: 15px; font-weight: 800; flex: none">{{c.ini}}</span>
+<span style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 3px">
+<span style="display: flex; justify-content: space-between; gap: 8px"><span style="font-size: 16px; font-weight: 800">{{c.name}}</span><span style="font-size: 12px; color: #5a6e84; flex: none">{{c.time}}</span></span>
+<span style="font-size: 13px; font-weight: 600; color: #2f6194; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{c.about}}</span>
+<span style="font-size: 14px; color: #5a6e84; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{c.last}}</span>
+</span>
+<sc-if value="{{c.unread}}" hint-placeholder-val="{{ false }}"><span style="width: 10px; height: 10px; border-radius: 5px; background: {{accent}}; flex: none"></span></sc-if>
+</button>
+</sc-for>
+</div>
+</section>
+</sc-if>
+
+<sc-if value="{{s.thread}}" hint-placeholder-val="{{ false }}">
+<section aria-label="Чат з клієнткою" style="position: absolute; inset: 0; display: flex; flex-direction: column; background: #f4f7fa">
+<div style="padding: 52px 12px 10px; background: #ffffff; border-bottom: 1px solid #e3ebf3; display: flex; align-items: center; gap: 8px">
+<button type="button" aria-label="Назад" onClick="{{back}}" style="width: 44px; height: 44px; border-radius: 22px; border: none; background: none; display: flex; align-items: center; justify-content: center; color: #24405c; cursor: pointer; padding: 0; flex: none">
+<svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" style="fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round"><path d="{{ic.chevL}}"></path></svg>
+</button>
+<span style="width: 42px; height: 42px; border-radius: 14px; background: {{TH.tint}}; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 800; flex: none">{{TH.ini}}</span>
+<div style="flex: 1; min-width: 0">
+<div style="font-size: 16px; font-weight: 800">{{TH.name}}</div>
+<div style="font-size: 13px; color: #5a6e84; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{TH.about}}</div>
+</div>
+</div>
+<div ref="{{TH.setRef}}" style="flex: 1; min-height: 0; overflow-y: auto; scrollbar-width: none; padding: 16px; display: flex; flex-direction: column; gap: 10px">
+<sc-for list="{{TH.msgs}}" as="m" hint-placeholder-count="2">
+<div style="align-self: {{m.align}}; max-width: 80%; padding: 10px 14px 8px; border-radius: {{m.radius}}; background: {{m.bg}}; color: {{m.fg}}; font-size: 15px; line-height: 1.4; box-shadow: {{m.sh}}">{{m.text}}<div style="font-size: 11px; margin-top: 4px; text-align: right; color: {{m.timeFg}}">{{m.time}}</div></div>
+</sc-for>
+</div>
+<div style="background: #ffffff; border-top: 1px solid #e3ebf3; padding: 10px 12px 30px">
+<div style="display: flex; gap: 8px; overflow-x: auto; scrollbar-width: none; margin: 0 -12px 10px; padding: 0 12px">
+<sc-for list="{{TH.quick}}" as="q" hint-placeholder-count="3">
+<button type="button" onClick="{{q.send}}" style="flex: none; height: 38px; padding: 0 14px; border-radius: 19px; border: 1px solid #d5e0ea; background: #ffffff; color: #24405c; font-family: inherit; font-size: 14px; font-weight: 600; cursor: pointer; white-space: nowrap">{{q.t}}</button>
+</sc-for>
+</div>
+<div style="display: flex; gap: 8px; align-items: center">
+<input type="text" aria-label="Повідомлення клієнтці" value="{{TH.draft}}" onChange="{{TH.onDraft}}" onKeyDown="{{TH.onKey}}" placeholder="Відповісти…" style="flex: 1; min-width: 0; height: 46px; border-radius: 23px; border: 1px solid #e3ebf3; background: #f4f7fa; padding: 0 16px; font-family: inherit; font-size: 15px; color: #24405c; outline: none; box-sizing: border-box">
+<button type="button" aria-label="Надіслати" onClick="{{TH.send}}" style="width: 46px; height: 46px; border-radius: 23px; border: none; background: {{TH.sendBg}}; color: #ffffff; display: flex; align-items: center; justify-content: center; cursor: pointer; padding: 0; flex: none">
+<svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true" style="fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round"><path d="{{ic.send}}"></path></svg>
+</button>
+</div>
+</div>
+</section>
+</sc-if>
+
+<sc-if value="{{s.profile}}" hint-placeholder-val="{{ false }}">
+<section aria-label="Профіль і акції" style="position: absolute; inset: 0; display: flex; flex-direction: column; background: #f4f7fa">
+<div style="flex: 1; min-height: 0; overflow-y: auto; scrollbar-width: none; padding-bottom: 110px">
+<div style="background: #24405c; color: #ffffff; padding: 54px 20px 22px; border-radius: 0 0 28px 28px; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 6px">
+<span style="width: 76px; height: 76px; border-radius: 26px; background: {{me.tint}}; color: #24405c; display: flex; align-items: center; justify-content: center; font-size: 26px; font-weight: 800">{{me.ini}}</span>
+<div style="font-size: 22px; font-weight: 800; letter-spacing: -0.02em; margin-top: 6px">{{me.name}}</div>
+<div style="font-size: 14px; color: rgba(255, 255, 255, 0.82)">{{me.title}} · {{me.work}}</div>
+<div style="display: flex; align-items: center; gap: 8px; margin-top: 6px">
+<span style="display: inline-flex; align-items: center; gap: 5px; height: 32px; padding: 0 12px; border-radius: 16px; background: #ffffff; color: {{accentDeep}}; font-size: 15px; font-weight: 800">
+<svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true" style="fill: currentColor; stroke: none"><path d="{{ic.star}}"></path></svg>{{me.rating}}<span style="font-size: 12px; font-weight: 700">/10</span></span>
+<span style="font-size: 14px; font-weight: 600; color: rgba(255, 255, 255, 0.9)">{{me.reviews}}</span>
+</div>
+</div>
+<div style="padding: 16px; display: flex; flex-direction: column; gap: 16px">
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px">
+<sc-for list="{{PF.stats}}" as="x" hint-placeholder-count="4">
+<div style="background: #ffffff; border-radius: 18px; padding: 14px; box-shadow: 0 2px 10px rgba(36, 64, 92, 0.05); display: flex; flex-direction: column; gap: 2px">
+<span style="font-size: 22px; font-weight: 800; letter-spacing: -0.01em">{{x.v}}</span>
+<span style="font-size: 13px; font-weight: 600; color: #5a6e84">{{x.label}}</span>
+</div>
+</sc-for>
+</div>
+<div style="background: #ffffff; border-radius: 22px; padding: 16px; box-shadow: 0 2px 10px rgba(36, 64, 92, 0.05)">
+<div style="display: flex; justify-content: space-between; align-items: baseline">
+<h2 style="margin: 0; font-size: 17px; font-weight: 800">Профіль заповнено</h2>
+<span style="font-size: 17px; font-weight: 800; color: {{accentDeep}}">{{PF.pct}}%</span>
+</div>
+<div style="height: 8px; border-radius: 4px; background: #eef2f6; margin-top: 10px; overflow: hidden">
+<div style="height: 8px; border-radius: 4px; background: {{accent}}; width: {{PF.pct}}%; transition: width 0.3s ease"></div>
+</div>
+<div style="display: flex; flex-direction: column; margin-top: 8px">
+<sc-for list="{{PF.checks}}" as="c" hint-placeholder-count="5">
+<div style="display: flex; align-items: center; gap: 12px; padding: 10px 0; border-bottom: 1px solid #f0f4f8">
+<span style="width: 26px; height: 26px; border-radius: 13px; background: {{c.dotBg}}; color: #ffffff; border: 1.5px solid {{c.dotBd}}; display: flex; align-items: center; justify-content: center; flex: none; box-sizing: border-box">
+<svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true" style="fill: none; stroke: currentColor; stroke-width: 2.8; stroke-linecap: round; stroke-linejoin: round"><path d="{{ic.check}}"></path></svg>
+</span>
+<div style="flex: 1; min-width: 0">
+<div style="font-size: 15px; font-weight: 700">{{c.label}}</div>
+<div style="font-size: 13px; line-height: 1.35; color: #5a6e84; margin-top: 2px">{{c.note}}</div>
+</div>
+<sc-if value="{{c.todo}}" hint-placeholder-val="{{ false }}">
+<button type="button" onClick="{{c.fix}}" style="height: 36px; padding: 0 14px; border-radius: 18px; border: none; background: {{accentSoft}}; color: {{accentDeep}}; font-family: inherit; font-size: 14px; font-weight: 800; cursor: pointer; flex: none">{{c.cta}}</button>
+</sc-if>
+</div>
+</sc-for>
+</div>
+</div>
+<div style="background: #ffffff; border-radius: 22px; padding: 16px; box-shadow: 0 2px 10px rgba(36, 64, 92, 0.05)">
+<h2 style="margin: 0; font-size: 17px; font-weight: 800">Мої акції на barb.ua</h2>
+<sc-for list="{{PF.deals}}" as="d" hint-placeholder-count="2">
+<div style="display: flex; align-items: center; gap: 12px; padding: 12px 0; border-bottom: 1px solid #f0f4f8">
+<span style="width: 46px; height: 46px; border-radius: 15px; background: {{accentSoft}}; color: {{accentDeep}}; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 800; flex: none">{{d.badge}}</span>
+<div style="flex: 1; min-width: 0">
+<div style="font-size: 15px; font-weight: 700; line-height: 1.3">{{d.t}}</div>
+<div style="font-size: 13px; color: #5a6e84; margin-top: 2px">{{d.till}}</div>
+</div>
+</div>
+</sc-for>
+<button type="button" onClick="{{PF.newDeal}}" style="margin-top: 12px; width: 100%; height: 46px; border-radius: 23px; border: 1.5px dashed #c3cfdb; background: #ffffff; color: #24405c; font-family: inherit; font-size: 15px; font-weight: 700; cursor: pointer">Створити акцію</button>
+</div>
+<sc-if value="{{linked}}" hint-placeholder-val="{{ false }}">
+<button type="button" onClick="{{toClient}}" style="height: 52px; border: none; border-radius: 26px; background: #24405c; color: #ffffff; display: flex; align-items: center; justify-content: center; gap: 8px; font-family: inherit; font-size: 16px; font-weight: 700; cursor: pointer">Подивитися профіль очима клієнта
+<svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" style="fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round"><path d="{{ic.chevR}}"></path></svg></button>
+</sc-if>
+<sc-if value="{{unlinked}}" hint-placeholder-val="{{ true }}">
+<a href="Profile.dc.html" style="height: 52px; border-radius: 26px; background: #24405c; color: #ffffff; display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 16px; font-weight: 700; text-decoration: none">Подивитися профіль очима клієнта
+<svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" style="fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round"><path d="{{ic.chevR}}"></path></svg></a>
+</sc-if>
+<a href="{{me.url}}" target="_blank" rel="noopener" style="height: 48px; border-radius: 24px; border: 1px solid #d5e0ea; color: #24405c; display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 15px; font-weight: 700; text-decoration: none">Профіль на barb.ua
+<svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true" style="fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round"><path d="{{ic.ext}}"></path></svg></a>
+</div>
+</div>
+</section>
+</sc-if>
+
+<sc-if value="{{showTabs}}" hint-placeholder-val="{{ true }}">
+<nav aria-label="Навігація Barb Pro" style="position: absolute; left: 0; right: 0; bottom: 0; height: 84px; background: rgba(255, 255, 255, 0.97); border-top: 1px solid #e3ebf3; display: flex; justify-content: space-around; align-items: flex-start; padding: 8px 10px 0; box-sizing: border-box; z-index: 40">
+<sc-for list="{{tabs}}" as="t" hint-placeholder-count="4">
+<button type="button" aria-current="{{t.cur}}" onClick="{{t.go}}" style="position: relative; width: 80px; height: 52px; border: none; background: none; padding: 0; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 4px; font-family: inherit; color: {{t.color}}">
+<svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" style="fill: none; stroke: currentColor; stroke-width: 1.9; stroke-linecap: round; stroke-linejoin: round"><path d="{{t.icon}}"></path></svg>
+<span style="font-size: 11.5px; font-weight: {{t.weight}}">{{t.label}}</span>
+<sc-if value="{{t.hasBadge}}" hint-placeholder-val="{{ false }}"><span style="position: absolute; top: -3px; left: 46px; min-width: 19px; height: 19px; border-radius: 10px; background: {{accent}}; color: #ffffff; font-size: 11px; font-weight: 800; display: flex; align-items: center; justify-content: center; padding: 0 5px; box-sizing: border-box; border: 2px solid #ffffff">{{t.badge}}</span></sc-if>
+</button>
+</sc-for>
+</nav>
+</sc-if>
+
+<sc-if value="{{toast.show}}" hint-placeholder-val="{{ false }}">
+<div role="status" style="position: absolute; left: 50%; bottom: 110px; transform: translateX(-50%); background: #24405c; color: #ffffff; font-size: 14px; font-weight: 600; line-height: 1.35; padding: 12px 16px; border-radius: 16px; box-shadow: 0 10px 26px rgba(36, 64, 92, 0.3); z-index: 60; width: max-content; max-width: 320px; text-align: center">{{toast.text}}</div>
+</sc-if>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"start":{"editor":"enum","options":["today","prices","inbox","thread","profile"],"default":"today"},"accent":{"editor":"color","default":"#e0144c","options":["#e0144c","#f5265f","#c8175d","#24405c"]},"font":{"editor":"enum","options":["Onest","Manrope","Montserrat","Nunito Sans"],"default":"Onest"},"$preview":{"width":390,"height":844}}'>
+var DATA_URL = '/_blob/fa3b6b67b01bcc9461fe3fa8fc588b78';
+var ACCENT = '#e0144c';
+var INK = '#24405c';
+var MUTED = '#5a6e84';
+var FONTS = {
+  'Onest': "'Onest', system-ui, -apple-system, 'Segoe UI', sans-serif",
+  'Manrope': "'Manrope', system-ui, -apple-system, 'Segoe UI', sans-serif",
+  'Montserrat': "'Montserrat', system-ui, -apple-system, 'Segoe UI', sans-serif",
+  'Nunito Sans': "'Nunito Sans', system-ui, -apple-system, 'Segoe UI', sans-serif"
+};
+var IC = {
+  calendar: 'M5 5.5h14a1 1 0 0 1 1 1V19a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6.5a1 1 0 0 1 1-1z M4 10h16 M8.5 3.5v4 M15.5 3.5v4',
+  tag: 'M20.6 13.4l-7.2 7.2a1.5 1.5 0 0 1-2.1 0L3.5 12.8V4.5a1 1 0 0 1 1-1h8.3l7.8 7.8a1.5 1.5 0 0 1 0 2.1z M8 8h.01',
+  msg: 'M20.5 11.5a8 8 0 0 1-11.8 7L3.5 20l1.6-4.8A8 8 0 1 1 20.5 11.5z',
+  user: 'M16 8a4 4 0 1 1-8 0a4 4 0 1 1 8 0z M4.5 20.5a7.5 7.5 0 0 1 15 0',
+  bell: 'M6 16.5V11a6 6 0 1 1 12 0v5.5l1.5 2h-15z M10 20.5a2 2 0 0 0 4 0',
+  clock: 'M21 12a9 9 0 1 1-18 0a9 9 0 1 1 18 0z M12 7.5V12l3 2',
+  check: 'M5 12.5l4.5 4.5L19 7.5',
+  chevL: 'M15 5l-7 7l7 7',
+  chevR: 'M9 5l7 7l-7 7',
+  chevD: 'M6 9l6 6l6-6',
+  search: 'M18 11a7 7 0 1 1-14 0a7 7 0 1 1 14 0z M20.5 20.5l-4.6-4.6',
+  star: 'M12 3.2l2.7 5.5l6 .9l-4.35 4.25l1.03 6l-5.38-2.83l-5.38 2.83l1.03-6L3.3 9.6l6-.9z',
+  send: 'M4 12L20 4l-6 16l-2.5-6.5z M11.5 13.5L20 4',
+  ext: 'M14 4h6v6 M20 4l-9 9 M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5'
+};
+var WD = ['Нд', 'Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб'];
+var MG = ['січня', 'лютого', 'березня', 'квітня', 'травня', 'червня', 'липня', 'серпня', 'вересня', 'жовтня', 'листопада', 'грудня'];
+var SLOTS = ['09:00', '09:30', '10:00', '10:30', '11:00', '11:30', '12:00', '12:30', '13:00', '13:30', '14:00', '14:30', '15:00', '15:30', '16:00', '16:30', '17:00', '17:30', '18:00', '18:30', '19:00', '19:30', '20:00'];
+var TINTS = ['#ffe1e8', '#dceaf7', '#e4ebf3', '#ffeef2', '#e8f0f8'];
+var SCREENS = { today: ['T', 'todayData'], prices: ['PR', 'pricesData'], inbox: ['IN', 'inboxData'], thread: ['TH', 'threadData'], profile: ['PF', 'profileData'] };
+var DB = null, DB_P = null, ME = null;
+
+function rgb(h) { h = String(h || '').replace('#', ''); if (h.length === 3) h = h.split('').map(function (c) { return c + c; }).join(''); var n = parseInt(h, 16); if (isNaN(n)) n = 0xe0144c; return [(n >> 16) & 255, (n >> 8) & 255, n & 255]; }
+function mix(a, b, t) { var A = rgb(a), B = rgb(b); return '#' + A.map(function (v, i) { var c = Math.round(v * (1 - t) + B[i] * t); return ('0' + c.toString(16)).slice(-2); }).join(''); }
+function fmt(n) { return String(n).replace(/\B(?=(\d{3})+(?!\d))/g, ' '); }
+function plural(n, a, b, c) { var m10 = n % 10, m100 = n % 100; if (m10 === 1 && m100 !== 11) return a; if (m10 >= 2 && m10 <= 4 && (m100 < 10 || m100 >= 20)) return b; return c; }
+function hhmm(d) { return ('0' + d.getHours()).slice(-2) + ':' + ('0' + d.getMinutes()).slice(-2); }
+function days7() { var out = []; var now = new Date(); for (var i = 0; i < 7; i++) { var d = new Date(now.getFullYear(), now.getMonth(), now.getDate() + i); out.push({ i: i, wd: WD[d.getDay()], num: d.getDate(), long: WD[d.getDay()] + ', ' + d.getDate() + ' ' + MG[d.getMonth()] }); } return out; }
+function hashStr(s) { var h = 2166136261; for (var i = 0; i < s.length; i++) { h ^= s.charCodeAt(i); h = Math.imul(h, 16777619); } return h >>> 0; }
+function busyMap(pid, day) { var h = hashStr(pid + '|' + day); var out = {}; SLOTS.forEach(function (t) { h = (Math.imul(h, 1103515245) + 12345) >>> 0; out[t] = ((h >>> 9) % 100) < 42; }); return out; }
+function findSvc(p, name) { var f = null; p.groups.forEach(function (g) { g[2].forEach(function (r) { if (!f && r[0] === name) f = r; }); }); return f; }
+function loadDB() {
+  if (DB) return Promise.resolve(DB);
+  if (!DB_P) DB_P = fetch(DATA_URL).then(function (r) { if (!r.ok) throw new Error('data ' + r.status); return r.json(); }).then(function (d) { DB = d; ME = d.places.filter(function (p) { return p.id === 'vshevchyk'; })[0]; return d; }).catch(function (e) { DB_P = null; throw e; });
+  return DB_P;
+}
+
+class Component extends DCLogic {
+  componentDidMount() { var self = this; this._alive = true; this._jump = this.props.jump; loadDB().then(function () { if (self._alive) self.setState(Object.assign({ ready: true }, self.seed())); }).catch(function () {}); }
+  componentWillUnmount() { this._alive = false; (this._t || []).forEach(function (t) { clearTimeout(t); }); }
+  componentDidUpdate() { this.applyJump(); this.applyIncoming(); this.reportScreen(); this.syncChat(); }
+  applyJump() {
+    var j = this.props.jump;
+    if (!j || j === this._jump || !DB || !(this.state && this.state.ready)) return;
+    this._jump = j;
+    var target = String(j).split(':')[0].split('|')[0];
+    if (target === 'reset') { this._seen = {}; this._reported = null; this.setState(Object.assign(this.base(), this.seed(), { ready: true })); return; }
+    if (!SCREENS[target]) return;
+    var st = this.st(); var patch = { screen: target, hist: [], editing: null };
+    if (target === 'thread') { var tid = st.tid || (st.threads[0] && st.threads[0].id); patch.tid = tid; patch.threads = st.threads.map(function (t) { return t.id === tid ? Object.assign({}, t, { unread: false }) : t; }); }
+    this.setState(patch);
+  }
+  applyIncoming() {
+    var inc = this.props.incoming;
+    if (!Array.isArray(inc) || !inc.length || this.props.visible === false || !(this.state && this.state.ready)) return;
+    var self = this; this._seen = this._seen || {};
+    var fresh = inc.filter(function (b) { return b && b.id && !self._seen[b.id]; });
+    if (!fresh.length) return;
+    fresh.forEach(function (b) { self._seen[b.id] = true; });
+    var st = this.st(); var now = hhmm(new Date());
+    var reqs = fresh.map(function (b) { return { id: b.id, ext: true, name: 'Катерина', ini: 'К', day: b.day, time: b.time, long: b.long, s: { n: b.svc, price: b.total, dur: b.dur } }; }).concat(st.reqs);
+    var threads = fresh.map(function (b) { return { id: 't' + b.id, name: 'Катерина', ini: 'К', about: 'Заявка: ' + b.svc + ' · ' + b.long + ', ' + b.time, unread: true, msgs: [{ mine: false, text: 'Добрий день! Записалася через застосунок Barb на ' + b.long + ' о ' + b.time + '.', time: now }] }; }).concat(st.threads);
+    this.setState({ reqs: reqs, threads: threads });
+    this.toast(fresh.length > 1 ? 'Нові заявки із застосунку Barb' : 'Нова заявка від Катерини');
+  }
+  reportScreen() {
+    if (typeof this.props.onScreen !== 'function' || !(this.state && this.state.ready)) return;
+    var scr = this.st().screen;
+    if (scr !== this._reported) { this._reported = scr; this.props.onScreen(scr); }
+  }
+  later(fn, ms) { var self = this; var t = setTimeout(function () { if (self._alive) fn(); }, ms); (this._t = this._t || []).push(t); }
+  base() { return { screen: this.props.start || 'today', hist: [], day: 0, closed: {}, opened: {}, reqs: [], visits: [], prices: {}, editing: null, draft: '', openG: { 1: true }, q: '', threads: [], tid: null, tdraft: '', checks: { hours: false, online: false }, toast: '' }; }
+  st() { return Object.assign(this.base(), this.state || {}); }
+  svc(name) { var r = ME && findSvc(ME, name); return r ? { n: r[0], price: r[1], v: r[2], dur: r[3] } : { n: name, price: '', v: 0, dur: '' }; }
+  seed() {
+    var dd = days7();
+    var s = {
+      reqs: [
+        { id: 'r1', name: 'Ірина Коваль', ini: 'ІК', day: 1, time: '11:30', s: this.svc('Біозавивка волосся') },
+        { id: 'r2', name: 'Олена Мельник', ini: 'ОМ', day: 2, time: '16:00', s: this.svc('Тонування волосся') }
+      ],
+      visits: [
+        { id: 'v1', name: 'Софія Т.', day: 0, time: '10:00', s: this.svc('Жіноча стрижка') },
+        { id: 'v2', name: 'Дарина Л.', day: 0, time: '13:00', s: this.svc('Фарбування коренів') },
+        { id: 'v3', name: 'Марія П.', day: 0, time: '17:30', s: this.svc('Корекція брів') },
+        { id: 'v4', name: 'Анна В.', day: 1, time: '15:00', s: this.svc('Мелірування волосся') },
+        { id: 'v5', name: 'Вікторія С.', day: 3, time: '12:00', s: this.svc('Жіноча стрижка') }
+      ],
+      threads: [
+        { id: 't1', name: 'Ірина Коваль', ini: 'ІК', about: 'Заявка: Біозавивка · ' + dd[1].long + ', 11:30', unread: true, msgs: [{ mine: false, text: 'Добрий день! Записалася на біозавивку — чи потрібно мити голову перед процедурою?', time: '10:41' }] },
+        { id: 't2', name: 'Олена Мельник', ini: 'ОМ', about: 'Заявка: Тонування · ' + dd[2].long + ', 16:00', unread: false, msgs: [{ mine: false, text: 'Чи можна робити тонування після освітлення в іншому салоні?', time: 'вчора' }, { mine: true, text: 'Так, подивимося стан волосся на консультації й підберемо відтінок.', time: 'вчора' }] },
+        { id: 't3', name: 'Софія Т.', ini: 'СТ', about: 'Візит: Жіноча стрижка · сьогодні, 10:00', unread: false, msgs: [{ mine: false, text: 'Буду о 10:00, дякую!', time: 'нд' }] }
+      ]
+    };
+    if (this.props.start === 'thread') s.tid = 't1';
+    if (this.props.start === 'prices') s.openG = { 1: true, 2: true };
+    return s;
+  }
+  go(screen, patch) { var st = this.st(); this.setState(Object.assign({ screen: screen, hist: st.hist.concat([st.screen]).slice(-20) }, patch || {})); }
+  back() { var st = this.st(); var h = st.hist.slice(); var prev = h.pop() || 'today'; this.setState({ screen: prev, hist: h }); }
+  tab(k) { this.setState({ screen: k, hist: [], editing: null }); }
+  toast(text) { var self = this; var id = (this._toastId || 0) + 1; this._toastId = id; this.setState({ toast: text }); this.later(function () { if (self._toastId === id) self.setState({ toast: '' }); }, 2400); }
+  chatRef() { var self = this; if (!this._chatRefFn) this._chatRefFn = function (el) { if (el) { if (el !== self._chatEl) { self._chatEl = el; self._chatN = -1; setTimeout(function () { self.syncChat(); }, 0); } } else self._chatEl = null; }; return this._chatRefFn; }
+  syncChat() { var el = this._chatEl; if (!el) return; var st = this.st(); var th = st.threads.filter(function (t) { return t.id === st.tid; })[0]; var n = th ? th.msgs.length : 0; if (n !== this._chatN) { this._chatN = n; el.scrollTop = el.scrollHeight; } }
+  openThread(id) { var st = this.st(); this.go('thread', { tid: id, tdraft: '', threads: st.threads.map(function (t) { return t.id === id ? Object.assign({}, t, { unread: false }) : t; }) }); }
+  sendMsg(text) {
+    var st = this.st(); text = String(text || '').trim(); if (!text) return; var self = this; var id = st.tid;
+    var upd = function (list, msg) { return list.map(function (t) { return t.id === id ? Object.assign({}, t, { msgs: t.msgs.concat([msg]) }) : t; }); };
+    this.setState({ threads: upd(st.threads, { mine: true, text: text, time: hhmm(new Date()) }), tdraft: '' });
+    this.later(function () { var s2 = self.st(); self.setState({ threads: upd(s2.threads, { mine: false, text: 'Дякую! До зустрічі.', time: hhmm(new Date()) }) }); }, 1800);
+  }
+
+  renderVals() {
+    var self = this;
+    var accent = this.props.accent || ACCENT;
+    this._a = accent;
+    var out = { font: FONTS[this.props.font] || FONTS.Onest, accent: accent, accentSoft: mix(accent, '#ffffff', 0.88), accentLine: mix(accent, '#ffffff', 0.55), accentDeep: mix(accent, '#000000', 0.2), ic: IC, back: function () { self.back(); }, s: {}, tabs: [], showTabs: false, toast: { show: false, text: '' }, loading: false, me: {} };
+    Object.keys(SCREENS).forEach(function (k) { out[SCREENS[k][0]] = {}; });
+    out.linked = typeof this.props.onRole === 'function';
+    out.unlinked = !out.linked;
+    out.toClient = function () { if (typeof self.props.onRole === 'function') self.props.onRole('client', 'place|vshevchyk'); };
+    if (!DB || !ME || !(this.state && this.state.ready)) { out.loading = true; return out; }
+    var st = this.st();
+    var scr = SCREENS[st.screen] ? st.screen : 'today';
+    Object.keys(SCREENS).forEach(function (k) { out.s[k] = scr === k; });
+    out.showTabs = scr !== 'thread';
+    var unread = st.threads.filter(function (t) { return t.unread; }).length;
+    out.tabs = [['today', 'Розклад', IC.calendar, st.reqs.length], ['prices', 'Прайс', IC.tag, 0], ['inbox', 'Чати', IC.msg, unread], ['profile', 'Профіль', IC.user, 0]].map(function (t) {
+      var on = scr === t[0]; return { label: t[1], icon: t[2], color: on ? accent : MUTED, weight: on ? 800 : 600, cur: on ? 'page' : 'false', hasBadge: t[3] > 0, badge: String(t[3]), go: function () { self.tab(t[0]); } };
+    });
+    out.toast = { show: !!st.toast, text: st.toast };
+    out.me = { name: ME.name, ini: ME.ini, tint: ME.tint, title: ME.title, work: (ME.work || '').replace('Салон краси ', ''), rating: ME.rating >= 10 ? '10' : String(ME.rating), reviews: ME.reviews + ' ' + plural(ME.reviews, 'відгук', 'відгуки', 'відгуків'), url: ME.url };
+    out[SCREENS[scr][0]] = this[SCREENS[scr][1]](st);
+    return out;
+  }
+
+  todayData(st) {
+    var self = this; var a = this._a; var dd = days7();
+    var day = st.day;
+    var vis = st.visits.filter(function (v) { return v.day === day; }).sort(function (x, y) { return x.time < y.time ? -1 : 1; });
+    var reqTimes = {}; st.reqs.forEach(function (r) { if (r.day === day) reqTimes[r.time] = true; });
+    var visTimes = {}; vis.forEach(function (v) { visTimes[v.time] = true; });
+    var busy = busyMap(ME.id, day);
+    var closed = st.closed[day] || {}; var opened = st.opened[day] || {};
+    var now = new Date(); var cur = now.getHours() * 60 + now.getMinutes();
+    var slots = SLOTS.map(function (t) {
+      var p = t.split(':'); var m = (+p[0]) * 60 + (+p[1]); var past = day === 0 && m < cur;
+      if (visTimes[t]) return { t: t, on: false, locked: true, aria: t + ', запис', bg: INK, fg: '#ffffff', bd: INK, cur: 'default', deco: 'none', toggle: function () {} };
+      if (reqTimes[t]) return { t: t, on: false, locked: true, aria: t + ', заявка', bg: '#fff4dc', fg: '#7a5200', bd: '#e9c46a', cur: 'default', deco: 'none', toggle: function () {} };
+      var isOpen = !past && (opened[t] || (!busy[t] && !closed[t]));
+      if (past) return { t: t, on: false, locked: true, aria: t + ', минуло', bg: '#f4f7fa', fg: '#9aabbd', bd: '#f4f7fa', cur: 'default', deco: 'line-through', toggle: function () {} };
+      return { t: t, on: isOpen, locked: false, aria: t + (isOpen ? ', відкрито' : ', закрито'), bg: isOpen ? '#ffffff' : '#eef2f6', fg: isOpen ? INK : MUTED, bd: isOpen ? a : '#eef2f6', cur: 'pointer', deco: 'none', toggle: function () {
+        var s2 = self.st(); var c = Object.assign({}, s2.closed[day] || {}); var o = Object.assign({}, s2.opened[day] || {});
+        if (isOpen) { c[t] = true; delete o[t]; } else { o[t] = true; delete c[t]; }
+        var cc = Object.assign({}, s2.closed); cc[day] = c; var oo = Object.assign({}, s2.opened); oo[day] = o;
+        self.setState({ closed: cc, opened: oo });
+      } };
+    });
+    var openCount = slots.filter(function (x) { return x.on; }).length;
+    var sum = vis.reduce(function (acc, v) { return acc + (v.s.v || 0); }, 0);
+    var hasVisitDay = {}; st.visits.forEach(function (v) { hasVisitDay[v.day] = true; });
+    return {
+      days: dd.map(function (d) { var on = d.i === day; return { wd: d.i === 0 ? 'Сьог.' : d.wd, num: d.num, aria: d.long, on: on, bg: on ? '#ffffff' : 'rgba(255, 255, 255, 0.1)', fg: on ? INK : '#ffffff', dot: hasVisitDay[d.i] ? (on ? a : '#ffc9d6') : 'transparent', pick: function () { self.setState({ day: d.i }); } }; }),
+      stats: [{ v: String(vis.length), label: plural(vis.length, 'візит', 'візити', 'візитів') }, { v: sum ? '≈ ' + fmt(sum) + ' ₴' : '—', label: 'за прайсом' }, { v: String(openCount), label: plural(openCount, 'вікно', 'вікна', 'вікон') }],
+      hasReq: st.reqs.length > 0, reqCount: st.reqs.length,
+      reqs: st.reqs.map(function (r, i) {
+        return { name: r.name, ini: r.ini, tint: TINTS[i % TINTS.length], svc: r.s.n, price: r.s.price, when: (r.long || (dd[r.day] ? dd[r.day].long : '')) + ', ' + r.time, dur: r.s.dur || 'тривалість уточнюється', isNew: !!r.ext,
+          accept: function () { var s2 = self.st(); self.setState({ reqs: s2.reqs.filter(function (x) { return x.id !== r.id; }), visits: s2.visits.concat([{ id: 'v' + r.id, name: r.name, day: r.day, time: r.time, s: r.s }]) }); if (r.ext && typeof self.props.onDecision === 'function') self.props.onDecision(r.id, 'confirmed'); self.toast('Підтверджено — ' + r.name.split(' ')[0] + ' отримала сповіщення'); },
+          decline: function () { var s2 = self.st(); self.setState({ reqs: s2.reqs.filter(function (x) { return x.id !== r.id; }) }); if (r.ext && typeof self.props.onDecision === 'function') self.props.onDecision(r.id, 'declined'); self.toast('Заявку відхилено, вікно знову відкрите'); },
+          chat: function () { var t = self.st().threads.filter(function (x) { return x.name === r.name; })[0]; if (t) self.openThread(t.id); } };
+      }),
+      dayTitle: day === 0 ? 'Сьогодні, ' + dd[0].long.split(', ')[1] : dd[day].long,
+      visits: vis.map(function (v) { return { time: v.time, name: v.name, svc: v.s.n + (v.s.dur ? ' · ' + v.s.dur : ''), price: v.s.price }; }),
+      noVisits: vis.length === 0,
+      slots: slots,
+      openAll: function () { var s2 = self.st(); var o = {}; SLOTS.forEach(function (t) { o[t] = true; }); var oo = Object.assign({}, s2.opened); oo[day] = o; var cc = Object.assign({}, s2.closed); cc[day] = {}; self.setState({ opened: oo, closed: cc }); self.toast('Усі вільні вікна на день відкрито'); },
+      toReqs: function () { self.tab('today'); }
+    };
+  }
+
+  pricesData(st) {
+    var self = this; var a = this._a; var q = st.q.trim().toLowerCase();
+    var openG = st.openG || {};
+    var groups = [];
+    ME.groups.forEach(function (g, gi) {
+      var items = [];
+      g[2].forEach(function (r, ri) {
+        if (q && r[0].toLowerCase().indexOf(q) < 0) return;
+        var key = gi + '|' + ri; var edited = st.prices[key]; var price = edited || r[1]; var editing = st.editing === key;
+        var save = function () { var s2 = self.st(); var val = String(s2.draft || '').trim(); var pr = Object.assign({}, s2.prices); if (val) pr[key] = /грн/.test(val) ? val : (/^\d[\d\s]*$/.test(val) ? fmt(val.replace(/\s/g, '')) + ' грн' : val); self.setState({ prices: pr, editing: null, draft: '' }); if (val) self.toast('Ціну оновлено — клієнти бачать її одразу'); };
+        items.push({ n: r[0], dur: r[3], hasDur: !!r[3], price: price, aria: 'Ціна: ' + r[0], editing: editing, idle: !editing, draft: editing ? st.draft : '', bg: edited ? mix(a, '#ffffff', 0.9) : '#ffffff', bd: edited ? a : '#d5e0ea',
+          edit: function () { self.setState({ editing: key, draft: String(price).replace(/^від\s*/, '').replace(/\s*грн$/, '') }); },
+          onDraft: function (e) { self.setState({ draft: e.target.value }); },
+          onKey: function (e) { if (e.key === 'Enter') { e.preventDefault(); save(); } if (e.key === 'Escape') self.setState({ editing: null }); },
+          save: save });
+      });
+      if (q && !items.length) return;
+      var open = q ? true : !!openG[gi];
+      groups.push({ name: g[0], count: String(g[2].length), open: open, rot: open ? 'rotate(180deg)' : 'rotate(0deg)', items: open ? items : [], toggle: function () { var o = Object.assign({}, self.st().openG || {}); o[gi] = !o[gi]; self.setState({ openG: o }); } });
+    });
+    var total = ME.groups.reduce(function (n, g) { return n + g[2].length; }, 0);
+    return { sub: total + ' ' + plural(total, 'послуга', 'послуги', 'послуг') + ' · ' + ME.groups.length + ' ' + plural(ME.groups.length, 'розділ', 'розділи', 'розділів'), q: st.q, onQ: function (e) { self.setState({ q: e.target.value }); }, groups: groups };
+  }
+
+  inboxData(st) {
+    var self = this;
+    return { items: st.threads.map(function (t, i) { var m = t.msgs[t.msgs.length - 1]; return { name: t.name, ini: t.ini, tint: TINTS[i % TINTS.length], about: t.about, last: (m.mine ? 'Ви: ' : '') + m.text, time: m.time, unread: !!t.unread, open: function () { self.openThread(t.id); } }; }) };
+  }
+
+  threadData(st) {
+    var self = this; var a = this._a;
+    var idx = 0; var t = st.threads.filter(function (x, i) { if (x.id === st.tid) idx = i; return x.id === st.tid; })[0] || st.threads[0];
+    if (!t) return { msgs: [], quick: [], setRef: this.chatRef() };
+    return {
+      name: t.name, ini: t.ini, tint: TINTS[idx % TINTS.length], about: t.about,
+      msgs: t.msgs.map(function (m) { return { text: m.text, time: m.time, align: m.mine ? 'flex-end' : 'flex-start', radius: m.mine ? '18px 18px 6px 18px' : '18px 18px 18px 6px', bg: m.mine ? INK : '#ffffff', fg: m.mine ? '#ffffff' : INK, sh: m.mine ? 'none' : '0 2px 8px rgba(36, 64, 92, 0.06)', timeFg: m.mine ? 'rgba(255, 255, 255, 0.75)' : MUTED }; }),
+      quick: ['Так, підтверджую', 'Мити голову не потрібно', 'Надішлю варіанти часу', 'Чекаю на вас!'].map(function (q) { return { t: q, send: function () { self.sendMsg(q); } }; }),
+      draft: st.tdraft, onDraft: function (e) { self.setState({ tdraft: e.target.value }); },
+      onKey: function (e) { if (e.key === 'Enter') { e.preventDefault(); self.sendMsg(self.st().tdraft); } },
+      send: function () { self.sendMsg(self.st().tdraft); },
+      sendBg: st.tdraft.trim() ? a : '#c3cfdb', setRef: this.chatRef()
+    };
+  }
+
+  profileData(st) {
+    var self = this; var a = this._a;
+    var total = ME.groups.reduce(function (n, g) { return n + g[2].length; }, 0);
+    var myDeals = DB.deals.filter(function (d) { return d.pid === ME.id; }).map(function (d) { return { badge: d.off ? '−' + d.off + '%' : '%', t: d.t, till: d.till ? 'діє до ' + d.till : 'безстроково' }; });
+    myDeals.push({ badge: '1+1', t: 'Біозавивка + стрижка кінчиків у подарунок', till: 'акція на barb.ua' });
+    var checks = [
+      { label: 'Прайс із цінами', note: total + ' ' + plural(total, 'послуга', 'послуги', 'послуг') + ' з тривалістю', done: true },
+      { label: 'Фото робіт', note: (ME.photos || 0) + ' фото в портфоліо', done: true },
+      { label: 'Опис і досвід', note: ME.exp || 'Досвід указано', done: true },
+      { label: 'Графік роботи', note: st.checks.hours ? 'Пн–Сб, 10:00–20:00' : 'Зараз: «немає чіткого графіку» — з годинами роботи записуються охочіше', done: !!st.checks.hours, cta: 'Додати', key: 'hours' },
+      { label: 'Онлайн-запис у Barb', note: st.checks.online ? 'Клієнти бачать вільні вікна й записуються самі' : 'Клієнти зможуть записатися без дзвінка', done: !!st.checks.online, cta: 'Увімкнути', key: 'online' }
+    ];
+    var doneN = checks.filter(function (c) { return c.done; }).length;
+    return {
+      stats: [{ v: String(total), label: 'послуг у прайсі' }, { v: String(ME.photos || 0), label: 'фото робіт' }, { v: (ME.exp || '').replace(' досвіду', '') || '—', label: 'досвіду' }, { v: String(myDeals.length), label: plural(myDeals.length, 'акція', 'акції', 'акцій') }],
+      pct: Math.round(doneN / checks.length * 100),
+      checks: checks.map(function (c) { return { label: c.label, note: c.note, todo: !c.done, cta: c.cta || '', dotBg: c.done ? '#1f7a52' : '#ffffff', dotBd: c.done ? '#1f7a52' : '#c3cfdb', fix: function () { var s2 = self.st(); var ch = Object.assign({}, s2.checks); ch[c.key] = true; self.setState({ checks: ch }); self.toast(c.key === 'hours' ? 'Графік додано — його видно в профілі' : 'Онлайн-запис увімкнено'); } }; }),
+      deals: myDeals,
+      newDeal: function () { self.toast('Конструктор акцій: назва, знижка, термін — і на модерацію'); }
+    };
+  }
+}
+</script>
+</body>
+</html>

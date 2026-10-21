@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<title>Barb — клікабельний прототип</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;family=Montserrat:wght@400;500;600;700;800&amp;family=Nunito+Sans:wght@400;500;600;700;800&amp;family=Onest:wght@400;500;600;700;800&amp;display=swap">
+<style>body{margin:0}</style>
+</helmet>
+<div style="min-height: 100vh; box-sizing: border-box; background: #e6ecf3; padding: 32px clamp(0px, calc((100vw - 414px) / 2), 32px); font-family: {{font}}; color: #24405c; display: flex; justify-content: center; align-items: flex-start">
+<div style="width: 100%; max-width: 1080px; display: flex; flex-wrap: wrap; justify-content: center; align-items: flex-start; gap: 40px">
+
+<div style="flex: none; padding: clamp(0px, calc((100vw - 390px) / 2), 12px); border-radius: 58px; background: #16283b; box-shadow: 0 40px 80px -24px rgba(22, 40, 59, 0.5)">
+<div style="position: relative; width: 390px; height: 844px; border-radius: 46px; overflow: hidden; background: #ffffff">
+<div style="display: {{clientDisplay}}; width: 390px; height: 844px">
+<dc-import name="Main" jump="{{jump}}" visible="{{isClient}}" decisions="{{decisions}}" on-screen="{{onScreen}}" on-role="{{onRole}}" on-booked="{{onBooked}}" hint-size="390px,844px"></dc-import>
+</div>
+<div style="display: {{proDisplay}}; width: 390px; height: 844px">
+<dc-import name="Pro" jump="{{jumpPro}}" visible="{{isPro}}" incoming="{{incoming}}" on-screen="{{onScreenPro}}" on-role="{{onRole}}" on-decision="{{onDecision}}" hint-size="390px,844px"></dc-import>
+</div>
+</div>
+</div>
+
+<aside aria-label="Керування прототипом" style="flex: 1 1 340px; max-width: 440px; min-width: 0; display: flex; flex-direction: column; gap: 14px; padding: 0 16px; box-sizing: border-box">
+<div style="background: #ffffff; border-radius: 24px; padding: 22px; box-shadow: 0 2px 12px rgba(36, 64, 92, 0.06); display: flex; flex-direction: column; gap: 10px">
+<div style="font-size: 13px; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: {{accentDeep}}">Barb.ua · концепт застосунку</div>
+<h1 style="margin: 0; font-size: 28px; line-height: 1.1; font-weight: 800; letter-spacing: -0.03em">Запис до майстра — з обох боків</h1>
+<p style="margin: 0; font-size: 15px; line-height: 1.5; color: #5a6e84">Клієнтський застосунок і кабінет майстра Barb Pro в одному прототипі. Дані справжні: 22 майстри й салони Києва з barb.ua — прайси, рейтинги, акції.</p>
+</div>
+
+<div style="background: #ffffff; border-radius: 24px; padding: 18px; box-shadow: 0 2px 12px rgba(36, 64, 92, 0.06)">
+<div style="font-size: 12px; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: #5a6e84">Режим</div>
+<div role="tablist" aria-label="Режим прототипу" style="display: flex; gap: 4px; margin-top: 10px; padding: 4px; background: #eef3f8; border-radius: 16px">
+<sc-for list="{{roles}}" as="r" hint-placeholder-count="2">
+<button type="button" role="tab" aria-selected="{{r.on}}" onClick="{{r.pick}}" style="flex: 1; height: 44px; border: none; border-radius: 12px; background: {{r.bg}}; color: {{r.fg}}; box-shadow: {{r.sh}}; display: flex; align-items: center; justify-content: center; gap: 8px; font-family: inherit; font-size: 15px; font-weight: 700; cursor: pointer; padding: 0 8px">{{r.label}}<sc-if value="{{r.hasBadge}}" hint-placeholder-val="{{ false }}"><span style="min-width: 20px; height: 20px; border-radius: 10px; background: {{accent}}; color: #ffffff; font-size: 12px; font-weight: 800; display: flex; align-items: center; justify-content: center; padding: 0 6px; box-sizing: border-box">{{r.badge}}</span></sc-if></button>
+</sc-for>
+</div>
+<div style="margin-top: 12px; padding: 14px; border-radius: 18px; background: {{accentSoft}}; display: flex; gap: 12px; align-items: flex-start">
+<span style="width: 34px; height: 34px; border-radius: 11px; background: #ffffff; color: {{accent}}; display: flex; align-items: center; justify-content: center; flex: none">
+<svg width="19" height="19" viewBox="0 0 24 24" aria-hidden="true" style="fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round"><path d="{{ic.spark}}"></path></svg>
+</span>
+<div style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 10px">
+<p role="status" style="margin: 0; font-size: 14px; line-height: 1.45; color: #24405c">{{hint}}</p>
+<sc-if value="{{hasCta}}" hint-placeholder-val="{{ true }}">
+<button type="button" onClick="{{hintGo}}" style="align-self: flex-start; height: 40px; padding: 0 16px; border: none; border-radius: 20px; background: {{accent}}; color: #ffffff; font-family: inherit; font-size: 14px; font-weight: 700; cursor: pointer">{{cta}}</button>
+</sc-if>
+</div>
+</div>
+</div>
+
+<div style="background: #ffffff; border-radius: 24px; padding: 18px; box-shadow: 0 2px 12px rgba(36, 64, 92, 0.06)">
+<div style="display: flex; align-items: center; justify-content: space-between; gap: 10px">
+<div style="font-size: 12px; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: #5a6e84">{{screensTitle}}</div>
+<button type="button" onClick="{{reset}}" style="height: 36px; padding: 0 4px; border: none; background: none; display: flex; align-items: center; gap: 6px; color: #2f6194; font-family: inherit; font-size: 14px; font-weight: 700; cursor: pointer">
+<svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true" style="fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round"><path d="{{ic.reset}}"></path></svg>Почати спочатку</button>
+</div>
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; margin-top: 12px">
+<sc-for list="{{screens}}" as="x" hint-placeholder-count="10">
+<button type="button" aria-current="{{x.cur}}" onClick="{{x.go}}" style="height: 44px; border: none; border-radius: 14px; background: {{x.bg}}; color: {{x.fg}}; display: flex; align-items: center; gap: 10px; padding: 0 10px; font-family: inherit; font-size: 14px; font-weight: 700; cursor: pointer; text-align: left; min-width: 0">
+<span style="width: 24px; height: 24px; border-radius: 8px; background: {{x.numBg}}; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 800; flex: none">{{x.num}}</span>
+<span style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{x.label}}</span>
+</button>
+</sc-for>
+</div>
+</div>
+
+<p style="margin: 0 6px; font-size: 13px; line-height: 1.5; color: #5a6e84">Вільні години, клієнти в Barb Pro та відповіді в чатах — демонстраційні. Карта — схема Києва з лініями метро.</p>
+</aside>
+
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":940}}'>
+var ACCENT = '#e0144c';
+var INK = '#24405c';
+var MUTED = '#5a6e84';
+var FONTS = {
+  'Onest': "'Onest', system-ui, -apple-system, 'Segoe UI', sans-serif",
+  'Manrope': "'Manrope', system-ui, -apple-system, 'Segoe UI', sans-serif",
+  'Montserrat': "'Montserrat', system-ui, -apple-system, 'Segoe UI', sans-serif",
+  'Nunito Sans': "'Nunito Sans', system-ui, -apple-system, 'Segoe UI', sans-serif"
+};
+var IC = {
+  spark: 'M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9z M18.5 15l.8 1.7l1.7.8l-1.7.8l-.8 1.7l-.8-1.7l-1.7-.8l1.7-.8z',
+  reset: 'M4 12a8 8 0 1 0 2.3-5.7 M4 4v4.5h4.5'
+};
+var CLIENT = [['welcome', 'Вітання'], ['home', 'Головна'], ['map', 'Карта'], ['list', 'Категорія'], ['search', 'Пошук'], ['place', 'Профіль майстра'], ['book', 'Вибір часу'], ['done', 'Запис створено'], ['visits', 'Мої записи'], ['deals', 'Акції'], ['chat', 'Чат з майстром'], ['asst', 'Підбір за 3 кроки'], ['me', 'Кабінет клієнта'], ['saved', 'Обране']];
+var PRO = [['today', 'Розклад і заявки'], ['prices', 'Прайс-лист'], ['inbox', 'Повідомлення'], ['thread', 'Чат з клієнткою'], ['profile', 'Профіль і акції']];
+
+function rgb(h) { h = String(h || '').replace('#', ''); if (h.length === 3) h = h.split('').map(function (c) { return c + c; }).join(''); var n = parseInt(h, 16); if (isNaN(n)) n = 0xe0144c; return [(n >> 16) & 255, (n >> 8) & 255, n & 255]; }
+function mix(a, b, t) { var A = rgb(a), B = rgb(b); return '#' + A.map(function (v, i) { var c = Math.round(v * (1 - t) + B[i] * t); return ('0' + c.toString(16)).slice(-2); }).join(''); }
+
+class Component extends DCLogic {
+  base() { return { role: 'client', cur: 'welcome', curPro: 'today', jump: '', jumpPro: '', n: 0, incoming: [], decisions: {} }; }
+  st() { return Object.assign(this.base(), this.state || {}); }
+  bump(make) { var n = this.st().n + 1; this.setState(Object.assign({ n: n }, make(n))); }
+  goClient(target) { this.bump(function (n) { return { role: 'client', jump: target + ':' + n, cur: target.split('|')[0] }; }); }
+  goPro(target) { this.bump(function (n) { return { role: 'pro', jumpPro: target + ':' + n, curPro: target }; }); }
+
+  renderVals() {
+    var self = this; var st = this.st(); var a = this.props.accent || ACCENT;
+    var pendingIn = st.incoming.filter(function (b) { return !st.decisions[b.id]; }).length;
+    var decidedIn = st.incoming.length - pendingIn;
+    var isClient = st.role === 'client';
+    var list = isClient ? CLIENT : PRO;
+    var cur = isClient ? st.cur : st.curPro;
+    var hint;
+    if (pendingIn) {
+      hint = isClient
+        ? { text: 'Заявку надіслано в Barb Pro. Перемкніться на кабінет майстра, щоб її підтвердити.', cta: 'Відкрити Barb Pro', go: function () { self.goPro('today'); } }
+        : { text: 'Нова заявка від Катерини вже в розкладі. Підтвердьте її — клієнтка одразу отримає сповіщення.', cta: '', go: null };
+    } else if (decidedIn) {
+      hint = isClient
+        ? { text: 'Майстер відповів на заявку — статус уже оновився в «Мої записи».', cta: 'Мої записи', go: function () { self.goClient('visits'); } }
+        : { text: 'Готово: відповідь майстра вже в застосунку клієнтки.', cta: 'Повернутися до клієнтки', go: function () { self.goClient('visits'); } };
+    } else {
+      hint = isClient
+        ? { text: 'Сценарій для показу: запишіться до Валентини Шевчук — заявка прийде в її кабінет Barb Pro, а підтвердження повернеться клієнтці.', cta: 'Почати сценарій', go: function () { self.goClient('place|vshevchyk'); } }
+        : { text: 'Тут майстер бачить заявки з застосунку. Запишіться до Валентини Шевчук у режимі «Клієнт» — і заявка з’явиться тут.', cta: 'Перейти до клієнта', go: function () { self.goClient('place|vshevchyk'); } };
+    }
+    return {
+      font: FONTS[this.props.font] || FONTS.Onest, accent: a, accentSoft: mix(a, '#ffffff', 0.88), accentDeep: mix(a, '#000000', 0.2), ic: IC,
+      isClient: isClient, isPro: !isClient,
+      clientDisplay: isClient ? 'block' : 'none', proDisplay: isClient ? 'none' : 'block',
+      jump: st.jump, jumpPro: st.jumpPro, incoming: st.incoming, decisions: st.decisions,
+      onScreen: function (s) { if (self.st().cur !== s) self.setState({ cur: s }); },
+      onScreenPro: function (s) { if (self.st().curPro !== s) self.setState({ curPro: s }); },
+      onRole: function (role, target) { if (target) { if (role === 'client') self.goClient(target); else self.goPro(target); } else self.setState({ role: role === 'pro' ? 'pro' : 'client' }); },
+      onBooked: function (b) { var s2 = self.st(); if (!b || s2.incoming.some(function (x) { return x.id === b.id; })) return; self.setState({ incoming: s2.incoming.concat([b]) }); },
+      onDecision: function (id, status) { var s2 = self.st(); var d = Object.assign({}, s2.decisions); d[id] = status; self.setState({ decisions: d }); },
+      roles: [['client', 'Клієнт', 0], ['pro', 'Майстер · Barb Pro', pendingIn]].map(function (r) {
+        var on = st.role === r[0];
+        return { label: r[1], on: on, bg: on ? '#ffffff' : 'transparent', fg: on ? INK : MUTED, sh: on ? '0 2px 6px rgba(36, 64, 92, 0.12)' : 'none', hasBadge: r[2] > 0, badge: String(r[2]), pick: function () { self.setState({ role: r[0] }); } };
+      }),
+      hint: hint.text, hasCta: !!hint.cta, cta: hint.cta || '',
+      hintGo: function () { if (hint.go) hint.go(); },
+      screensTitle: isClient ? 'Екрани клієнта' : 'Екрани Barb Pro',
+      screens: list.map(function (x, i) {
+        var on = x[0] === cur;
+        return { num: String(i + 1), label: x[1], on: on, cur: on ? 'true' : 'false', bg: on ? INK : '#f4f7fa', fg: on ? '#ffffff' : INK, numBg: on ? 'rgba(255, 255, 255, 0.16)' : '#ffffff', go: function () { if (isClient) self.goClient(x[0]); else self.goPro(x[0]); } };
+      }),
+      reset: function () { self.bump(function (n) { return { role: 'client', cur: 'welcome', curPro: 'today', jump: 'reset:' + n, jumpPro: 'reset:' + n, incoming: [], decisions: {} }; }); }
+    };
+  }
+}
+</script>
+</body>
+</html>

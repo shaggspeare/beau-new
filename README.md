@@ -13,23 +13,19 @@ It extracts:
 
 ---
 
-## Beau Web Application (React + Vite + Leaflet)
+## Barb app concept (React + Vite)
 
-The project now includes the full interactive **Beau** React application based on the `Beau Colored.html` design concept:
-- **Client & Master Dual Mode**: Instant toggle between Client booking flow and a dedicated Master Management Portal (schedule, slot editor, live catalog & UAH price editor, incoming booking request approvals, analytics, and map pin preview).
-- **Interactive Leaflet Map**: Displays all **30 crawled masters** across Kyiv neighborhoods (Pechersk, Podil, Obolon, Darnytsia, Holosiiv, Svyatoshyn, etc.) with category-coded pins (Hair, Nails, Laser Epilation), star ratings, and custom badges.
-- **Dynamic Search & Category Filters**: Search by master name, service, or district with filter pills (`All (30)`, `Hair (10)`, `Nails (10)`, `Laser (10)`, `Top Rated ★`, `Salons`, `Masters`).
-- **Expandable Bottom Sheet**: Live master drawer syncing with map selection.
-- **Beau AI Booking Assistant**: Conversational triage bot with quick chips and automated map transitions.
-- **Master Profile & Catalog**: Deep dive into all crawled services, real Ukrainian prices in ₴, duration, review breakdown chart, and studio portfolio.
-- **Interactive Booking & Chat Flow**: Free slot booking with celebratory confetti and message history.
-- **iOS Device Frame & Fullscreen Mode**: Switch between luxury iPhone 26 Liquid Glass bezel view and full browser view.
+The web app renders the Claude Design concept in [`barb-canvas/`](barb-canvas/README.md) (client app + Barb Pro) directly from its `.dc.html` files via a small runtime, [`src/dc.tsx`](src/dc.tsx):
+- **Desktop (≥ 820px):** the canvas "Прототип" page — the app in a phone frame, next to a panel with every client / Barb Pro screen, the role switch and the guided booking scenario. Scaled to fit the window height.
+- **Mobile:** the app itself, full screen (still switches to Barb Pro from the client cabinet).
 
-### Start the Web Application
+To update the design, replace the files in `barb-canvas/project/` and `barb-canvas/assets/` (if the export's `/_blob/…` ids change, update them in [`src/App.tsx`](src/App.tsx)).
+
 ```bash
-npm run dev
+npm run dev                     # http://localhost:5173
+npm run build && npx vite preview --port 4173 &
+npm run test:app                # browser smoke test: desktop demo flow + mobile layout
 ```
-Open [http://localhost:5173](http://localhost:5173) in your browser.
 
 ---
 
